@@ -1,1 +1,1 @@
-TripCraft V4.40 GitHub Public
+V4.41 GitHub public build
