@@ -1,2 +1,1 @@
-TripCraft V4.37 ADMIN
-Built from V4.35 approved baseline. Mobile navigation hardened; GitHub cache reset; duplicate trips removed.
+V4.38_GITHUB
