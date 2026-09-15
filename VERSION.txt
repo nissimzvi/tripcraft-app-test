@@ -1,1 +1,3 @@
-V4.41 GitHub public build
+TripCraft V4.42
+GitHub build
+Bilingual fast city/airport autocomplete
