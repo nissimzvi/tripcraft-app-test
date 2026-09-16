@@ -133,11 +133,17 @@ body.tc-links-underlined a{text-decoration:underline!important;text-underline-of
 }
 
 </style>
-</head><body>
+
+<style id="tc-v49-css">
+.brand{cursor:pointer}.tc-import-home{display:none}.tc-logged-in .tc-import-home{display:inline-flex}
+.tc-import-preflight{margin:14px 0;padding:14px;border-radius:14px;background:#f7fbfd;border:1px solid #d6e5ee}.tc-import-preflight.ok{background:#edf9f3;border-color:#c9e7d5}.tc-import-preflight.warn{background:#fff8e7;border-color:#efd9a3}.tc-import-preflight.err{background:#fff1f1;border-color:#edc3c3}.tc-import-preflight ul{margin:8px 0 0;padding-inline-start:20px}.tc-import-progress{display:none;margin:16px 0;padding:16px;border:1px solid #d7e5ee;border-radius:16px;background:#fbfdff}.tc-import-progress.show{display:block}.tc-import-progress-track{height:10px;background:#e6eef3;border-radius:999px;overflow:hidden}.tc-import-progress-track span{display:block;height:100%;width:0;background:#167d54;transition:width .25s}.tc-import-stage{margin-top:8px;font-weight:900;color:#0d3557}.tc-import-pct{float:left;font-weight:900}.tc-audit-table{max-height:430px;overflow:auto}.tc-admin-only{display:none}.tc-admin .tc-admin-only{display:block}
+@media(max-width:700px){.ac-list{max-height:236px!important;border-radius:14px!important}.ac-item{min-height:48px!important;padding:9px 10px!important}.ac-main{font-size:14px!important}.ac-sub{font-size:11px!important}.ac-list .ac-item:nth-of-type(n+5){display:none!important}.ac-picked-note{display:block!important;margin-top:5px!important;font-size:12px!important;font-weight:900!important;color:#157347!important;background:#edf9f3!important;border:1px solid #c9e7d5!important;padding:6px 8px!important;border-radius:9px!important}.place-ac.ac-selected{border-color:#1b9b70!important;box-shadow:0 0 0 3px rgba(27,155,112,.12)!important}.planner-grid{gap:10px!important}.field{min-width:0}}
+</style>
+</head><body><script>window.TC_ADMIN_BUILD=false</script>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="#home" aria-label="TripCraft - דף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V4.46 · נץ מערכות מידע</small></div></a>
+  <div class="brand"><div class="logo">T</div><div><h1>TripCraft</h1><small>V4.46 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#pricing" data-he="מחירים" data-en="Pricing">מחירים</a>
@@ -180,7 +186,7 @@ body.tc-links-underlined a{text-decoration:underline!important;text-underline-of
   <div class="home-option"><strong data-he="טיול מוכן" data-en="Ready Trip">טיול מוכן</strong><span data-he="בחרו מסלול קיים והתחילו מיד." data-en="Choose an existing itinerary and start immediately.">בחרו מסלול קיים והתחילו מיד.</span></div>
   <div class="home-option"><strong data-he="התאמת טיול" data-en="Adapt a Trip">התאמת טיול</strong><span data-he="התאימו קצב, ימים והעדפות אליכם." data-en="Adjust pace, days and preferences to fit you.">התאימו קצב, ימים והעדפות אליכם.</span></div>
   <div class="home-option"><strong data-he="בניית AI" data-en="AI Trip Builder">בניית AI</strong><span data-he="בנו טיול אישי מאפס לפי מי שנוסע ומה שאוהבים." data-en="Build a personal trip from scratch around your travelers and interests.">בנו טיול אישי מאפס לפי מי שנוסע ומה שאוהבים.</span></div>
-  <div class="home-option"><strong data-he="הכול בדרך" data-en="Everything on the Go">הכול בדרך</strong><span data-he="מפות, Waze, TripCheck ושינויים גם מהנייד." data-en="Maps, Waze, TripCheck and updates from your phone.">מפות, Waze, TripCheck ושינויים גם מהנייד.</span></div>
+  <div class="home-option tc-import-home"><strong data-he="ייבוא טיול" data-en="Import Trip">ייבוא טיול</strong><span data-he="העלו מסלול בפורמט TripCraft והמערכת תבנה ממנו טיול חי." data-en="Upload a TripCraft-format itinerary and turn it into a live trip.">העלו מסלול בפורמט TripCraft והמערכת תבנה ממנו טיול חי.</span></div><div class="home-option"><strong data-he="הכול בדרך" data-en="Everything on the Go">הכול בדרך</strong><span data-he="מפות, Waze, TripCheck ושינויים גם מהנייד." data-en="Maps, Waze, TripCheck and updates from your phone.">מפות, Waze, TripCheck ושינויים גם מהנייד.</span></div>
 </div>
 </div></section>
 <div class="focus-title planner wrap" style="padding-bottom:0"><div class="headrow"><div><h2>תכנון טיול</h2><p>אשף תכנון, עריכת ימים ושיחה עם עוזר התכנון.</p></div></div></div><div class="focus-title trips wrap" style="padding-bottom:0"><div class="headrow"><div><h2>הצעות לטיולים</h2><p>6 מסלולים מוכנים לבחירה, התאמה ורכישה.</p></div></div></div><div class="focus-title import wrap" style="padding-bottom:0"><div class="headrow"><div><h2>יבוא טיול</h2><p>Excel / Word / PDF לתבנית TripCraft.</p></div></div></div><div class="focus-title admin wrap" style="padding-bottom:0"><div class="headrow"><div><h2>ניהול</h2><p>בדיקות, טיולים מיובאים והכנה להרשאות Admin.</p></div></div></div><main class="wrap">
@@ -298,5 +304,6 @@ body.tc-links-underlined a{text-decoration:underline!important;text-underline-of
 })();
 </script>
 
+\n
 
 </body></html>
