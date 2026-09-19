@@ -1,0 +1,28 @@
+TripCraft V72 - Test Report
+Date: 2026-09-19
+Baseline: TripCraft V70
+
+Passed checks:
+1. JavaScript syntax: all inline scripts passed node --check.
+2. Service worker syntax passed node --check.
+3. manifest.webmanifest parsed successfully.
+4. Version label/title: V72.
+5. Planner: 16 sequential screens.
+6. Next navigation: passed through all planner screens.
+7. Back navigation: passed, including final registration screen back to details.
+8. Build action: produced a planner draft successfully.
+9. Pilot metadata: changeLimit=10 stored in generated draft.
+10. Lodging anchors: existing hotel names are used as daily route start/end anchors.
+11. Star/return behavior: same lodging is marked as return to lodging / star route.
+12. Hotel rows: add-another-hotel button and hidden value synchronization passed.
+13. Tyrol aliases: Hebrew 'טירול' resolves to Tyrol / Tirol locally.
+14. Switzerland aliases: 'שויץ' resolves locally to Zurich (ZRH) and Geneva (GVA).
+15. Mobile wizard navigation tested at iPhone-like 390x844 and Android-like 412x915.
+16. No-scroll planner layout checked at 390x844, 412x915 and small Android-like 360x800: all 16 steps plus navigation fit inside the fixed planner viewport.
+17. Main logo returns to #home.
+18. Relative HTML links: no missing local file targets found.
+19. PWA assets: manifest and service worker are served successfully by local HTTP server; install metadata and 192/512 icons are present.
+
+Notes:
+- External live services (Booking availability, AI API, Photon network service) require network/server credentials and are not treated as completed production integrations in this build.
+- PWA installation should be tested once on the final HTTPS GitHub Pages URL because browser install prompts are environment-dependent.
