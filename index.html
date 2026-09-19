@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V89</title>
+<title>TripCraft V90</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -1032,7 +1032,7 @@ function renderPlannerBudget(){const el=document.getElementById('plannerBudgetSu
 function bookingSearchUrl(town,profile){
  const adults=Math.max(1,Number(profile.people||1)-Number(profile.children||0)),children=Number(profile.children||0);
  const direct='https://www.booking.com/searchresults.html?ss='+encodeURIComponent(town)+'&group_adults='+adults+'&no_rooms='+estimatedRooms(profile)+'&group_children='+children;
- // V89: affiliate-ready. Until CJ/Booking approves the program, use the normal Booking search URL.
+ // V90: affiliate-ready. Until CJ/Booking approves the program, use the normal Booking search URL.
  // After approval, put the CJ deep-link template in tripcraft-config.js. Supported placeholders: {url}, {destination}.
  const cfg=window.TRIPCRAFT_CONFIG||{};
  const tpl=String(cfg.bookingAffiliateTemplate||'').trim();
@@ -1454,5 +1454,5 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
   if(log){log.addEventListener('click',function(e){const email=(document.getElementById('tcLoginIdentity')?.value||'').trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){e.stopImmediatePropagation();alert('נא להזין את כתובת האימייל שאיתה נרשמתם.');}},true);}
 })();
 </script>
-<script src="tripcraft-v89.js?v=89"></script>
+<script src="tripcraft-v90.js?v=90"></script>
 </body></html>
