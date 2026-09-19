@@ -2,7 +2,7 @@
    Uses public Supabase client configuration only. */
 (() => {
   'use strict';
-  const V='V91';
+  const V='V94';
   const PROTECTED=new Set(['planner','account','import','cart','hotels','trips']);
   let sb=null, sessionUser=null, authCtx=null, resendTimer=null, resendLeft=0, cloudTrips=[], cloudTripsReady=false, tableReady=true;
 
@@ -25,7 +25,7 @@
     const ctl=new AbortController();
     const timer=setTimeout(()=>ctl.abort(),15000);
     try{
-      const res=await fetch(url,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',signal:ctl.signal,headers:{'Content-Type':'application/json','apikey':c.supabaseAnonKey,'X-Client-Info':'tripcraft-v91'},body:JSON.stringify(payload||{})});
+      const res=await fetch(url,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',signal:ctl.signal,headers:{'Content-Type':'application/json','apikey':c.supabaseAnonKey,'X-Client-Info':'tripcraft-v94'},body:JSON.stringify(payload||{})});
       const text=await res.text();
       let data={};
       try{data=text?JSON.parse(text):{}}catch(_){data={message:text}}
@@ -92,6 +92,14 @@
       byId('tcVerifyOtp')?.addEventListener('click',v85VerifyOtp,true);
       byId('tcResendOtp')?.addEventListener('click',v85ResendOtp,true);
       byId('tcOtpCode')?.addEventListener('input',e=>{const clean=String(e.target.value||'').replace(/\D/g,'').slice(0,8);if(e.target.value!==clean)e.target.value=clean;byId('tcOtpStatus').textContent='';});
+      byId('tcOtpCode')?.addEventListener('paste',e=>{
+        e.preventDefault();
+        const raw=(e.clipboardData||window.clipboardData)?.getData('text')||'';
+        const clean=String(raw).replace(/\D/g,'').slice(0,8);
+        e.currentTarget.value=clean;
+        byId('tcOtpStatus').textContent=clean.length===8?'':'יש להדביק קוד בן 8 ספרות.';
+        setTimeout(()=>e.currentTarget.setSelectionRange?.(clean.length,clean.length),0);
+      });
       byId('tcOtpCode')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();v85VerifyOtp(e)}});
     }
     byId('tcAuthContinue')?.addEventListener('click',v85CheckEmail);
@@ -224,7 +232,18 @@
     const page=raw.split('?')[0]||'home';if(PROTECTED.has(page)&&!loggedIn()){goLogin('#'+page);return}if(page==='account')renderCloudAccount();
   }
   function installRouteGate(){
-    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const href=a.getAttribute('href'),page=pageFromHash(href);if((page==='trip'||PROTECTED.has(page))&&!loggedIn()){e.preventDefault();e.stopImmediatePropagation();goLogin(href);return}if(page==='planner'&&loggedIn()){window.planner.currentTripId=null}},true);
+    document.addEventListener('click',e=>{
+      const a=e.target.closest('a[href^="#"]');
+      if(!a)return;
+      const href=a.getAttribute('href'),page=pageFromHash(href),current=pageFromHash(location.hash||'#home');
+      const protectedTarget=(page==='trip'||PROTECTED.has(page));
+      // V94: every protected action launched from the Home page must pass through email/OTP,
+      // even when Supabase still has a persisted session from an earlier test.
+      if(protectedTarget && (current==='home' || !loggedIn())){
+        e.preventDefault();e.stopImmediatePropagation();goLogin(href);return;
+      }
+      if(page==='planner'&&loggedIn()){window.planner.currentTripId=null}
+    },true);
     window.addEventListener('hashchange',()=>setTimeout(handleCurrentRoute,0));
   }
   function wrapPlanner(){
