@@ -1,4 +1,4 @@
-const CACHE='tripcraft-v73-shell';
+const CACHE='tripcraft-v74-shell';
 const CORE=['./','./index.html','./index-en.html','./manifest.webmanifest','./assets/hero.jpg','./assets/austria.jpg','./assets/dolomites.jpg','./assets/greece.jpg','./assets/slovakia.jpg','./assets/vietnam.jpg','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});

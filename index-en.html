@@ -137,35 +137,7 @@ body.tc-links-underlined a{text-decoration:underline!important;text-underline-of
 }
 
 </style>
-<style id="tc-v70-mobile-en">html,body{max-width:100%;overflow-x:hidden}*,*::before,*::after{box-sizing:border-box}img,svg,video,canvas,iframe{max-width:100%;height:auto}@media(max-width:900px){.planner-grid{grid-template-columns:1fr!important}input,select,textarea{min-width:0;max-width:100%}}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0d3557"><link rel="apple-touch-icon" href="icons/icon-180.png">
-<style id="v73-mobile-fixes">
-/* V73 mobile fixes: autocomplete visibility, always-available navigation, clearer selection state */
-@media (max-width:700px){
-  #planner{padding-bottom:112px!important}
-  #planner .planner-step{padding-bottom:18px!important}
-  #planner .planner-actions{
-    position:fixed!important;left:12px!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;
-    z-index:10050!important;margin:0!important;padding:8px!important;border:1px solid #d5e1e8!important;border-radius:18px!important;
-    background:rgba(255,255,255,.97)!important;box-shadow:0 10px 28px rgba(13,53,87,.18)!important;backdrop-filter:blur(10px);
-  }
-  #planner .planner-actions .btn{flex:1 1 0!important;min-height:52px!important;font-size:18px!important;margin:0!important}
-  body.tc-keyboard-open #planner .planner-actions{display:none!important}
-  .a11y-fab{left:14px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 84px)!important;background:#6b4fa1!important;color:#fff!important;width:48px!important;height:48px!important;font-size:21px!important;z-index:10040!important}
-  body.tc-keyboard-open .a11y-fab{display:none!important}
-  .ac-wrap{z-index:10020!important}
-  .ac-list{position:fixed!important;left:12px!important;right:12px!important;width:auto!important;max-height:38vh!important;overflow-y:auto!important;z-index:10060!important;border-radius:16px!important}
-  .ac-item{min-height:56px!important;padding:12px 14px!important}
-  .country-popular{position:relative;z-index:1}
-  .planner-step[data-step="4"] .choice-grid{grid-template-columns:1fr 1fr!important;gap:8px!important}
-  .planner-step[data-step="4"] .choice-grid label{min-height:58px!important;padding:10px 8px!important;font-size:14px!important}
-}
-/* selection state: no blue radio dots; use a familiar green check */
-#planner .choice-grid label{position:relative}
-#planner .choice-grid label input[type="radio"],#planner .choice-grid label input[type="checkbox"]{position:absolute!important;opacity:0!important;pointer-events:none!important}
-#planner .choice-grid label:has(input:checked){border-color:#16966f!important;background:#eefaf5!important;box-shadow:0 0 0 2px rgba(22,150,111,.08) inset!important;color:#103b31!important}
-#planner .choice-grid label:has(input:checked)::after{content:'✓';position:absolute;top:7px;inset-inline-end:8px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#16966f;color:#fff;font-size:14px;font-weight:900;box-shadow:0 2px 6px rgba(0,0,0,.12)}
-</style>
-</head><body><style id="tc-v67-nav">
+<style id="tc-v70-mobile-en">html,body{max-width:100%;overflow-x:hidden}*,*::before,*::after{box-sizing:border-box}img,svg,video,canvas,iframe{max-width:100%;height:auto}@media(max-width:900px){.planner-grid{grid-template-columns:1fr!important}input,select,textarea{min-width:0;max-width:100%}}</style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0d3557"><link rel="apple-touch-icon" href="icons/icon-180.png"></head><body><style id="tc-v67-nav">
 #tc-v67-bar{position:sticky;top:0;z-index:100000;background:#0d3557;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;direction:rtl;box-shadow:0 2px 10px rgba(0,0,0,.18)}#tc-v67-bar .tc-home{color:#fff;text-decoration:none;font-weight:900;font-size:17px;white-space:nowrap}#tc-v67-bar button{border:0;background:#fff;color:#0d3557;border-radius:11px;padding:9px 15px;font:inherit;font-weight:900;cursor:pointer;white-space:nowrap}@media(max-width:600px){#tc-v67-bar{padding:9px 10px}#tc-v67-bar .tc-home{font-size:15px}#tc-v67-bar button{padding:8px 12px}}
 </style><div id="tc-v67-bar"><a class="tc-home" href="index.html" aria-label="דף הבית">TripCraft</a><button type="button" onclick="if(history.length>1){history.back()}else{location.href='index.html'}">← חזרה</button></div>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
@@ -831,51 +803,4 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 })();
 </script>
 
-
-<script id="v73-mobile-js">
-(function(){
-  function positionAutocomplete(list,input){
-    if(!list||!input||!window.matchMedia('(max-width:700px)').matches||!list.classList.contains('show')) return;
-    const vv=window.visualViewport;
-    const vh=vv?vv.height:window.innerHeight;
-    const topOffset=vv?vv.offsetTop:0;
-    const r=input.getBoundingClientRect();
-    const margin=10, minH=150, maxH=Math.min(vh*0.38,320);
-    const below=topOffset+vh-r.bottom-margin;
-    const above=r.top-topOffset-margin;
-    let top;
-    if(below>=minH){ top=r.bottom+6; }
-    else if(above>=minH){ top=Math.max(topOffset+8,r.top-Math.min(maxH,above)-6); }
-    else { top=topOffset+Math.max(8,vh*0.12); }
-    list.style.top=Math.round(top)+'px';
-    list.style.bottom='auto';
-    list.style.maxHeight=Math.max(120,Math.min(maxH, vh-(top-topOffset)-12))+'px';
-  }
-  function updateOpenAutocomplete(){
-    document.querySelectorAll('.ac-list.show').forEach(list=>{
-      const input=list.closest('.ac-wrap')?.querySelector('input');
-      positionAutocomplete(list,input);
-    });
-  }
-  document.addEventListener('focusin',e=>{
-    if(e.target.matches('input,textarea,select')){document.body.classList.add('tc-keyboard-open');setTimeout(updateOpenAutocomplete,80);}
-  });
-  document.addEventListener('focusout',e=>{
-    if(e.target.matches('input,textarea,select')) setTimeout(()=>{if(!document.activeElement?.matches('input,textarea,select'))document.body.classList.remove('tc-keyboard-open');},120);
-  });
-  const mo=new MutationObserver(updateOpenAutocomplete);
-  document.querySelectorAll('.ac-list').forEach(x=>mo.observe(x,{attributes:true,attributeFilter:['class']}));
-  window.visualViewport?.addEventListener('resize',updateOpenAutocomplete);
-  window.visualViewport?.addEventListener('scroll',updateOpenAutocomplete);
-  window.addEventListener('resize',updateOpenAutocomplete);
-  // Keep wizard navigation reachable after changing steps.
-  const oldShow=window.plannerShowStep;
-  if(typeof oldShow==='function'){
-    window.plannerShowStep=function(n){oldShow(n);setTimeout(()=>{
-      const active=document.querySelector('.planner-step.active');
-      if(active&&window.matchMedia('(max-width:700px)').matches) active.scrollIntoView({block:'start',behavior:'smooth'});
-    },60);};
-  }
-})();
-</script>
 </body></html>

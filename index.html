@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V73</title>
+<title>TripCraft V74</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -165,7 +165,7 @@ body.tc-logged-in .mobile-menu-user{display:block}
 .home-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:24px;max-width:980px}
 .home-option{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(5px);border-radius:16px;padding:13px 14px;color:#fff}
 .home-option strong{display:block;margin-bottom:4px}
-.a11y-fab{position:fixed;left:18px;bottom:18px;z-index:1200;width:52px;height:52px;border-radius:50%;border:0;background:#0d5c98;color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer}
+.a11y-fab{position:fixed;left:18px;bottom:18px;z-index:1200;width:52px;height:52px;border-radius:50%;border:0;background:#5b6470;color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(0,0,0,.22);cursor:pointer}
 .a11y-panel{position:fixed;left:18px;bottom:80px;z-index:1200;width:min(310px,calc(100vw - 36px));background:#fff;border:1px solid #d6e2ea;border-radius:18px;padding:14px;box-shadow:0 15px 38px rgba(0,0,0,.22);display:none}
 .a11y-panel.open{display:block}
 .a11y-panel h3{margin:0 0 10px}
@@ -284,38 +284,22 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 @media(display-mode:standalone){.tc-header{padding-top:max(12px,env(safe-area-inset-top))}body{overscroll-behavior-y:none}}
 </style>
 
-<style id="v73-mobile-fixes">
-/* V73 mobile fixes: autocomplete visibility, always-available navigation, clearer selection state */
+<style id="v74-targeted-mobile-fixes">
+/* V74: last good layout + only the requested mobile fixes. */
 @media (max-width:700px){
-  #planner{padding-bottom:112px!important}
-  #planner .planner-step{padding-bottom:18px!important}
-  #planner .planner-actions{
-    position:fixed!important;left:12px!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;
-    z-index:10050!important;margin:0!important;padding:8px!important;border:1px solid #d5e1e8!important;border-radius:18px!important;
-    background:rgba(255,255,255,.97)!important;box-shadow:0 10px 28px rgba(13,53,87,.18)!important;backdrop-filter:blur(10px);
-  }
-  #planner .planner-actions .btn{flex:1 1 0!important;min-height:52px!important;font-size:18px!important;margin:0!important}
-  body.tc-keyboard-open #planner .planner-actions{display:none!important}
-  .a11y-fab{left:14px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 84px)!important;background:#6b4fa1!important;color:#fff!important;width:48px!important;height:48px!important;font-size:21px!important;z-index:10040!important}
-  body.tc-keyboard-open .a11y-fab{display:none!important}
-  .ac-wrap{z-index:10020!important}
-  .ac-list{position:fixed!important;left:12px!important;right:12px!important;width:auto!important;max-height:38vh!important;overflow-y:auto!important;z-index:10060!important;border-radius:16px!important}
-  .ac-item{min-height:56px!important;padding:12px 14px!important}
-  .country-popular{position:relative;z-index:1}
-  .planner-step[data-step="4"] .choice-grid{grid-template-columns:1fr 1fr!important;gap:8px!important}
-  .planner-step[data-step="4"] .choice-grid label{min-height:58px!important;padding:10px 8px!important;font-size:14px!important}
+  .ac-list{max-height:220px!important;overscroll-behavior:contain!important;}
+  body.tc-v74-keyboard .ac-list.show{position:fixed!important;left:14px!important;right:14px!important;width:auto!important;top:auto!important;bottom:calc(var(--tc-kb-height, 0px) + 10px)!important;max-height:min(220px,32vh)!important;z-index:10020!important;box-shadow:0 14px 36px rgba(9,43,69,.24)!important;}
+  .a11y-fab{left:10px!important;top:92px!important;bottom:auto!important;width:44px!important;height:44px!important;background:#5b6470!important;font-size:20px!important;z-index:1150!important;}
+  body.tc-v74-long-step .planner-actions{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;z-index:10010!important;margin:0!important;padding:7px!important;border-radius:14px!important;background:rgba(255,255,255,.98)!important;box-shadow:0 8px 22px rgba(13,53,87,.16)!important;}
+  body.tc-v74-long-step #planner{padding-bottom:78px!important;}
+  body.tc-v74-keyboard .planner-actions{display:none!important;}
 }
-/* selection state: no blue radio dots; use a familiar green check */
-#planner .choice-grid label{position:relative}
-#planner .choice-grid label input[type="radio"],#planner .choice-grid label input[type="checkbox"]{position:absolute!important;opacity:0!important;pointer-events:none!important}
-#planner .choice-grid label:has(input:checked){border-color:#16966f!important;background:#eefaf5!important;box-shadow:0 0 0 2px rgba(22,150,111,.08) inset!important;color:#103b31!important}
-#planner .choice-grid label:has(input:checked)::after{content:'✓';position:absolute;top:7px;inset-inline-end:8px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#16966f;color:#fff;font-size:14px;font-weight:900;box-shadow:0 2px 6px rgba(0,0,0,.12)}
 </style>
 </head><body>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V73 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V74 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -497,7 +481,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 
 <section id="import" class="panel"><div class="headrow"><div><h2>יבוא טיול חדש</h2><p><strong>היבוא עובד רק בפורמט TripCraft האחיד.</strong> המערכת בודקת את המבנה לפני יצירת הטיול.</p></div></div>
 <div class="safe" style="margin-bottom:16px"><h3 style="margin-top:0">פורמטים מותרים</h3><p><b>Excel:</b> .xlsx / .xls &nbsp; · &nbsp; <b>CSV:</b> .csv עם פסיקים &nbsp; · &nbsp; <b>Word:</b> .docx עם טבלה &nbsp; · &nbsp; <b>PDF:</b> PDF טבלאי עם אותן כותרות.</p><p><b>חמשת הטורים, בסדר הזה:</b></p><div style="overflow:auto"><table style="width:100%;border-collapse:collapse;background:#fff"><thead><tr><th>תאריך</th><th>מאיפה</th><th>לאן</th><th>לינה (עיר או מלון)</th><th>מה עושים (מלל)</th></tr></thead><tbody><tr><td>19.6.2027</td><td>Nice Airport</td><td>Gordes</td><td>Avignon</td><td>איסוף רכב, עצירה בגורד וסיור ערב.</td></tr></tbody></table></div><p style="margin-bottom:0">המערכת תזהה את היום, תאמת נקודות, תכין Waze ו־Google Maps, תייצר טיול בתבנית TripCraft ותציג רק כ־20% לפני תשלום.</p><p><a class="btn secondary" href="TripCraft_Import_Template.csv" download>הורד תבנית CSV</a></p></div><div class="uploadbox" id="dropzone"><div style="font-size:42px">⬆</div><h3>בחר קובץ טיול</h3><div class="uploadhint"><b>רק בפורמט האחיד:</b> .xlsx / .xls / .csv (פסיקים) / .docx / .pdf</div><label class="btn secondary" for="fileInput">בחר קובץ</label><input id="fileInput" type="file" accept=".xlsx,.xls,.csv,.docx,.pdf"></div><div id="status" class="statusbar"></div><div class="formgrid"><div class="field"><label>איך לקרוא לטיול? *</label><input id="tripName" placeholder="למשל: דולומיטים איטליה"></div><div class="field"><label>מדינה</label><input id="country" placeholder="איטליה"></div><div class="field"><label>שנה</label><input id="year" placeholder="2026"></div></div><div class="safe"><strong>כלל פרסום:</strong> לא נשמרים מחירים/כסף ולא שמות מלונות. בלינה נשמרת רק העיירה/האזור.</div><div class="cta"><button class="btn green" id="analyzeBtn" type="button">נתח והצג Preview מעוצב</button></div><div id="preview" class="preview"><div id="previewHero" class="preview-hero"></div><div id="daysPreview" class="day-list"></div><div class="warn">זהו Preview בתבנית הסטנדרטית. אחרי אישור, הטיול יופיע ב״הצעות לטיולים״ באותו מבנה: טיול → ימים → פירוט יום.</div><div class="import-tools"><button class="btn green" id="createBtn" type="button">אשר וצור טיול</button></div></div></section>
-<section id="admin" class="panel admin"><div class="headrow"><div><h2>ניהול ובדיקות מערכת</h2><p>V73 — בשלב זה אין הרשאות משתמשים; כפתורי המחיקה קיימים רק במסך הניהול כהכנה למנגנון Admin עתידי.</p></div></div><div class="statusgrid"><div class="status"><span class="oktxt">✓ Excel</span><br>SheetJS</div><div class="status"><span class="oktxt">✓ Word</span><br>Mammoth</div><div class="status"><span class="oktxt">✓ PDF</span><br>PDF.js</div></div><div class="safe"><strong>שמירת טיולים בין גרסאות:</strong> טיולים שנשמרו בדפדפן מופיעים מיד גם אחרי עדכון קוד באותו דפדפן. בשלב הענן הם יעברו למסד נתונים ויהיו זמינים מכל מחשב ונייד.</div><div class="warn"><strong>סטנדרט ניווט:</strong> בתחילת כל טיול מוצגת מפת מסלול; בכל יום Google Maps לכל היום; בכל תחנה Google Maps לנקודה הבאה, Waze לנקודה הבאה ו־Waze לחניה ליד היעד.</div><div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">🤖 חיבור AI — מצב ניסוי</h3><p style="color:#607887">בשלב זה ניתן לשמור כאן את מפתח ה־API פעם אחת בדפדפן הזה. עד שלא מפעילים חיוב API, TripCraft נשאר במצב Demo ואינו מבצע קריאה בתשלום.</p><div class="field"><label>OpenAI API Key</label><input id="aiApiKey" type="password" autocomplete="off" placeholder="sk-... / sk-proj-..."></div><div class="cta"><button class="btn ai-color" id="aiSaveKey" type="button">שמור טוקן חד־פעמי</button><button class="btn soft" id="aiTestConnection" type="button">בדוק סטטוס</button><button class="btn soft" id="aiRemoveKey" type="button">מחק טוקן</button></div><div id="aiStatus" class="safe" style="margin-top:12px">מצב AI: Demo — אין כרגע קריאות API.</div><div class="warn"><strong>חשוב:</strong> V73 היא גרסת בדיקה מקומית. המפתח נשמר רק בדפדפן שלך ואינו נכלל בקובץ ה־HTML או ב־ZIP. לפני פרסום האתר ללקוחות נעביר את המפתח לשרת מאובטח בלבד.</div></div><div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">🏨 Booking API / Affiliate — הכנה לשרת</h3><p>ב־GitHub Pages לא שומרים מפתח סודי. כאן מגדירים רק Partner/Affiliate ID וכתובת Backend מאובטחת. ה־API Secret יישמר בעתיד כ־environment variable בשרת בלבד.</p><div class="formgrid"><div class="field"><label>Booking Partner / Affiliate ID</label><input id="bookingPartnerId" autocomplete="off" placeholder="Partner ID"></div><div class="field"><label>Backend endpoint</label><input id="bookingBackendUrl" inputmode="url" autocomplete="off" placeholder="https://api.example.com/booking"></div></div><div class="cta"><button class="btn secondary" id="bookingSaveConfig" type="button">שמור הגדרות לא סודיות</button><button class="btn soft" id="bookingTestConfig" type="button">בדוק הגדרה</button></div><div id="bookingConfigStatus" class="safe" style="margin-top:12px">Booking: טרם הוגדר Backend.</div><div class="warn"><strong>אבטחה:</strong> לעולם לא להכניס API Secret / Password / כרטיס אשראי לקוד GitHub או ל־localStorage.</div></div><div style="margin-top:22px"><h3>טיולים שנוצרו מיבוא</h3><div id="adminTripsList" style="display:grid;gap:10px"></div></div>
+<section id="admin" class="panel admin"><div class="headrow"><div><h2>ניהול ובדיקות מערכת</h2><p>V74 — בשלב זה אין הרשאות משתמשים; כפתורי המחיקה קיימים רק במסך הניהול כהכנה למנגנון Admin עתידי.</p></div></div><div class="statusgrid"><div class="status"><span class="oktxt">✓ Excel</span><br>SheetJS</div><div class="status"><span class="oktxt">✓ Word</span><br>Mammoth</div><div class="status"><span class="oktxt">✓ PDF</span><br>PDF.js</div></div><div class="safe"><strong>שמירת טיולים בין גרסאות:</strong> טיולים שנשמרו בדפדפן מופיעים מיד גם אחרי עדכון קוד באותו דפדפן. בשלב הענן הם יעברו למסד נתונים ויהיו זמינים מכל מחשב ונייד.</div><div class="warn"><strong>סטנדרט ניווט:</strong> בתחילת כל טיול מוצגת מפת מסלול; בכל יום Google Maps לכל היום; בכל תחנה Google Maps לנקודה הבאה, Waze לנקודה הבאה ו־Waze לחניה ליד היעד.</div><div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">🤖 חיבור AI — מצב ניסוי</h3><p style="color:#607887">בשלב זה ניתן לשמור כאן את מפתח ה־API פעם אחת בדפדפן הזה. עד שלא מפעילים חיוב API, TripCraft נשאר במצב Demo ואינו מבצע קריאה בתשלום.</p><div class="field"><label>OpenAI API Key</label><input id="aiApiKey" type="password" autocomplete="off" placeholder="sk-... / sk-proj-..."></div><div class="cta"><button class="btn ai-color" id="aiSaveKey" type="button">שמור טוקן חד־פעמי</button><button class="btn soft" id="aiTestConnection" type="button">בדוק סטטוס</button><button class="btn soft" id="aiRemoveKey" type="button">מחק טוקן</button></div><div id="aiStatus" class="safe" style="margin-top:12px">מצב AI: Demo — אין כרגע קריאות API.</div><div class="warn"><strong>חשוב:</strong> V74 היא גרסת בדיקה מקומית. המפתח נשמר רק בדפדפן שלך ואינו נכלל בקובץ ה־HTML או ב־ZIP. לפני פרסום האתר ללקוחות נעביר את המפתח לשרת מאובטח בלבד.</div></div><div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">🏨 Booking API / Affiliate — הכנה לשרת</h3><p>ב־GitHub Pages לא שומרים מפתח סודי. כאן מגדירים רק Partner/Affiliate ID וכתובת Backend מאובטחת. ה־API Secret יישמר בעתיד כ־environment variable בשרת בלבד.</p><div class="formgrid"><div class="field"><label>Booking Partner / Affiliate ID</label><input id="bookingPartnerId" autocomplete="off" placeholder="Partner ID"></div><div class="field"><label>Backend endpoint</label><input id="bookingBackendUrl" inputmode="url" autocomplete="off" placeholder="https://api.example.com/booking"></div></div><div class="cta"><button class="btn secondary" id="bookingSaveConfig" type="button">שמור הגדרות לא סודיות</button><button class="btn soft" id="bookingTestConfig" type="button">בדוק הגדרה</button></div><div id="bookingConfigStatus" class="safe" style="margin-top:12px">Booking: טרם הוגדר Backend.</div><div class="warn"><strong>אבטחה:</strong> לעולם לא להכניס API Secret / Password / כרטיס אשראי לקוד GitHub או ל־localStorage.</div></div><div style="margin-top:22px"><h3>טיולים שנוצרו מיבוא</h3><div id="adminTripsList" style="display:grid;gap:10px"></div></div>
 <div class="admin-business"><h3>8 אבני הבסיס של TripCraft</h3><div class="business-grid">
 <div>1. <b>AI אמיתי</b><span>Backend מאובטח + OpenAI</span></div><div>2. <b>אירוח נפרד</b><span>Repository נפרד ל-TripCraft</span></div><div>3. <b>Database</b><span>לקוחות, Trip ID, ימים, תשלומים</span></div><div>4. <b>OTP וחשבון</b><span>טלפון / אימייל, 6 ספרות</span></div><div>5. <b>TripCheck</b><span>מיקומים, מרחקים, שעות, 72 שעות לפני</span></div><div>6. <b>Responsive / PWA</b><span>מחשב, מובייל ו-Offline</span></div><div>7. <b>פרטיות / נגישות / תקנון</b><span>מינימום מידע + ביקורת משפטית</span></div><div>8. <b>תשלומים והרשאות</b><span>סל, קופה, מכסות AI, Admin</span></div>
 </div></div>
@@ -1036,7 +1020,7 @@ function tcNorm(v){return (v||'').toString().toLowerCase().normalize('NFKD').rep
 
 const TC_REGIONS=[
  ['טירול','Tyrol','Austria',['tirol','tyrol','טירול','חבל טירול']],['פרובנס','Provence','France',['provence','פרובנס','luberon','avignon']],['בוואריה','Bavaria','Germany',['bavaria','bayern','בוואריה']],['שווייץ','Switzerland','Switzerland',['שויץ','שוויץ','שווייץ','switzerland','swiss']],['דולומיטים','Dolomites','Italy',['dolomites','dolomiti','דולומיטים']],['הריביירה הצרפתית','French Riviera','France',['cote dazur','côte d’azur','riviera','ריביירה']]];
-function tcRegionLocal(q){q=tcNorm(q);if(!q)return[];return TC_REGIONS.filter(x=>[x[0],x[1],x[2],...(x[3]||[])].some(v=>tcNorm(v).includes(q))).slice(0,6).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1]}));}
+function tcRegionLocal(q){q=tcNorm(q);if(!q)return[];const near=(a,b)=>{a=tcNorm(a);b=tcNorm(b);if(b.length<3||Math.abs(a.length-b.length)>1)return false;if(a===b)return true;let i=0,j=0,d=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++d>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return d+(i<a.length||j<b.length?1:0)<=1;};return TC_REGIONS.filter(x=>[x[0],x[1],x[2],...(x[3]||[])].some(v=>tcNorm(v).includes(q)||near(v,q))).slice(0,6).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1]}));}
 function tcCityLocal(q){q=tcNorm(q);if(!q)return[];const regions=tcRegionLocal(q);const cities=TC_CITIES.filter(x=>[x[0],x[1],...(x[6]||[])].some(v=>tcNorm(v).includes(q))).slice(0,7).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1],lat:x[4],lon:x[5]}));return [...regions,...cities].slice(0,8)}
 function tcAirportLocal(q){q=tcNorm(q);if(!q)return[];return TC_AIRPORTS.filter(x=>[x[0],x[1],x[2],x[3],x[4],...(x[8]||[])].some(v=>tcNorm(v).includes(q))).slice(0,8).map(x=>({kind:'airport',main:`${x[1]} · ${x[2]}`,sub:`${x[3]} · ${x[5]}`,value:`${x[2]} (${x[0]})`,code:x[0],lat:x[6],lon:x[7]}))}
 async function tcPhoton(q,type){if(q.length<2)return[];try{const lang=(document.documentElement.lang||'he').startsWith('he')?'he':'en';let url=`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=7&lang=${lang}`;/* Destination search intentionally has no layer filter: regions such as Provence must also be discoverable. */const r=await fetch(url,{headers:{Accept:'application/json'}});if(!r.ok)throw 0;const j=await r.json();return (j.features||[]).map(f=>{const p=f.properties||{},c=f.geometry?.coordinates||[];const isAirport=p.osm_key==='aeroway'||/airport|aeroport|flughafen|שדה תעופה|נמל התעופה/i.test([p.name,p.city,p.locality].filter(Boolean).join(' '));if(type==='airport'&&!isAirport)return null;const nm=p.name||p.city||p.locality||q;const loc=[p.city,p.state,p.country].filter((v,i,a)=>v&&a.indexOf(v)===i).join(' · ');return{kind:type,main:nm,sub:loc,value:nm,lat:c[1],lon:c[0]}}).filter(Boolean).slice(0,6)}catch(e){return[]}}
@@ -1134,7 +1118,8 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  const countryAliases={'שווייץ':['שווייץ','שויץ','שוויץ','שוויצריה','switzerland','swiss','ch'],'אוסטריה':['austria','osterreich','österreich'],'גרמניה':['germany','deutschland'],'איטליה':['italy','italia'],'צרפת':['france'],'יוון':['greece','hellas']};
  const nrm=v=>String(v||'').toLowerCase().normalize('NFKD').replace(/[׳’'״"]/g,'').trim();
  function canonicalCountry(v){const q=nrm(v);for(const c of countries){if(nrm(c)===q||(countryAliases[c]||[]).some(a=>nrm(a)===q))return c;}return String(v||'').trim();}
- function countryMatches(c,q){q=nrm(q);return nrm(c).includes(q)||(countryAliases[c]||[]).some(a=>nrm(a).includes(q));}
+ const tcOneEdit=(a,b)=>{a=nrm(a);b=nrm(b);if(!a||!b||Math.abs(a.length-b.length)>1)return false;if(a===b)return true;let i=0,j=0,d=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++d>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return d+(i<a.length||j<b.length?1:0)<=1;};
+ function countryMatches(c,q){q=nrm(q);const vals=[c,...(countryAliases[c]||[])].map(nrm);return vals.some(v=>v.includes(q)||(q.length>=3&&tcOneEdit(v,q)));}
  const search=document.getElementById('plCountrySearch'), list=document.getElementById('plCountrySearchList'), chips=document.getElementById('countryChoices'), selected=document.getElementById('selectedCountries');
  function checked(){return [...chips.querySelectorAll('input:checked')].map(x=>x.value)}
  function ensureCountry(name){name=canonicalCountry(name);if(!name)return;let input=[...chips.querySelectorAll('input')].find(x=>x.value===name);if(!input){const lab=document.createElement('label');lab.innerHTML='<input type="checkbox"><span></span>';input=lab.querySelector('input');input.value=name;lab.querySelector('span').textContent='🌍 '+name;chips.appendChild(lab)}input.checked=true;sync();search.value='';list.classList.remove('show')}
@@ -1204,50 +1189,26 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 })();
 </script>
 
-<script id="v73-mobile-js">
+<script id="v74-targeted-mobile-js">
 (function(){
-  function positionAutocomplete(list,input){
-    if(!list||!input||!window.matchMedia('(max-width:700px)').matches||!list.classList.contains('show')) return;
-    const vv=window.visualViewport;
-    const vh=vv?vv.height:window.innerHeight;
-    const topOffset=vv?vv.offsetTop:0;
-    const r=input.getBoundingClientRect();
-    const margin=10, minH=150, maxH=Math.min(vh*0.38,320);
-    const below=topOffset+vh-r.bottom-margin;
-    const above=r.top-topOffset-margin;
-    let top;
-    if(below>=minH){ top=r.bottom+6; }
-    else if(above>=minH){ top=Math.max(topOffset+8,r.top-Math.min(maxH,above)-6); }
-    else { top=topOffset+Math.max(8,vh*0.12); }
-    list.style.top=Math.round(top)+'px';
-    list.style.bottom='auto';
-    list.style.maxHeight=Math.max(120,Math.min(maxH, vh-(top-topOffset)-12))+'px';
+  const root=document.documentElement;
+  function updateKeyboard(){
+    if(!window.matchMedia('(max-width:700px)').matches){document.body.classList.remove('tc-v74-keyboard');root.style.removeProperty('--tc-kb-height');return;}
+    const vv=window.visualViewport, full=window.innerHeight, visible=vv?vv.height:full;
+    const kb=Math.max(0,full-visible-(vv?vv.offsetTop:0));
+    const focused=document.activeElement&&document.activeElement.matches('input,textarea,select');
+    const open=focused&&(kb>120||visible<full*.82);
+    document.body.classList.toggle('tc-v74-keyboard',!!open);
+    root.style.setProperty('--tc-kb-height',Math.round(kb)+'px');
   }
-  function updateOpenAutocomplete(){
-    document.querySelectorAll('.ac-list.show').forEach(list=>{
-      const input=list.closest('.ac-wrap')?.querySelector('input');
-      positionAutocomplete(list,input);
-    });
-  }
-  document.addEventListener('focusin',e=>{
-    if(e.target.matches('input,textarea,select')){document.body.classList.add('tc-keyboard-open');setTimeout(updateOpenAutocomplete,80);}
-  });
-  document.addEventListener('focusout',e=>{
-    if(e.target.matches('input,textarea,select')) setTimeout(()=>{if(!document.activeElement?.matches('input,textarea,select'))document.body.classList.remove('tc-keyboard-open');},120);
-  });
-  const mo=new MutationObserver(updateOpenAutocomplete);
-  document.querySelectorAll('.ac-list').forEach(x=>mo.observe(x,{attributes:true,attributeFilter:['class']}));
-  window.visualViewport?.addEventListener('resize',updateOpenAutocomplete);
-  window.visualViewport?.addEventListener('scroll',updateOpenAutocomplete);
-  window.addEventListener('resize',updateOpenAutocomplete);
-  // Keep wizard navigation reachable after changing steps.
-  const oldShow=window.plannerShowStep;
-  if(typeof oldShow==='function'){
-    window.plannerShowStep=function(n){oldShow(n);setTimeout(()=>{
-      const active=document.querySelector('.planner-step.active');
-      if(active&&window.matchMedia('(max-width:700px)').matches) active.scrollIntoView({block:'start',behavior:'smooth'});
-    },60);};
-  }
+  function updateStepClass(){const active=document.querySelector('.planner-step.active');const n=active?Number(active.dataset.step||0):0;document.body.classList.toggle('tc-v74-long-step',n>=2);}
+  document.addEventListener('focusin',()=>setTimeout(updateKeyboard,60));
+  document.addEventListener('focusout',()=>setTimeout(updateKeyboard,160));
+  window.visualViewport?.addEventListener('resize',updateKeyboard);
+  window.visualViewport?.addEventListener('scroll',updateKeyboard);
+  window.addEventListener('resize',updateKeyboard);
+  const planner=document.getElementById('planner');if(planner)new MutationObserver(updateStepClass).observe(planner,{subtree:true,attributes:true,attributeFilter:['class']});
+  updateStepClass();updateKeyboard();
 })();
 </script>
 </body></html>
