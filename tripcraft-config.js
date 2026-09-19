@@ -4,7 +4,7 @@ window.TRIPCRAFT_CONFIG = {
   // Supabase project already created for TripCraft:
   supabaseUrl: 'https://zhxmmpctqqoxjconoyyv.supabase.co',
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.
-  supabaseAnonKey: '',
+ " supabaseAnonKey: ''sb_publishable_FQAN7Em12GRjR3bYJVlQZw_nMBKgU4z",
 
   // Booking/CJ affiliate-ready. Leave empty until Booking.com MEA approves the CJ application.
   // When CJ provides a deep-link template, paste it here using {url} for the encoded Booking destination URL
