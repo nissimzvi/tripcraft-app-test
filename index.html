@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V75</title>
+<title>TripCraft V80</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -377,7 +377,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V79 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V80 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -995,7 +995,17 @@ function hotelNightRate(profile){const stars=profile.hotelStars||'any';return st
 function hotelBudget(trip){const p=trip.plannerProfile;if(!p.includeHotels)return 0;const nights=Math.max(0,trip.days.filter(d=>d.lodging).length),rooms=estimatedRooms(p);return nights*rooms*hotelNightRate(p);}
 function attractionBudget(trip){return trip.days.reduce((n,d)=>n+dayAttractionCost(d,trip.plannerProfile),0);}
 function renderPlannerBudget(){const el=document.getElementById('plannerBudgetSummary'),t=planner.draft;if(!el||!t)return;const a=attractionBudget(t),h=hotelBudget(t),total=a+h,p=t.plannerProfile;el.className='budget-summary show';el.innerHTML=`<h3 style="margin:0 0 12px">💰 תקציב משוער — ללא טיסות</h3><div class="budget-grid"><div class="budget-box">אטרקציות לכל הנוסעים<b>${a.toLocaleString()} ₪</b></div><div class="budget-box">מלונות ${p.includeHotels?'משוער':'לא נכלל'}<b>${p.includeHotels?h.toLocaleString()+' ₪':'—'}</b></div><div class="budget-box">סה״כ משוער ללא טיסות<b>${total.toLocaleString()} ₪</b></div></div><div style="margin-top:10px;font-size:12px;opacity:.9">הערכה בלבד לפי גילאי מבוגרים/ילדים, סוג האטרקציות ורמת הלינה. אוכל, ביטוח וקניות אינם כלולים בשלב זה.</div>`;renderHotelRecommendations();}
-function bookingSearchUrl(town,profile){const adults=Math.max(1,Number(profile.people||1)-Number(profile.children||0)),children=Number(profile.children||0);return 'https://www.booking.com/searchresults.html?ss='+encodeURIComponent(town)+'&group_adults='+adults+'&no_rooms='+estimatedRooms(profile)+'&group_children='+children;}
+function bookingSearchUrl(town,profile){
+ const adults=Math.max(1,Number(profile.people||1)-Number(profile.children||0)),children=Number(profile.children||0);
+ const direct='https://www.booking.com/searchresults.html?ss='+encodeURIComponent(town)+'&group_adults='+adults+'&no_rooms='+estimatedRooms(profile)+'&group_children='+children;
+ // V80: affiliate-ready. Until CJ/Booking approves the program, use the normal Booking search URL.
+ // After approval, put the CJ deep-link template in tripcraft-config.js. Supported placeholders: {url}, {destination}.
+ const cfg=window.TRIPCRAFT_CONFIG||{};
+ const tpl=String(cfg.bookingAffiliateTemplate||'').trim();
+ if(!tpl)return direct;
+ if(tpl.includes('{url}')||tpl.includes('{destination}'))return tpl.replaceAll('{url}',encodeURIComponent(direct)).replaceAll('{destination}',encodeURIComponent(town));
+ return direct;
+}
 function renderHotelRecommendations(){const box=document.getElementById('hotelRecommendations'),status=document.getElementById('hotelPlanStatus'),t=planner.draft;if(!box||!status)return;if(!t){status.textContent='בנו טיול כדי לראות את אזורי הלינה המומלצים.';box.innerHTML='';return;}const p=t.plannerProfile,map=new Map();t.days.forEach((d,i)=>{if(!d.lodging)return;const x=map.get(d.lodging)||{town:d.lodging,nights:0,days:[]};x.nights++;x.days.push(i+1);map.set(d.lodging,x)});const cards=[...map.values()];status.innerHTML=`<strong>${cards.length} אזורי לינה</strong> · סגנון: ${esc(p.lodgingStyle==='few'?'כמה שפחות החלפות':p.lodgingStyle==='star'?'טיול כוכב':p.lodgingStyle==='progressive'?'מתקדמים עם המסלול':'בחירה חכמה')} · רמה: ${esc(p.hotelStars==='any'?'לפי התאמה':p.hotelStars==='apartment'?'דירה / אפרטהוטל':p.hotelStars+' כוכבים')}`;box.innerHTML=cards.map((x,i)=>`<article class="hotel-card"><h3>${esc(x.town)}</h3><div class="hotel-meta"><span class="hotel-chip">${x.nights} לילות</span><span class="hotel-chip">ימים ${x.days.join(', ')}</span><span class="hotel-chip">≈ ${hotelNightRate(p).toLocaleString()} ₪ ללילה/יחידה</span></div><p>TripCraft ממליץ לחפש באזור זה כדי לשמור על מסלול הגיוני ולצמצם נסיעות מיותרות. המלון עצמו ייבחר על ידכם.</p><div class="hotel-actions"><a class="btn booking-cta" target="_blank" rel="noopener" href="${bookingSearchUrl(x.town,p)}">בדקו מלונות זמינים ב־Booking ↗</a><button class="btn soft" type="button" onclick="location.hash='#planner'">חזור למסלול</button></div><div class="booking-note">Booking נפתח בלשונית חדשה. TripCraft נשאר פתוח; לאחר הבדיקה/ההזמנה חזרו ללשונית TripCraft והמשיכו.</div></article>`).join('');}
 function openHotelsForDay(i){if(planner.draft&&planner.draft.days[i])sessionStorage.setItem('tc_hotel_focus',planner.draft.days[i].lodging||'');location.hash='#hotels';setTimeout(()=>renderHotelRecommendations(),50);}
 
@@ -1169,33 +1179,50 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
    if(tcSupabaseClient)return tcSupabaseClient;
    const cfg=window.TRIPCRAFT_CONFIG||{},url=String(cfg.supabaseUrl||'').trim(),key=String(cfg.supabaseAnonKey||'').trim();
    if(!url||!key||!window.supabase?.createClient)return null;
-   try{tcSupabaseClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return tcSupabaseClient;}catch(e){return null;}
+   try{tcSupabaseClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});return tcSupabaseClient;}catch(e){console.error('Supabase init failed',e);return null;}
  }
  function tcFindCustomer(identity,phone){const customers=jget(K.customers,[]),id=String(identity||'').trim().toLowerCase(),ph=String(phone||'').replace(/\D/g,'');return customers.find(x=>{const xe=String(x.email||'').trim().toLowerCase(),xp=String(x.phone||'').replace(/\D/g,'');return (id&&xe===id)||(id&&xp&&xp===id.replace(/\D/g,''))||(ph&&xp===ph);})||null;}
  function tcSetAuthMode(mode){const login=document.getElementById('login');login?.classList.toggle('auth-show-existing',mode==='existing');document.querySelectorAll('.auth-mode').forEach(b=>b.classList.toggle('active',b.dataset.authMode===(mode==='existing'?'existing':'new')));}
  async function tcLookupRegistration(){const email=document.getElementById('tcEmail')?.value.trim()||'',phone=document.getElementById('tcPhone')?.value.trim()||'';if(!email&&!phone)return null;const found=tcFindCustomer(email,phone);if(found){const id=document.getElementById('tcLoginIdentity');if(id)id.value=found.email||found.phone||'';tcSetAuthMode('existing');alert('מצאנו משתמש קיים לפי האימייל/טלפון. עברנו למסך כניסה ושליחת OTP.');return found;}return null;}
- function tcStartOtpCountdown(){clearInterval(tcOtpTimer);tcOtpSeconds=60;const b=document.getElementById('tcResendOtp');if(!b)return;b.disabled=true;const tick=()=>{if(tcOtpSeconds<=0){clearInterval(tcOtpTimer);b.disabled=false;b.textContent='שלח קוד חדש';return;}b.textContent=`שלח קוד חדש בעוד ${tcOtpSeconds} שנ׳`;tcOtpSeconds--;};tick();tcOtpTimer=setInterval(tick,1000);}
+ function tcStartOtpCountdown(){clearInterval(tcOtpTimer);tcOtpSeconds=60;const b=document.getElementById('tcResendOtp');if(!b)return;b.disabled=true;const tick=()=>{if(tcOtpSeconds<=0){clearInterval(tcOtpTimer);b.disabled=false;b.textContent='שלח קוד שוב';return;}b.textContent=`שלח קוד שוב בעוד ${tcOtpSeconds} שנ׳`;tcOtpSeconds--;};tick();tcOtpTimer=setInterval(tick,1000);}
+ function tcOtpBusy(busy,mode){const id=mode==='register'?'tcRegisterOtp':'tcLoginOtp',b=document.getElementById(id);if(!b)return;b.disabled=!!busy;b.textContent=busy?'שולח קוד...':'שלח קוד לאימייל';}
  async function tcSendOtp(mode,isResend=false){
    let data;
-   if(mode==='register'){
-     if(!isResend&&await tcLookupRegistration())return;
-     data={firstName:document.getElementById('tcFirstName').value.trim(),lastName:document.getElementById('tcLastName').value.trim(),phone:document.getElementById('tcPhone').value.trim(),email:document.getElementById('tcEmail').value.trim(),method:'email'};
-     if(!data.firstName||!data.lastName||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){alert('יש למלא שם פרטי, שם משפחה ואימייל תקין. הטלפון אינו חובה.');return;}
-   }else{
-     const identity=document.getElementById('tcLoginIdentity').value.trim();
-     const found=tcFindCustomer(identity);
-     if(!found){alert('לא נמצא משתמש בדפדפן הזה לפי האימייל או הטלפון. אם חובר Supabase אפשר להזין אימייל ולבקש OTP; אחרת יש לעבור להרשמה חדשה.');return;}
-     data={...found,method:'email'};
-   }
-   const v=document.getElementById('tcOtpVerify'),status=document.getElementById('tcOtpStatus'),demo=document.getElementById('tcOtpDemo');
-   const sb=tcSupabase();
-   if(sb){
-     status.textContent='שולח קוד לאימייל...';
-     const {error}=await sb.auth.signInWithOtp({email:data.email,options:{shouldCreateUser:mode==='register',data:{first_name:data.firstName||'',last_name:data.lastName||'',phone:data.phone||''}}});
-     if(error){status.textContent='שליחת הקוד נכשלה.';demo.className='warn';demo.textContent='Supabase: '+(error.message||'שגיאה לא ידועה');v.hidden=false;return;}
-     otpContext={mode,data,remote:true};tcLastOtpMode=mode;v.hidden=false;document.getElementById('tcOtpHint').textContent='שלחנו קוד בן 6 ספרות לאימייל '+data.email+'. הזינו אותו כאן.';status.textContent='הקוד נשלח.';demo.className='safe';demo.textContent='לא קיבלתם? בדקו גם בספאם. ניתן לבקש קוד חדש לאחר 60 שניות.';document.getElementById('tcOtpCode').value='';tcStartOtpCountdown();v.scrollIntoView({behavior:'smooth',block:'center'});return;
-   }
-   const code=tcMakeOtp();otpContext={mode,data,code,remote:false};tcLastOtpMode=mode;sessionStorage.setItem('tc_demo_otp',code);v.hidden=false;document.getElementById('tcOtpHint').textContent='הזינו את קוד האימות בן 6 הספרות.';status.textContent='מצב בדיקה מקומי — שירות המייל עדיין לא הוגדר.';demo.className='warn';demo.innerHTML='<strong>בדיקת התהליך:</strong> הקוד הוא <b style="font-size:20px">'+code+'</b>. כדי לקבל אותו במייל בפועל יש להגדיר את שני ערכי Supabase בקובץ tripcraft-config.js.';document.getElementById('tcOtpCode').value='';tcStartOtpCountdown();v.scrollIntoView({behavior:'smooth',block:'center'});
+   const v=document.getElementById('tcOtpVerify'),status=document.getElementById('tcOtpStatus'),demo=document.getElementById('tcOtpDemo'),codeInput=document.getElementById('tcOtpCode');
+   try{
+     if(mode==='register'){
+       if(!isResend&&await tcLookupRegistration())return;
+       data={firstName:document.getElementById('tcFirstName').value.trim(),lastName:document.getElementById('tcLastName').value.trim(),phone:document.getElementById('tcPhone').value.trim(),email:document.getElementById('tcEmail').value.trim(),method:'email'};
+       if(!data.firstName||!data.lastName||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){alert('יש למלא שם פרטי, שם משפחה ואימייל תקין. הטלפון אינו חובה.');return;}
+     }else{
+       const identity=document.getElementById('tcLoginIdentity').value.trim();
+       if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(identity)){alert('נא להזין כתובת אימייל תקינה.');return;}
+       const found=tcFindCustomer(identity);
+       data=found?{...found,method:'email'}:{firstName:'',lastName:'',phone:'',email:identity,method:'email'};
+     }
+     // Show the verification area immediately so the user always sees that the click worked.
+     v.hidden=false;tcLastOtpMode=mode;otpContext={mode,data,remote:false};
+     document.getElementById('tcOtpHint').textContent='שולחים קוד אימות ל־'+data.email+'...';
+     status.textContent='שולח קוד לאימייל...';demo.className='safe';demo.textContent='נא להמתין מספר שניות.';codeInput.value='';
+     v.scrollIntoView({behavior:'smooth',block:'center'});tcOtpBusy(true,mode);
+     const sb=tcSupabase();
+     if(sb){
+       const {error}=await sb.auth.signInWithOtp({email:data.email,options:{shouldCreateUser:mode==='register',data:{first_name:data.firstName||'',last_name:data.lastName||'',phone:data.phone||''}}});
+       if(error)throw error;
+       otpContext={mode,data,remote:true};
+       document.getElementById('tcOtpHint').textContent='שלחנו קוד בן 6 ספרות לאימייל '+data.email+'. הזינו אותו כאן.';
+       status.textContent='הקוד נשלח.';demo.className='safe';demo.textContent='לא קיבלתם? בדקו גם בספאם. ניתן לשלוח קוד חדש לאחר 60 שניות.';
+       tcStartOtpCountdown();setTimeout(()=>codeInput.focus({preventScroll:true}),150);return;
+     }
+     // Safe local fallback for the pilot if the public Supabase key has not yet been placed in tripcraft-config.js.
+     const code=tcMakeOtp();otpContext={mode,data,code,remote:false};sessionStorage.setItem('tc_demo_otp',code);
+     document.getElementById('tcOtpHint').textContent='הזינו את קוד האימות בן 6 הספרות.';
+     status.textContent='מצב בדיקה מקומי — Supabase עדיין לא מחובר בקובץ ההגדרות.';
+     demo.className='warn';demo.innerHTML='<strong>בדיקת התהליך:</strong> הקוד הוא <b style="font-size:20px">'+code+'</b>.<br>כדי לקבל אותו במייל בפועל יש להכניס את ה־Publishable/anon key של Supabase בקובץ tripcraft-config.js.';
+     tcStartOtpCountdown();setTimeout(()=>codeInput.focus({preventScroll:true}),150);
+   }catch(error){
+     console.error('OTP send failed',error);v.hidden=false;status.textContent='שליחת הקוד נכשלה.';demo.className='warn';demo.textContent='Supabase: '+(error?.message||'שגיאה לא ידועה');
+   }finally{tcOtpBusy(false,mode);}
  }
  async function tcVerifyOtp(){
    if(!otpContext)return;const entered=document.getElementById('tcOtpCode').value.trim();
@@ -1211,7 +1238,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
      const customers=jget(K.customers,[]);const existing=customers.find(x=>(u.phone&&x.phone===u.phone)||String(x.email||'').toLowerCase()===String(u.email||'').toLowerCase());
      if(existing)u={...existing,...u};else customers.push(u);jset(K.customers,customers);
    }
-   jset(K.customer,u);otpContext=null;document.getElementById('tcOtpVerify').hidden=true;tcRenderAccount();tcRenderHeaderUser();tcRenderCustomers();const ret=sessionStorage.getItem('tc_return_after_login')||'#account';sessionStorage.removeItem('tc_return_after_login');location.hash=ret;const auto=sessionStorage.getItem('tc_build_after_login');if(auto){sessionStorage.removeItem('tc_build_after_login');setTimeout(()=>{location.hash='#planner';plannerShowStep(7);buildPlannerDraft();},180);}tcLogEvent('login_verified',{method:u.method||'otp'});
+   jset(K.customer,u);otpContext=null;clearInterval(tcOtpTimer);document.getElementById('tcOtpVerify').hidden=true;tcRenderAccount();tcRenderHeaderUser();tcRenderCustomers();const ret=sessionStorage.getItem('tc_return_after_login')||'#account';sessionStorage.removeItem('tc_return_after_login');location.hash=ret;const auto=sessionStorage.getItem('tc_build_after_login');if(auto){sessionStorage.removeItem('tc_build_after_login');setTimeout(()=>{location.hash='#planner';plannerShowStep(7);buildPlannerDraft();},180);}tcLogEvent('login_verified',{method:u.method||'otp'});
  }
  function tcFmtDate(v){if(!v)return '—';const d=new Date(v+'T12:00:00');return isNaN(d)?v:d.toLocaleDateString('he-IL');}
  function tcOpenPurchasedTrip(id){const u=tcCustomer(),p=jget(K.purchases,[]).find(x=>x.tripId===id&&(x.customer?.id===u?.id||x.customer?.email===u?.email));if(!p){alert('הטיול לא נמצא בחשבון זה.');location.hash='#account';return;}if(p.tripDraft){planner.draft=p.tripDraft;renderPlannerDraft();document.querySelectorAll('.preview-locked').forEach(x=>x.classList.remove('preview-locked'));document.querySelectorAll('.preview-lock-banner').forEach(x=>x.remove());location.hash='#planner';setTimeout(()=>document.getElementById('plannerResult')?.scrollIntoView({behavior:'smooth'}),100);}else alert('המסלול המוכן יתחבר לקישור האישי בשלב השרת.');}
