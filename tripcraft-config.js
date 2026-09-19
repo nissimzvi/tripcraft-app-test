@@ -1,4 +1,4 @@
-// TripCraft V88 - public client configuration.
+// TripCraft V89 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
   // Supabase project already created for TripCraft:
