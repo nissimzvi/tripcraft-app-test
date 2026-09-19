@@ -1,5 +1,13 @@
-const VERSION='tripcraft-v72';
-const STATIC=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(VERSION).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',e=>e.waitUntil((async()=>{for(const k of await caches.keys())if(k!==VERSION)await caches.delete(k);await self.clients.claim();})()));
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith((async()=>{try{const r=await fetch(e.request);if(r&&r.ok&&new URL(e.request.url).origin===self.location.origin){const c=await caches.open(VERSION);c.put(e.request,r.clone()).catch(()=>{});}return r;}catch(err){return (await caches.match(e.request))||(await caches.match('./index.html'))||Response.error();}})());});
+const CACHE='tripcraft-v73-shell';
+const CORE=['./','./index.html','./index-en.html','./manifest.webmanifest','./assets/hero.jpg','./assets/austria.jpg','./assets/dolomites.jpg','./assets/greece.jpg','./assets/slovakia.jpg','./assets/vietnam.jpg','./icons/icon-192.png','./icons/icon-512.png'];
+self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{
+  const u=new URL(e.request.url);
+  if(e.request.method!=='GET'||u.origin!==location.origin)return;
+  if(e.request.mode==='navigate'){
+    e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))));
+    return;
+  }
+  e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));}return r})));
+});

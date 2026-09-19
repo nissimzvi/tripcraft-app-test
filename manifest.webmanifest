@@ -1,27 +1,16 @@
 {
-  "name": "TripCraft",
+  "name": "TripCraft - Smart Trip Planner",
   "short_name": "TripCraft",
-  "description": "תכנון טיולים חכם ומותאם אישית",
+  "description": "Trip planning, lodging, maps and updates in one place.",
   "lang": "he",
   "dir": "rtl",
-  "start_url": "./#home",
+  "start_url": "./index.html#home",
   "scope": "./",
   "display": "standalone",
-  "orientation": "portrait-primary",
   "background_color": "#f4f8fb",
   "theme_color": "#0d3557",
   "icons": [
-    {
-      "src": "icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
+    {"src":"icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
   ]
 }
