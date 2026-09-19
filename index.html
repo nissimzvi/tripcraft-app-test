@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V78</title>
+<title>TripCraft V75</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -357,24 +357,27 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 
 <script src="tripcraft-config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style id="tc-v77-final-fixes">
+<style id="tc-v79-final-fixes">
 .req-star{color:#d92d20!important;font-weight:950!important;margin-inline-start:3px}
 .calendar-input{direction:ltr!important;unicode-bidi:isolate!important;text-align:right!important}.date-preview{display:block;margin-top:5px;font-size:13px;font-weight:850;color:#315d78;text-align:right;min-height:18px}
 @media(max-width:700px){
-  body.tc-v74-keyboard .planner-actions{
-    display:grid!important;position:fixed!important;left:12px!important;right:12px!important;
-    bottom:calc(var(--tc-kb-height,0px) + env(safe-area-inset-bottom,0px) + 8px)!important;
-    z-index:10050!important;background:rgba(255,255,255,.99)!important;box-shadow:0 8px 24px rgba(13,53,87,.22)!important
-  }
-  body.tc-v74-keyboard #planner{padding-bottom:88px!important}
+  body.tc-v74-keyboard .planner-actions{display:none!important}
+  body.tc-v74-keyboard #planner{padding-bottom:20px!important}
   body.tc-v74-keyboard .a11y-fab{display:none!important}
+  body.tc-v74-keyboard .ac-wrap{position:relative!important;z-index:10030!important}
+  body.tc-v74-keyboard .ac-list.show{position:absolute!important;left:0!important;right:0!important;width:100%!important;top:calc(100% + 6px)!important;bottom:auto!important;max-height:min(190px,24vh)!important;overflow-y:auto!important;z-index:10040!important;border-radius:16px!important;box-shadow:0 12px 30px rgba(9,43,69,.22)!important}
+  #planner>.headrow{margin-bottom:8px!important;align-items:center!important}
+  #planner>.headrow h2{font-size:30px!important;line-height:1!important;margin:0!important}
+  #planner>.headrow p{font-size:13px!important;line-height:1.3!important;margin-top:4px!important}
+  #planner>.headrow .planner-badge{padding:6px 9px!important;font-size:11px!important;max-width:118px!important;text-align:center!important}
+  #planner>.planner-progress{margin:4px 0 12px!important;height:6px!important}
 }
 </style>
 </head><body>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V77 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V79 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -1137,8 +1140,8 @@ function tcRegionLocal(q){q=tcNorm(q);if(!q)return[];const near=(a,b)=>{a=tcNorm
 function tcCityLocal(q){q=tcNorm(q);if(!q)return[];const regions=tcRegionLocal(q);const cities=TC_CITIES.filter(x=>[x[0],x[1],...(x[6]||[])].some(v=>tcNorm(v).includes(q))).slice(0,7).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1],lat:x[4],lon:x[5]}));return [...regions,...cities].slice(0,8)}
 function tcAirportLocal(q){q=tcNorm(q);if(!q)return[];return TC_AIRPORTS.filter(x=>[x[0],x[1],x[2],x[3],x[4],...(x[8]||[])].some(v=>tcNorm(v).includes(q))).slice(0,8).map(x=>({kind:'airport',main:`${x[1]} · ${x[2]}`,sub:`${x[3]} · ${x[5]}`,value:`${x[2]} (${x[0]})`,code:x[0],lat:x[6],lon:x[7]}))}
 async function tcPhoton(q,type){if(q.length<2)return[];try{const lang=(document.documentElement.lang||'he').startsWith('he')?'he':'en';let url=`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=7&lang=${lang}`;/* Destination search intentionally has no layer filter: regions such as Provence must also be discoverable. */const r=await fetch(url,{headers:{Accept:'application/json'}});if(!r.ok)throw 0;const j=await r.json();return (j.features||[]).map(f=>{const p=f.properties||{},c=f.geometry?.coordinates||[];const isAirport=p.osm_key==='aeroway'||/airport|aeroport|flughafen|שדה תעופה|נמל התעופה/i.test([p.name,p.city,p.locality].filter(Boolean).join(' '));if(type==='airport'&&!isAirport)return null;const nm=p.name||p.city||p.locality||q;const loc=[p.city,p.state,p.country].filter((v,i,a)=>v&&a.indexOf(v)===i).join(' · ');return{kind:type,main:nm,sub:loc,value:nm,lat:c[1],lon:c[0]}}).filter(Boolean).slice(0,6)}catch(e){return[]}}
-function tcRenderAC(input,items,loading=false){const box=document.getElementById(input.id+'List');if(!box)return;if(loading){box.innerHTML='<div class="ac-loading">מחפש… / Searching…</div>';box.classList.add('show');return}if(!items.length){box.innerHTML='<div class="ac-empty">לא נמצאה התאמה מדויקת. אפשר להמשיך להקליד.</div>';box.classList.add('show');return}box.innerHTML=items.map((it,i)=>`<div class="ac-item" role="option" data-i="${i}"><span class="ac-icon">${it.kind==='airport'?'✈️':'📍'}</span><span><div class="ac-main">${esc(it.main)}</div><div class="ac-sub">${esc(it.sub||'')}</div></span>${it.code?`<span class="ac-code">${esc(it.code)}</span>`:''}</div>`).join('');box.classList.add('show');box.querySelectorAll('.ac-item').forEach(el=>{const pick=e=>{e.preventDefault();const it=items[Number(el.dataset.i)];input.value=it.value;input.dataset.lat=it.lat||'';input.dataset.lon=it.lon||'';input.dataset.code=it.code||'';input.classList.add('ac-selected');box.classList.remove('show');input.dispatchEvent(new Event('change',{bubbles:true}));};el.addEventListener('pointerdown',pick,{passive:false});el.addEventListener('click',pick,{passive:false});})}
-function tcInitAC(input){let timer=0,seq=0;const type=input.dataset.acType;const go=()=>{input.classList.remove('ac-selected');input.dataset.lat='';input.dataset.lon='';input.dataset.code='';const note=input.closest('.ac-wrap')?.querySelector('.ac-picked-note');if(note)note.remove();const q=input.value.trim(),my=++seq;clearTimeout(timer);if(q.length<1){document.getElementById(input.id+'List')?.classList.remove('show');return}const local=type==='airport'?tcAirportLocal(q):tcCityLocal(q);tcRenderAC(input,local);if(q.length<2||local.length>=5)return;timer=setTimeout(async()=>{tcRenderAC(input,local,true);const remote=await tcPhoton(q,type);if(my!==seq)return;const seen=new Set(),all=[...local,...remote].filter(x=>{const k=tcNorm(x.main+' '+(x.code||''));if(seen.has(k))return false;seen.add(k);return true}).slice(0,8);tcRenderAC(input,all)},280)};input.addEventListener('input',go);input.addEventListener('focus',()=>{if(window.matchMedia('(max-width:700px)').matches)setTimeout(()=>input.scrollIntoView({block:'center',behavior:'smooth'}),180);if(input.value.trim())go()});input.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById(input.id+'List')?.classList.remove('show')})}
+function tcRenderAC(input,items,loading=false){const box=document.getElementById(input.id+'List');if(!box)return;if(loading){box.innerHTML='<div class="ac-loading">מחפש… / Searching…</div>';box.classList.add('show');return}if(!items.length){box.innerHTML='<div class="ac-empty">לא נמצאה התאמה מדויקת. אפשר להמשיך להקליד.</div>';box.classList.add('show');return}box.innerHTML=items.map((it,i)=>`<div class="ac-item" role="option" data-i="${i}"><span class="ac-icon">${it.kind==='airport'?'✈️':'📍'}</span><span><div class="ac-main">${esc(it.main)}</div><div class="ac-sub">${esc(it.sub||'')}</div></span>${it.code?`<span class="ac-code">${esc(it.code)}</span>`:''}</div>`).join('');box.classList.add('show');box.querySelectorAll('.ac-item').forEach(el=>{const pick=e=>{e.preventDefault();const it=items[Number(el.dataset.i)];input.value=it.value;input.dataset.lat=it.lat||'';input.dataset.lon=it.lon||'';input.dataset.code=it.code||'';input.classList.add('ac-selected');box.classList.remove('show');input.dispatchEvent(new Event('change',{bubbles:true}));setTimeout(()=>input.blur(),0);};el.addEventListener('pointerdown',pick,{passive:false});el.addEventListener('click',pick,{passive:false});})}
+function tcInitAC(input){let timer=0,seq=0;const type=input.dataset.acType;const go=()=>{input.classList.remove('ac-selected');input.dataset.lat='';input.dataset.lon='';input.dataset.code='';const note=input.closest('.ac-wrap')?.querySelector('.ac-picked-note');if(note)note.remove();const q=input.value.trim(),my=++seq;clearTimeout(timer);if(q.length<1){document.getElementById(input.id+'List')?.classList.remove('show');return}const local=type==='airport'?tcAirportLocal(q):tcCityLocal(q);tcRenderAC(input,local);if(q.length<2||local.length>=5)return;timer=setTimeout(async()=>{tcRenderAC(input,local,true);const remote=await tcPhoton(q,type);if(my!==seq)return;const seen=new Set(),all=[...local,...remote].filter(x=>{const k=tcNorm(x.main+' '+(x.code||''));if(seen.has(k))return false;seen.add(k);return true}).slice(0,8);tcRenderAC(input,all)},280)};input.addEventListener('input',go);input.addEventListener('focus',()=>{if(window.matchMedia('(max-width:700px)').matches)setTimeout(()=>{const f=input.closest('.field')||input.closest('.ac-wrap')||input;f.scrollIntoView({block:'start',behavior:'smooth'});setTimeout(()=>window.scrollBy({top:-92,behavior:'smooth'}),120)},220);if(input.value.trim())go()});input.addEventListener('keydown',e=>{if(e.key==='Escape')document.getElementById(input.id+'List')?.classList.remove('show');if(e.key==='Enter'){e.preventDefault();document.getElementById(input.id+'List')?.classList.remove('show');input.blur();}})}
 document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.querySelectorAll('.place-ac').forEach(tcInitAC);document.addEventListener('pointerdown',e=>{if(!e.target.closest('.ac-wrap'))document.querySelectorAll('.ac-list').forEach(x=>x.classList.remove('show'))});
 
 </script>
@@ -1281,7 +1284,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  function countryMatches(c,q){q=nrm(q);const vals=[c,...(countryAliases[c]||[])].map(nrm);return vals.some(v=>v.includes(q)||(q.length>=3&&tcOneEdit(v,q)));}
  const search=document.getElementById('plCountrySearch'), list=document.getElementById('plCountrySearchList'), chips=document.getElementById('countryChoices'), selected=document.getElementById('selectedCountries');
  function checked(){return [...chips.querySelectorAll('input:checked')].map(x=>x.value)}
- function ensureCountry(name){name=canonicalCountry(name);if(!name)return;let input=[...chips.querySelectorAll('input')].find(x=>x.value===name);if(!input){const lab=document.createElement('label');lab.innerHTML='<input type="checkbox"><span></span>';input=lab.querySelector('input');input.value=name;lab.querySelector('span').textContent='🌍 '+name;chips.appendChild(lab)}input.checked=true;sync();search.value='';list.classList.remove('show')}
+ function ensureCountry(name){name=canonicalCountry(name);if(!name)return;let input=[...chips.querySelectorAll('input')].find(x=>x.value===name);if(!input){const lab=document.createElement('label');lab.innerHTML='<input type="checkbox"><span></span>';input=lab.querySelector('input');input.value=name;lab.querySelector('span').textContent='🌍 '+name;chips.appendChild(lab)}input.checked=true;sync();search.value='';list.classList.remove('show');setTimeout(()=>search?.blur(),0)}
  function sync(){const vals=checked();document.getElementById('plCountries').value=vals.join(', ');selected.innerHTML=vals.map(x=>'<button type="button" class="selected-country" data-c="'+x.replace(/"/g,'&quot;')+'">✓ '+x+' ×</button>').join('');selected.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=[...chips.querySelectorAll('input')].find(x=>x.value===b.dataset.c);if(i)i.checked=false;sync()})}
  function render(){const q=(search.value||'').trim().toLowerCase();if(!q){list.classList.remove('show');return}const a=countries.filter(x=>countryMatches(x,q)).slice(0,10);list.innerHTML=(a.length?a:[search.value.trim()]).map(x=>'<div class="ac-item" data-country="'+x.replace(/"/g,'&quot;')+'"><span class="ac-icon">🌍</span><span class="ac-main">'+x+'</span></div>').join('');list.classList.add('show');list.querySelectorAll('.ac-item').forEach(el=>el.onpointerdown=e=>{e.preventDefault();ensureCountry(el.dataset.country)})}
  search?.addEventListener('input',render);search?.addEventListener('focus',render);chips?.addEventListener('change',sync);document.getElementById('addCountryBtn')?.addEventListener('click',()=>ensureCountry(search.value));sync();
@@ -1347,6 +1350,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  });
  // V77: standard red asterisks for any remaining required labels written with a plain star.
  document.querySelectorAll('label').forEach(label=>{if(label.querySelector('.req-star'))return;const html=label.innerHTML;if(/\s\*$/.test(html))label.innerHTML=html.replace(/\s\*$/,' <span class="req-star">*</span>');});
+ document.querySelectorAll('#planner input:not([type="date"]):not([type="checkbox"]):not([type="radio"]),#login input').forEach(el=>{el.setAttribute('enterkeyhint','done');el.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.querySelectorAll('.ac-list').forEach(x=>x.classList.remove('show'));el.blur();}});});
 })();
 </script>
 
@@ -1401,74 +1405,4 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
   if(log){log.addEventListener('click',function(e){const email=(document.getElementById('tcLoginIdentity')?.value||'').trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){e.stopImmediatePropagation();alert('נא להזין את כתובת האימייל שאיתה נרשמתם.');}},true);}
 })();
 </script>
-
-<style id="tc-v78-final-mobile-fixes">
-@media (max-width:700px){
-  /* During typing, navigation must disappear completely. */
-  body.tc-v74-keyboard .planner-actions{display:none!important;visibility:hidden!important;pointer-events:none!important;}
-  body.tc-v74-keyboard #planner{padding-bottom:12px!important;}
-  /* Autocomplete lives immediately above the iOS keyboard, never at the top of the screen. */
-  body.tc-v74-keyboard .ac-list.show{
-    position:fixed!important;
-    left:14px!important;right:14px!important;width:auto!important;
-    top:auto!important;
-    bottom:calc(var(--tc-kb-height, 0px) + 8px)!important;
-    max-height:min(190px,28vh)!important;
-    overflow-y:auto!important;
-    z-index:10050!important;
-    border-radius:16px!important;
-  }
-  /* Without keyboard, keep previous V77 behavior and buttons fixed at bottom. */
-  body:not(.tc-v74-keyboard).tc-v74-long-step .planner-actions{
-    display:grid!important;visibility:visible!important;pointer-events:auto!important;
-  }
-}
-</style>
-<script id="tc-v78-final-behavior">
-(function(){
-  // V78 is deliberately based on V77. Only keyboard/autocomplete/date fixes are added here.
-  const $=id=>document.getElementById(id);
-
-  // Make the keyboard's Done/Enter dismiss editing. This restores the fixed Next/Previous bar.
-  document.querySelectorAll('#planner input[type="text"],#planner input:not([type]),#planner input[type="email"],#planner input[type="tel"],#planner textarea').forEach(el=>{
-    try{el.setAttribute('enterkeyhint','done')}catch(e){}
-    el.addEventListener('keydown',e=>{
-      if(e.key==='Enter' && el.tagName!=='TEXTAREA'){
-        e.preventDefault();
-        el.blur();
-        document.querySelectorAll('.ac-list').forEach(x=>x.classList.remove('show'));
-      }
-    });
-  });
-
-  // When user chooses an autocomplete result, close keyboard and reveal navigation.
-  document.addEventListener('change',e=>{
-    if(e.target && e.target.classList && e.target.classList.contains('place-ac')){
-      setTimeout(()=>{e.target.blur();document.querySelectorAll('.ac-list').forEach(x=>x.classList.remove('show'));},80);
-    }
-  });
-
-  // Correct the old demo dates that were persisted by V77. New empty planners start with Sep 20–30, 2027.
-  const start=$('plStart'), end=$('plEnd');
-  if(start && end){
-    const oldStart=start.value, oldEnd=end.value;
-    const oldDemo=(oldStart==='2026-09-20' && oldEnd==='2026-09-30');
-    if((!oldStart && !oldEnd) || oldDemo){
-      start.value='2027-09-20';
-      end.value='2027-09-30';
-      try{
-        const key='tripcraft_planner_draft_v57';
-        const d=JSON.parse(localStorage.getItem(key)||'{}');
-        if(!d.plStart || d.plStart==='2026-09-20') d.plStart='2027-09-20';
-        if(!d.plEnd || d.plEnd==='2026-09-30') d.plEnd='2027-09-30';
-        localStorage.setItem(key,JSON.stringify(d));
-      }catch(e){}
-      start.dispatchEvent(new Event('change',{bubbles:true}));
-      end.dispatchEvent(new Event('change',{bubbles:true}));
-    }
-    start.min='2026-01-01'; end.min='2026-01-02';
-  }
-})();
-</script>
-
 </body></html>
