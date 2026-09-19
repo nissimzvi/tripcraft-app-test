@@ -138,6 +138,16 @@ input[type="date"]{direction:ltr!important;text-align:left!important}
  .v59-dates .v59-topic-body{max-width:none!important}
 }
 @media(max-width:900px){.v59-dates .calendar-input{width:100%!important;min-height:54px!important;font-size:17px!important}}
+
+/* V76 targeted fixes: split first planner step into 3 compact screens; fixed navigation; robust OTP demo. */
+.step1-subnav{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:-4px 0 12px}.step1-subnav span{padding:8px 6px;border:1px solid #cedfe9;border-radius:999px;text-align:center;font-size:12px;font-weight:900;background:#f4f8fb;color:#667c8b}.step1-subnav span.active{background:#0d3557;color:#fff;border-color:#0d3557}
+.planner-step[data-step="1"] .v59-topic{display:none!important}.planner-step[data-step="1"] .v59-topic.tc-part-active{display:block!important}.planner-step[data-step="1"] .planner-tip{display:none!important}
+.otp-resend-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}.otp-resend-row .btn{min-height:40px;padding:8px 12px}.otp-resend-row span{font-size:12px;color:#607887}
+@media(max-width:700px){
+ .planner-step[data-step="1"].active{padding:10px!important}.planner-step[data-step="1"] h3{font-size:21px!important;margin:0 0 8px!important}.planner-step[data-step="1"] .quick-plan-card{margin:0!important}.planner-step[data-step="1"] .v59-topic{margin:0!important;border-radius:18px!important}.planner-step[data-step="1"] .v59-topic-title{padding:10px 12px!important}.planner-step[data-step="1"] .v59-topic-body{padding:10px!important}.planner-step[data-step="1"] .planner-grid{grid-template-columns:1fr!important;gap:8px!important}.planner-step[data-step="1"] .journey-row{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}.planner-step[data-step="1"] .journey-arrow{display:none!important}.planner-step[data-step="1"] .country-popular{gap:6px!important}.planner-step[data-step="1"] .country-popular label span{padding:7px 9px!important;font-size:12px!important}.planner-step[data-step="1"] .field input,.planner-step[data-step="1"] .field select{min-height:44px!important;padding:9px 10px!important}.planner-step[data-step="1"] #plannerAirportCheck{margin:8px 0 0!important;font-size:12px!important;padding:8px 10px!important} body[data-tc-step1-part="2"] .planner-step[data-step="1"] #plannerAirportCheck{display:block!important}body[data-tc-step1-part="1"] .planner-step[data-step="1"] #plannerAirportCheck,body[data-tc-step1-part="3"] .planner-step[data-step="1"] #plannerAirportCheck{display:none!important}
+ #tcOtpVerify .otp-row{display:grid!important;grid-template-columns:1fr!important;gap:8px!important}#tcOtpVerify .otp-row .btn{width:100%!important}
+}
+
 </style>
 
 <style id="tc-v433-css">
@@ -348,7 +358,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V75 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V76 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -418,6 +428,9 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
   <div class="planner-progress"><div id="plannerProgressBar"></div></div>
   <div id="plannerSteps">
     <div class="planner-step active" data-step="1"><h3>1. לאן ומתי נוסעים?</h3>
+      <div class="step1-subnav" id="step1Subnav" aria-label="שלבי יעד, טיסות ותאריכים">
+        <span data-part="1" class="active">1 · יעד</span><span data-part="2">2 · טיסות</span><span data-part="3">3 · תאריכים</span>
+      </div>
       <div class="quick-plan-card v59-plan-groups">
         <section class="v59-topic v59-destination"><div class="v59-topic-title"><span>🗺️</span><div><strong>יעד הטיול</strong><small>בחרו מדינות ואזור מרכזי</small></div></div><div class="v59-topic-body">
           <div class="planner-grid"><div class="field"><label>שם הטיול שלכם *</label><input id="plTripName" placeholder="למשל: אוסטריה וגרמניה 2027"></div>
@@ -559,7 +572,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
  <div class="page-visual login-visual"><div><h2 data-he="כניסה והרשמה" data-en="Sign in & Register">כניסה והרשמה</h2><p data-he="נרשמים פעם אחת בלבד. בהמשך נכנסים עם OTP בן 6 ספרות לטלפון או למייל." data-en="Register once. Afterwards sign in with a 6-digit OTP sent to your phone or email.">נרשמים פעם אחת בלבד. בהמשך נכנסים עם OTP בן 6 ספרות לטלפון או למייל.</p></div></div>
  <div class="safe pilot-feedback-note"><strong>פיילוט TripCraft:</strong> הפרטים נדרשים כדי לשמור את הטיול שלכם, לאפשר עדכונים ולקבל פידבקים ומשוב שיעזרו לנו לשפר את המערכת. כל השדות חובה למעט טלפון.</div><div class="auth-mode-tabs"><button type="button" class="auth-mode active" data-auth-mode="new">הרשמה חדשה</button><button type="button" class="auth-mode" data-auth-mode="existing">כבר נרשמתי</button></div><div class="auth-grid"><div class="auth-card auth-new"><h3 data-he="לקוח חדש" data-en="New customer">לקוח חדש</h3><div class="formgrid"><div class="field"><label data-he="שם פרטי" data-en="First name">שם פרטי</label><input id="tcFirstName" autocomplete="given-name"></div><div class="field"><label data-he="שם משפחה" data-en="Last name">שם משפחה</label><input id="tcLastName" autocomplete="family-name"></div><div class="field"><label data-he="טלפון (לא חובה)" data-en="Phone (optional)">טלפון (לא חובה)</label><input id="tcPhone" inputmode="tel" autocomplete="tel"></div><div class="field"><label data-he="אימייל" data-en="Email">אימייל</label><input id="tcEmail" type="email" autocomplete="email"></div></div><div class="otp-method-note"><strong>קוד האימות יישלח לאימייל</strong><span>בפיילוט נתחיל באימות אימייל. SMS יתווסף בהמשך.</span></div><select id="tcOtpMethod" hidden><option value="email" selected>אימייל</option></select><button id="tcRegisterOtp" class="btn secondary" type="button" data-he="שלח קוד לאימייל" data-en="Send code by email">שלח קוד לאימייל</button></div>
  <div class="auth-card auth-existing"><h3 data-he="לקוח קיים" data-en="Existing customer">לקוח קיים</h3><div class="field"><label data-he="אימייל" data-en="Email">אימייל</label><input id="tcLoginIdentity" type="email" autocomplete="email"></div><div class="otp-method-note"><strong>קוד האימות יישלח לאימייל</strong><span>הזינו את האימייל שאיתו נרשמתם.</span></div><select id="tcLoginOtpMethod" hidden><option value="email" selected>אימייל</option></select><button id="tcLoginOtp" class="btn secondary" type="button" data-he="שלח קוד לאימייל" data-en="Send code by email">שלח קוד לאימייל</button></div></div>
- <div id="tcOtpVerify" class="otp-box" hidden><h3 data-he="אימות OTP" data-en="OTP Verification">אימות OTP</h3><p id="tcOtpHint"></p><div class="otp-row"><input id="tcOtpCode" inputmode="numeric" maxlength="6" placeholder="000000"><button id="tcVerifyOtp" class="btn green" type="button" data-he="אמת והמשך" data-en="Verify & Continue">אמת והמשך</button></div><div id="tcOtpDemo" class="safe"></div></div>
+ <div id="tcOtpVerify" class="otp-box" hidden><h3 data-he="אימות OTP" data-en="OTP Verification">אימות OTP</h3><p id="tcOtpHint"></p><div class="otp-row"><input id="tcOtpCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000"><button id="tcVerifyOtp" class="btn green" type="button" data-he="אמת והמשך" data-en="Verify & Continue">אמת והמשך</button></div><div class="otp-resend-row"><button id="tcResendOtp" class="btn soft" type="button" disabled>שלח קוד חדש בעוד 60 שנ׳</button><span id="tcOtpStatus" aria-live="polite"></span></div><div id="tcOtpDemo" class="safe"></div></div>
 </section>
 
 <section id="account" class="panel tc-commerce-page">
@@ -815,7 +828,21 @@ function loadImported(){tcCleanupDuplicateImported();for(let i=0;i<localStorage.
 
 const planner={step:1,draft:null};
 const plannerSteps=[...document.querySelectorAll('.planner-step')], plannerBar=document.getElementById('plannerProgressBar'), plannerPrev=document.getElementById('plannerPrev'), plannerNext=document.getElementById('plannerNext'), plannerBuild=document.getElementById('plannerBuild');
-function plannerShowStep(n){planner.step=Math.max(1,Math.min(7,n));plannerSteps.forEach(x=>x.classList.toggle('active',Number(x.dataset.step)===planner.step));plannerBar.style.width=(planner.step*(100/7))+'%';plannerPrev.disabled=planner.step===1;plannerNext.style.display=planner.step===7?'none':'inline-flex';plannerBuild.style.display=planner.step===7?'inline-flex':'none';if(planner.step===2)renderAgeFields();if(planner.step===6)renderPreApprovalHotels();if(planner.step===7)renderPlannerSummary();requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));}
+let plannerStep1Part=1;
+function showPlannerStep1Part(part){
+ plannerStep1Part=Math.max(1,Math.min(3,Number(part)||1));
+ const step=document.querySelector('.planner-step[data-step="1"]');
+ if(step){
+   step.querySelector('.v59-destination')?.classList.toggle('tc-part-active',plannerStep1Part===1);
+   step.querySelector('.v59-flights')?.classList.toggle('tc-part-active',plannerStep1Part===2);
+   step.querySelector('.v59-dates')?.classList.toggle('tc-part-active',plannerStep1Part===3);
+   step.querySelectorAll('.step1-subnav span').forEach(x=>x.classList.toggle('active',Number(x.dataset.part)===plannerStep1Part));
+ }
+ document.body.dataset.tcStep1Part=String(plannerStep1Part);
+ plannerPrev.disabled=planner.step===1&&plannerStep1Part===1;
+ requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));
+}
+function plannerShowStep(n){planner.step=Math.max(1,Math.min(7,n));plannerSteps.forEach(x=>x.classList.toggle('active',Number(x.dataset.step)===planner.step));plannerBar.style.width=(planner.step*(100/7))+'%';plannerPrev.disabled=planner.step===1&&plannerStep1Part===1;plannerNext.style.display=planner.step===7?'none':'inline-flex';plannerBuild.style.display=planner.step===7?'inline-flex':'none';if(planner.step===1)showPlannerStep1Part(plannerStep1Part);if(planner.step===2)renderAgeFields();if(planner.step===6)renderPreApprovalHotels();if(planner.step===7)renderPlannerSummary();requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));}
 function syncTravelerBands(){
  const data={};let people=0,children=0;
  document.querySelectorAll('#travelerBands .traveler-band').forEach(card=>{const k=card.dataset.band,v=Math.max(0,Number(card.querySelector('output')?.textContent)||0);data[k]=v;people+=v;if(['teen','kid','baby'].includes(k))children+=v;});
@@ -832,18 +859,29 @@ function plannerData(){
  const representativeAges=[];for(const [k,n] of Object.entries(bands)){const age={adult:45,young:27,teen:16,kid:8,baby:1,dogs:null}[k];if(age===null)continue;for(let i=0;i<Number(n||0);i++)representativeAges.push(age);}
  return{tripName:(document.getElementById('plTripName')?.value||'').trim(),countries:selectedChoiceValues('countryChoices'),destination:document.getElementById('plDestination').value.trim(),from:'',arrivalAirport:document.getElementById('plArrivalAirport').value.trim(),departureAirport:document.getElementById('plDepartureAirport').value.trim(),start:document.getElementById('plStart').value,end:document.getElementById('plEnd').value,people:Number(document.getElementById('plPeople').value)||0,children:Number(document.getElementById('plChildren')?.value)||0,group:document.getElementById('plGroup').value,ageBands:bands,ages:representativeAges,transports,transport:transports.length>1?'mixed':(transports[0]||'car'),dayLength:document.getElementById('plDayLength')?.value||'full',pace:document.getElementById('plPace').value,walk:document.getElementById('plWalk').value,drive:document.getElementById('plDrive').value,interests:[...document.querySelectorAll('#interestChoices input:checked')].map(x=>x.value),priorities,must:document.getElementById('plMust').value.trim(),avoid:avoids.join(', '),free:document.getElementById('plFree').value.trim(),lodgingStyle:document.getElementById('plLodgingStyle')?.value||'smart',hotelStars:document.getElementById('plHotelStars')?.value||'any',includeHotels:(document.getElementById('plIncludeHotels')?.value||'yes')==='yes',lodgingMode:(document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend'),lodgingTypes:selectedChoiceValues('lodgingTypeChoices'),lodgingBudget:(document.querySelector('input[name=plLodgingBudget]:checked')?.value||'mid'),lodgingFilters:selectedChoiceValues('lodgingFilterChoices'),lodgingPriority:document.getElementById('plLodgingPriority')?.value||'balanced',lodgingDetour:document.getElementById('plLodgingDetour')?.value||'10',existingLodging:(document.getElementById('plExistingLodging')?.value||'').trim()}
 }
-function validatePlannerStep(){
+function validatePlannerStep1Part(part){
  const d=plannerData();
- if(planner.step===1){
-   if(!d.destination){alert('נא להזין יעד או אזור.');return false}
-   if(!d.arrivalAirport){alert('נא להזין היכן נוחתים.');return false}
-   if(!d.start||!d.end){alert('נא לבחור תאריך יציאה ותאריך חזרה.');return false}
-   const a=new Date(d.start+'T12:00:00'),b=new Date(d.end+'T12:00:00'),diff=Math.round((b-a)/86400000);
-   if(!isFinite(diff)||diff<=0){alert('תאריך החזרה חייב להיות מאוחר מתאריך היציאה.');return false}
-   if(diff<=2&&!confirm(`הטיול קצר מאוד (${diff+1} ימים קלנדריים). בטוחים שאתם רוצים לטוס לזמן כל כך קצר?`))return false;
+ if(part===1){
+   const tripName=(document.getElementById('plTripName')?.value||'').trim();
+   if(!tripName){alert('נא להזין שם לטיול.');document.getElementById('plTripName')?.focus();return false;}
+   if(!d.destination){alert('נא להזין יעד או אזור ולבחור אותו מהרשימה.');document.getElementById('plDestination')?.focus();return false;}
+ }
+ if(part===2){
+   if(!d.arrivalAirport){alert('נא להזין היכן נוחתים ולבחור שדה תעופה.');document.getElementById('plArrivalAirport')?.focus();return false;}
    const chk=airportCompatibility(d.destination,d.arrivalAirport,d.departureAirport||d.arrivalAirport);
    if(chk.warn&&!confirm(chk.message+'\n\nלהמשיך בכל זאת?'))return false;
  }
+ if(part===3){
+   if(!d.start||!d.end){alert('נא לבחור תאריך יציאה ותאריך חזרה.');return false;}
+   const a=new Date(d.start+'T12:00:00'),b=new Date(d.end+'T12:00:00'),diff=Math.round((b-a)/86400000);
+   if(!isFinite(diff)||diff<=0){alert('תאריך החזרה חייב להיות מאוחר מתאריך היציאה.');return false;}
+   if(diff<=2&&!confirm(`הטיול קצר מאוד (${diff+1} ימים קלנדריים). בטוחים שאתם רוצים לטוס לזמן כל כך קצר?`))return false;
+ }
+ return true;
+}
+function validatePlannerStep(){
+ const d=plannerData();
+ if(planner.step===1){if(!validatePlannerStep1Part(1)||!validatePlannerStep1Part(2)||!validatePlannerStep1Part(3))return false;}
  if(planner.step===2){
    if(d.people<1){alert('נא להזין מספר נוסעים.');return false}
    if(d.children<0||d.children>d.people){alert('מספר הילדים לא יכול להיות גדול ממספר הנוסעים.');return false}
@@ -1033,10 +1071,10 @@ function tcInitDateChoice(prefix){
 
 const plSameAirport=document.getElementById('plSameAirport');
 if(plSameAirport){const syncSameAirport=()=>{const a=document.getElementById('plArrivalAirport'),d=document.getElementById('plDepartureAirport');if(plSameAirport.checked){d.value=a.value;d.readOnly=true;}else d.readOnly=false;};plSameAirport.addEventListener('change',syncSameAirport);document.getElementById('plArrivalAirport')?.addEventListener('input',()=>{if(plSameAirport.checked) syncSameAirport();});}
-plannerPrev.addEventListener('click',()=>plannerShowStep(planner.step-1));
+plannerPrev.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part>1){showPlannerStep1Part(plannerStep1Part-1);return;}if(planner.step===2){planner.step=1;plannerStep1Part=3;plannerShowStep(1);return;}plannerShowStep(planner.step-1);});
 document.querySelectorAll('input[name=plLodgingMode]').forEach(r=>r.addEventListener('change',()=>{const mode=document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend';const rec=document.getElementById('lodgingRecommendOptions'),ex=document.getElementById('lodgingExistingOptions');if(rec)rec.style.display=mode==='recommend'?'block':'none';if(ex)ex.style.display=mode==='existing'?'block':'none';}));
 window.tcCheckLateLodgingChange=function(hotelName,detourMinutes){const d=plannerData(),limit=d.lodgingDetour==='any'?Infinity:Number(d.lodgingDetour||10);if(Number(detourMinutes)>limit){return confirm(`⚠️ מקום הלינה ${hotelName||''} חורג מגבול הסטייה שבחרתם (${limit} דקות). הוספתו עשויה לשנות את סדר הימים, זמני הנסיעה והתקציב. לחשב מחדש את המסלול?`);}return confirm('הוספת מקום לינה לאחר בניית הטיול יכולה לשנות את המסלול. לחשב מחדש ולעדכן את הימים והתקציב?');};
-plannerNext.addEventListener('click',()=>{if(!validatePlannerStep())return;plannerShowStep(planner.step+1);});
+plannerNext.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part<3){if(!validatePlannerStep1Part(plannerStep1Part))return;showPlannerStep1Part(plannerStep1Part+1);return;}if(!validatePlannerStep())return;plannerShowStep(planner.step+1);});
 plannerBuild.addEventListener('click',()=>{let u=null;try{u=JSON.parse(localStorage.getItem('tc_v433_customer')||'null')}catch(e){}if(!u){sessionStorage.setItem('tc_build_after_login','1');sessionStorage.setItem('tc_return_after_login','#planner');location.hash='#login';setTimeout(()=>document.querySelector('.pilot-feedback-note')?.scrollIntoView({behavior:'smooth',block:'center'}),80);return;}buildPlannerDraft();});
 plannerShowStep(1);
 
@@ -1097,8 +1135,13 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  function tcOpenCheckout(){const c=jget(K.cart,[]);if(!c.length){alert('הסל ריק.');return;}if(!tcCustomer()){sessionStorage.setItem('tc_return_after_login','#cart');location.hash='#login';return;}document.getElementById('tcPaymentBox').hidden=false;document.getElementById('tcPaymentBox').scrollIntoView({behavior:'smooth',block:'start'});}
  function tcPay(){const last4=(document.getElementById('tcLast4').value||'').trim(),result=document.getElementById('tcPaymentResult').value,box=document.getElementById('tcPayStatus');if(!/^\d{4}$/.test(last4)){box.textContent='יש להזין 4 ספרות אחרונות בלבד.';box.className='statusbar err';return;}const u=tcCustomer(),cart=jget(K.cart,[]),sum=cart.reduce((a,x)=>a+Number(x.price||0),0),payments=jget(K.payments,[]),tripId='TRIP-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*900000)+100000);const p={id:'PAY-'+Date.now(),date:new Date().toISOString(),customer:u,amount:sum,last4,status:result,tripId:result==='success'?tripId:'',items:cart};payments.unshift(p);jset(K.payments,payments);if(result==='success'){const purchases=jget(K.purchases,[]);cart.forEach((item,idx)=>{const iid=idx===0?tripId:tripId+'-'+(idx+1),draft=item.tripDraft||null,meta=draft?tcTripDatesFromDraft(draft):{destination:item.title||'',start:'',end:''};purchases.unshift({tripId:iid,customer:u,items:[item],amount:Number(item.price||0),date:p.date,tripName:item.tripName||draft?.name||item.title||iid,destination:item.destination||meta.destination||'',start:item.start||meta.start||'',end:item.end||meta.end||'',personalUrl:tcPersonalTripUrl(iid),tripDraft:draft,aiCredits:item.sku==='ai'?20:item.sku==='adapt'?12:item.kind==='trip'?5:item.sku==='ai10'?10:20});});jset(K.purchases,purchases);jset(K.cart,[]);box.innerHTML='✓ התשלום הצליח ב-Demo. הטיול נשמר בהיסטוריה עם קישור אישי. <button class="btn soft" type="button" onclick="location.hash=\'#account\'">הטיולים שלי</button>';box.className='statusbar ok';tcUpdateCart();tcRenderCart();tcRenderAccount();}else{box.textContent='✕ התשלום סומן ככשלון ב-Demo.';box.className='statusbar err';}}
 
- function tcSendOtp(mode){let data;if(mode==='register'){data={firstName:document.getElementById('tcFirstName').value.trim(),lastName:document.getElementById('tcLastName').value.trim(),phone:document.getElementById('tcPhone').value.trim(),email:document.getElementById('tcEmail').value.trim(),method:document.getElementById('tcOtpMethod').value};if(!data.firstName||!data.lastName||!/^\S+@\S+\.\S+$/.test(data.email)){alert('יש למלא שם פרטי, שם משפחה ואימייל תקין. הטלפון אינו חובה.');return;}if(data.method==='phone'&&!data.phone){data.method='email';document.getElementById('tcOtpMethod').value='email';}}else{const identity=document.getElementById('tcLoginIdentity').value.trim(),method=document.getElementById('tcLoginOtpMethod').value,customers=jget(K.customers,[]);const found=customers.find(x=>x.phone===identity||x.email.toLowerCase()===identity.toLowerCase());if(!found){alert('לא נמצא לקוח מאומת. אפשר להירשם כלקוח חדש.');return;}data={...found,method};}
- const code=tcMakeOtp();otpContext={mode,data,code};sessionStorage.setItem('tc_demo_otp',code);const v=document.getElementById('tcOtpVerify');v.hidden=false;document.getElementById('tcOtpHint').textContent=data.method==='email'?'קוד בן 6 ספרות נשלח למייל.':'קוד בן 6 ספרות נשלח לטלפון.';document.getElementById('tcOtpDemo').innerHTML='<strong>Demo בלבד:</strong> קוד האימות הוא <b style="font-size:20px">'+code+'</b>. בפרודקשן הקוד לא יוצג במסך.';v.scrollIntoView({behavior:'smooth'});}
+ let tcOtpTimer=null,tcOtpSeconds=0,tcLastOtpMode=null;
+ function tcFindCustomer(identity,phone){const customers=jget(K.customers,[]),id=String(identity||'').trim().toLowerCase(),ph=String(phone||'').replace(/\D/g,'');return customers.find(x=>{const xe=String(x.email||'').trim().toLowerCase(),xp=String(x.phone||'').replace(/\D/g,'');return (id&&xe===id)||(id&&xp&&xp===id.replace(/\D/g,''))||(ph&&xp===ph);})||null;}
+ function tcSetAuthMode(mode){const login=document.getElementById('login');login?.classList.toggle('auth-show-existing',mode==='existing');document.querySelectorAll('.auth-mode').forEach(b=>b.classList.toggle('active',b.dataset.authMode===(mode==='existing'?'existing':'new')));}
+ function tcLookupRegistration(){const email=document.getElementById('tcEmail')?.value.trim()||'',phone=document.getElementById('tcPhone')?.value.trim()||'';if(!email&&!phone)return null;const found=tcFindCustomer(email,phone);if(found){const id=document.getElementById('tcLoginIdentity');if(id)id.value=found.email||found.phone||'';tcSetAuthMode('existing');alert('מצאנו משתמש קיים לפי האימייל/טלפון. עברנו למסך כניסה ושליחת OTP.');return found;}return null;}
+ function tcStartOtpCountdown(){clearInterval(tcOtpTimer);tcOtpSeconds=60;const b=document.getElementById('tcResendOtp');if(!b)return;b.disabled=true;const tick=()=>{if(tcOtpSeconds<=0){clearInterval(tcOtpTimer);b.disabled=false;b.textContent='שלח קוד חדש';return;}b.textContent=`שלח קוד חדש בעוד ${tcOtpSeconds} שנ׳`;tcOtpSeconds--;};tick();tcOtpTimer=setInterval(tick,1000);}
+ function tcSendOtp(mode,isResend=false){let data;if(mode==='register'){if(!isResend&&tcLookupRegistration())return;data={firstName:document.getElementById('tcFirstName').value.trim(),lastName:document.getElementById('tcLastName').value.trim(),phone:document.getElementById('tcPhone').value.trim(),email:document.getElementById('tcEmail').value.trim(),method:'email'};if(!data.firstName||!data.lastName||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)){alert('יש למלא שם פרטי, שם משפחה ואימייל תקין. הטלפון אינו חובה.');return;}}else{const identity=document.getElementById('tcLoginIdentity').value.trim(),found=tcFindCustomer(identity);if(!found){alert('לא נמצא משתמש לפי האימייל או הטלפון. אפשר לעבור להרשמה חדשה.');return;}data={...found,method:'email'};}
+ const code=tcMakeOtp();otpContext={mode,data,code};tcLastOtpMode=mode;sessionStorage.setItem('tc_demo_otp',code);const v=document.getElementById('tcOtpVerify');v.hidden=false;document.getElementById('tcOtpHint').textContent='הזינו את קוד האימות בן 6 הספרות.';document.getElementById('tcOtpStatus').textContent='קוד חדש נוצר.';document.getElementById('tcOtpDemo').innerHTML='<strong>מצב פיילוט מקומי:</strong> עדיין לא מחובר שירות אימייל, לכן הקוד לא נשלח בפועל. לצורך הבדיקה הקוד הוא <b style="font-size:20px">'+code+'</b>. לאחר חיבור Supabase הקוד יישלח לאימייל ולא יוצג כאן.';document.getElementById('tcOtpCode').value='';tcStartOtpCountdown();v.scrollIntoView({behavior:'smooth',block:'center'});}
  function tcVerifyOtp(){if(!otpContext)return;const entered=document.getElementById('tcOtpCode').value.trim();if(entered!==otpContext.code){alert('קוד OTP שגוי.');return;}let u=otpContext.data;if(otpContext.mode==='register'){const customers=jget(K.customers,[]);const existing=customers.find(x=>(u.phone&&x.phone===u.phone)||x.email.toLowerCase()===u.email.toLowerCase());if(existing)u=existing;else{u={id:'CUS-'+Date.now(),firstName:u.firstName,lastName:u.lastName,phone:u.phone,email:u.email,verifiedPhone:u.method==='phone',verifiedEmail:u.method==='email',createdAt:new Date().toISOString()};customers.push(u);jset(K.customers,customers);}}jset(K.customer,u);otpContext=null;document.getElementById('tcOtpVerify').hidden=true;tcRenderAccount();tcRenderHeaderUser();tcRenderCustomers();const ret=sessionStorage.getItem('tc_return_after_login')||'#account';sessionStorage.removeItem('tc_return_after_login');location.hash=ret;const auto=sessionStorage.getItem('tc_build_after_login');if(auto){sessionStorage.removeItem('tc_build_after_login');setTimeout(()=>{location.hash='#planner';plannerShowStep(7);buildPlannerDraft();},180);}tcLogEvent('login_verified',{method:u.method||'otp'});}
  function tcFmtDate(v){if(!v)return '—';const d=new Date(v+'T12:00:00');return isNaN(d)?v:d.toLocaleDateString('he-IL');}
  function tcOpenPurchasedTrip(id){const u=tcCustomer(),p=jget(K.purchases,[]).find(x=>x.tripId===id&&(x.customer?.id===u?.id||x.customer?.email===u?.email));if(!p){alert('הטיול לא נמצא בחשבון זה.');location.hash='#account';return;}if(p.tripDraft){planner.draft=p.tripDraft;renderPlannerDraft();document.querySelectorAll('.preview-locked').forEach(x=>x.classList.remove('preview-locked'));document.querySelectorAll('.preview-lock-banner').forEach(x=>x.remove());location.hash='#planner';setTimeout(()=>document.getElementById('plannerResult')?.scrollIntoView({behavior:'smooth'}),100);}else alert('המסלול המוכן יתחבר לקישור האישי בשלב השרת.');}
@@ -1114,7 +1157,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  window.tcMenu=function(open){const nav=document.getElementById('tcNavToggle');if(nav)nav.checked=!!open;document.getElementById('tcMobileMenu')?.classList.toggle('open',open);document.getElementById('tcMenuBackdrop')?.classList.toggle('show',open);document.getElementById('tcMobileMenu')?.setAttribute('aria-hidden',open?'false':'true');document.getElementById('tcHamburger')?.setAttribute('aria-expanded',open?'true':'false');};
  window.tcRouteRefresh=function(page){window.tcMenu(false);if(page==='cart')tcRenderCart();if(page==='account')tcRenderAccount();if(page==='hotels')renderHotelRecommendations();if(page==='admin'){tcRenderPayments();tcRenderCustomers();}};
  document.getElementById('tcHamburger')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(true)});document.getElementById('tcMobileClose')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(false)});document.getElementById('tcMenuBackdrop')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(false)});document.getElementById('tcMobileMenu')?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>window.tcMenu(false)));document.getElementById('tcNavToggle')?.addEventListener('change',e=>{document.getElementById('tcMobileMenu')?.setAttribute('aria-hidden',e.target.checked?'false':'true');});
- document.getElementById('tcCheckoutBtn')?.addEventListener('click',tcOpenCheckout);document.getElementById('tcPayBtn')?.addEventListener('click',tcPay);document.getElementById('tcRegisterOtp')?.addEventListener('click',()=>tcSendOtp('register'));document.getElementById('tcLoginOtp')?.addEventListener('click',()=>tcSendOtp('login'));document.getElementById('tcVerifyOtp')?.addEventListener('click',tcVerifyOtp);document.getElementById('tcAdminSearch')?.addEventListener('input',tcRenderPayments);
+ document.getElementById('tcCheckoutBtn')?.addEventListener('click',tcOpenCheckout);document.getElementById('tcPayBtn')?.addEventListener('click',tcPay);document.getElementById('tcRegisterOtp')?.addEventListener('click',()=>tcSendOtp('register'));document.getElementById('tcLoginOtp')?.addEventListener('click',()=>tcSendOtp('login'));document.getElementById('tcVerifyOtp')?.addEventListener('click',tcVerifyOtp);document.getElementById('tcResendOtp')?.addEventListener('click',()=>{if(tcLastOtpMode)tcSendOtp(tcLastOtpMode,true);});document.getElementById('tcEmail')?.addEventListener('blur',tcLookupRegistration);document.getElementById('tcPhone')?.addEventListener('blur',()=>{if(document.getElementById('tcPhone')?.value.trim())tcLookupRegistration();});document.getElementById('tcAdminSearch')?.addEventListener('input',tcRenderPayments);
  document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>tcSetLang(btn.dataset.lang)));
 
 
@@ -1250,7 +1293,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
     document.body.classList.toggle('tc-v74-keyboard',!!open);
     root.style.setProperty('--tc-kb-height',Math.round(kb)+'px');
   }
-  function updateStepClass(){const active=document.querySelector('.planner-step.active');const n=active?Number(active.dataset.step||0):0;document.body.classList.toggle('tc-v74-long-step',n>=2);}
+  function updateStepClass(){const active=document.querySelector('.planner-step.active');const n=active?Number(active.dataset.step||0):0;document.body.classList.toggle('tc-v74-long-step',n>=1);}
   document.addEventListener('focusin',()=>setTimeout(updateKeyboard,60));
   document.addEventListener('focusout',()=>setTimeout(updateKeyboard,160));
   window.visualViewport?.addEventListener('resize',updateKeyboard);
