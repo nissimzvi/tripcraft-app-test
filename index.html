@@ -2,12 +2,12 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https:; connect-src 'self' https://photon.komoot.io https://nominatim.openstreetmap.org https://api.openstreetmap.org; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; img-src 'self' data: blob: https:; connect-src 'self' https://zhxmmpctqqoxjconoyyv.supabase.co wss://zhxmmpctqqoxjconoyyv.supabase.co https://photon.komoot.io https://nominatim.openstreetmap.org https://api.openstreetmap.org; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V85</title>
+<title>TripCraft V86</title>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -388,7 +388,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V83 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><div class="logo">T</div><div><h1>TripCraft</h1><small>V86 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -1032,7 +1032,7 @@ function renderPlannerBudget(){const el=document.getElementById('plannerBudgetSu
 function bookingSearchUrl(town,profile){
  const adults=Math.max(1,Number(profile.people||1)-Number(profile.children||0)),children=Number(profile.children||0);
  const direct='https://www.booking.com/searchresults.html?ss='+encodeURIComponent(town)+'&group_adults='+adults+'&no_rooms='+estimatedRooms(profile)+'&group_children='+children;
- // V85: affiliate-ready. Until CJ/Booking approves the program, use the normal Booking search URL.
+ // V86: affiliate-ready. Until CJ/Booking approves the program, use the normal Booking search URL.
  // After approval, put the CJ deep-link template in tripcraft-config.js. Supported placeholders: {url}, {destination}.
  const cfg=window.TRIPCRAFT_CONFIG||{};
  const tpl=String(cfg.bookingAffiliateTemplate||'').trim();
@@ -1454,5 +1454,5 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
   if(log){log.addEventListener('click',function(e){const email=(document.getElementById('tcLoginIdentity')?.value||'').trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){e.stopImmediatePropagation();alert('נא להזין את כתובת האימייל שאיתה נרשמתם.');}},true);}
 })();
 </script>
-<script src="tripcraft-v85.js?v=85"></script>
+<script src="tripcraft-v86.js?v=86"></script>
 </body></html>
