@@ -1,8 +1,8 @@
-// TripCraft V87 - public client configuration.
+// TripCraft V88 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
   // Supabase project already created for TripCraft:
-  supabaseUrl: 'https://zhxmmpctqqoxjconoyyv.supabase.co',
+  supabaseUrl: 'https://zhxmmpctqqoxjconovyv.supabase.co',
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.
   supabaseAnonKey: 'sb_publishable_FQAN7Em12GRjR3bYJVlQZw_nMBKgU4z',
 
