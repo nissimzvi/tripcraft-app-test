@@ -1,6 +1,9 @@
-// TripCraft V101 - public client configuration.
+// TripCraft V102 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
+  // Permanent public URL used for saved Trip IDs, even when the demo is opened from a local ZIP.
+  publicAppUrl: 'https://nissimzvi.github.io/tripcraft-app-test/',
+
   // Supabase project already created for TripCraft:
   supabaseUrl: 'https://zhxmmpctqqoxjconovyv.supabase.co',
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.

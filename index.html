@@ -7,7 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V101</title>
+<title>TripCraft V102</title>
+<link rel="icon" type="image/png" href="assets/tripcraft-logo.png?v=102">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -287,7 +288,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="TripCraft">
-<link rel="apple-touch-icon" href="icons/icon-180.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png?v=102">
 <style id="tc-v71-pwa">
 .tc-install{display:none;border:0;background:#eaf3f8;color:#0d3557;border-radius:10px;padding:8px 10px;font-weight:900;cursor:pointer}.tc-install.show{display:inline-flex}.tc-offline{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:500;background:#7c2d12;color:white;padding:9px 14px;border-radius:999px;font-weight:800;display:none}.tc-offline.show{display:block}.existing-hotel-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.existing-hotel-chip{border:1px solid #b9d1df;background:#f7fbfd;border-radius:999px;padding:8px 10px;display:inline-flex;gap:7px;align-items:center}.existing-hotel-chip button{border:0;background:transparent;cursor:pointer;font-weight:900}.pilot-feedback-note{margin-bottom:16px}.change-quota{display:inline-flex;background:#fff7df;border:1px solid #efd993;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900;margin-top:6px}.tc-skipped{opacity:.55}.tc-skipped::after{content:'דולג';font-weight:900;margin-inline-start:8px}
 @media(max-width:900px){.tc-install{margin-top:6px}.planner-actions{gap:8px}.planner-actions .btn{min-height:46px}.planner-step.active{min-width:0}.planner-grid{grid-template-columns:1fr!important}}
@@ -389,7 +390,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><img class="logo tc-brand-logo" src="assets/tripcraft-logo.png?v=101" alt="TripCraft"><div><h1>TripCraft</h1><small>V101 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="index.html" aria-label="חזרה לדף הבית"><img class="logo tc-brand-logo" src="assets/tripcraft-logo.png?v=102" alt="TripCraft" fetchpriority="high"><div><h1>TripCraft</h1><small>V102 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -566,7 +567,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
     </div>
     <div class="planner-step" data-step="7"><h3>7. סקירה ואישור לפני בניית הטיול</h3><div id="plannerSummary" class="planner-summary"></div><div class="ai-box"><div><strong>💬 עוזר התכנון</strong><p>אחרי יצירת הטיול תוכלו לשנות ימים, יעדים, לינות ואילוצים. שינוי שמשפיע על המסלול יחושב מחדש ויוצג לאישור.</p></div><span>הטיול נשאר ניתן לעריכה</span></div></div>
   </div>
-  <div class="planner-actions"><button class="btn soft" id="plannerPrev" type="button" disabled>הקודם</button><button class="btn secondary" id="plannerNext" type="button">הבא</button><button class="btn green" id="plannerBuild" type="button" style="display:none">בנה טיול</button></div><div id="tripBuildOverlay" class="trip-build-overlay" aria-hidden="true"><div class="trip-build-card"><div class="trip-build-icon">🧭</div><h3>בונים לכם את הטיול...</h3><p id="tripBuildStatus">מנתחים את ההעדפות שלכם</p><div class="trip-build-track"><div id="tripBuildBar"></div></div><strong id="tripBuildPct">0%</strong><small>TripCraft מתאים קצב, גילאים, מרחקים, לינות ואטרקציות לפני הצגת הטעימה.</small></div></div>
+  <div class="planner-actions"><button class="btn soft" id="plannerPrev" type="button" disabled>הקודם</button><button class="btn secondary" id="plannerNext" type="button">הבא</button><button class="btn green" id="plannerBuild" type="button" style="display:none">בנה טיול</button></div><div id="tripBuildOverlay" class="trip-build-overlay" aria-hidden="true"><div class="trip-build-card"><div class="trip-build-icon">🧭</div><h3>בונים לכם את הטיול...</h3><p id="tripBuildStatus">מנתחים את ההעדפות שלכם</p><div class="trip-build-track"><div id="tripBuildBar"></div></div><strong id="tripBuildPct">0%</strong><small>TripCraft מתאים קצב, גילאים, מרחקים, לינות ואטרקציות ומכין את הטיול המלא.</small></div></div>
   <div id="plannerResult" class="planner-result"><div class="planner-result-head"><div><h3 id="plannerResultTitle">טיול חדש</h3><p id="plannerResultMeta"></p><span id="plannerChangeQuota" class="change-quota">פיילוט: עד 10 שינויים</span></div><button class="btn green" id="plannerSaveTrip">שמור טיול</button></div><div id="plannerShareBox" class="safe" style="display:none;margin:14px 0"><strong>הקישור האישי לטיול:</strong><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><input id="plannerShareLink" readonly dir="ltr" style="flex:1;min-width:230px"><button id="plannerCopyLink" class="btn soft" type="button">העתק קישור</button></div></div><div id="plannerBudgetSummary" class="budget-summary"></div>
   <div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">פוסטים והמלצות לכל הטיול</h3><p style="color:#607887;margin-top:-4px">הדביקו פוסט, לינק או המלצה. TripCraft יציע לאיזה יום לשבץ אותו, ויתריע אם הוא נראה רחוק או לא הגיוני למסלול.</p><div class="field"><textarea id="plannerGlobalPostInput" rows="5" placeholder="הדבק כאן פוסט / לינק / המלצה לכל הטיול"></textarea></div><div class="cta"><button class="btn secondary" id="plannerGlobalPostReview" type="button">בדוק והצע שיבוץ</button></div><div id="plannerGlobalPostResult"></div></div>
   <div id="plannerDraftDays" class="day-list"></div><div class="chatbox"><div class="chatlog" id="plannerChatLog"><div class="chatmsg bot">הטיול הראשוני מוכן. כתבו לי מה תרצו לשנות.</div></div><div class="chatinput"><input id="plannerChatInput" placeholder="למשל: יום 2 עמוס מדי, תוריד תחנה אחת"><button class="btn secondary" id="plannerChatSend">שלח</button></div></div></div>
@@ -1039,7 +1040,7 @@ function renderHotelRecommendations(){const box=document.getElementById('hotelRe
 function openHotelsForDay(i){if(planner.draft&&planner.draft.days[i])sessionStorage.setItem('tc_hotel_focus',planner.draft.days[i].lodging||'');location.hash='#hotels';setTimeout(()=>renderHotelRecommendations(),50);}
 
 function tcSleep(ms){return new Promise(r=>setTimeout(r,ms));}
-async function runTripBuildProgress(){const overlay=document.getElementById('tripBuildOverlay'),bar=document.getElementById('tripBuildBar'),pct=document.getElementById('tripBuildPct'),status=document.getElementById('tripBuildStatus');if(!overlay||!bar||!pct||!status)return;const steps=[[8,'מנתחים את ההעדפות שלכם'],[22,'מתאימים את הקצב לגילאי הנוסעים'],[38,'בונים חלוקת ימים ומסלול'],[54,'בודקים מרחקים וזמני נסיעה'],[68,'מתאימים אזורי לינה'],[82,'מחשבים עלויות אטרקציות'],[93,'מבצעים TripCheck ראשוני'],[100,'הטעימה שלכם מוכנה']];overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');for(const [v,msg] of steps){bar.style.width=v+'%';pct.textContent=v+'%';status.textContent=msg;await tcSleep(v===100?250:320);}overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');}
+async function runTripBuildProgress(){const overlay=document.getElementById('tripBuildOverlay'),bar=document.getElementById('tripBuildBar'),pct=document.getElementById('tripBuildPct'),status=document.getElementById('tripBuildStatus');if(!overlay||!bar||!pct||!status)return;const steps=[[8,'מנתחים את ההעדפות שלכם'],[22,'מתאימים את הקצב לגילאי הנוסעים'],[38,'בונים חלוקת ימים ומסלול'],[54,'בודקים מרחקים וזמני נסיעה'],[68,'מתאימים אזורי לינה'],[82,'מחשבים עלויות אטרקציות'],[93,'מבצעים TripCheck ראשוני'],[100,'הטיול המלא שלכם מוכן']];overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');for(const [v,msg] of steps){bar.style.width=v+'%';pct.textContent=v+'%';status.textContent=msg;await tcSleep(v===100?250:320);}overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');}
 function parseHardConstraints(text,startYear){
  const src=String(text||'').trim();if(!src)return[];const out=[];
  const lines=src.split(/\n|;/).map(x=>x.trim()).filter(Boolean);
@@ -1450,4 +1451,5 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 })();
 </script>
 <script src="tripcraft-v101.js?v=101"></script>
+<script src="tripcraft-v102.js?v=102"></script>
 </body></html>
