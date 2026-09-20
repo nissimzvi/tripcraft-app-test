@@ -3,7 +3,7 @@
 </style><div id="tc-v67-bar"><a class="tc-home" href="index.html" aria-label="דף הבית">TripCraft</a><button type="button" onclick="if(history.length>1){history.back()}else{location.href='index.html'}">← חזרה</button></div><script>
 (function(){
  const p=location.pathname; const m=p.match(/\/tripcraft-app-test\/(slovakia|vietnam|greece|dolomites|tyrol|usa)(?:\/index\.html)?$/i);
- if(m){ location.replace('/tripcraft-app-test/trips/'+m[1].toLowerCase()+'/index.html'+location.search+location.hash); return; }
+ if(m){ location.replace('/tripcraft-app-test/trip-'+m[1].toLowerCase()+'.html'+location.search+location.hash); return; }
  location.replace('/tripcraft-app-test/'+(location.hash||''));
 })();
 </script></body></html>

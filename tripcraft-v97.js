@@ -2,7 +2,7 @@
    Uses public Supabase client configuration only. */
 (() => {
   'use strict';
-  const V='V95';
+  const V='V97';
   const PROTECTED=new Set(['planner','account','import','cart','hotels','trips']);
   let sb=null, sessionUser=null, authCtx=null, resendTimer=null, resendLeft=0, cloudTrips=[], cloudTripsReady=false, tableReady=true;
 
@@ -25,7 +25,7 @@
     const ctl=new AbortController();
     const timer=setTimeout(()=>ctl.abort(),15000);
     try{
-      const res=await fetch(url,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',signal:ctl.signal,headers:{'Content-Type':'application/json','apikey':c.supabaseAnonKey,'X-Client-Info':'tripcraft-v91'},body:JSON.stringify(payload||{})});
+      const res=await fetch(url,{method:'POST',mode:'cors',cache:'no-store',credentials:'omit',signal:ctl.signal,headers:{'Content-Type':'application/json','apikey':c.supabaseAnonKey,'X-Client-Info':'tripcraft-v97'},body:JSON.stringify(payload||{})});
       const text=await res.text();
       let data={};
       try{data=text?JSON.parse(text):{}}catch(_){data={message:text}}
@@ -86,12 +86,20 @@
     const otp=byId('tcOtpStep');
     if(otp){
       const demo=byId('tcOtpDemo'); if(demo)demo.style.display='none';
-      const codeInput=byId('tcOtpCode'); if(codeInput){codeInput.maxLength=8;codeInput.placeholder='00000000';codeInput.setAttribute('aria-label','קוד אימות');}
+      const codeInput=byId('tcOtpCode'); if(codeInput){codeInput.maxLength=8;codeInput.placeholder='00000000';codeInput.setAttribute('aria-label','קוד אימות');codeInput.setAttribute('dir','ltr');codeInput.style.textAlign='center';}
       const subtitle=otp.querySelector('.otp-subtitle'); if(subtitle)subtitle.textContent='הזינו את קוד האימות שנשלח אל:';
       byId('tcOtpBack')?.addEventListener('click',v85BackFromOtp,true);
       byId('tcVerifyOtp')?.addEventListener('click',v85VerifyOtp,true);
       byId('tcResendOtp')?.addEventListener('click',v85ResendOtp,true);
       byId('tcOtpCode')?.addEventListener('input',e=>{const clean=String(e.target.value||'').replace(/\D/g,'').slice(0,8);if(e.target.value!==clean)e.target.value=clean;byId('tcOtpStatus').textContent='';});
+      byId('tcOtpCode')?.addEventListener('paste',e=>{
+        e.preventDefault();
+        const raw=(e.clipboardData||window.clipboardData)?.getData('text')||'';
+        const clean=String(raw).replace(/\D/g,'').slice(0,8);
+        e.currentTarget.value=clean;
+        byId('tcOtpStatus').textContent=clean.length===8?'':'יש להדביק קוד בן 8 ספרות.';
+        setTimeout(()=>e.currentTarget.setSelectionRange?.(clean.length,clean.length),0);
+      });
       byId('tcOtpCode')?.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();v85VerifyOtp(e)}});
     }
     byId('tcAuthContinue')?.addEventListener('click',v85CheckEmail);
@@ -149,6 +157,21 @@
     }catch(err){alert('שליחת הקוד נכשלה: '+tcExplainAuthError(err));console.error(err)}finally{btn.disabled=false;btn.textContent='הרשם ושלח קוד'}
   }
   async function v85ResendOtp(e){if(e){e.preventDefault();e.stopImmediatePropagation()} if(!authCtx||resendLeft>0)return;const b=byId('tcResendOtp');b.disabled=true;b.textContent='שולח...';try{const payload={email:authCtx.email,create_user:!!authCtx.isNew};if(authCtx.isNew&&authCtx.profile)payload.data={tripcraft_profile:authCtx.profile,first_name:authCtx.profile.firstName,last_name:authCtx.profile.lastName,phone:authCtx.profile.phone||''};await tcAuthRequest('otp',payload);byId('tcOtpStatus').textContent='קוד חדש נשלח.';startResendTimer(60);setTimeout(()=>byId('tcOtpCode')?.focus(),80)}catch(err){byId('tcOtpStatus').textContent='שליחה חוזרת נכשלה: '+tcExplainAuthError(err);b.disabled=false;b.textContent='שלח קוד חדש'}}
+  function navigateAfterAuth(ret){
+    const target=ret||'#account';
+    const otp=byId('tcOtpStep'), entry=byId('tcAuthEntry'), reg=byId('tcV90RegisterStep');
+    if(otp)otp.hidden=true; if(entry)entry.hidden=false; if(reg)reg.hidden=true;
+    try{history.replaceState(null,'',target);}catch(_){location.hash=target;}
+    // Force both the legacy page renderer and the current route gate to refresh even if the hash is unchanged.
+    try{window.dispatchEvent(new HashChangeEvent('hashchange'));}catch(_){window.dispatchEvent(new Event('hashchange'));}
+    setTimeout(()=>{
+      const page=(target.replace(/^#/,'').split('?')[0]||'account');
+      const app=byId('mainApp'); if(app){app.classList.add('page-focus');app.dataset.page=page;}
+      window.tcRouteRefresh?.(page);
+      window.scrollTo({top:0,behavior:'instant'});
+    },30);
+  }
+
   async function v85VerifyOtp(e){
     if(e){e.preventDefault();e.stopImmediatePropagation()}
     const token=String(byId('tcOtpCode')?.value||'').replace(/\D/g,'');if(token.length!==8){byId('tcOtpStatus').textContent=`קוד האימות חייב להכיל 8 ספרות. כרגע הוזנו ${token.length}.`;byId('tcOtpCode')?.focus();return}
@@ -160,15 +183,8 @@
       sessionUser=user;writeLocalCustomer(userToCustomer(user));
       const client=supabaseClient();if(client&&data?.access_token&&data?.refresh_token){try{await client.auth.setSession({access_token:data.access_token,refresh_token:data.refresh_token})}catch(_){}}
       clearInterval(resendTimer);byId('tcOtpStatus').textContent='האימות הצליח.';
-      const ret=sessionStorage.getItem('tc_v91_return_after_auth')||sessionStorage.getItem('tc_return_after_login')||'#account';
-      sessionStorage.removeItem('tc_v91_return_after_auth');sessionStorage.removeItem('tc_return_after_login');
-      // V95: navigate only after the verified customer has been persisted, then force the legacy page router
-      // to refresh as well. This prevents #planner from being in the URL while the OTP screen remains visible.
-      location.hash=ret;
-      setTimeout(()=>{
-        try{ if(typeof window.applyPageFocus==='function') window.applyPageFocus(); }catch(_){}
-        window.tcRenderAccount?.();window.tcRenderHeaderUser?.();
-      },30);
+      const ret=sessionStorage.getItem('tc_v91_return_after_auth')||'#account';sessionStorage.removeItem('tc_v91_return_after_auth');navigateAfterAuth(ret);
+      setTimeout(()=>{window.tcRenderAccount?.();window.tcRenderHeaderUser?.()},80);
     }catch(err){byId('tcOtpStatus').textContent='קוד שגוי או שפג תוקפו: '+tcExplainAuthError(err);console.error(err)}finally{b.disabled=false;b.textContent='אמת והמשך'}
   }
 
@@ -221,7 +237,8 @@
     const u=userToCustomer(sessionUser),loading=!cloudTripsReady?'<div class="safe">טוען את הטיולים שלך...</div>':'';
     const tableWarn=!tableReady?'<div class="warn">שמירת טיולים בענן עדיין לא הופעלה. יש להריץ פעם אחת את הקובץ supabase-setup.sql ב-Supabase.</div>':'';
     const list=cloudTrips.length?cloudTrips.map(p=>`<div class="safe" style="margin-bottom:12px"><h3 style="margin:0 0 8px">${window.esc?window.esc(p.name||p.id):p.name||p.id}</h3><div><b>יעד:</b> ${window.esc?window.esc(p.destination||'—'):p.destination||'—'}</div><div><b>תאריכים:</b> ${p.start_date||'—'} – ${p.end_date||'—'}</div><div style="margin-top:8px"><b>קישור אישי:</b> <span dir="ltr">${tripUrl(p.id)}</span></div><div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn secondary" type="button" data-open-trip="${p.id}">פתח ועדכן טיול</button><button class="btn soft" type="button" data-copy-trip="${p.id}">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. אפשר לבנות טיול חדש.</div>';
-    box.innerHTML=`<div class="account-card"><h3>${u.firstName||''} ${u.lastName||''}</h3><p>${u.email}${u.phone?' · '+u.phone:''}</p><button class="btn soft" id="tcV85Logout">התנתק</button></div><h3 style="margin-top:24px">הטיולים שלי</h3>${tableWarn}${loading}${list}`;
+    const safe=window.esc||((value)=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])));
+    box.innerHTML=`<div class="account-card"><h3>${safe(u.firstName||'')} ${safe(u.lastName||'')}</h3><p>${safe(u.email||'')}${u.phone?' · '+safe(u.phone):''}</p><button class="btn soft" id="tcV85Logout">התנתק</button></div><h3 style="margin-top:24px">הטיולים שלי</h3>${tableWarn}${loading}${list}`;
     byId('tcV85Logout').onclick=async()=>{await supabaseClient()?.auth.signOut();sessionUser=null;writeLocalCustomer(null);location.hash='#home'};
     box.querySelectorAll('[data-open-trip]').forEach(b=>b.onclick=()=>openCloudTrip(b.dataset.openTrip));box.querySelectorAll('[data-copy-trip]').forEach(b=>b.onclick=()=>navigator.clipboard?.writeText(tripUrl(b.dataset.copyTrip)));
   }
@@ -231,7 +248,18 @@
     const page=raw.split('?')[0]||'home';if(PROTECTED.has(page)&&!loggedIn()){goLogin('#'+page);return}if(page==='account')renderCloudAccount();
   }
   function installRouteGate(){
-    document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const href=a.getAttribute('href'),page=pageFromHash(href);if((page==='trip'||PROTECTED.has(page))&&!loggedIn()){e.preventDefault();e.stopImmediatePropagation();goLogin(href);return}if(page==='planner'&&loggedIn()){window.planner.currentTripId=null}},true);
+    document.addEventListener('click',e=>{
+      const a=e.target.closest('a[href^="#"]');
+      if(!a)return;
+      const href=a.getAttribute('href'),page=pageFromHash(href),current=pageFromHash(location.hash||'#home');
+      const protectedTarget=(page==='trip'||PROTECTED.has(page));
+      // V94: every protected action launched from the Home page must pass through email/OTP,
+      // even when Supabase still has a persisted session from an earlier test.
+      if(protectedTarget && (current==='home' || !loggedIn())){
+        e.preventDefault();e.stopImmediatePropagation();goLogin(href);return;
+      }
+      if(page==='planner'&&loggedIn()){window.planner.currentTripId=null}
+    },true);
     window.addEventListener('hashchange',()=>setTimeout(handleCurrentRoute,0));
   }
   function wrapPlanner(){
