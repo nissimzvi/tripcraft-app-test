@@ -9,6 +9,12 @@
   function byId(id){return document.getElementById(id)}
   function cleanEmail(v){return String(v||'').trim().toLowerCase()}
   function validEmail(v){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail(v))}
+  function displayDate(value){
+    const s=String(value||'').trim(),iso=s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/),local=s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+    if(iso)return `${iso[3].padStart(2,'0')}-${iso[2].padStart(2,'0')}-${iso[1]}`;
+    if(local)return `${local[1].padStart(2,'0')}-${local[2].padStart(2,'0')}-${local[3]}`;
+    return s||'—';
+  }
   function cfg(){return window.TRIPCRAFT_CONFIG||{}}
   function supabaseClient(){
     if(sb)return sb;
@@ -49,7 +55,14 @@
     const m=user?.user_metadata||{},p=m.tripcraft_profile||{};
     return {id:user?.id||'',email:user?.email||'',firstName:p.firstName||m.first_name||'',lastName:p.lastName||m.last_name||'',phone:p.phone||m.phone||'',method:'otp',isAdmin:user?.app_metadata?.role==='admin'};
   }
-  function loggedIn(){return !!sessionUser}
+  function loggedIn(){
+    const windowSession=['tc_v106_session_window','tc_v104_session_window','tc_v103_session_window'].some(key=>sessionStorage.getItem(key)==='active');
+    return !!sessionUser||!!(windowSession&&localCustomer());
+  }
+  window.tcV101AdoptSessionUser=function(user){
+    sessionUser=user||null;
+    if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));setTimeout(loadCloudTrips,0)}
+  };
   function pageFromHash(hash=location.hash){const raw=(hash||'#home').replace(/^#/,'');return raw.startsWith('trip/')?'trip':(raw.split('?')[0]||'home')}
   function authReturn(hash){sessionStorage.setItem('tc_v91_return_after_auth',hash||'#account')}
   function goLogin(hash){authReturn(hash);sessionStorage.removeItem('tc_build_after_login');sessionStorage.removeItem('tc_return_after_login');location.hash='#login';setTimeout(()=>byId('tcAuthEmailPrimary')?.focus(),120)}
@@ -197,7 +210,7 @@
     try{
       const data=await tcAuthRequest('verify',{email:authCtx.email,token,type:'email'});
       const user=data?.user;if(!user)throw new Error('האימות הצליח אך לא התקבל משתמש מ-Supabase');
-      sessionUser=user;writeLocalCustomer(userToCustomer(user));
+      sessionUser=user;writeLocalCustomer(userToCustomer(user));window.tcV106AdoptAuthenticatedUser?.(user);
       const client=supabaseClient();if(client&&data?.access_token&&data?.refresh_token){try{await client.auth.setSession({access_token:data.access_token,refresh_token:data.refresh_token})}catch(_){}}
       clearInterval(resendTimer);byId('tcOtpStatus').textContent='האימות הצליח.';
       const ret=sessionStorage.getItem('tc_v91_return_after_auth')||'#account';sessionStorage.removeItem('tc_v91_return_after_auth');
@@ -211,8 +224,8 @@
   async function syncSession(){
     const client=supabaseClient(); if(!client)return;
     const {data}=await client.auth.getSession();sessionUser=data?.session?.user||null;
-    if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));await loadCloudTrips()}else{writeLocalCustomer(null);cloudTrips=[];cloudTripsReady=true}
-    client.auth.onAuthStateChange((_event,session)=>{sessionUser=session?.user||null;if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));setTimeout(loadCloudTrips,0)}else{writeLocalCustomer(null);cloudTrips=[];cloudTripsReady=true}});
+    if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));window.tcV106AdoptAuthenticatedUser?.(sessionUser,false);await loadCloudTrips()}else{cloudTrips=[];cloudTripsReady=true}
+    client.auth.onAuthStateChange((event,session)=>{sessionUser=session?.user||null;if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));window.tcV106AdoptAuthenticatedUser?.(sessionUser,false);setTimeout(loadCloudTrips,0)}else if(event==='SIGNED_OUT'){writeLocalCustomer(null);cloudTrips=[];cloudTripsReady=true}});
   }
   async function loadCloudTrips(){
     cloudTripsReady=false;tableReady=true;const client=supabaseClient();if(!client||!sessionUser){cloudTrips=[];cloudTripsReady=true;return}
@@ -261,7 +274,7 @@
     const box=byId('tcAccountBody');if(!box)return;if(!sessionUser){box.innerHTML='<div class="safe">כדי לראות את הטיולים יש להיכנס עם אימייל ו-OTP.</div>';return}
     const u=userToCustomer(sessionUser),loading=!cloudTripsReady?'<div class="safe">טוען את הטיולים שלך...</div>':'';
     const tableWarn=!tableReady?'<div class="warn">שמירת טיולים בענן עדיין לא הופעלה. יש להריץ פעם אחת את הקובץ supabase-setup.sql ב-Supabase.</div>':'';
-    const list=cloudTrips.length?cloudTrips.map(p=>`<div class="safe" style="margin-bottom:12px"><h3 style="margin:0 0 8px">${window.esc?window.esc(p.name||p.id):p.name||p.id}</h3><div><b>יעד:</b> ${window.esc?window.esc(p.destination||'—'):p.destination||'—'}</div><div><b>תאריכים:</b> ${p.start_date||'—'} – ${p.end_date||'—'}</div><div style="margin-top:8px"><b>קישור אישי:</b> <span dir="ltr">${tripUrl(p.id)}</span></div><div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn secondary" type="button" data-open-trip="${p.id}">פתח ועדכן טיול</button><button class="btn soft" type="button" data-copy-trip="${p.id}">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. אפשר לבנות טיול חדש.</div>';
+    const list=cloudTrips.length?cloudTrips.map(p=>`<div class="safe" style="margin-bottom:12px"><h3 style="margin:0 0 8px">${window.esc?window.esc(p.name||p.id):p.name||p.id}</h3><div><b>יעד:</b> ${window.esc?window.esc(p.destination||'—'):p.destination||'—'}</div><div><b>תאריכים:</b> ${displayDate(p.start_date)} – ${displayDate(p.end_date)}</div><div style="margin-top:8px"><b>קישור אישי:</b> <span dir="ltr">${tripUrl(p.id)}</span></div><div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap"><button class="btn secondary" type="button" data-open-trip="${p.id}">פתח ועדכן טיול</button><button class="btn soft" type="button" data-copy-trip="${p.id}">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. אפשר לבנות טיול חדש.</div>';
     const safe=window.esc||((value)=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch])));
     box.innerHTML=`<div class="account-card"><h3>${safe(u.firstName||'')} ${safe(u.lastName||'')}</h3><p>${safe(u.email||'')}${u.phone?' · '+safe(u.phone):''}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn planner-color" id="tcV99NewTrip" type="button">בניית טיול חדש</button><button class="btn soft" id="tcV85Logout">התנתק</button></div></div><h3 style="margin-top:24px">הטיולים שלי</h3><p>בחרו טיול קיים כדי לטעון את כל הנתונים שהוזנו, או התחילו טיול חדש עם שאלון נקי.</p>${tableWarn}${loading}${list}`;
     byId('tcV99NewTrip').onclick=startNewTrip;
@@ -277,11 +290,11 @@
     document.addEventListener('click',e=>{
       const a=e.target.closest('a[href^="#"]');
       if(!a)return;
-      const href=a.getAttribute('href'),page=pageFromHash(href),current=pageFromHash(location.hash||'#home');
+      const href=a.getAttribute('href'),page=pageFromHash(href);
       const protectedTarget=(page==='trip'||PROTECTED.has(page));
-      // V94: every protected action launched from the Home page must pass through email/OTP,
-      // even when Supabase still has a persisted session from an earlier test.
-      if(protectedTarget && (current==='home' || !loggedIn())){
+      // V106: a valid persisted Supabase session remains usable throughout the app.
+      // Authentication is requested only when there is no active session.
+      if(protectedTarget && !loggedIn()){
         e.preventDefault();e.stopImmediatePropagation();goLogin(href);return;
       }
       if(page==='planner'&&loggedIn()){e.preventDefault();e.stopImmediatePropagation();if(cloudTrips.length){location.hash='#account';setTimeout(renderCloudAccount,0);}else startNewTrip();}

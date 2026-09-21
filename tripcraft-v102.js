@@ -14,6 +14,12 @@
   const safe=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
   const config=()=>window.TRIPCRAFT_CONFIG||{};
   const deepCopy=value=>JSON.parse(JSON.stringify(value));
+  function displayDate(value){
+    const s=String(value||'').trim(),iso=s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/),local=s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
+    if(iso)return `${iso[3].padStart(2,'0')}-${iso[2].padStart(2,'0')}-${iso[1]}`;
+    if(local)return `${local[1].padStart(2,'0')}-${local[2].padStart(2,'0')}-${local[3]}`;
+    return s||'—';
+  }
 
   function supabase(){
     if(client)return client;
@@ -166,7 +172,7 @@
   function renderDayEditor(){
     if(currentDay<0||!window.planner?.draft?.days?.[currentDay])return;
     const draft=window.planner.draft,day=draft.days[currentDay],p=draft.plannerProfile||{},route=mapsRoute(day.stops),total=dayTotal(day,p);
-    $('plannerDayRouteBox').innerHTML=`<strong>${safe(day.date)} · ${safe(day.title)}</strong>${route!=='#'?`<div style="margin-top:10px"><a class="btn secondary" href="${route}" target="_blank" rel="noopener">מסלול היום ב-Google Maps</a></div>`:''}${day.lodging?`<div style="margin-top:10px"><strong>🏨 לינה:</strong> ${safe(day.lodging)}</div>`:''}<div class="v102-day-total"><strong>סה״כ עלות אטרקציות ליום:</strong> ${total===null?'דורש בדיקה':total.toLocaleString()+' ₪ לכל המשתתפים'}</div>`;
+    $('plannerDayRouteBox').innerHTML=`<strong>${safe(displayDate(day.date))} · ${safe(day.title)}</strong>${route!=='#'?`<div style="margin-top:10px"><a class="btn secondary" href="${route}" target="_blank" rel="noopener">מסלול היום ב-Google Maps</a></div>`:''}${day.lodging?`<div style="margin-top:10px"><strong>🏨 לינה:</strong> ${safe(day.lodging)}</div>`:''}<div class="v102-day-total"><strong>סה״כ עלות אטרקציות ליום:</strong> ${total===null?'דורש בדיקה':total.toLocaleString()+' ₪ לכל המשתתפים'}</div>`;
     $('plannerDayDistanceWarning').innerHTML='';
     $('plannerDayStopsEditor').innerHTML=stopsHtml(day.stops,p)+`<details class="v102-rain"><summary>חלופה ליום גשום</summary><h4>${safe(day.rainAlternative?.title||'חלופה מקורה באזור היום')}</h4>${mapsRoute(day.rainAlternative?.stops)!=='#'?`<a class="btn soft" target="_blank" rel="noopener" href="${mapsRoute(day.rainAlternative.stops)}">מסלול חלופת הגשם ב-Google Maps</a>`:''}${stopsHtml(day.rainAlternative?.stops||[],p)}</details>`;
   }
@@ -174,7 +180,7 @@
     const draft=window.planner?.draft;if(!draft?.days?.[index])return;
     currentDay=index;try{plannerEditingDay=index}catch(_){ }
     const day=draft.days[index],modal=$('plannerDayModal');
-    $('plannerDayModalTitle').textContent=`יום ${index+1} · ${day.date}`;$('plannerDayTitleInput').value=day.title||'';
+    $('plannerDayModalTitle').textContent=`יום ${index+1} · ${displayDate(day.date)}`;$('plannerDayTitleInput').value=day.title||'';
     renderDayEditor();modal.classList.add('show');modal.setAttribute('aria-hidden','false');
   }
 
@@ -187,7 +193,7 @@
     const colors=['#2f80ed','#27ae60','#f2994a','#9b51e0','#eb5757'];
     $('plannerDraftDays').innerHTML=draft.days.map((day,i)=>{
       const total=dayTotal(day,p),route=mapsRoute(day.stops),line=(day.stops||[]).map(x=>x.place).join(' ← ');
-      return`<article class="day-row" style="--day:${colors[i%colors.length]}"><div class="day-no"><span>יום</span><b>${i+1}</b><span class="day-date">${safe(day.date)}</span></div><div class="day-main day-summary-card"><h3>${safe(day.title)}</h3><div class="day-route-line">${safe(line)}</div><div class="day-mini-meta">${route!=='#'?`<a href="${route}" target="_blank" rel="noopener">🗺 מסלול היום ב-Google Maps</a>`:''}<span>💰 ${total===null?'עלות דורשת בדיקה':total.toLocaleString()+' ₪'}</span><span>🌧 חלופה ליום גשום</span></div>${day.lodging?`<span class="lodging-chip">🏨 לינה: ${safe(day.lodging)}</span>`:''}</div><div class="day-action"><button class="btn ai-color" type="button" onclick="plannerEditDay(${i})">פתח פירוט יום</button></div></article>`;
+      return`<article class="day-row" style="--day:${colors[i%colors.length]}"><div class="day-no"><span>יום</span><b>${i+1}</b><span class="day-date">${safe(displayDate(day.date))}</span></div><div class="day-main day-summary-card"><h3>${safe(day.title)}</h3><div class="day-route-line">${safe(line)}</div><div class="day-mini-meta">${route!=='#'?`<a href="${route}" target="_blank" rel="noopener">🗺 מסלול היום ב-Google Maps</a>`:''}<span>💰 ${total===null?'עלות דורשת בדיקה':total.toLocaleString()+' ₪'}</span><span>🌧 חלופה ליום גשום</span></div>${day.lodging?`<span class="lodging-chip">🏨 לינה: ${safe(day.lodging)}</span>`:''}</div><div class="day-action"><button class="btn ai-color" type="button" onclick="plannerEditDay(${i})">פתח פירוט יום</button></div></article>`;
     }).join('');
     window.renderPlannerBudget?.();
     result?.scrollIntoView({behavior:'smooth',block:'start'});
@@ -208,7 +214,7 @@
     window.planner.currentTripId=id;draft.tripId=id;
     const row={id,user_id:session.user.id,name:draft.name||p.tripName||'טיול',destination:p.destination||'',start_date:p.start||null,end_date:p.end||null,draft:deepCopy(draft),updated_at:new Date().toISOString()};
     const {error}=await sb.from(TABLE).upsert(row,{onConflict:'id'});
-    if(error)throw new Error(/relation|does not exist|42P01/i.test(error.message||'')?'טבלת tripcraft_trips עדיין לא הוקמה. יש להריץ ב-Supabase את SUPABASE_SETUP_V102.sql.':error.message);
+    if(error)throw new Error(/relation|does not exist|42P01/i.test(error.message||'')?'טבלת tripcraft_trips עדיין לא הוקמה. יש להריץ ב-Supabase את SUPABASE_SETUP_V106.sql.':error.message);
     localSave(row,session.user.email||'');showLink(id,true);return id;
   }
 
@@ -251,7 +257,8 @@
     resetNewTrip();const p=draft.plannerProfile||{};
     setValue('plTripName',p.tripName||draft.name||'');setValue('plDestination',p.destination||'');setValue('plArrivalAirport',p.arrivalAirport||'');setValue('plDepartureAirport',p.departureAirport||'');setDate('plStart',p.start);setDate('plEnd',p.end);
     ['People','Children','Group','Pace','Walk','Drive','DayLength','Must','Free','ExistingLodging','LodgingStyle','HotelStars','LodgingPriority','LodgingDetour'].forEach(s=>{const key=s.charAt(0).toLowerCase()+s.slice(1);if(p[key]!==undefined)setValue('pl'+s,p[key])});
-    const check=(selector,values)=>{const chosen=new Set(values||[]);document.querySelectorAll(selector).forEach(el=>el.checked=chosen.has(el.value))};
+    if(p.includeHotels!==undefined)setValue('plIncludeHotels',p.includeHotels?'yes':'no');
+    const check=(selector,values)=>{const chosen=new Set(values||[]);document.querySelectorAll(selector).forEach(el=>{el.checked=chosen.has(el.value);el.dispatchEvent(new Event('change',{bubbles:true}))})};
     check('#countryChoices input',p.countries);check('#transportChoices input',p.transports);check('#interestChoices input',p.interests);check('#tripPriorityChoices input',p.priorities);check('#avoidChoices input',String(p.avoid||'').split(',').map(x=>x.trim()).filter(Boolean));check('#lodgingTypeChoices input',p.lodgingTypes);check('#lodgingFilterChoices input',p.lodgingFilters);
     document.querySelectorAll('input[name="plGroupChoice"]').forEach(el=>el.checked=el.value===(p.group||'couple'));document.querySelectorAll('input[name="plLodgingMode"]').forEach(el=>el.checked=el.value===(p.lodgingMode||'recommend'));document.querySelectorAll('input[name="plLodgingBudget"]').forEach(el=>el.checked=el.value===(p.lodgingBudget||'mid'));
     document.querySelectorAll('#travelerBands .traveler-band').forEach(row=>{const out=row.querySelector('output');if(out)out.textContent=Number((p.ageBands||{})[row.dataset.band]||0)});window.syncTravelerBands?.();
@@ -264,17 +271,20 @@
     return{user:session.user,trips:data||[],error:error?.message||''};
   }
   async function openTrip(id){
-    const result=await loadTrips();const rec=result.trips.find(x=>x.id===id);if(!rec){alert('הטיול לא נמצא בחשבון הזה.');return}
-    const draft=deepCopy(rec.draft);prefill(draft);window.planner.draft=draft;window.planner.currentTripId=id;location.hash='#planner';
-    setTimeout(()=>{renderDraft();showLink(id,true)},100);
+    const result=await loadTrips();const rec=result.trips.find(x=>x.id===id);if(!rec){alert('הטיול לא נמצא בחשבון הזה.');return false}
+    const draft=deepCopy(rec.draft);prefill(draft);window.planner.draft=draft;window.planner.currentTripId=id;
+    location.hash='#planner';
+    const app=$('mainApp');if(app){app.classList.add('page-focus');app.dataset.page='planner'}
+    window.tcRouteRefresh?.('planner');window.plannerShowStep?.(1);window.scrollTo({top:0,behavior:'auto'});
+    setTimeout(()=>{renderDraft();showLink(id,true)},100);return true;
   }
   async function renderAccount(){
     const box=$('tcAccountBody');if(!box)return;box.innerHTML='<div class="safe">טוען את הטיולים שלך...</div>';
     const {user,trips,error}=await loadTrips();
     if(!user){box.innerHTML='<div class="safe">כדי לראות את הטיולים יש להיכנס עם אימייל ו-OTP.</div>';return}
     const meta=user.user_metadata||{},profileData=meta.tripcraft_profile||{},display=[profileData.firstName||meta.first_name,profileData.lastName||meta.last_name].filter(Boolean).join(' ');
-    const warning=error?`<div class="warn">${/relation|does not exist|42P01/i.test(error)?'טבלת הטיולים עדיין לא הוקמה. הריצו את SUPABASE_SETUP_V102.sql ב-Supabase.':safe(error)}</div>`:'';
-    const list=trips.length?trips.map(t=>`<div class="safe v102-trip-card"><h3>${safe(t.name||t.id)}</h3><div><b>לאן:</b> ${safe(t.destination||'—')}</div><div><b>תאריכים:</b> ${safe(t.start_date||'—')} – ${safe(t.end_date||'—')}</div><div><b>לינק שנוצר:</b> <span dir="ltr">${safe(tripUrl(t.id))}</span></div><div class="cta"><button class="btn secondary" data-v102-open="${safe(t.id)}" type="button">פתח / ערוך טיול</button><button class="btn soft" data-v102-copy="${safe(t.id)}" type="button">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. בחרו „בניית טיול חדש”.</div>';
+    const warning=error?`<div class="warn">${/relation|does not exist|42P01/i.test(error)?'טבלת הטיולים עדיין לא הוקמה. הריצו את SUPABASE_SETUP_V106.sql ב-Supabase.':safe(error)}</div>`:'';
+    const list=trips.length?trips.map(t=>`<div class="safe v102-trip-card"><h3>${safe(t.name||t.id)}</h3><div><b>לאן:</b> ${safe(t.destination||'—')}</div><div><b>תאריכים:</b> ${safe(displayDate(t.start_date))} – ${safe(displayDate(t.end_date))}</div><div><b>לינק שנוצר:</b> <span dir="ltr">${safe(tripUrl(t.id))}</span></div><div class="cta"><button class="btn secondary" data-v102-open="${safe(t.id)}" type="button">פתח / ערוך טיול</button><button class="btn soft" data-v102-copy="${safe(t.id)}" type="button">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. בחרו „בניית טיול חדש”.</div>';
     box.innerHTML=`<div class="account-card"><h3>${safe(display||'החשבון שלי')}</h3><p>${safe(user.email||'')}</p><div class="cta"><button class="btn planner-color" id="tcV102NewTrip" type="button">בניית טיול חדש</button><button class="btn soft" id="tcV102Logout" type="button">התנתק</button></div></div><h3 style="margin-top:24px">הטיולים שלי</h3><p>טיול קיים ממלא מחדש את כל הבחירות המקוריות. טיול חדש נפתח נקי, למעט ברירות המחדל.</p>${warning}${list}`;
     $('tcV102NewTrip').onclick=resetNewTrip;$('tcV102Logout').onclick=async()=>{await supabase()?.auth.signOut();location.hash='#home'};
     box.querySelectorAll('[data-v102-open]').forEach(btn=>btn.onclick=()=>openTrip(btn.dataset.v102Open));
@@ -305,7 +315,7 @@
     // V101 finishes an async session restore after this overlay may already be installed.
     // Re-assert the V102 public handlers after that restore completes.
     setTimeout(()=>{window.tcRenderAccount=renderAccount;window.tcStartNewTrip=resetNewTrip;if(location.hash==='#account')renderAccount()},600);
-    window.TripCraftV102={VERSION,TABLE,DEMO_ACCESS_PERCENT,FUTURE_PAID_PREVIEW_PERCENT,generateDraft,saveDraft,renderAccount,openTrip,resetNewTrip,tripUrl};
+    window.TripCraftV102={VERSION,TABLE,DEMO_ACCESS_PERCENT,FUTURE_PAID_PREVIEW_PERCENT,generateDraft,saveDraft,renderAccount,openTrip,resetNewTrip,tripUrl,supabase};
     window.addEventListener('hashchange',()=>{route();if(location.hash==='#account')setTimeout(renderAccount,700)});route();document.documentElement.dataset.tripcraftVersion=VERSION;
   }
 

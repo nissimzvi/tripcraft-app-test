@@ -1,4 +1,4 @@
-// TripCraft V102 - public client configuration.
+// TripCraft V106 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
   // Permanent public URL used for saved Trip IDs, even when the demo is opened from a local ZIP.
