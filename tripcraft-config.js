@@ -9,6 +9,12 @@ window.TRIPCRAFT_CONFIG = {
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.
   supabaseAnonKey: 'sb_publishable_FQAN7Em12GRjR3bYJVlQZw_nMBKgU4z',
 
+  // CJ Publisher Tag for Booking links. These are public tracking identifiers,
+  // not passwords or API secrets. The matching tag is loaded by index.html.
+  cjPublisherTagEnabled: true,
+  cjPublisherId: '101885723',
+  cjSid: 'tripcraft_booking',
+
   // Booking/CJ affiliate-ready. Every Booking button in V108 passes through this configuration.
   // If Booking supplies a direct affiliate ID, enter it here. It is added as the `aid` query parameter.
   bookingAffiliateId: '',

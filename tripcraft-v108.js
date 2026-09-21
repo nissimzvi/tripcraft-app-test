@@ -632,7 +632,7 @@
     return filtered.length?filtered:(known.length&&!selected.length?known:genericHotels(town,profile));
   }
 
-  function affiliateConfigured(){const config=window.TRIPCRAFT_CONFIG||{};return !!(String(config.bookingAffiliateId||'').trim()||String(config.bookingAffiliateTemplate||'').trim())}
+  function affiliateConfigured(){const config=window.TRIPCRAFT_CONFIG||{};return !!(config.cjPublisherTagEnabled&&String(config.cjPublisherId||'').trim()&&String(config.cjSid||'').trim()||String(config.bookingAffiliateId||'').trim()||String(config.bookingAffiliateTemplate||'').trim())}
   function bookingUrl(hotel,segment,profile){
     const config=window.TRIPCRAFT_CONFIG||{},adults=Math.max(1,Number(profile?.people||1)-Number(profile?.children||0));
     const params=new URLSearchParams({ss:`${hotel?.name||segment.town}, ${segment.town}`,checkin:segment.checkIn,checkout:segment.checkOut,group_adults:String(adults),group_children:String(Number(profile?.children||0)),no_rooms:String(rooms(profile)),label:'tripcraft-v108'});
