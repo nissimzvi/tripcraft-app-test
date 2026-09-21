@@ -214,7 +214,7 @@
     window.planner.currentTripId=id;draft.tripId=id;
     const row={id,user_id:session.user.id,name:draft.name||p.tripName||'טיול',destination:p.destination||'',start_date:p.start||null,end_date:p.end||null,draft:deepCopy(draft),updated_at:new Date().toISOString()};
     const {error}=await sb.from(TABLE).upsert(row,{onConflict:'id'});
-    if(error)throw new Error(/relation|does not exist|42P01/i.test(error.message||'')?'טבלת tripcraft_trips עדיין לא הוקמה. יש להריץ ב-Supabase את SUPABASE_SETUP_V107.sql.':error.message);
+    if(error)throw new Error(/relation|does not exist|42P01/i.test(error.message||'')?'טבלת tripcraft_trips עדיין לא הוקמה. יש להריץ ב-Supabase את SUPABASE_SETUP_V108.sql.':error.message);
     localSave(row,session.user.email||'');showLink(id,true);return id;
   }
 
@@ -283,7 +283,7 @@
     const {user,trips,error}=await loadTrips();
     if(!user){box.innerHTML='<div class="safe">כדי לראות את הטיולים יש להיכנס עם אימייל ו-OTP.</div>';return}
     const meta=user.user_metadata||{},profileData=meta.tripcraft_profile||{},display=[profileData.firstName||meta.first_name,profileData.lastName||meta.last_name].filter(Boolean).join(' ');
-    const warning=error?`<div class="warn">${/relation|does not exist|42P01/i.test(error)?'טבלת הטיולים עדיין לא הוקמה. הריצו את SUPABASE_SETUP_V107.sql ב-Supabase.':safe(error)}</div>`:'';
+    const warning=error?`<div class="warn">${/relation|does not exist|42P01/i.test(error)?'טבלת הטיולים עדיין לא הוקמה. הריצו את SUPABASE_SETUP_V108.sql ב-Supabase.':safe(error)}</div>`:'';
     const list=trips.length?trips.map(t=>`<div class="safe v102-trip-card"><h3>${safe(t.name||t.id)}</h3><div><b>לאן:</b> ${safe(t.destination||'—')}</div><div><b>תאריכים:</b> ${safe(displayDate(t.start_date))} – ${safe(displayDate(t.end_date))}</div><div><b>לינק שנוצר:</b> <span dir="ltr">${safe(tripUrl(t.id))}</span></div><div class="cta"><button class="btn secondary" data-v102-open="${safe(t.id)}" type="button">פתח / ערוך טיול</button><button class="btn soft" data-v102-copy="${safe(t.id)}" type="button">העתק קישור</button></div></div>`).join(''):'<div class="warn">עדיין אין טיולים בחשבון. בחרו „בניית טיול חדש”.</div>';
     box.innerHTML=`<div class="account-card"><h3>${safe(display||'החשבון שלי')}</h3><p>${safe(user.email||'')}</p><div class="cta"><button class="btn planner-color" id="tcV102NewTrip" type="button">בניית טיול חדש</button><button class="btn soft" id="tcV102Logout" type="button">התנתק</button></div></div><h3 style="margin-top:24px">הטיולים שלי</h3><p>טיול קיים ממלא מחדש את כל הבחירות המקוריות. טיול חדש נפתח נקי, למעט ברירות המחדל.</p>${warning}${list}`;
     $('tcV102NewTrip').onclick=resetNewTrip;$('tcV102Logout').onclick=async()=>{await supabase()?.auth.signOut();location.hash='#home'};

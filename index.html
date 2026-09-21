@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V107</title>
+<title>TripCraft V108</title>
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
@@ -390,7 +390,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="#home" aria-label="חזרה לדף הבית"><img class="logo tc-brand-logo" src="icons/tripcraft-header-logo.png" alt="TripCraft" fetchpriority="high"><div><h1>TripCraft</h1><small>V107 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="#home" aria-label="חזרה לדף הבית"><img class="logo tc-brand-logo" src="icons/tripcraft-header-logo.png?v=108" alt="TripCraft" fetchpriority="high" decoding="sync"><div><h1>TripCraft</h1><small>V108 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -500,7 +500,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
     </div>
     <div class="planner-step" data-step="3"><h3>3. איך אתם אוהבים לטייל?</h3>
       <div class="field"><label>באילו אמצעי תחבורה תרצו להשתמש? <small>אפשר לבחור כמה</small></label><div class="choice-grid transport-choice-grid" id="transportChoices">
-        <label><input type="checkbox" value="car" checked><span>🚗</span> רכב שכור</label>
+        <label><input type="checkbox" value="car" checked><span>🚗</span> רכב</label>
         <label><input type="checkbox" value="train"><span>🚆</span> רכבת</label>
         <label><input type="checkbox" value="public"><span>🚌</span> תחבורה ציבורית</label>
         <label><input type="checkbox" value="walking"><span>🚶</span> הליכה</label>
@@ -524,8 +524,9 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <label><input type="radio" name="plLodgingBudget" value="luxury"><span>👑</span> יוקרתי</label><label><input type="radio" name="plLodgingBudget" value="mid" checked><span>⚖️</span> ביניים</label><label><input type="radio" name="plLodgingBudget" value="budget"><span>💰</span> חסכוני</label><label><input type="radio" name="plLodgingBudget" value="verycheap"><span>🪙</span> זול מאוד</label>
 </div>
 <h4 class="section-mini-title">מה חשוב במקום הלינה?</h4><div class="choice-grid" id="lodgingFilterChoices">
-<label><input type="checkbox" value="breakfast"><span>☕</span> ארוחת בוקר</label><label><input type="checkbox" value="free_cancel"><span>↩️</span> ביטול חינם</label><label><input type="checkbox" value="parking"><span>🅿️</span> חניה</label><label><input type="checkbox" value="pool"><span>🏊</span> בריכה</label><label><input type="checkbox" value="spa"><span>🧖</span> ספא</label><label><input type="checkbox" value="kitchen"><span>🍳</span> מטבח</label><label><input type="checkbox" value="center"><span>📍</span> מרכזי</label><label><input type="checkbox" value="view"><span>🌄</span> נוף</label><label><input type="checkbox" value="family"><span>👨‍👩‍👧‍👦</span> משפחתי</label><label><input type="checkbox" value="accessible"><span>♿</span> נגיש</label><label><input type="checkbox" value="pets"><span>🐾</span> חיות מחמד</label>
+<label><input type="checkbox" value="breakfast" checked><span>☕</span> ארוחת בוקר</label><label><input type="checkbox" value="half_board"><span>🍽️</span> ארוחת בוקר וערב (חצי פנסיון)</label><label><input type="checkbox" value="all_inclusive"><span>🥗</span> הכל כלול</label><label><input type="checkbox" value="free_cancel"><span>↩️</span> ביטול חינם</label><label><input type="checkbox" value="parking"><span>🅿️</span> חניה</label><label><input type="checkbox" value="pool"><span>🏊</span> בריכה</label><label><input type="checkbox" value="spa"><span>🧖</span> ספא</label><label><input type="checkbox" value="kitchen"><span>🍳</span> מטבח</label><label><input type="checkbox" value="center"><span>📍</span> מרכזי</label><label><input type="checkbox" value="view"><span>🌄</span> נוף</label><label><input type="checkbox" value="family"><span>👨‍👩‍👧‍👦</span> משפחתי</label><label><input type="checkbox" value="accessible"><span>♿</span> נגיש</label><label><input type="checkbox" value="pets"><span>🐾</span> חיות מחמד</label>
 </div>
+<div class="planner-grid tc-v108-room-grid"><div class="field"><label for="plRooms">כמה חדרים תרצו?</label><input id="plRooms" type="number" min="1" max="20" value="1" inputmode="numeric"><small id="plRoomsHint">המערכת תציע מספר חדרים לפי הרכב הנוסעים, ותוכלו לשנות.</small></div><div id="plGroupInterpretation" class="field tc-v108-group-interpretation"><strong>הרכב לחיפוש המלונות</strong><span>זוג אחד · חדר אחד</span></div></div>
 <div class="planner-grid"><div class="field"><label>מה חשוב יותר?</label><select id="plLodgingPriority"><option value="price">מחיר</option><option value="balanced" selected>איזון מחיר ואיכות</option><option value="rating">דירוג ואיכות</option></select></div><div class="field"><label>כמה מותר לסטות מהמסלול בשביל לינה?</label><select id="plLodgingDetour"><option value="0">רק על המסלול / באזור הלינה</option><option value="10" selected>עד 10 דקות</option><option value="20">עד 20 דקות</option><option value="any">לא משנה</option></select></div></div>
 </div>
 <div id="lodgingExistingOptions" style="display:none"><div class="field"><label>שם המלון / הדירה שכבר הזמנתם</label><div class="country-search-row"><div class="ac-wrap"><input id="plExistingHotelInput" class="place-ac" data-ac-type="lodging" autocomplete="off" placeholder="אפשר להקליד בעברית או באנגלית"><div class="ac-list" id="plExistingHotelInputList"></div></div><button class="btn soft" id="addExistingHotelBtn" type="button">+ הוסף</button></div><div id="existingHotelList" class="existing-hotel-list"></div><textarea id="plExistingLodging" hidden></textarea><small>אפשר להקליד גם אם אין התאמה מדויקת. אם יש כמה לינות, סדר ההקלדה משמש את TripCraft כעוגני המסלול.</small></div></div>
@@ -533,7 +534,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 </div>
 <div class="planner-step" data-step="5"><h3>5. מה חשוב לנו לדעת?</h3><div class="planner-grid hotel-preferences">
 <div class="field"><label>איך אתם מעדיפים לישון?</label><select id="plLodgingStyle"><option value="smart" selected>תן ל-TripCraft לבחור חכם</option><option value="few">כמה שפחות החלפות מלון</option><option value="star">טיול כוכב — בסיס אחד כשזה הגיוני</option><option value="progressive">מתקדמים עם המסלול ומחליפים לפי הצורך</option></select></div>
-<div class="field"><label>רמת מלון מועדפת</label><select id="plHotelStars"><option value="any" selected>לא חשוב / תן המלצה</option><option value="3">3 כוכבים</option><option value="4">4 כוכבים</option><option value="5">5 כוכבים</option><option value="apartment">דירה / אפרטהוטל</option></select></div>
+<div class="field"><label>רמת מלון מועדפת <small>אפשר לבחור כמה</small></label><div class="choice-grid tc-v108-stars" id="hotelStarChoices"><label><input type="checkbox" value="any" checked> לא חשוב / תן המלצה</label><label><input type="checkbox" value="3"> 3 כוכבים</label><label><input type="checkbox" value="4"> 4 כוכבים</label><label><input type="checkbox" value="5"> 5 כוכבים</label><label><input type="checkbox" value="apartment"> דירה / אפרטהוטל</label></div><input id="plHotelStars" type="hidden" value="any"></div>
 <div class="field"><label>לכלול מלונות בתקציב?</label><select id="plIncludeHotels"><option value="yes" selected>כן — הצג הערכת לינה</option><option value="no">לא בשלב זה</option></select></div>
 </div><div id="lodgingStrategyNote" class="planner-tip">המנוע יעדיף את סגנון הלינה שבחרתם, אבל יתריע אם טיול כוכב יוצר נסיעות לא סבירות. במסלול מתקדם יציע מעבר מלון רק כשזה חוסך זמן משמעותי.</div>
       <h4 class="section-mini-title">מה חשוב לכם בטיול?</h4><div class="choice-grid" id="tripPriorityChoices">
@@ -568,7 +569,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
     <div class="planner-step" data-step="7"><h3>7. סקירה ואישור לפני בניית הטיול</h3><div id="plannerSummary" class="planner-summary"></div><div class="ai-box"><div><strong>💬 עוזר התכנון</strong><p>אחרי יצירת הטיול תוכלו לשנות ימים, יעדים, לינות ואילוצים. שינוי שמשפיע על המסלול יחושב מחדש ויוצג לאישור.</p></div><span>הטיול נשאר ניתן לעריכה</span></div></div>
   </div>
   <div class="planner-actions"><button class="btn soft" id="plannerPrev" type="button" disabled>הקודם</button><button class="btn secondary" id="plannerNext" type="button">הבא</button><button class="btn green" id="plannerBuild" type="button" style="display:none">בנה טיול</button></div><div id="tripBuildOverlay" class="trip-build-overlay" aria-hidden="true"><div class="trip-build-card"><div class="trip-build-icon">🧭</div><h3>בונים לכם את הטיול...</h3><p id="tripBuildStatus">מנתחים את ההעדפות שלכם</p><div class="trip-build-track"><div id="tripBuildBar"></div></div><strong id="tripBuildPct">0%</strong><small>TripCraft מתאים קצב, גילאים, מרחקים, לינות ואטרקציות ומכין את הטיול המלא.</small></div></div>
-  <div id="plannerResult" class="planner-result"><div class="planner-result-head"><div><h3 id="plannerResultTitle">טיול חדש</h3><p id="plannerResultMeta"></p><span id="plannerChangeQuota" class="change-quota">פיילוט: עד 10 שינויים</span></div><button class="btn green" id="plannerSaveTrip">שמור טיול</button></div><div id="plannerShareBox" class="safe" style="display:none;margin:14px 0"><strong>הקישור האישי לטיול:</strong><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><input id="plannerShareLink" readonly dir="ltr" style="flex:1;min-width:230px"><button id="plannerCopyLink" class="btn soft" type="button">העתק קישור</button></div></div><div id="plannerBudgetSummary" class="budget-summary"></div>
+  <div id="plannerResult" class="planner-result"><div class="planner-result-head"><div><h3 id="plannerResultTitle">טיול חדש</h3><p id="plannerResultMeta"></p><span id="plannerChangeQuota" class="change-quota">פיילוט: עד 10 שינויים</span></div><div class="tc-v108-result-actions"><button class="btn green" id="plannerSaveTrip">שמור טיול</button><button class="btn tc-v108-discard" id="plannerDiscardTrip" type="button">יציאה ללא שמירה</button></div></div><div id="tcV108SaveNotice" class="warn tc-v108-save-notice"><strong>הטיול עדיין לא נשמר.</strong> שמרו כדי לקבל קישור קבוע ולהמשיך אליו מהחשבון, או בחרו יציאה ללא שמירה.</div><div id="plannerShareBox" class="safe" style="display:none;margin:14px 0"><strong>הקישור האישי לטיול:</strong><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><input id="plannerShareLink" readonly dir="ltr" style="flex:1;min-width:230px"><button id="plannerCopyLink" class="btn soft" type="button">העתק קישור</button></div></div><div id="plannerBudgetSummary" class="budget-summary"></div>
   <div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">פוסטים והמלצות לכל הטיול</h3><p style="color:#607887;margin-top:-4px">הדביקו פוסט, לינק או המלצה. TripCraft יציע לאיזה יום לשבץ אותו, ויתריע אם הוא נראה רחוק או לא הגיוני למסלול.</p><div class="field"><textarea id="plannerGlobalPostInput" rows="5" placeholder="הדבק כאן פוסט / לינק / המלצה לכל הטיול"></textarea></div><div class="cta"><button class="btn secondary" id="plannerGlobalPostReview" type="button">בדוק והצע שיבוץ</button></div><div id="plannerGlobalPostResult"></div></div>
   <div id="plannerDraftDays" class="day-list"></div><div class="chatbox"><div class="chatlog" id="plannerChatLog"><div class="chatmsg bot">הטיול הראשוני מוכן. כתבו לי מה תרצו לשנות.</div></div><div class="chatinput"><input id="plannerChatInput" placeholder="למשל: יום 2 עמוס מדי, תוריד תחנה אחת"><button class="btn secondary" id="plannerChatSend">שלח</button></div></div></div>
 </section>
@@ -1452,5 +1453,5 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 </script>
 <script src="tripcraft-v101.js?v=101"></script>
 <script src="tripcraft-v102.js?v=102"></script>
-<script src="tripcraft-v107.js?v=107"></script>
+<script src="tripcraft-v108.js?v=108"></script>
 </body></html>

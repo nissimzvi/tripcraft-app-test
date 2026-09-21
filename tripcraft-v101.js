@@ -56,7 +56,7 @@
     return {id:user?.id||'',email:user?.email||'',firstName:p.firstName||m.first_name||'',lastName:p.lastName||m.last_name||'',phone:p.phone||m.phone||'',method:'otp',isAdmin:user?.app_metadata?.role==='admin'};
   }
   function loggedIn(){
-    const windowSession=['tc_v107_session_window','tc_v104_session_window','tc_v103_session_window'].some(key=>sessionStorage.getItem(key)==='active');
+    const windowSession=['tc_v108_session_window','tc_v107_session_window','tc_v104_session_window','tc_v103_session_window'].some(key=>sessionStorage.getItem(key)==='active');
     return !!sessionUser||!!(windowSession&&localCustomer());
   }
   window.tcV101AdoptSessionUser=function(user){
@@ -210,7 +210,7 @@
     try{
       const data=await tcAuthRequest('verify',{email:authCtx.email,token,type:'email'});
       const user=data?.user;if(!user)throw new Error('האימות הצליח אך לא התקבל משתמש מ-Supabase');
-      sessionUser=user;writeLocalCustomer(userToCustomer(user));window.tcV107AdoptAuthenticatedUser?.(user);
+      sessionUser=user;writeLocalCustomer(userToCustomer(user));(window.tcV108AdoptAuthenticatedUser||window.tcV107AdoptAuthenticatedUser)?.(user);
       const client=supabaseClient();if(client&&data?.access_token&&data?.refresh_token){try{await client.auth.setSession({access_token:data.access_token,refresh_token:data.refresh_token})}catch(_){}}
       clearInterval(resendTimer);byId('tcOtpStatus').textContent='האימות הצליח.';
       const ret=sessionStorage.getItem('tc_v91_return_after_auth')||'#account';sessionStorage.removeItem('tc_v91_return_after_auth');
@@ -224,8 +224,8 @@
   async function syncSession(){
     const client=supabaseClient(); if(!client)return;
     const {data}=await client.auth.getSession();sessionUser=data?.session?.user||null;
-    if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));window.tcV107AdoptAuthenticatedUser?.(sessionUser,false);await loadCloudTrips()}else{cloudTrips=[];cloudTripsReady=true}
-    client.auth.onAuthStateChange((event,session)=>{sessionUser=session?.user||null;if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));window.tcV107AdoptAuthenticatedUser?.(sessionUser,false);setTimeout(loadCloudTrips,0)}else if(event==='SIGNED_OUT'){writeLocalCustomer(null);cloudTrips=[];cloudTripsReady=true}});
+    if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));(window.tcV108AdoptAuthenticatedUser||window.tcV107AdoptAuthenticatedUser)?.(sessionUser,false);await loadCloudTrips()}else{cloudTrips=[];cloudTripsReady=true}
+    client.auth.onAuthStateChange((event,session)=>{sessionUser=session?.user||null;if(sessionUser){writeLocalCustomer(userToCustomer(sessionUser));(window.tcV108AdoptAuthenticatedUser||window.tcV107AdoptAuthenticatedUser)?.(sessionUser,false);setTimeout(loadCloudTrips,0)}else if(event==='SIGNED_OUT'){writeLocalCustomer(null);cloudTrips=[];cloudTripsReady=true}});
   }
   async function loadCloudTrips(){
     cloudTripsReady=false;tableReady=true;const client=supabaseClient();if(!client||!sessionUser){cloudTrips=[];cloudTripsReady=true;return}

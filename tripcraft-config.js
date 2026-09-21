@@ -1,4 +1,4 @@
-// TripCraft V107 - public client configuration.
+// TripCraft V108 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
   // Permanent public URL used for saved Trip IDs, even when the demo is opened from a local ZIP.
@@ -9,7 +9,7 @@ window.TRIPCRAFT_CONFIG = {
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.
   supabaseAnonKey: 'sb_publishable_FQAN7Em12GRjR3bYJVlQZw_nMBKgU4z',
 
-  // Booking/CJ affiliate-ready. Every Booking button in V107 passes through this configuration.
+  // Booking/CJ affiliate-ready. Every Booking button in V108 passes through this configuration.
   // If Booking supplies a direct affiliate ID, enter it here. It is added as the `aid` query parameter.
   bookingAffiliateId: '',
 
