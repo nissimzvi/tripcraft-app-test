@@ -1,5 +1,5 @@
-const CACHE='tripcraft-v106';
-const CORE=['./','./index.html','./index-en.html','./manifest.webmanifest','./tripcraft-config.js','./tripcraft-v101.js','./tripcraft-v102.js','./tripcraft-v106.js','./assets/tripcraft-logo.png','./assets/hero.jpg','./assets/austria.jpg','./assets/dolomites.jpg','./assets/greece.jpg','./assets/slovakia.jpg','./assets/vietnam.jpg','./icons/tripcraft-header-logo.png','./icons/icon-192.png','./icons/icon-512.png'];
+const CACHE='tripcraft-v107';
+const CORE=['./','./index.html','./index-en.html','./manifest.webmanifest','./tripcraft-config.js','./tripcraft-v101.js','./tripcraft-v102.js','./tripcraft-v107.js','./assets/tripcraft-logo.png','./assets/hero.jpg','./assets/austria.jpg','./assets/dolomites.jpg','./assets/greece.jpg','./assets/slovakia.jpg','./assets/vietnam.jpg','./icons/tripcraft-header-logo.png','./icons/icon-192.png','./icons/icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{
