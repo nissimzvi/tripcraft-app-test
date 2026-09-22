@@ -1,6 +1,0 @@
-TripCraft destination-card images used in this prototype:
-- Achensee_1.jpg — Dimitry Anikin, Wikimedia Commons, CC0 1.0.
-  https://commons.wikimedia.org/wiki/File:Achensee_1.jpg
-- Niagara_Falls.jpg — Pascal Reusch, Wikimedia Commons, CC BY-SA 3.0 / GFDL.
-  https://commons.wikimedia.org/wiki/File:Niagara_Falls.jpg
-Other local images are part of the existing TripCraft package / user-provided assets.
