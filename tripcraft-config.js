@@ -1,4 +1,4 @@
-// TripCraft V108 - public client configuration.
+// TripCraft V109 - public client configuration.
 // Public client values only. NEVER put service_role/API secrets here.
 window.TRIPCRAFT_CONFIG = {
   // Permanent public URL used for saved Trip IDs, even when the demo is opened from a local ZIP.
@@ -15,7 +15,7 @@ window.TRIPCRAFT_CONFIG = {
   cjPublisherId: '101885723',
   cjSid: 'tripcraft_booking',
 
-  // Booking/CJ affiliate-ready. Every Booking button in V108 passes through this configuration.
+  // Booking/CJ affiliate-ready. Every Booking button in V109 passes through this configuration.
   // If Booking supplies a direct affiliate ID, enter it here. It is added as the `aid` query parameter.
   bookingAffiliateId: '',
 

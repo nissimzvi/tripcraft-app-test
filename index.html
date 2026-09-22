@@ -7,7 +7,8 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V108</title>
+<title>TripCraft V109</title>
+<script>if(new URLSearchParams(location.search).get('lang')==='en'||/index-en\.html$/i.test(location.pathname)){localStorage.setItem('tc_v433_lang','en');document.documentElement.lang='en';document.documentElement.dir='ltr';}</script>
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mammoth@1.8.0/mammoth.browser.min.js"></script>
@@ -389,8 +390,8 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 </head><body>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
-  <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט">☰</label>
-  <a class="brand" href="#home" aria-label="חזרה לדף הבית"><img class="logo tc-brand-logo" src="icons/tripcraft-header-logo.png?v=108" alt="TripCraft" fetchpriority="high" decoding="sync"><div><h1>TripCraft</h1><small>V108 · נץ מערכות מידע</small></div></a>
+  <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
+  <a class="brand" href="#home" aria-label="חזרה לדף הבית" data-he-aria="חזרה לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"><div><h1>TripCraft</h1><small data-he="V109 · נץ מערכות מידע" data-en="V109 · Netz Information Systems">V109 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -398,14 +399,13 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
     <a href="#trips" data-he="הצעות לטיולים" data-en="Trip Ideas">הצעות לטיולים</a>
     <a href="#hotels" data-he="בתי מלון" data-en="Hotels">בתי מלון</a>
     <a href="#planner" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
-    <a href="#import" data-he="יבוא טיול" data-en="Import Trip">יבוא טיול</a>
     <a href="#cart" data-he="סל" data-en="Cart">סל <span id="tcCartBadge" class="cart-badge">0</span></a>
     <a href="#account" data-he="החשבון שלי" data-en="My Account">החשבון שלי</a>
     <a href="#login" data-he="כניסה" data-en="Sign in">כניסה</a><button id="tcInstallApp" class="tc-install" type="button">התקן אפליקציה</button>
 
   </nav>
   <span id="tcUserGreeting" class="tc-user-greeting" aria-live="polite"></span>
-  <div class="lang-switch"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
+  <div class="lang-switch" aria-label="Language"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
 </header>
 <div id="tcMobileMenu" class="mobile-menu" aria-hidden="true">
   <div class="mobile-menu-head"><strong>TripCraft</strong><label id="tcMobileClose" for="tcNavToggle" role="button" tabindex="0" aria-label="סגור">×</label></div><div id="tcMobileUser" class="mobile-menu-user"></div>
@@ -415,28 +415,22 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
   <a href="#trips" data-he="הצעות לטיולים" data-en="Trip Ideas">הצעות לטיולים</a>
   <a href="#hotels" data-he="בתי מלון" data-en="Hotels">בתי מלון</a>
   <a href="#planner" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
-  <a href="#import" data-he="יבוא טיול" data-en="Import Trip">יבוא טיול</a>
   <a href="#cart"><span data-he="סל" data-en="Cart">סל</span> <span id="tcCartBadgeMobile" class="cart-badge">0</span></a>
   <a href="#account" data-he="החשבון שלי" data-en="My Account">החשבון שלי</a>
   <a href="#login" data-he="כניסה / הרשמה" data-en="Sign in / Register">כניסה / הרשמה</a>
   <a href="#legal" data-he="פרטיות, תקנון ונגישות" data-en="Privacy, Terms & Accessibility">פרטיות, תקנון ונגישות</a><button id="tcInstallAppMobile" class="tc-install" type="button">התקן אפליקציה</button>
 
-  <div class="mobile-lang"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">English</button></div>
+  <div class="mobile-lang" aria-label="Language"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
 </div>
 <label id="tcMenuBackdrop" class="menu-backdrop" for="tcNavToggle" aria-label="סגור תפריט"></label>
 <div id="mainApp" class="page-focus" data-page="home">
-<section id="home" class="hero"><div class="heroin">
-  <div class="home-kicker" data-he="TripCraft · טיולים חכמים, חיים ונגישים" data-en="TripCraft · Smart, live and accessible travel">TripCraft · טיולים חכמים, חיים ונגישים</div>
+<section id="home" class="hero"><div class="heroin tc-home-final">
+  <div class="home-kicker" data-he="TripCraft · הטיול כולו במקום אחד" data-en="TripCraft · Your entire trip in one place">TripCraft · הטיול כולו במקום אחד</div>
   <h2 data-he="הטיול שלכם מתחיל כאן" data-en="Your trip starts here">הטיול שלכם מתחיל כאן</h2>
-  <p data-he="TripCraft הופך תכנון טיול לחוויה פשוטה, חכמה ואישית. בחרו טיול מוכן שכבר נבנה, התאימו מסלול קיים בדיוק אליכם, או בנו טיול חדש מאפס בעזרת AI." data-en="TripCraft makes trip planning simple, smart and personal. Choose a ready-made trip, tailor an existing itinerary to fit you, or build a new trip from scratch with AI.">TripCraft הופך תכנון טיול לחוויה פשוטה, חכמה ואישית. בחרו טיול מוכן שכבר נבנה, התאימו מסלול קיים בדיוק אליכם, או בנו טיול חדש מאפס בעזרת AI.</p>
-  <p class="home-subcopy" data-he="המערכת מרכזת עבורכם את כל הטיול במקום אחד — מסלול יומי, מפות וניווט, המלצות, שינויים ו־TripCheck לפני ובמהלך הנסיעה." data-en="Everything is kept in one place — your daily itinerary, maps and navigation, recommendations, updates and TripCheck before and during your journey.">המערכת מרכזת עבורכם את כל הטיול במקום אחד — מסלול יומי, מפות וניווט, המלצות, שינויים ו־TripCheck לפני ובמהלך הנסיעה.</p>
-  <div class="cta"><a class="btn planner-color" href="#planner" data-he="בנה טיול חדש" data-en="Build a New Trip">בנה טיול חדש</a><a class="btn import-color" href="#import" data-he="ייבוא טיול" data-en="Import Trip">ייבוא טיול</a><a class="btn soft" href="#trips" data-he="ראה טיולים" data-en="Browse Trips">ראה טיולים</a></div>
-  <div class="home-trust"><span>✓ OTP</span><span>✓ TripCheck</span><span>✓ Google Maps / Waze</span><span>✓ AI</span><span>✓ Mobile</span></div><div class="home-options" aria-label="אפשרויות TripCraft">
-  <div class="home-option"><strong data-he="טיול מוכן" data-en="Ready Trip">טיול מוכן</strong><span data-he="בחרו מסלול קיים והתחילו מיד." data-en="Choose an existing itinerary and start immediately.">בחרו מסלול קיים והתחילו מיד.</span></div>
-  <div class="home-option"><strong data-he="התאמת טיול" data-en="Adapt a Trip">התאמת טיול</strong><span data-he="התאימו קצב, ימים והעדפות אליכם." data-en="Adjust pace, days and preferences to fit you.">התאימו קצב, ימים והעדפות אליכם.</span></div>
-  <div class="home-option"><strong data-he="בניית AI" data-en="AI Trip Builder">בניית AI</strong><span data-he="בנו טיול אישי מאפס לפי מי שנוסע ומה שאוהבים." data-en="Build a personal trip from scratch around your travelers and interests.">בנו טיול אישי מאפס לפי מי שנוסע ומה שאוהבים.</span></div>
-  <div class="home-option"><strong data-he="הכול בדרך" data-en="Everything on the Go">הכול בדרך</strong><span data-he="מפות, Waze, TripCheck ושינויים גם מהנייד." data-en="Maps, Waze, TripCheck and updates from your phone.">מפות, Waze, TripCheck ושינויים גם מהנייד.</span></div>
-</div>
+  <p data-he="מתכננים מסלול אישי, שומרים אותו בחשבון ומטיילים עם כל הימים, המפות, הלינות והעדכונים מהטלפון." data-en="Plan a personal itinerary, save it to your account, and travel with every day, map, hotel and update on your phone.">מתכננים מסלול אישי, שומרים אותו בחשבון ומטיילים עם כל הימים, המפות, הלינות והעדכונים מהטלפון.</p>
+  <div class="cta tc-home-actions"><a class="btn planner-color" href="#planner" data-he="בנה טיול חדש" data-en="Build a New Trip">בנה טיול חדש</a><a class="btn tc-home-account" href="#account" data-he="הטיולים שלי" data-en="My Trips">הטיולים שלי</a></div>
+  <a class="tc-home-demo" href="trip-slovakia.html"><span class="tc-home-demo-icon">✦</span><span><strong data-he="רוצים לראות איך זה נראה?" data-en="Want to see how it works?">רוצים לראות איך זה נראה?</strong><small data-he="פתחו טיול לדוגמה: סלובקיה ובודפשט — ללא הרשמה" data-en="Open the Slovakia and Budapest sample trip — no registration required">פתחו טיול לדוגמה: סלובקיה ובודפשט — ללא הרשמה</small></span><b aria-hidden="true">‹</b></a>
+  <div class="home-trust"><span>✓ OTP</span><span>✓ TripCheck</span><span>✓ Google Maps / Waze</span><span>✓ AI</span></div>
 </div></section>
 <div class="focus-title planner wrap" style="padding-bottom:0"><div class="headrow"><div><h2>תכנון טיול</h2><p>אשף תכנון, עריכת ימים ושיחה עם עוזר התכנון.</p></div></div></div><div class="focus-title trips wrap" style="padding-bottom:0"><div class="headrow"><div><h2>הצעות לטיולים</h2><p>6 מסלולים מוכנים לבחירה, התאמה ורכישה.</p></div></div></div><div class="focus-title import wrap" style="padding-bottom:0"><div class="headrow"><div><h2>יבוא טיול</h2><p>Excel / Word / PDF לתבנית TripCraft.</p></div></div></div><div class="focus-title admin wrap" style="padding-bottom:0"><div class="headrow"><div><h2>ניהול</h2><p>בדיקות, טיולים מיובאים והכנה להרשאות Admin.</p></div></div></div><main class="wrap">
 <section id="how" class="panel tc-commerce-page"><div class="page-visual pricing-visual"><div><h2 data-he="איך TripCraft עובד?" data-en="How does TripCraft work?">איך TripCraft עובד?</h2><p data-he="לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה." data-en="More than an itinerary document — a smart platform that stays with your trip from the first idea until you return home.">לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.</p></div></div><p class="how-lead" data-he="TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות." data-en="TripCraft keeps planning, routing and updates in one place. Start from a ready trip, tailor one to you, import our standard format, or build a new trip with AI around your dates, travelers, ages, pace and interests.">TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות.</p><div class="how-grid"><div class="how-card"><div class="how-icon">🧭</div><b>1. מספרים לנו על הטיול</b><span>יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.</span></div><div class="how-card"><div class="how-icon">🤖</div><b>2. המנוע בונה חכם</b><span>חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים.</span></div><div class="how-card"><div class="how-icon">🗺️</div><b>3. הכול הופך למסלול חי</b><span>ימים, Google Maps, Waze, נקודות עצירה, זמני נסיעה ועלויות אטרקציות משוערות.</span></div><div class="how-card"><div class="how-icon">🏨</div><b>4. גם לינה — לבחירתכם</b><span>ניתן להחליט על אזורי לינה ומלונות בהתאם למסלול. יכולות המלונות המלאות יתווספו בהמשך.</span></div><div class="how-card"><div class="how-icon">🔒</div><b>5. מקבלים מסלול מלא</b><span>הטיול המלא נשמר בחשבון וניתן לפתוח, לערוך ולשתף באמצעות קישור אישי.</span></div><div class="how-card"><div class="how-icon">✅</div><b>6. TripCheck</b><span>המערכת מיועדת לבדוק את היגיון המסלול, מרחקים, לינות ושינויים חשובים לקראת הנסיעה.</span></div></div><div class="how-highlight"><h3>הטיול נשאר שלכם — גם אחרי התכנון</h3><p>בחשבון האישי נשמרת היסטוריית הטיולים שלכם: שם הטיול, היעד, התאריכים והקישור האישי. אפשר לחזור לטיול בכל זמן — גם לאחר שהסתיים. במהלך התכנון והנסיעה תוכלו להמשיך לשפר את המסלול דרך AI שמחובר לטיול שלכם: לקצר יום, להחליף נקודה, להתאים למזג האוויר או לשנות את התוכנית בלי להתחיל מחדש.</p><strong>מתכננים פעם אחת. ממשיכים לשפר עד שחוזרים הביתה.</strong></div><div class="trust-grid"><div>🔐 פרטיות ואבטחה בתכנון</div><div>♿ ממשק נגיש ורספונסיבי</div><div>💳 תשלום דרך ספק סליקה</div><div>🧠 AI כחלק מהטיול</div><div>📚 היסטוריית טיולים אישית</div><div>📱 הטיול זמין גם מהנייד</div></div><div class="cta"><a class="btn planner-color" href="#planner">בנו טיול חדש</a><a class="btn import-color" href="#trips">ראו הצעות לטיולים</a></div></section>
@@ -889,10 +883,10 @@ function showPlannerStep1Part(part){
    step.querySelectorAll('.step1-subnav span').forEach(x=>x.classList.toggle('active',Number(x.dataset.part)===plannerStep1Part));
  }
  document.body.dataset.tcStep1Part=String(plannerStep1Part);
- plannerPrev.disabled=planner.step===1&&plannerStep1Part===1;
+ plannerPrev.disabled=false;
  requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));
 }
-function plannerShowStep(n){planner.step=Math.max(1,Math.min(7,n));plannerSteps.forEach(x=>x.classList.toggle('active',Number(x.dataset.step)===planner.step));plannerBar.style.width=(planner.step*(100/7))+'%';plannerPrev.disabled=planner.step===1&&plannerStep1Part===1;plannerNext.style.display=planner.step===7?'none':'inline-flex';plannerBuild.style.display=planner.step===7?'inline-flex':'none';if(planner.step===1)showPlannerStep1Part(plannerStep1Part);if(planner.step===2)renderAgeFields();if(planner.step===6)renderPreApprovalHotels();if(planner.step===7)renderPlannerSummary();requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));}
+function plannerShowStep(n){planner.step=Math.max(1,Math.min(7,n));plannerSteps.forEach(x=>x.classList.toggle('active',Number(x.dataset.step)===planner.step));plannerBar.style.width=(planner.step*(100/7))+'%';plannerPrev.disabled=false;plannerNext.style.display=planner.step===7?'none':'inline-flex';plannerBuild.style.display=planner.step===7?'inline-flex':'none';if(planner.step===1)showPlannerStep1Part(plannerStep1Part);if(planner.step===2)renderAgeFields();if(planner.step===6)renderPreApprovalHotels();if(planner.step===7)renderPlannerSummary();requestAnimationFrame(()=>document.getElementById('planner')?.scrollIntoView({block:'start',behavior:'smooth'}));}
 function syncTravelerBands(){
  const data={};let people=0,children=0;
  document.querySelectorAll('#travelerBands .traveler-band').forEach(card=>{const k=card.dataset.band,v=Math.max(0,Number(card.querySelector('output')?.textContent)||0);data[k]=v;people+=v;if(['teen','kid','baby'].includes(k))children+=v;});
@@ -1143,7 +1137,7 @@ if(plSameAirport){
  plSameAirport.addEventListener('change',syncSameAirport);
  a?.addEventListener('input',()=>{if(plSameAirport.checked) syncSameAirport();});
 }
-plannerPrev.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part>1){showPlannerStep1Part(plannerStep1Part-1);return;}if(planner.step===2){planner.step=1;plannerStep1Part=3;plannerShowStep(1);return;}plannerShowStep(planner.step-1);});
+plannerPrev.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part===1){location.hash='#account';return;}if(planner.step===1&&plannerStep1Part>1){showPlannerStep1Part(plannerStep1Part-1);return;}if(planner.step===2){planner.step=1;plannerStep1Part=3;plannerShowStep(1);return;}plannerShowStep(planner.step-1);});
 document.querySelectorAll('input[name=plLodgingMode]').forEach(r=>r.addEventListener('change',()=>{const mode=document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend';const rec=document.getElementById('lodgingRecommendOptions'),ex=document.getElementById('lodgingExistingOptions');if(rec)rec.style.display=mode==='recommend'?'block':'none';if(ex)ex.style.display=mode==='existing'?'block':'none';}));
 window.tcCheckLateLodgingChange=function(hotelName,detourMinutes){const d=plannerData(),limit=d.lodgingDetour==='any'?Infinity:Number(d.lodgingDetour||10);if(Number(detourMinutes)>limit){return confirm(`⚠️ מקום הלינה ${hotelName||''} חורג מגבול הסטייה שבחרתם (${limit} דקות). הוספתו עשויה לשנות את סדר הימים, זמני הנסיעה והתקציב. לחשב מחדש את המסלול?`);}return confirm('הוספת מקום לינה לאחר בניית הטיול יכולה לשנות את המסלול. לחשב מחדש ולעדכן את הימים והתקציב?');};
 plannerNext.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part<3){if(!validatePlannerStep1Part(plannerStep1Part))return;showPlannerStep1Part(plannerStep1Part+1);return;}if(!validatePlannerStep())return;plannerShowStep(planner.step+1);});
@@ -1453,7 +1447,8 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 </script>
 <script src="tripcraft-v101.js?v=101"></script>
 <script src="tripcraft-v102.js?v=102"></script>
-<script src="tripcraft-v108.js?v=108"></script>
+<script src="tripcraft-v109.js?v=109"></script>
+<script src="tripcraft-v109-final.js?v=109-final"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 </body></html>
