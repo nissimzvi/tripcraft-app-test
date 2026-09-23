@@ -1,4 +1,4 @@
-/* TripCraft Mobile V110 - compact day cards and reliable iPhone controls. */
+/* TripCraft Mobile V110 controls, retained and hardened for V111. */
 (() => {
   'use strict';
 
@@ -168,9 +168,12 @@
       const id = await window.TripCraftV102?.saveDraft?.();
       if (!id) throw new Error(text('לא התקבל אישור שמירה מהשרת.', 'The server did not confirm the save.'));
       window.TripCraftV108State?.markSaved?.();
-      await window.TripCraftV102?.renderAccount?.();
-      saveStatus(text('הטיול נשמר בהצלחה והקישור הקבוע מוכן ✓', 'Trip saved successfully. Your permanent link is ready ✓'), true);
-      $('tcV102TripLink')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      sessionStorage.setItem('tc_v111_saved_notice', String(Date.now()));
+      location.hash = '#account';
+      window.tcRouteRefresh?.('account');
+      try { await window.TripCraftV102?.renderAccount?.(); }
+      catch (accountError) { console.warn('Trip saved; account refresh will retry on route change.', accountError); }
+      window.scrollTo?.({ top: 0, behavior: 'auto' });
     } catch (error) {
       window.TripCraftV108State?.markDirty?.();
       saveStatus(text('השמירה לא הושלמה. הטיול נשאר פתוח ולא נמחק.', 'Save was not completed. Your trip remains open and was not deleted.'), false);
@@ -335,9 +338,8 @@
     syncDateLimits();
     if ($('plannerPrev')) $('plannerPrev').disabled = false;
     document.addEventListener('click', onClick, true);
-    document.addEventListener('pointerdown', onPressStart, true);
-    document.addEventListener('pointerup', onPressEnd, true);
-    document.addEventListener('pointercancel', () => { activePress = null; }, true);
+    /* A single capture-phase click path is more reliable on iOS than
+       synthesizing an action from pointerup and then suppressing click. */
     document.addEventListener('pointerup', onPointer, true);
     document.addEventListener('touchend', onPointer, { capture: true, passive: true });
     document.addEventListener('focusin', event => {

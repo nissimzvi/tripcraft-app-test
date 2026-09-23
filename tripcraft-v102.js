@@ -16,8 +16,8 @@
   const deepCopy=value=>JSON.parse(JSON.stringify(value));
   function displayDate(value){
     const s=String(value||'').trim(),iso=s.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/),local=s.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);
-    if(iso)return `${iso[3].padStart(2,'0')}-${iso[2].padStart(2,'0')}-${iso[1]}`;
-    if(local)return `${local[1].padStart(2,'0')}-${local[2].padStart(2,'0')}-${local[3]}`;
+    if(iso)return `${iso[3].padStart(2,'0')}/${iso[2].padStart(2,'0')}/${iso[1]}`;
+    if(local)return `${local[1].padStart(2,'0')}/${local[2].padStart(2,'0')}/${local[3]}`;
     return s||'—';
   }
 

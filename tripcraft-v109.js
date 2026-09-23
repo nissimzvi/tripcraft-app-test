@@ -576,7 +576,7 @@
   }
   function iso(date){return `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,'0')}-${String(date.getDate()).padStart(2,'0')}`}
   function addDays(value,count){const date=parseIso(value)||new Date();date.setDate(date.getDate()+Number(count||0));return iso(date)}
-  function displayDate(value){const match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return match?`${match[3]}-${match[2]}-${match[1]}`:String(value||'')}
+  function displayDate(value){const match=String(value||'').match(/^(\d{4})-(\d{2})-(\d{2})$/);return match?`${match[3]}/${match[2]}/${match[1]}`:String(value||'')}
   function nightsBetween(start,end){const a=parseIso(start),b=parseIso(end);return a&&b?Math.max(1,Math.round((b-a)/86400000)):1}
   function rooms(profile){return Math.max(1,Number(profile?.rooms||0)||Math.ceil(Math.max(1,Number(profile?.people||1))/2))}
   function planKey(segment){return `${segment.town}|${segment.checkIn}`}

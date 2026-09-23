@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V110</title>
+<title>TripCraft V111</title>
 <script>if(new URLSearchParams(location.search).get('lang')==='en'||/index-en\.html$/i.test(location.pathname)){localStorage.setItem('tc_v433_lang','en');document.documentElement.lang='en';document.documentElement.dir='ltr';}</script>
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -391,7 +391,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <a class="brand" href="#home" aria-label="חזרה לדף הבית" data-he-aria="חזרה לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"><div><h1>TripCraft</h1><small data-he="V110 · נץ מערכות מידע" data-en="V110 · Netz Information Systems">V110 · נץ מערכות מידע</small></div></a>
+  <a class="brand" href="#home" aria-label="חזרה לדף הבית" data-he-aria="חזרה לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"><div><h1>TripCraft</h1><small data-he="V111 · נץ מערכות מידע" data-en="V111 · Netz Information Systems">V111 · נץ מערכות מידע</small></div></a>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -951,7 +951,7 @@ function plannerKnownStops(destination,interests,must){
 }
 function plannerThemeShort(d){const txt=((d.title||'')+' '+(d.stops||[]).map(x=>x.place).join(' ')).toLowerCase();const a=[];if(/lake|אגם|waterfall|מפל|nature|טבע|park|forest|mountain|הר|נוף/.test(txt))a.push('טבע ונופים');if(/old town|center|עיר|כיכר|castle|museum|market|עייר/.test(txt))a.push('עיר ועיירות');if(/shopping|outlet|שופינג|קניות/.test(txt))a.push('שופינג');return a.slice(0,2).join(' · ')||'מסלול מגוון';}
 function weekdayForDate(s){const dt=dateObj(String(s||'').replace(/-/g,'.'));if(!dt)return'';return['יום א׳','יום ב׳','יום ג׳','יום ד׳','יום ה׳','יום ו׳','שבת'][dt.getDay()];}
-function displayPlannerDate(s){const v=String(s||'').trim(),iso=v.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/),local=v.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);if(iso)return `${iso[3].padStart(2,'0')}-${iso[2].padStart(2,'0')}-${iso[1]}`;if(local)return `${local[1].padStart(2,'0')}-${local[2].padStart(2,'0')}-${local[3]}`;return v;}
+function displayPlannerDate(s){const v=String(s||'').trim(),iso=v.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/),local=v.match(/^(\d{1,2})[-/.](\d{1,2})[-/.](\d{4})$/);if(iso)return `${iso[3].padStart(2,'0')}/${iso[2].padStart(2,'0')}/${iso[1]}`;if(local)return `${local[1].padStart(2,'0')}/${local[2].padStart(2,'0')}/${local[3]}`;return v;}
 function airportCompatibility(destination,arrival,departure){
  const d=String(destination||'').toLowerCase(),a=String(arrival||'').toLowerCase(),r=String(departure||arrival||'').toLowerCase();
  const both=a+' '+r;
@@ -1417,7 +1417,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
   const planner=document.getElementById('planner');if(planner)new MutationObserver(updateStepClass).observe(planner,{subtree:true,attributes:true,attributeFilter:['class']});
   updateStepClass();updateKeyboard();
   const months=['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
-  function renderDatePreview(id){const el=document.getElementById(id),out=document.getElementById(id+'Preview');if(!el||!out)return;if(!el.value){out.textContent='';return;}const [y,m,d]=el.value.split('-').map(Number);out.textContent=`${String(d).padStart(2,'0')}-${String(m).padStart(2,'0')}-${y}`;}
+  function renderDatePreview(id){const el=document.getElementById(id),out=document.getElementById(id+'Preview');if(!el||!out)return;if(!el.value){out.textContent='';return;}const [y,m,d]=el.value.split('-').map(Number);out.textContent=`${String(d).padStart(2,'0')}/${String(m).padStart(2,'0')}/${y}`;}
   ['plStart','plEnd'].forEach(id=>{document.getElementById(id)?.addEventListener('change',()=>renderDatePreview(id));renderDatePreview(id);});
 })();
 </script>
@@ -1450,6 +1450,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 <script src="tripcraft-v109.js?v=109"></script>
 <script src="tripcraft-v109-final.js?v=109-final"></script>
 <script src="tripcraft-v109-mobile-fixes.js?v=110-mobile"></script>
+<script src="tripcraft-v111.js?v=111"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 </body></html>
