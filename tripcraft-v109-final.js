@@ -11,7 +11,7 @@
   const language=()=>localStorage.getItem(LANG_KEY)==='en'?'en':'he';
 
   const EN=new Map(Object.entries({
-    'V109 · נץ מערכות מידע':'V109 · Netz Information Systems',
+    'V110 · נץ מערכות מידע':'V110 · Netz Information Systems','V109 · נץ מערכות מידע':'V109 · Netz Information Systems',
     'דף הבית':'Home','איך זה עובד':'How It Works','מחירים':'Pricing','הצעות לטיולים':'Trip Ideas','בתי מלון':'Hotels','תכנון טיול':'Plan a Trip','סל':'Cart','החשבון שלי':'My Account','כניסה':'Sign In','כניסה / הרשמה':'Sign In / Register','התקן אפליקציה':'Install App','פרטיות, תקנון ונגישות':'Privacy, Terms & Accessibility',
     'איך TripCraft עובד?':'How does TripCraft work?','לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.':'More than an itinerary document — a smart platform that stays with you from the first idea until you return home.',
     '1. מספרים לנו על הטיול':'1. Tell us about your trip','יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.':'Destination, dates, airports, travelers, ages, pace, interests and preferences.',
