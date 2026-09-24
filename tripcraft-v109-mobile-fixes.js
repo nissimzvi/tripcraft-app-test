@@ -232,7 +232,7 @@
   }
 
   function handleLogo(event) {
-    const logo = event.target.closest?.('.tc-header .brand,[data-tc-home-logo="1"]');
+    const logo = event.target.closest?.('[data-tc-home-logo="1"]');
     if (!logo) return false;
     event.preventDefault();
     event.stopImmediatePropagation();
