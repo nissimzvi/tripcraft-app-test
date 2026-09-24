@@ -284,7 +284,7 @@
   function handleCurrentRoute(){
     const raw=(location.hash||'#home').replace(/^#/,'');
     if(raw.startsWith('trip/')){const id=decodeURIComponent(raw.slice(5));if(!loggedIn()){goLogin('#trip/'+encodeURIComponent(id));return}openCloudTrip(id);return}
-    const page=raw.split('?')[0]||'home';if(PROTECTED.has(page)&&!loggedIn()){goLogin('#'+page);return}if(page==='account'){if(window.TripCraftV113)window.TripCraftV113.renderAccount();else setTimeout(()=>window.TripCraftV113?.renderAccount?.(),120)}
+    const page=raw.split('?')[0]||'home';if(PROTECTED.has(page)&&!loggedIn()){goLogin('#'+page);return}if(page==='account'){if(window.TripCraftV114)window.TripCraftV114.renderAccount();else setTimeout(()=>window.TripCraftV114?.renderAccount?.(),120)}
   }
   function installRouteGate(){
     document.addEventListener('click',e=>{
@@ -297,7 +297,7 @@
       if(protectedTarget && !loggedIn()){
         e.preventDefault();e.stopImmediatePropagation();goLogin(href);return;
       }
-      if(page==='planner'&&loggedIn()){e.preventDefault();e.stopImmediatePropagation();if(cloudTrips.length){location.hash='#account';setTimeout(()=>window.TripCraftV113?.renderAccount?.(),0);}else startNewTrip();}
+      if(page==='planner'&&loggedIn()){e.preventDefault();e.stopImmediatePropagation();if(cloudTrips.length){location.hash='#account';setTimeout(()=>window.TripCraftV114?.renderAccount?.(),0);}else startNewTrip();}
     },true);
     window.addEventListener('hashchange',()=>setTimeout(handleCurrentRoute,0));
   }
@@ -310,7 +310,7 @@
   async function init(){
     installAuthUI();installRouteGate();wrapPlanner();
     await syncSession();
-    window.tcRenderAccount=(...args)=>window.TripCraftV113?.renderAccount?.(...args);try{tcRenderAccount=window.tcRenderAccount}catch(e){}
+    window.tcRenderAccount=(...args)=>window.TripCraftV114?.renderAccount?.(...args);try{tcRenderAccount=window.tcRenderAccount}catch(e){}
     window.tcOpenPurchasedTrip=openCloudTrip;try{tcOpenPurchasedTrip=openCloudTrip}catch(e){}
     window.tcStartNewTrip=startNewTrip;
     handleCurrentRoute();
