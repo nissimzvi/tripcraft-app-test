@@ -293,7 +293,7 @@
 
   function route(){
     const raw=(location.hash||'#home').replace(/^#/,'');
-    if(raw==='account')setTimeout(()=>window.TripCraftV114?.renderAccount?.(),80);
+    if(raw==='account')setTimeout(()=>window.TripCraftV115?.renderAccount?.(),80);
     if(raw.startsWith('trip/'))setTimeout(()=>openTrip(decodeURIComponent(raw.slice(5))),120);
   }
   function install(){
@@ -314,9 +314,9 @@
     window.tcRenderAccount=renderAccount;window.tcStartNewTrip=resetNewTrip;
     // V101 finishes an async session restore after this overlay may already be installed.
     // Re-assert the V102 public handlers after that restore completes.
-    setTimeout(()=>{if(window.TripCraftV114)window.tcRenderAccount=window.TripCraftV114.renderAccount;window.tcStartNewTrip=resetNewTrip;if(location.hash==='#account')window.TripCraftV114?.renderAccount?.()},600);
+    setTimeout(()=>{if(window.TripCraftV115)window.tcRenderAccount=window.TripCraftV115.renderAccount;window.tcStartNewTrip=resetNewTrip;if(location.hash==='#account')window.TripCraftV115?.renderAccount?.()},600);
     window.TripCraftV102={VERSION,TABLE,DEMO_ACCESS_PERCENT,FUTURE_PAID_PREVIEW_PERCENT,generateDraft,saveDraft,renderAccount,openTrip,resetNewTrip,tripUrl,supabase};
-    window.addEventListener('hashchange',()=>{route();if(location.hash==='#account')setTimeout(()=>window.TripCraftV114?.renderAccount?.(),700)});route();document.documentElement.dataset.tripcraftVersion=VERSION;
+    window.addEventListener('hashchange',()=>{route();if(location.hash==='#account')setTimeout(()=>window.TripCraftV115?.renderAccount?.(),700)});route();document.documentElement.dataset.tripcraftVersion=VERSION;
   }
 
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();

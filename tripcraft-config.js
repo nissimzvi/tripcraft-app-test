@@ -9,6 +9,10 @@ window.TRIPCRAFT_CONFIG = {
   // Paste the Supabase Publishable key (or legacy anon key) here before testing real email OTP.
   supabaseAnonKey: 'sb_publishable_FQAN7Em12GRjR3bYJVlQZw_nMBKgU4z',
 
+  // Secure server-side AI function. The OpenAI key belongs only in the
+  // Supabase function secret OPENAI_API_KEY; never place it in this file.
+  aiFunctionName: 'tripcraft-ai',
+
   // CJ Publisher Tag for Booking links. These are public tracking identifiers,
   // not passwords or API secrets. The matching tag is loaded by index.html.
   cjPublisherTagEnabled: true,
