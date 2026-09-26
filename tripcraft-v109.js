@@ -632,10 +632,13 @@
     return filtered.length?filtered:(known.length&&!selected.length?known:genericHotels(town,profile));
   }
 
+  function requiresKosher(profile){return Boolean((profile?.lodgingFilters||[]).includes('kosher'))}
+
   function affiliateConfigured(){const config=window.TRIPCRAFT_CONFIG||{};return !!(config.cjPublisherTagEnabled&&String(config.cjPublisherId||'').trim()&&String(config.cjSid||'').trim()||String(config.bookingAffiliateId||'').trim()||String(config.bookingAffiliateTemplate||'').trim())}
   function bookingUrl(hotel,segment,profile){
     const config=window.TRIPCRAFT_CONFIG||{},adults=Math.max(1,Number(profile?.people||1)-Number(profile?.children||0));
-    const params=new URLSearchParams({ss:`${hotel?.name||segment.town}, ${segment.town}`,checkin:segment.checkIn,checkout:segment.checkOut,group_adults:String(adults),group_children:String(Number(profile?.children||0)),no_rooms:String(rooms(profile)),label:'tripcraft-v109'});
+    const search=requiresKosher(profile)?`kosher hotel ${segment.town}`:`${hotel?.name||segment.town}, ${segment.town}`;
+    const params=new URLSearchParams({ss:search,checkin:segment.checkIn,checkout:segment.checkOut,group_adults:String(adults),group_children:String(Number(profile?.children||0)),no_rooms:String(rooms(profile)),label:'tripcraft-v117'});
     const affiliateId=String(config.bookingAffiliateId||'').trim();if(affiliateId)params.set('aid',affiliateId);
     const direct=`https://www.booking.com/searchresults.html?${params.toString()}`;
     const template=String(config.bookingAffiliateTemplate||'').trim();
@@ -689,12 +692,15 @@
 
   function hotelChoiceHtml(hotel,segment,profile,index,mode){
     const selected=segment.selectedHotel?.name===hotel.name;
-    return `<div class="tc-v108-hotel-option${selected?' selected':''}"><div class="tc-v108-hotel-main"><strong>${safe(hotel.name)}</strong><div class="tc-v108-hotel-facts"><span>ציון Booking: ${safe(scoreText(hotel))}</span><span class="tc-v108-stars" aria-label="${hotel.stars} כוכבים">${starsText(hotel.stars)}</span><span>${safe(totalText(hotel,segment,profile))}</span></div></div><div class="tc-v108-hotel-buttons"><a class="btn booking-cta" target="_blank" rel="noopener sponsored" href="${safe(bookingUrl(hotel,segment,profile))}">פתח ב־Booking ↗</a><button class="btn green" type="button" data-v108-${mode}="${safe(segment.id)}" data-hotel-index="${index}">${selected?'נבחר ✓':'בחר מלון'}</button></div></div>`;
+    const kosher=requiresKosher(profile),verified=hotel.kosherVerified===true;
+    const selectButton=!kosher||verified?`<button class="btn green" type="button" data-v108-${mode}="${safe(segment.id)}" data-hotel-index="${index}">${selected?'נבחר ✓':'בחר מלון'}</button>`:'<span class="warn tc-kosher-unverified">✡️ נדרש אימות כשרות בעמוד המלון לפני שיבוץ</span>';
+    return `<div class="tc-v108-hotel-option${selected?' selected':''}"><div class="tc-v108-hotel-main"><strong>${safe(hotel.name)}</strong><div class="tc-v108-hotel-facts"><span>ציון Booking: ${safe(scoreText(hotel))}</span><span class="tc-v108-stars" aria-label="${hotel.stars} כוכבים">${starsText(hotel.stars)}</span><span>${safe(totalText(hotel,segment,profile))}</span></div></div><div class="tc-v108-hotel-buttons"><a class="btn booking-cta" target="_blank" rel="noopener sponsored" href="${safe(bookingUrl(hotel,segment,profile))}">${kosher?'חפש מלון כשר ב־Booking ↗':'פתח ב־Booking ↗'}</a>${selectButton}</div></div>`;
   }
 
   function segmentHtml(segment,profile,mode){
     const list=candidates(segment.town,profile),maxNights=Math.max(1,nightsBetween(segment.checkIn,profile.end));
-    return `<article class="tc-v108-stay${segment.skipped?' skipped':''}" data-stay-id="${safe(segment.id)}"><div class="tc-v108-stay-head"><div><h3>📍 ${safe(segment.town)}</h3><p><strong>${segment.nights} ${segment.nights===1?'לילה':'לילות'}</strong> · ${displayDate(segment.checkIn)} עד ${displayDate(segment.checkOut)} · <strong>${rooms(profile)} ${rooms(profile)===1?'חדר':'חדרים'}</strong></p></div><label>מספר לילות <input type="number" min="1" max="${maxNights}" value="${segment.nights}" data-v108-nights="${safe(segment.id)}"></label></div>${segment.skipped?'<div class="warn">הלינה באזור זה דולגה. אפשר לבחור מלון בכל עת.</div>':''}<div class="tc-v108-options">${list.map((hotel,index)=>hotelChoiceHtml(hotel,segment,profile,index,mode)).join('')}</div><div class="tc-v108-stay-footer"><button class="btn soft" type="button" data-v108-skip="${safe(segment.id)}" data-mode="${mode}">דלג על אזור לינה זה</button>${affiliateNote()}</div></article>`;
+    const kosherNotice=requiresKosher(profile)?'<div class="warn tc-kosher-verification"><strong>✡️ כשרות:</strong> החיפוש נפתח ב־Booking עם “kosher hotel”. Booking אינו מספק מסנן כשרות רשמי, ולכן TripCraft לא ישבץ מלון עד שמופיע במפורש בעמוד המלון שהוא כשר.</div>':'';
+    return `<article class="tc-v108-stay${segment.skipped?' skipped':''}" data-stay-id="${safe(segment.id)}"><div class="tc-v108-stay-head"><div><h3>📍 ${safe(segment.town)}</h3><p><strong>${segment.nights} ${segment.nights===1?'לילה':'לילות'}</strong> · ${displayDate(segment.checkIn)} עד ${displayDate(segment.checkOut)} · <strong>${rooms(profile)} ${rooms(profile)===1?'חדר':'חדרים'}</strong></p></div><label>מספר לילות <input type="number" min="1" max="${maxNights}" value="${segment.nights}" data-v108-nights="${safe(segment.id)}"></label></div>${segment.skipped?'<div class="warn">הלינה באזור זה דולגה. אפשר לבחור מלון בכל עת.</div>':''}${kosherNotice}<div class="tc-v108-options">${list.map((hotel,index)=>hotelChoiceHtml(hotel,segment,profile,index,mode)).join('')}</div><div class="tc-v108-stay-footer"><button class="btn soft" type="button" data-v108-skip="${safe(segment.id)}" data-mode="${mode}">דלג על אזור לינה זה</button>${affiliateNote()}</div></article>`;
   }
 
   function renderPreApproval(){
@@ -703,7 +709,8 @@
     if(profile.lodgingMode==='skip'){box.innerHTML='<div class="safe"><strong>דילגתם על לינה.</strong> ניתן לחזור לשלב זה ולשנות את הבחירה.</div>';return}
     if(profile.lodgingMode==='existing'){box.innerHTML=`<div class="safe"><strong>הלינות שכבר הזנתם יישמרו:</strong><div style="margin-top:8px;white-space:pre-line">${safe(profile.existingLodging||'טרם הוזנו מקומות לינה.')}</div></div>`;return}
     const plan=proposedPlan(profile);
-    box.innerHTML=`<div class="prehotel-head"><div><strong>חלוקת הלינות שמציע TripCraft</strong><p>אפשר לבחור מלון, לשנות מספר לילות או לדלג. התאריכים יעברו גם לחיפוש Booking.</p></div><span>${plan.reduce((sum,item)=>sum+item.nights,0)} לילות</span></div><div class="tc-v108-data-note">הציון והמחיר הם תמונת מצב לפיילוט. המחיר והציון העדכניים והמחייבים מופיעים ב־Booking בעת פתיחת הקישור.</div>${plan.map(segment=>segmentHtml(segment,profile,'preselect')).join('')}`;
+    const instructions=requiresKosher(profile)?'יש לפתוח את חיפוש Booking ולאמת כשרות מפורשת בעמוד המלון לפני שיבוץ. ניתן לשנות מספר לילות או לדלג.':'אפשר לבחור מלון, לשנות מספר לילות או לדלג. התאריכים יעברו גם לחיפוש Booking.';
+    box.innerHTML=`<div class="prehotel-head"><div><strong>חלוקת הלינות שמציע TripCraft</strong><p>${instructions}</p></div><span>${plan.reduce((sum,item)=>sum+item.nights,0)} לילות</span></div><div class="tc-v108-data-note">הציון והמחיר הם תמונת מצב לפיילוט. המחיר והציון העדכניים והמחייבים מופיעים ב־Booking בעת פתיחת הקישור.</div>${plan.map(segment=>segmentHtml(segment,profile,'preselect')).join('')}`;
   }
 
   function renderHotels(){
