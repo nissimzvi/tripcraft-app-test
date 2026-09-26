@@ -405,15 +405,38 @@
     }
   }
 
-  function discardCurrentTrip() {
-    if (!confirm(t('לצאת ללא שמירה? השינויים שלא נשמרו יימחקו.', 'Exit without saving? Unsaved changes will be discarded.'))) return;
+  async function routeAfterPlannerExit() {
+    const user = customer();
+    if (!user) {
+      location.hash = '#home';
+      window.tcRouteRefresh?.('home');
+      window.scrollTo?.({ top: 0, behavior: 'auto' });
+      return 'home';
+    }
+    let hasTrips = localRecords().length > 0;
+    if (!hasTrips) {
+      try { hasTrips = (await cloudRecords()).length > 0; } catch (_) { }
+    }
+    if (hasTrips) {
+      goToAccount();
+      await renderAccount();
+      return 'account';
+    }
+    location.hash = '#home';
+    window.tcRouteRefresh?.('home');
+    window.scrollTo?.({ top: 0, behavior: 'auto' });
+    return 'home';
+  }
+
+  async function discardCurrentTrip() {
+    if (!confirm(t('לצאת ללא שמירה? השינויים שלא נשמרו יימחקו.', 'Exit without saving? Unsaved changes will be discarded.'))) return false;
     if (editing.original && window.planner) window.planner.draft = deepCopy(editing.original);
     window.TripCraftV108State?.resetState?.();
     if (!editing.id) window.TripCraftV102?.resetNewTrip?.();
     editing = { id: '', source: '', original: null };
     document.body.classList.remove('tc-v115-editing');
-    goToAccount();
-    renderAccount();
+    await routeAfterPlannerExit();
+    return true;
   }
 
   function signOut() {
@@ -863,7 +886,58 @@
     event.stopImmediatePropagation();
   }
 
+  function closeDayModal() {
+    const modal = $('plannerDayModal');
+    if (!modal) return false;
+    modal.classList.remove('show');
+    modal.setAttribute('aria-hidden', 'true');
+    activeDayIndex = -1;
+    return true;
+  }
+
+  function saveDayTitle() {
+    const input = $('plannerDayTitleInput');
+    const index = activeDayIndex >= 0 ? activeDayIndex : Number(globalThis.plannerEditingDay);
+    const day = window.planner?.draft?.days?.[index];
+    if (!day || !input) return false;
+    const value = input.value.trim();
+    if (value) day.title = value;
+    window.plannerRenderDayEditor?.();
+    window.renderPlannerDraft?.();
+    window.TripCraftV108State?.markDirty?.();
+    return true;
+  }
+
+  function handleModalAction(target) {
+    if (!target?.closest) return false;
+    if (target.closest('#plannerDayModalClose')) return closeDayModal();
+    if (target.closest('#plannerApplyDayTitle')) return saveDayTitle();
+    if (target.closest('#plannerDayChatSend')) { applyAiChange('day'); return true; }
+    const edit = target.closest('#plannerDayStopsEditor .stop-edit-row .edit');
+    if (edit) {
+      const match = String(edit.getAttribute('onclick') || '').match(/plannerEditStop\((\d+)\)/);
+      if (match && typeof window.plannerEditStop === 'function') window.plannerEditStop(Number(match[1]));
+      return true;
+    }
+    const remove = target.closest('#plannerDayStopsEditor .stop-edit-row .remove');
+    if (remove) {
+      const match = String(remove.getAttribute('onclick') || '').match(/plannerRemoveStop\((\d+)\)/);
+      if (match && typeof window.plannerRemoveStop === 'function') window.plannerRemoveStop(Number(match[1]));
+      return true;
+    }
+    const hotels = target.closest('#plannerDayModal button[onclick*="openHotelsForDay"]');
+    if (hotels) {
+      const match = String(hotels.getAttribute('onclick') || '').match(/openHotelsForDay\((\d+)\)/);
+      if (match && typeof window.openHotelsForDay === 'function') window.openHotelsForDay(Number(match[1]));
+      return true;
+    }
+    return false;
+  }
+
   function handleClick(event) {
+    const modalTap = event.target.closest?.('#plannerDayModalClose,#plannerApplyDayTitle,#plannerDayChatSend,#plannerDayStopsEditor .stop-edit-row button,#plannerDayModal button[onclick*="openHotelsForDay"]');
+    if (modalTap && Number(modalTap.dataset.v116LastTap || 0) + 650 > Date.now()) { stop(event); return; }
+    if (handleModalAction(event.target)) { stop(event); return; }
     const accountAction = event.target.closest?.('[data-v115-action]');
     if (accountAction) {
       stop(event);
@@ -958,13 +1032,17 @@
 
       .tc-v116-result-proxy{display:none!important}
       body.tc-v116-result-mode .planner-actions{pointer-events:auto!important}
+      body.tc-v108-built.tc-v116-result-mode #planner>.planner-actions{display:flex!important;pointer-events:auto!important;visibility:visible!important;opacity:1!important}
+      #plannerDayModal.show,#plannerDayModal.show .planner-modal-card,#plannerDayModal.show button,#plannerDayModal.show input,#plannerDayModal.show a{pointer-events:auto!important}
+      #plannerDayModal.show{z-index:40000!important}
+      #plannerDayModal.show .planner-modal-card{position:relative!important;z-index:40001!important}
       body.tc-v116-result-mode .planner-actions .tc-v116-result-proxy{display:inline-flex!important;align-items:center!important;justify-content:center!important}
       body.tc-v116-result-mode .planner-actions #tcV116SaveProxy{background:#16875d!important;color:#fff!important}
       body.tc-v116-result-mode .planner-actions #tcV116DiscardProxy{background:#d1262b!important;color:#fff!important}
       #plannerDraftDays,#plannerDraftDays>.day-row,#plannerDraftDays>.day-row .day-action,#plannerDraftDays>.day-row .day-action button{pointer-events:auto!important}
       #plannerDraftDays>.day-row .day-action button{touch-action:manipulation!important;cursor:pointer!important}
       @media(max-width:620px){
-        body.tc-v116-result-mode .planner-actions{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;z-index:30000!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:0!important;padding:8px!important;border-radius:18px!important;background:rgba(255,255,255,.98)!important;box-shadow:0 8px 28px rgba(13,53,87,.22)!important}
+        body.tc-v116-result-mode .planner-actions,body.tc-v108-built.tc-v116-result-mode #planner>.planner-actions{position:fixed!important;left:12px!important;right:12px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 8px)!important;z-index:30000!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important;margin:0!important;padding:8px!important;border-radius:18px!important;background:rgba(255,255,255,.98)!important;box-shadow:0 8px 28px rgba(13,53,87,.22)!important}
         body.tc-v116-result-mode .planner-actions .tc-v116-result-proxy{width:100%!important;min-height:54px!important;font-size:17px!important;font-weight:900!important}
         body.tc-v116-result-mode #plannerResult .tc-v108-result-actions{display:none!important}
         body.tc-v116-result-mode #plannerResult{padding-bottom:92px!important}
@@ -978,7 +1056,7 @@
     ensureLogoutMenu();
     ensureCalendar();
     enhancePlanner();
-    window.TripCraftV115 = { VERSION, renderAccount, openTrip, startNewTrip, saveCurrentTrip, discardCurrentTrip, deleteTrip, activateAccountAction, openDayDetails, applyAiChange, persistDraft };
+    window.TripCraftV115 = { VERSION, renderAccount, openTrip, startNewTrip, saveCurrentTrip, discardCurrentTrip, deleteTrip, activateAccountAction, openDayDetails, applyAiChange, persistDraft, routeAfterPlannerExit, closeDayModal };
     window.tcRenderAccount = renderAccount;
     if (window.TripCraftV102) {
       window.TripCraftV102.renderAccount = renderAccount;
@@ -986,8 +1064,18 @@
     }
     window.addEventListener('click', handleClick, true);
     window.addEventListener('pointerup', event => {
+      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+      const modalAction = event.target.closest?.('#plannerDayModalClose,#plannerApplyDayTitle,#plannerDayChatSend,#plannerDayStopsEditor .stop-edit-row button,#plannerDayModal button[onclick*="openHotelsForDay"]');
+      if (modalAction) {
+        const now = Date.now();
+        if (Number(modalAction.dataset.v116LastTap || 0) + 450 > now) return;
+        modalAction.dataset.v116LastTap = String(now);
+        stop(event);
+        handleModalAction(modalAction);
+        return;
+      }
       const actionable = event.target.closest?.('#tcV116SaveProxy,#tcV116DiscardProxy,[data-v116-open-day]');
-      if (!actionable || event.pointerType !== 'touch') return;
+      if (!actionable) return;
       const now = Date.now();
       if (Number(actionable.dataset.v116LastTap || 0) + 450 > now) return;
       actionable.dataset.v116LastTap = String(now);
@@ -1016,14 +1104,14 @@
           }, 0);
         }
       });
-    }).observe(document.body, { childList: true, subtree: true });
+    }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
     window.addEventListener('hashchange', () => {
       if (location.hash === '#account') renderAccount();
       setTimeout(enhancePlanner, 30);
     });
     if (location.hash === '#account') renderAccount();
     document.documentElement.dataset.tripcraftVersion = VERSION;
-    document.documentElement.dataset.tripcraftBuild = 'V116-MOBILE';
+    document.documentElement.dataset.tripcraftBuild = 'V116-FIXED-MOBILE';
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install, { once: true });
