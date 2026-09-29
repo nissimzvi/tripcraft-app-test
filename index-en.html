@@ -7,7 +7,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V117</title>
+<title>TripCraft V118</title>
 <script>if(new URLSearchParams(location.search).get('lang')==='en'||/index-en\.html$/i.test(location.pathname)){localStorage.setItem('tc_v433_lang','en');document.documentElement.lang='en';document.documentElement.dir='ltr';}</script>
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -391,7 +391,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V117 · נץ מערכות מידע" data-en="V117 · Netz Information Systems">V117 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V118 · נץ מערכות מידע" data-en="V118 · Netz Information Systems">V118 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -405,7 +405,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 
   </nav>
   <span id="tcUserGreeting" class="tc-user-greeting" aria-live="polite"></span>
-  <div class="lang-switch" aria-label="Language"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
+  <div class="lang-switch" aria-label="Language" data-no-translate><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
 </header>
 <div id="tcMobileMenu" class="mobile-menu" aria-hidden="true">
   <div class="mobile-menu-head"><strong>TripCraft</strong><label id="tcMobileClose" for="tcNavToggle" role="button" tabindex="0" aria-label="סגור">×</label></div><div id="tcMobileUser" class="mobile-menu-user"></div>
@@ -420,7 +420,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
   <a href="#login" data-he="כניסה / הרשמה" data-en="Sign in / Register">כניסה / הרשמה</a>
   <a href="#legal" data-he="פרטיות, תקנון ונגישות" data-en="Privacy, Terms & Accessibility">פרטיות, תקנון ונגישות</a><button id="tcInstallAppMobile" class="tc-install" type="button">התקן אפליקציה</button>
 
-  <div class="mobile-lang" aria-label="Language"><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
+  <div class="mobile-lang" aria-label="Language" data-no-translate><button type="button" class="lang-link active" data-lang="he">עברית</button><button type="button" class="lang-link" data-lang="en">EN</button></div>
 </div>
 <label id="tcMenuBackdrop" class="menu-backdrop" for="tcNavToggle" aria-label="סגור תפריט"></label>
 <div id="mainApp" class="page-focus" data-page="home">
@@ -901,14 +901,17 @@ function plannerData(){
  const avoids=selectedChoiceValues('avoidChoices');
  const bands=JSON.parse(document.getElementById('plAgesBands')?.value||'{}');
  const representativeAges=[];for(const [k,n] of Object.entries(bands)){const age={adult:45,young:27,teen:16,kid:8,baby:1,dogs:null}[k];if(age===null)continue;for(let i=0;i<Number(n||0);i++)representativeAges.push(age);}
- return{tripName:(document.getElementById('plTripName')?.value||'').trim(),countries:selectedChoiceValues('countryChoices'),destination:document.getElementById('plDestination').value.trim(),from:'',arrivalAirport:document.getElementById('plArrivalAirport').value.trim(),departureAirport:document.getElementById('plDepartureAirport').value.trim(),start:document.getElementById('plStart').value,end:document.getElementById('plEnd').value,people:Number(document.getElementById('plPeople').value)||0,children:Number(document.getElementById('plChildren')?.value)||0,group:document.getElementById('plGroup').value,ageBands:bands,ages:representativeAges,transports,transport:transports.length>1?'mixed':(transports[0]||'car'),dayLength:document.getElementById('plDayLength')?.value||'full',pace:document.getElementById('plPace').value,walk:document.getElementById('plWalk').value,drive:document.getElementById('plDrive').value,interests:[...document.querySelectorAll('#interestChoices input:checked')].map(x=>x.value),priorities,must:document.getElementById('plMust').value.trim(),avoid:avoids.join(', '),free:document.getElementById('plFree').value.trim(),lodgingStyle:document.getElementById('plLodgingStyle')?.value||'smart',hotelStars:document.getElementById('plHotelStars')?.value||'any',includeHotels:(document.getElementById('plIncludeHotels')?.value||'yes')==='yes',lodgingMode:(document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend'),lodgingTypes:selectedChoiceValues('lodgingTypeChoices'),lodgingBudget:(document.querySelector('input[name=plLodgingBudget]:checked')?.value||'mid'),lodgingFilters:selectedChoiceValues('lodgingFilterChoices'),lodgingPriority:document.getElementById('plLodgingPriority')?.value||'balanced',lodgingDetour:document.getElementById('plLodgingDetour')?.value||'10',existingLodging:(document.getElementById('plExistingLodging')?.value||'').trim()}
+ const rawDestination=document.getElementById('plDestination').value.trim();
+ const destination=/^(?:פרובאנס|פרובנס|provence(?:\s*,\s*france)?)$/i.test(rawDestination)?'Provence':rawDestination;
+ return{tripName:(document.getElementById('plTripName')?.value||'').trim(),countries:selectedChoiceValues('countryChoices'),destination,from:'',arrivalAirport:document.getElementById('plArrivalAirport').value.trim(),departureAirport:document.getElementById('plDepartureAirport').value.trim(),start:document.getElementById('plStart').value,end:document.getElementById('plEnd').value,people:Number(document.getElementById('plPeople').value)||0,children:Number(document.getElementById('plChildren')?.value)||0,group:document.getElementById('plGroup').value,ageBands:bands,ages:representativeAges,transports,transport:transports.length>1?'mixed':(transports[0]||'car'),dayLength:document.getElementById('plDayLength')?.value||'full',pace:document.getElementById('plPace').value,walk:document.getElementById('plWalk').value,drive:document.getElementById('plDrive').value,interests:[...document.querySelectorAll('#interestChoices input:checked')].map(x=>x.value),priorities,must:document.getElementById('plMust').value.trim(),avoid:avoids.join(', '),free:document.getElementById('plFree').value.trim(),lodgingStyle:document.getElementById('plLodgingStyle')?.value||'smart',hotelStars:document.getElementById('plHotelStars')?.value||'any',includeHotels:(document.getElementById('plIncludeHotels')?.value||'yes')==='yes',lodgingMode:(document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend'),lodgingTypes:selectedChoiceValues('lodgingTypeChoices'),lodgingBudget:(document.querySelector('input[name=plLodgingBudget]:checked')?.value||'mid'),lodgingFilters:selectedChoiceValues('lodgingFilterChoices'),lodgingPriority:document.getElementById('plLodgingPriority')?.value||'balanced',lodgingDetour:document.getElementById('plLodgingDetour')?.value||'10',existingLodging:(document.getElementById('plExistingLodging')?.value||'').trim()}
 }
+function plannerMessage(he,en){return document.documentElement.lang==='en'?en:he;}
 function validatePlannerStep1Part(part){
  const d=plannerData();
  if(part===1){
    const tripName=(document.getElementById('plTripName')?.value||'').trim();
-   if(!tripName){alert('נא להזין שם לטיול.');document.getElementById('plTripName')?.focus();return false;}
-   if(!d.destination){alert('נא להזין יעד או אזור ולבחור אותו מהרשימה.');document.getElementById('plDestination')?.focus();return false;}
+   if(!tripName){alert(plannerMessage('נא להזין שם לטיול.','Please enter a trip name.'));document.getElementById('plTripName')?.focus();return false;}
+   if(!d.destination){alert(plannerMessage('נא להזין יעד או אזור. ניתן גם להקליד ידנית.','Please enter a destination or region. Manual text is accepted.'));document.getElementById('plDestination')?.focus();return false;}
  }
  if(part===2){
    if(d.arrivalAirport||d.departureAirport){
@@ -1141,10 +1144,13 @@ if(plSameAirport){
  plSameAirport.addEventListener('change',syncSameAirport);
  a?.addEventListener('input',()=>{if(plSameAirport.checked) syncSameAirport();});
 }
-plannerPrev.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part===1){location.hash='#account';return;}if(planner.step===1&&plannerStep1Part>1){showPlannerStep1Part(plannerStep1Part-1);return;}if(planner.step===2){planner.step=1;plannerStep1Part=3;plannerShowStep(1);return;}plannerShowStep(planner.step-1);});
+function plannerGoPrevious(){if(planner.step===1&&plannerStep1Part===1){location.hash=window.tcCustomer?.()?'#account':'#home';return true;}if(planner.step===1&&plannerStep1Part>1){showPlannerStep1Part(plannerStep1Part-1);return true;}if(planner.step===2){planner.step=1;plannerStep1Part=3;plannerShowStep(1);return true;}plannerShowStep(planner.step-1);return true;}
+plannerPrev.addEventListener('click',plannerGoPrevious);
 document.querySelectorAll('input[name=plLodgingMode]').forEach(r=>r.addEventListener('change',()=>{const mode=document.querySelector('input[name=plLodgingMode]:checked')?.value||'recommend';const rec=document.getElementById('lodgingRecommendOptions'),ex=document.getElementById('lodgingExistingOptions');if(rec)rec.style.display=mode==='recommend'?'block':'none';if(ex)ex.style.display=mode==='existing'?'block':'none';}));
 window.tcCheckLateLodgingChange=function(hotelName,detourMinutes){const d=plannerData(),limit=d.lodgingDetour==='any'?Infinity:Number(d.lodgingDetour||10);if(Number(detourMinutes)>limit){return confirm(`⚠️ מקום הלינה ${hotelName||''} חורג מגבול הסטייה שבחרתם (${limit} דקות). הוספתו עשויה לשנות את סדר הימים, זמני הנסיעה והתקציב. לחשב מחדש את המסלול?`);}return confirm('הוספת מקום לינה לאחר בניית הטיול יכולה לשנות את המסלול. לחשב מחדש ולעדכן את הימים והתקציב?');};
-plannerNext.addEventListener('click',()=>{if(planner.step===1&&plannerStep1Part<3){if(!validatePlannerStep1Part(plannerStep1Part))return;showPlannerStep1Part(plannerStep1Part+1);return;}if(!validatePlannerStep())return;plannerShowStep(planner.step+1);});
+function plannerGoNext(){if(planner.step===1&&plannerStep1Part<3){if(!validatePlannerStep1Part(plannerStep1Part))return false;showPlannerStep1Part(plannerStep1Part+1);return true;}if(!validatePlannerStep())return false;plannerShowStep(planner.step+1);return true;}
+plannerNext.addEventListener('click',plannerGoNext);
+window.TripCraftPlannerNavigation={next:plannerGoNext,previous:plannerGoPrevious,getStep:()=>planner.step,getStep1Part:()=>plannerStep1Part};
 plannerBuild.addEventListener('click',async()=>{if(!tcCustomer()){sessionStorage.setItem('tc_v91_return_after_auth','#planner');location.hash='#login';return;}if(plannerBuild.dataset.busy==='1')return;plannerBuild.dataset.busy='1';plannerBuild.disabled=true;const label=plannerBuild.textContent;plannerBuild.textContent='בונה טיול...';try{const built=await buildPlannerDraft();if(built===false||!planner.draft)throw new Error('לא נוצר טיול. בדקו שהיעד והתאריכים הוזנו.');}catch(err){console.error(err);alert('בניית הטיול נכשלה: '+(err?.message||'שגיאה לא ידועה'));}finally{plannerBuild.dataset.busy='0';plannerBuild.disabled=false;plannerBuild.textContent=label;}});
 plannerShowStep(1);
 
@@ -1177,7 +1183,7 @@ function tcNorm(v){return (v||'').toString().toLowerCase().normalize('NFKD').rep
 
 const TC_REGIONS=[
  ['טירול','Tyrol','Austria',['tirol','tyrol','טירול','חבל טירול']],['פרובנס','Provence','France',['provence','פרובנס','luberon','avignon']],['בוואריה','Bavaria','Germany',['bavaria','bayern','בוואריה']],['שווייץ','Switzerland','Switzerland',['שויץ','שוויץ','שווייץ','switzerland','swiss']],['דולומיטים','Dolomites','Italy',['dolomites','dolomiti','דולומיטים']],['הריביירה הצרפתית','French Riviera','France',['cote dazur','côte d’azur','riviera','ריביירה']]];
-function tcRegionLocal(q){q=tcNorm(q);if(!q)return[];const near=(a,b)=>{a=tcNorm(a);b=tcNorm(b);if(b.length<3||Math.abs(a.length-b.length)>1)return false;if(a===b)return true;let i=0,j=0,d=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++d>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return d+(i<a.length||j<b.length?1:0)<=1;};return TC_REGIONS.filter(x=>[x[0],x[1],x[2],...(x[3]||[])].some(v=>tcNorm(v).includes(q)||near(v,q))).slice(0,6).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1]}));}
+function tcRegionLocal(q){q=tcNorm(q);if(!q)return[];if(/^(?:פרובאנס|פרובנס|provence(?:,? france)?)$/.test(q))q='provence';const near=(a,b)=>{a=tcNorm(a);b=tcNorm(b);if(b.length<3||Math.abs(a.length-b.length)>1)return false;if(a===b)return true;let i=0,j=0,d=0;while(i<a.length&&j<b.length){if(a[i]===b[j]){i++;j++;continue;}if(++d>1)return false;if(a.length>b.length)i++;else if(b.length>a.length)j++;else{i++;j++;}}return d+(i<a.length||j<b.length?1:0)<=1;};return TC_REGIONS.filter(x=>[x[0],x[1],x[2],...(x[3]||[])].some(v=>tcNorm(v).includes(q)||near(v,q))).slice(0,6).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1]}));}
 function tcCityLocal(q){q=tcNorm(q);if(!q)return[];const regions=tcRegionLocal(q);const cities=TC_CITIES.filter(x=>[x[0],x[1],...(x[6]||[])].some(v=>tcNorm(v).includes(q))).slice(0,7).map(x=>({kind:'city',main:`${x[0]} · ${x[1]}`,sub:x[2],value:x[1],lat:x[4],lon:x[5]}));return [...regions,...cities].slice(0,8)}
 function tcAirportLocal(q){q=tcNorm(q);if(!q)return[];return TC_AIRPORTS.filter(x=>[x[0],x[1],x[2],x[3],x[4],...(x[8]||[])].some(v=>tcNorm(v).includes(q))).slice(0,8).map(x=>({kind:'airport',main:`${x[1]} · ${x[2]}`,sub:`${x[3]} · ${x[5]}`,value:`${x[2]} (${x[0]})`,code:x[0],lat:x[6],lon:x[7]}))}
 async function tcPhoton(q,type){if(q.length<2)return[];try{const lang=(document.documentElement.lang||'he').startsWith('he')?'he':'en';let url=`https://photon.komoot.io/api/?q=${encodeURIComponent(q)}&limit=7&lang=${lang}`;/* Destination search intentionally has no layer filter: regions such as Provence must also be discoverable. */const r=await fetch(url,{headers:{Accept:'application/json'}});if(!r.ok)throw 0;const j=await r.json();return (j.features||[]).map(f=>{const p=f.properties||{},c=f.geometry?.coordinates||[];const isAirport=p.osm_key==='aeroway'||/airport|aeroport|flughafen|שדה תעופה|נמל התעופה/i.test([p.name,p.city,p.locality].filter(Boolean).join(' '));if(type==='airport'&&!isAirport)return null;const nm=p.name||p.city||p.locality||q;const loc=[p.city,p.state,p.country].filter((v,i,a)=>v&&a.indexOf(v)===i).join(' · ');return{kind:type,main:nm,sub:loc,value:nm,lat:c[1],lon:c[0]}}).filter(Boolean).slice(0,6)}catch(e){return[]}}
@@ -1454,7 +1460,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 <script src="tripcraft-v109.js?v=109"></script>
 <script src="tripcraft-v109-final.js?v=109-final"></script>
 <script src="tripcraft-v109-mobile-fixes.js?v=110-mobile"></script>
-<script src="tripcraft-v117.js?v=117"></script>
+<script src="tripcraft-v118.js?v=118"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 </body></html>

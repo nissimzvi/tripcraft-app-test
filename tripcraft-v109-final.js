@@ -7,11 +7,13 @@
   const HEBREW=/[\u0590-\u05ff]/;
   const originalText=new WeakMap();
   const originalAttrs=new WeakMap();
+  const trackedText=[];
+  const trackedAttrs=[];
   const $=id=>document.getElementById(id);
   const language=()=>localStorage.getItem(LANG_KEY)==='en'?'en':'he';
 
   const EN=new Map(Object.entries({
-    'V110 · נץ מערכות מידע':'V110 · Netz Information Systems','V109 · נץ מערכות מידע':'V109 · Netz Information Systems',
+    'V118 · נץ מערכות מידע':'V118 · Netz Information Systems','V117 · נץ מערכות מידע':'V117 · Netz Information Systems','V110 · נץ מערכות מידע':'V110 · Netz Information Systems','V109 · נץ מערכות מידע':'V109 · Netz Information Systems',
     'דף הבית':'Home','איך זה עובד':'How It Works','מחירים':'Pricing','הצעות לטיולים':'Trip Ideas','בתי מלון':'Hotels','תכנון טיול':'Plan a Trip','סל':'Cart','החשבון שלי':'My Account','כניסה':'Sign In','כניסה / הרשמה':'Sign In / Register','התקן אפליקציה':'Install App','פרטיות, תקנון ונגישות':'Privacy, Terms & Accessibility',
     'איך TripCraft עובד?':'How does TripCraft work?','לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.':'More than an itinerary document — a smart platform that stays with you from the first idea until you return home.',
     '1. מספרים לנו על הטיול':'1. Tell us about your trip','יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.':'Destination, dates, airports, travelers, ages, pace, interests and preferences.',
@@ -30,7 +32,7 @@
     '1. לאן ומתי נוסעים?':'1. Where and when are you traveling?','1 · יעד':'1 · Destination','2 · טיסות':'2 · Flights','3 · תאריכים':'3 · Dates','יעד הטיול':'Trip Destination','בחרו מדינות ואזור מרכזי':'Choose countries and a main region','שם הטיול שלכם':'Your Trip Name','מדינות':'Countries','אפשר לבחור כמה':'Multiple selections allowed','+ הוסף':'+ Add','איפה מטיילים?':'Where are you traveling?','טיסות (אופציונלי)':'Flights (optional)','אם אין טיסות, משאירים את שני השדות ריקים':'If you have no flight details, leave both fields blank','נוחתים ב־ (אופציונלי)':'Arrival airport (optional)','חוזרים מ־ (אופציונלי)':'Departure airport (optional)','אותו שדה בחזרה — סמנו ✓ למילוי אוטומטי':'Same airport for departure — check ✓ to fill automatically','תאריכים':'Dates','מתי תרצו לטייל':'When would you like to travel?','תאריך יציאה':'Start Date','תאריך חזרה':'End Date','TripCheck יבדוק התאמה בין היעד לשדות התעופה.':'TripCheck will verify that the airports match your destination.',
     '2. מי נוסע?':'2. Who is traveling?','סוג הקבוצה':'Group Type','זוג':'Couple','משפחה':'Family','חברים':'Friends','יחיד':'Solo Traveler','רב־דורי':'Multi-generational','כמה נוסעים מכל גיל?':'How many travelers in each age group?','מבוגרים':'Adults','צעירים':'Young Adults','נוער':'Teens','ילדים':'Children','תינוקות':'Infants','כלבים':'Dogs','חיות מחמד':'Pets','אין צורך להקליד גיל. הבחירה לפי קבוצות גיל מאפשרת ל־TripCraft להתאים קצב, הליכות, אטרקציות וימי נסיעה.':'No need to enter exact ages. Age groups help TripCraft adapt pace, walking, attractions and travel days.',
     '3. איך אתם אוהבים לטייל?':'3. How do you like to travel?','באילו אמצעי תחבורה תרצו להשתמש?':'Which modes of transportation would you like to use?','רכב':'Car','רכבת':'Train','תחבורה ציבורית':'Public Transit','הליכה':'Walking','טיסות פנימיות':'Domestic Flights','מעבורת / שייט':'Ferry / Cruise','מונית / הסעה':'Taxi / Transfer','אורך יום טיול':'Length of Travel Day','יום מלא — לנצל את היום':'Full day — make the most of it','גמיש — לפי היעד':'Flexible — based on destination','חצי יום — יותר זמן חופשי':'Half day — more free time','קצב':'Pace','רגוע':'Relaxed','מאוזן':'Balanced','אינטנסיבי':'Intensive','הליכה יומית נוחה':'Comfortable Daily Walking','עד שעה':'Up to 1 hour','1–3 שעות':'1–3 hours','3–5 שעות':'3–5 hours','אין מגבלה מיוחדת':'No special limit','נהיגה יומית רצויה':'Preferred Daily Driving','עד שעתיים':'Up to 2 hours','עד 4 שעות':'Up to 4 hours','עד 6 שעות':'Up to 6 hours','לא מפריע לנו יום ארוך מדי פעם':'An occasional long day is fine','מה מעניין אתכם?':'What interests you?','נופים וטבע':'Scenery & Nature','עיירות וכפרים':'Towns & Villages','אגמים ומפלים':'Lakes & Waterfalls','ערים':'Cities','חוף':'Beach','טיולים רגליים':'Hiking','קולינריה':'Food','גסטרונומיה':'Gastronomy','שופינג':'Shopping','אטרקציות ואדרנלין':'Attractions & Adrenaline','ספורט אתגרי':'Adventure Sports','פארקי מים ואטרקציות לילדים':'Water Parks & Kids Attractions','ספורט מים':'Water Sports','שייט':'Cruises / Boating','תרבות ומוזיאונים':'Culture & Museums','היסטוריה וטירות':'History & Castles','תיאטרון ומופעים':'Theater & Shows','צילום':'Photography','ספא ובריאות':'Spa & Wellness','הליכות':'Walking','חיי לילה':'Nightlife','יין':'Wine',
-    '4. תרצו ש-TripCraft יתכנן גם את הלינה?':'4. Would you like TripCraft to plan your lodging?','מה תרצו לעשות עם הלינה?':'How should we handle lodging?','כן — תציע ותתכנן לינה':'Yes — recommend and plan lodging','כבר יש לי מקומות לינה':'I already have lodging','אחליט ואוסיף אחר כך':'I will decide and add it later','לא — דלג על שלב הלינה':'No — skip lodging','איזו לינה לחפש?':'What type of lodging should we find?','מלון':'Hotel','דירה':'Apartment','וילה':'Villa','ריזורט':'Resort','בית נופש':'Holiday Home','הוסטל':'Hostel','רמת מחיר':'Price Level','יוקרתי':'Luxury','ביניים':'Mid-range','חסכוני':'Budget','זול מאוד':'Very Low Cost','מה חשוב במקום הלינה?':'What matters in your lodging?','ארוחת בוקר':'Breakfast','ארוחת בוקר וערב (חצי פנסיון)':'Breakfast and Dinner (Half Board)','הכל כלול':'All Inclusive','ביטול חינם':'Free Cancellation','חניה':'Parking','בריכה':'Pool','ספא':'Spa','מטבח':'Kitchen','מרכזי':'Central Location','נוף':'View','משפחתי':'Family-friendly','נגיש':'Accessible','כמה חדרים תרצו?':'How many rooms would you like?','הרכב לחיפוש המלונות':'Hotel Search Group','זוג אחד · חדר אחד':'One couple · one room','מה חשוב יותר?':'What matters most?','מחיר':'Price','איזון מחיר ואיכות':'Balance of price and quality','דירוג ואיכות':'Rating and quality','כמה מותר לסטות מהמסלול בשביל לינה?':'How far may lodging deviate from the route?','רק על המסלול / באזור הלינה':'Only on the route / in the lodging area','עד 10 דקות':'Up to 10 minutes','עד 20 דקות':'Up to 20 minutes','לא משנה':'No preference','שם המלון / הדירה שכבר הזמנתם':'Hotel / apartment already booked','חשוב:':'Important:',
+    '4. תרצו ש-TripCraft יתכנן גם את הלינה?':'4. Would you like TripCraft to plan your lodging?','מה תרצו לעשות עם הלינה?':'How should we handle lodging?','כן — תציע ותתכנן לינה':'Yes — recommend and plan lodging','כבר יש לי מקומות לינה':'I already have lodging','אחליט ואוסיף אחר כך':'I will decide and add it later','לא — דלג על שלב הלינה':'No — skip lodging','איזו לינה לחפש?':'What type of lodging should we find?','מלון':'Hotel','דירה':'Apartment','וילה':'Villa','ריזורט':'Resort','בית נופש':'Holiday Home','הוסטל':'Hostel','כשרות':'Kosher','רמת מחיר':'Price Level','יוקרתי':'Luxury','ביניים':'Mid-range','חסכוני':'Budget','זול מאוד':'Very Low Cost','מה חשוב במקום הלינה?':'What matters in your lodging?','ארוחת בוקר':'Breakfast','ארוחת בוקר וערב (חצי פנסיון)':'Breakfast and Dinner (Half Board)','הכל כלול':'All Inclusive','ביטול חינם':'Free Cancellation','חניה':'Parking','בריכה':'Pool','ספא':'Spa','מטבח':'Kitchen','מרכזי':'Central Location','נוף':'View','משפחתי':'Family-friendly','נגיש':'Accessible','כמה חדרים תרצו?':'How many rooms would you like?','הרכב לחיפוש המלונות':'Hotel Search Group','זוג אחד · חדר אחד':'One couple · one room','מה חשוב יותר?':'What matters most?','מחיר':'Price','איזון מחיר ואיכות':'Balance of price and quality','דירוג ואיכות':'Rating and quality','כמה מותר לסטות מהמסלול בשביל לינה?':'How far may lodging deviate from the route?','רק על המסלול / באזור הלינה':'Only on the route / in the lodging area','עד 10 דקות':'Up to 10 minutes','עד 20 דקות':'Up to 20 minutes','לא משנה':'No preference','שם המלון / הדירה שכבר הזמנתם':'Hotel / apartment already booked','חשוב:':'Important:',
     '5. מה חשוב לנו לדעת?':'5. What should we know?','איך אתם מעדיפים לישון?':'How do you prefer to stay?','תן ל-TripCraft לבחור חכם':'Let TripCraft choose intelligently','כמה שפחות החלפות מלון':'As few hotel changes as possible','טיול כוכב — בסיס אחד כשזה הגיוני':'Hub trip — one base when practical','מתקדמים עם המסלול ומחליפים לפי הצורך':'Move along the route and change lodging as needed','רמת מלון מועדפת':'Preferred Hotel Level','לא חשוב / תן המלצה':'No preference / recommend','3 כוכבים':'3 Stars','4 כוכבים':'4 Stars','5 כוכבים':'5 Stars','דירה / אפרטהוטל':'Apartment / Aparthotel','לכלול מלונות בתקציב?':'Include hotels in the budget?','כן — הצג הערכת לינה':'Yes — show lodging estimate','לא בשלב זה':'Not at this stage','מה חשוב לכם בטיול?':'What matters to you on this trip?','בלי ימים עמוסים':'No overloaded days','מעט החלפות מלון':'Few hotel changes','זמן חופשי':'Free time','מסלול יעיל':'Efficient itinerary','כבישים נופיים':'Scenic roads','ממה להימנע?':'What should we avoid?','טרקים קשים':'Difficult treks','נהיגה ארוכה':'Long drives','כבישים קשים':'Difficult roads','מדרגות רבות':'Many stairs','יקר מדי':'Too expensive','קימה מוקדמת':'Early starts','מקומות שחייבים להיות בטיול':'Must-see places','אירועים / טיסות / אילוצים בתאריך מסוים':'Events / flights / fixed-date constraints',
     '6. לינות ומחירים — לפני האישור הסופי':'6. Lodging and Prices — Before Final Approval','המחירים בשלב זה הם הערכה בלבד.':'Prices at this stage are estimates only.','7. סקירה ואישור לפני בניית הטיול':'7. Review and Approve Before Building','💬 עוזר התכנון':'💬 Planning Assistant','הטיול נשאר ניתן לעריכה':'Your trip remains editable','הקודם':'Back','הבא':'Next','בנה טיול':'Build Trip','בונים לכם את הטיול...':'Building your trip...','מנתחים את ההעדפות שלכם':'Analyzing your preferences','טיול חדש':'New Trip','פיילוט: עד 10 שינויים':'Pilot: up to 10 changes','שמור טיול':'Save Trip','שמור טיול וקבל קישור':'Save Trip and Get Link','הטיול נשמר ✓':'Trip Saved ✓','יציאה ללא שמירה':'Exit Without Saving','הטיול עדיין לא נשמר.':'Your trip has not been saved yet.','הקישור האישי לטיול:':'Your Personal Trip Link:','העתק קישור':'Copy Link','הקישור הועתק ✓':'Link Copied ✓','פוסטים והמלצות לכל הטיול':'Posts and Recommendations for the Entire Trip','בדוק והצע שיבוץ':'Review and Suggest Placement','הטיול הראשוני מוכן. כתבו לי מה תרצו לשנות.':'Your initial trip is ready. Tell me what you would like to change.','שלח':'Send',
     'בחרו את הדרך שמתאימה לכם':'Choose the plan that fits you','מחירים פשוטים לפי טיול':'Simple Pricing Per Trip','טיול קיים':'Ready Trip','טיול מוכן':'Ready-made Trip','הכי מתאים למי שמצא בסיס טוב':'Best if you found a good base trip','התאמת טיול':'Trip Adaptation','מאפס':'From Scratch','טיול אישי AI':'Personal AI Trip','צריכים עוד שינויים?':'Need more changes?','המשך לקופה':'Continue to Checkout','סה״כ':'Total',
@@ -67,8 +69,8 @@
   }
 
   function translateNode(node){
-    if(!node?.parentElement||node.parentElement.closest('script,style,[data-no-translate],#tcUserGreeting,#tcMobileUser'))return;
-    if(!originalText.has(node))originalText.set(node,node.nodeValue);
+    if(!node?.parentElement||node.parentElement.closest('script,style,[data-no-translate],[data-lang],#tcUserGreeting,#tcMobileUser'))return;
+    if(!originalText.has(node)){originalText.set(node,node.nodeValue);trackedText.push(node);}
     const next=translateValue(node.nodeValue,node);
     if(next!==node.nodeValue)node.nodeValue=next;
   }
@@ -81,13 +83,26 @@
     base.querySelectorAll?.('[data-en]').forEach(el=>{if(!el.dataset.tcFinalEn)el.dataset.tcFinalEn='1';if(el.textContent!==el.dataset.en)el.textContent=el.dataset.en});
     base.querySelectorAll?.('[data-en-aria]').forEach(el=>el.setAttribute('aria-label',el.dataset.enAria));
     base.querySelectorAll?.('[placeholder],[title],[aria-label]').forEach(el=>{
-      if(!originalAttrs.has(el))originalAttrs.set(el,{placeholder:el.getAttribute('placeholder'),title:el.getAttribute('title'),aria:el.getAttribute('aria-label')});
+      if(!originalAttrs.has(el)){originalAttrs.set(el,{placeholder:el.getAttribute('placeholder'),title:el.getAttribute('title'),aria:el.getAttribute('aria-label')});trackedAttrs.push(el);}
       for(const attr of ['placeholder','title','aria-label']){const value=el.getAttribute(attr);if(!value||!HEBREW.test(value))continue;el.setAttribute(attr,PLACEHOLDERS[value]||translateValue(value,{parentElement:el}));}
     });
     const walker=document.createTreeWalker(base,NodeFilter.SHOW_TEXT);const nodes=[];let n;while((n=walker.nextNode()))nodes.push(n);nodes.forEach(translateNode);
   }
 
-  function restoreHebrewState(){document.body.classList.remove('tc-en');}
+  function syncLanguageControls(){
+    const current=language();
+    document.querySelectorAll('[data-lang]').forEach(btn=>{
+      btn.textContent=btn.dataset.lang==='en'?'EN':(current==='en'?'HE':'עברית');
+      btn.setAttribute('aria-label',btn.dataset.lang==='en'?'Switch to English':'מעבר לעברית');
+    });
+  }
+
+  function restoreHebrewState(){
+    trackedText.forEach(node=>{if(node?.isConnected&&originalText.has(node))node.nodeValue=originalText.get(node)});
+    trackedAttrs.forEach(el=>{if(!el?.isConnected||!originalAttrs.has(el))return;const saved=originalAttrs.get(el);for(const [attr,value] of [['placeholder',saved.placeholder],['title',saved.title],['aria-label',saved.aria]])value===null?el.removeAttribute(attr):el.setAttribute(attr,value)});
+    document.querySelectorAll('[data-he]').forEach(el=>{if(el.dataset.he!==undefined)el.textContent=el.dataset.he});
+    document.documentElement.lang='he';document.documentElement.dir='rtl';document.body.classList.remove('tc-en');syncLanguageControls();
+  }
 
   function installLogo(){
     document.querySelectorAll('.tc-brand-logo').forEach(img=>{
@@ -115,16 +130,16 @@
       @media(max-width:380px),(max-height:700px){.tc-home-final{padding-top:12px!important;justify-content:flex-start!important}.tc-home-final .home-kicker{font-size:12px!important;padding:6px 9px!important}.tc-home-final h2{font-size:38px!important;margin:8px 0!important}.tc-home-final>p{font-size:15px!important;line-height:1.35!important}.tc-home-final .tc-home-actions{margin-top:11px!important}.tc-home-final .tc-home-actions .btn{min-height:45px!important;padding:9px 12px!important}.tc-home-demo{margin-top:9px!important}.tc-home-demo small{font-size:11px!important}.tc-home-final .home-trust{margin-top:8px!important;font-size:10px!important}}
     `;document.head.appendChild(style);
     installLogo();
-    document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>setTimeout(()=>{language()==='en'?applyEnglish():restoreHebrewState();installLogo()},0)));
+    document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>setTimeout(()=>{language()==='en'?applyEnglish():restoreHebrewState();syncLanguageControls();installLogo()},0)));
     const nativeAlert=window.alert.bind(window),nativeConfirm=window.confirm.bind(window);
     window.alert=message=>nativeAlert(language()==='en'?translateValue(String(message),{parentElement:document.body}):message);
     window.confirm=message=>nativeConfirm(language()==='en'?translateValue(String(message),{parentElement:document.body}):message);
     let queued=false;new MutationObserver(records=>{installLogo();if(language()!=='en'||queued)return;queued=true;requestAnimationFrame(()=>{queued=false;records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType===Node.TEXT_NODE)translateNode(node);else applyEnglish(node)}))})}).observe(document.body,{childList:true,subtree:true});
-    if(language()==='en')applyEnglish();
+    if(language()==='en')applyEnglish();syncLanguageControls();
     const leaveImport=()=>{if(location.hash==='#import')location.hash=document.body.classList.contains('tc-logged-in')?'#account':'#home'};
     leaveImport();window.addEventListener('hashchange',leaveImport);
-    window.addEventListener('pageshow',()=>{installLogo();if(language()==='en')applyEnglish()});
-    window.addEventListener('hashchange',()=>setTimeout(()=>{installLogo();if(language()==='en')applyEnglish()},0));
+    window.addEventListener('pageshow',()=>{installLogo();language()==='en'?applyEnglish():restoreHebrewState();syncLanguageControls()});
+    window.addEventListener('hashchange',()=>setTimeout(()=>{installLogo();language()==='en'?applyEnglish():restoreHebrewState();syncLanguageControls()},0));
     document.documentElement.dataset.tripcraftBuild='V109-FINAL';
   }
 

@@ -1,2 +1,6 @@
-TripCraft Mobile V117
-26-09-2026
+TripCraft Mobile V118
+
+Built from the approved V117 baseline.
+Fixes: stable HE/EN switching, reliable Next/Back wizard navigation,
+manual Provence recognition, and preserved V117 save/edit/day/lodging behavior.
+29-09-2026
