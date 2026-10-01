@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>TripCraft V119</title>
+<title>TripCraft V118</title>
 
 <link rel="icon" type="image/png" href="icons/icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -385,11 +385,27 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 @media(max-width:700px){#tcOtpStep .otp-box{padding:18px 14px;border-radius:22px}#tcOtpStep h2{font-size:28px}.otp-email-display{font-size:18px;padding:12px}.otp-back-btn{font-size:15px}}
 </style>
 <style id="tc-v99-fixes">.tc-brand-logo{width:84px!important;height:68px!important;min-width:84px!important;object-fit:contain;border-radius:0!important;background:#fff!important;padding:0!important}body:not(.tc-logged-in) .tc-desktop-nav a:not([href="#home"]):not([href="#how"]):not([href="#pricing"]):not([href="#login"]){display:none!important}body:not(.tc-logged-in) #tcMobileMenu a:not([href="#home"]):not([href="#how"]):not([href="#pricing"]):not([href="#login"]){display:none!important}body:not(.tc-logged-in) .tc-install{display:none!important}@media(max-width:620px){.tc-brand-logo{width:72px!important;height:60px!important;min-width:72px!important}.tc-header .brand h1{font-size:18px!important}.planner-actions{padding-bottom:max(10px,env(safe-area-inset-bottom))}}</style>
+
+<style id="tc-v118-qa-step-fallback">
+/* V118 QA: keep the first planner screen visible even before JS completes. */
+body:not([data-tc-step1-part]) .planner-step[data-step="1"] .v59-destination,
+body[data-tc-step1-part="1"] .planner-step[data-step="1"] .v59-destination,
+body[data-tc-step1-part="2"] .planner-step[data-step="1"] .v59-flights,
+body[data-tc-step1-part="3"] .planner-step[data-step="1"] .v59-dates{display:grid!important}
+body:not([data-tc-step1-part]) .planner-step[data-step="1"] .v59-flights,
+body:not([data-tc-step1-part]) .planner-step[data-step="1"] .v59-dates,
+body[data-tc-step1-part="1"] .planner-step[data-step="1"] .v59-flights,
+body[data-tc-step1-part="1"] .planner-step[data-step="1"] .v59-dates,
+body[data-tc-step1-part="2"] .planner-step[data-step="1"] .v59-destination,
+body[data-tc-step1-part="2"] .planner-step[data-step="1"] .v59-dates,
+body[data-tc-step1-part="3"] .planner-step[data-step="1"] .v59-destination,
+body[data-tc-step1-part="3"] .planner-step[data-step="1"] .v59-flights{display:none!important}
+</style>
 </head><body>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V119 · נץ מערכות מידע" data-en="V119 · Netz Information Systems">V119 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V118 · נץ מערכות מידע" data-en="V118 · Netz Information Systems">V118 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -456,7 +472,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
         <span data-part="1" class="active">1 · יעד</span><span data-part="2">2 · טיסות</span><span data-part="3">3 · תאריכים</span>
       </div>
       <div class="quick-plan-card v59-plan-groups">
-        <section class="v59-topic v59-destination"><div class="v59-topic-title"><span>🗺️</span><div><strong>יעד הטיול</strong><small>בחרו מדינות ואזור מרכזי</small></div></div><div class="v59-topic-body">
+        <section class="v59-topic v59-destination tc-part-active"><div class="v59-topic-title"><span>🗺️</span><div><strong>יעד הטיול</strong><small>בחרו מדינות ואזור מרכזי</small></div></div><div class="v59-topic-body">
           <div class="planner-grid"><div class="field"><label>שם הטיול שלכם <span class="req-star">*</span></label><input id="plTripName" placeholder="למשל: אוסטריה וגרמניה 2027"></div>
           <div class="field"><label>מדינות <small>אפשר לבחור כמה</small></label><div class="country-search-row"><div class="ac-wrap"><input id="plCountrySearch" autocomplete="off" placeholder="הקלידו מדינה ובחרו מהרשימה"><div class="ac-list" id="plCountrySearchList"></div></div><button class="btn soft" id="addCountryBtn" type="button">+ הוסף</button></div><div class="selected-countries" id="selectedCountries"></div><div class="country-chips country-popular" id="countryChoices"><label><input type="checkbox" value="אוסטריה"><span>🇦🇹 אוסטריה</span></label><label><input type="checkbox" value="גרמניה"><span>🇩🇪 גרמניה</span></label><label><input type="checkbox" value="איטליה"><span>🇮🇹 איטליה</span></label><label><input type="checkbox" value="צרפת"><span>🇫🇷 צרפת</span></label><label><input type="checkbox" value="שווייץ"><span>🇨🇭 שווייץ</span></label><label><input type="checkbox" value="יוון"><span>🇬🇷 יוון</span></label></div><input id="plCountries" type="hidden"><input id="plCountryOther" type="hidden"></div></div>
           <div class="field destination-wide"><label>איפה מטיילים? <span class="req-star">*</span></label><div class="ac-wrap"><input id="plDestination" class="place-ac" data-ac-type="city" autocomplete="off" placeholder="מדינה, עיר או אזור — כולל ישראל"><div class="ac-list" id="plDestinationList"></div></div></div>
@@ -750,7 +766,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <script src="tripcraft-v109.js?v=109"></script>
 <script src="tripcraft-v109-final.js?v=109-final"></script>
 <script src="tripcraft-v109-mobile-fixes.js?v=110-mobile"></script>
-<script src="tripcraft-v119.js?v=119"></script>
+<script src="tripcraft-v118.js?v=118-qa-20261001"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 
