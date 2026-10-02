@@ -1,6 +1,6 @@
-TripCraft Mobile V118
+TripCraft Mobile V120
 
-Built from the approved V117 baseline.
-Fixes: stable HE/EN switching, reliable Next/Back wizard navigation,
-manual Provence recognition, and preserved V117 save/edit/day/lodging behavior.
-29-09-2026
+Built from TripCraft Mobile V118 FINAL.
+Primary fix: hardened mobile Next/Back controls with touch pointerup support and duplicate-click protection.
+QA: all 56 button elements audited for wiring; V120 acceptance, runtime, navigation runtime, CJ/Booking, feature and mobile-control regressions passed.
+02-10-2026
