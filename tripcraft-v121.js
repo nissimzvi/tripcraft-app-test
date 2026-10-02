@@ -1,8 +1,8 @@
-/* TripCraft Mobile V121 - Booking-readiness presentation/SEO layer on stable V120 mobile controls. */
+/* TripCraft Mobile V122 - Booking-readiness presentation/SEO layer on stable V120 mobile controls. */
 (() => {
   'use strict';
 
-  const VERSION = 'V121';
+  const VERSION = 'V122';
   const LANG_KEY = 'tc_v433_lang';
   const CUSTOMER_KEY = 'tc_v433_customer';
   const LOCAL_TRIPS_KEY = 'tc_v433_purchases';
@@ -1071,7 +1071,7 @@
     ensureCalendar();
     enhancePlanner();
     const api = { VERSION, renderAccount, openTrip, startNewTrip, saveCurrentTrip, discardCurrentTrip, deleteTrip, activateAccountAction, openDayDetails, applyAiChange, persistDraft, routeAfterPlannerExit, closeDayModal, syncFloatingActions };
-    window.TripCraftV121 = api;
+    window.TripCraftV122 = api;
     window.TripCraftV120 = api; // compatibility alias for the stable V120 API
     window.TripCraftV118 = api;
     window.TripCraftV117 = api;
@@ -1142,7 +1142,7 @@
     });
     if (location.hash === '#account') renderAccount();
     document.documentElement.dataset.tripcraftVersion = VERSION;
-    document.documentElement.dataset.tripcraftBuild = 'V121-MOBILE';
+    document.documentElement.dataset.tripcraftBuild = 'V122-MOBILE';
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install, { once: true });
