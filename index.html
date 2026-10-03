@@ -404,7 +404,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V125 · נץ מערכות מידע" data-en="V125 · Netz Information Systems">V125 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V126 · נץ מערכות מידע" data-en="V126 · Netz Information Systems">V126 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -1082,7 +1082,39 @@ function parseHardConstraints(text,startYear){
 function applyHardConstraintsToDays(days,constraints){
  for(const c of constraints){const idx=days.findIndex(d=>String(d.date).replace(/\./g,'-')===c.date||displayPlannerDate(c.date)===displayPlannerDate(d.date));if(idx<0)continue;const d=days[idx];const place=c.from&&c.to?`${c.from} → ${c.to}`:'אירוע קבוע';d.stops.unshift({time:c.time,place,what:`אילוץ קשיח: ${c.text}`});d.title=`${d.title} · אילוץ קבוע`;d.hardConstraints=d.hardConstraints||[];d.hardConstraints.push(c);}
 }
-async function buildPlannerDraft(){const d=plannerData();if(!d.tripName||!d.destination||!d.start||!d.end){alert('חסרים שם טיול, יעד או תאריכים. חזרו לשלבים הקודמים והשלימו אותם.');return false;}await runTripBuildProgress();const start=new Date(d.start+'T12:00:00'),end=new Date(d.end+'T12:00:00');let n=Math.round((end-start)/86400000)+1;if(!isFinite(n)||n<1)n=5;n=Math.min(n,30);const hasFlights=!!(d.arrivalAirport||d.departureAirport),gentle=d.ages.some(a=>a>=65)||d.ages.some(a=>a<10)||d.pace==='relaxed';const base=plannerKnownStops(d.destination,d.interests,d.must);const days=[];for(let i=0;i<n;i++){let stops=[],title='יום טיול';const lodging=chooseLodging(d,i,n),prevLodging=i>0?chooseLodging(d,i-1,n):'';if(i===0){title=hasFlights?'נחיתה והתחלה':'תחילת הטיול ב־'+d.destination;stops=hasFlights?[{time:'',place:d.arrivalAirport||d.destination,what:'נחיתה, איסוף רכב/התארגנות ויציאה לדרך.'},{time:'',place:base[1]||d.destination,what:'היכרות ראשונה עם היעד בקצב רגוע.'}]:[{time:'',place:d.destination,what:'יציאה לטיול והתארגנות באזור היעד.'},{time:'',place:base[1]||d.destination,what:'היכרות ראשונה עם האזור בקצב המתאים להרכב המטיילים.'}];if(lodging)stops.push({time:'',place:lodging,what:'הגעה למקום הלינה והתארגנות.'});}else if(i===n-1){title=hasFlights?'חזרה הביתה':'יום אחרון ב־'+d.destination;if(prevLodging)stops.push({time:'',place:prevLodging,what:'יציאה ממקום הלינה.'});stops.push({time:'',place:base[(i%Math.max(2,base.length-1))]||d.destination,what:'בוקר רגוע והשלמות אחרונות.'});if(hasFlights)stops.push({time:'',place:d.departureAirport||d.arrivalAirport,what:'החזרת רכב אם יש, צ׳ק-אין וטיסה חזרה הביתה.'});}else{const max=d.dayLength==='half'?2:(gentle?3:d.pace==='active'?5:4);const pool=base.filter((x,j)=>j>0&&j<base.length);if(prevLodging)stops.push({time:'',place:prevLodging,what:'יציאה ממקום הלינה — נקודת העוגן של היום.'});for(let j=0;j<max;j++){const place=pool[(i+j-1)%Math.max(1,pool.length)]||`${d.destination} center`;stops.push({time:'',place,what:`ביקור ב־${place}. הפירוט המלא, זמני פתיחה, חניה והמלצות יופיעו ב־Drill Down.`});}if(lodging)stops.push({time:'',place:lodging,what:lodging===prevLodging?'חזרה למקום הלינה — טיול כוכב.':'הגעה למקום הלינה הבא.'});title=plannerThemeShort({stops,title:d.interests[(i-1)%Math.max(1,d.interests.length)]||'יום טיול'});}days.push({date:dayDate(d.start,i),title,lodging,stops:stops.filter(s=>s.place)});}applyHardConstraintsToDays(days,parseHardConstraints(d.free,d.start?d.start.slice(0,4):''));planner.draft={name:d.tripName||d.destination,country:'',year:d.start?d.start.slice(0,4):'',sourceType:'planner',plannerProfile:d,changeCount:0,maxChanges:10,days};renderPlannerDraft();Promise.resolve(tcSaveCurrentTrip(false)).catch(e=>console.warn('Background save failed',e));tcLogEvent('trip_built',{name:planner.draft.name,days:n,lodgingMode:d.lodgingMode,dayLength:d.dayLength,hasFlights});return true;}
+async function buildPlannerDraft(){
+ const d=plannerData();
+ const lang=(document.documentElement.lang||'he').startsWith('en')?'en':'he';
+ if(!d.tripName||!d.destination||!d.start||!d.end){alert(plannerMessage('חסרים שם טיול, יעד או תאריכים. חזרו לשלבים הקודמים והשלימו אותם.','Trip name, destination or dates are missing. Go back and complete them.'));return false;}
+ const sb=tcSupabase();
+ if(!sb?.functions?.invoke)throw new Error(plannerMessage('שירות ה-AI אינו זמין.','AI service is unavailable.'));
+ const tripId=planner.currentTripId||planner.draft?.tripId||tcNewTripId();
+ planner.currentTripId=tripId;
+ const functionName=window.TRIPCRAFT_CONFIG?.aiFunctionName||'tripcraft-ai';
+ const tripRequest={destination:d.destination,start_date:d.start,end_date:d.end,travelers:d.people,language:lang,intensity:d.pace,trip_name:d.tripName,group:d.group,children:d.children,transport:d.transport,interests:d.interests,must:d.must,avoid:d.avoid,notes:d.free};
+ await runTripBuildProgress();
+ const build=await sb.functions.invoke(functionName,{body:{action:'build_trip',trip_id:tripId,user_id:tcCustomer()?.id||null,trip:tripRequest}});
+ if(build?.error)throw build.error;
+ const payload=build?.data||{};
+ if(!payload.ok||!payload.itinerary)throw new Error(payload.error||'INVALID_BUILD_RESPONSE');
+ const ai=payload.itinerary;
+ const days=(ai.days||[]).map(day=>({date:day.date||'',title:day.title||'',lodging:day.overnight_location||'',stops:(day.activities||[]).map(a=>({time:a.time||'',place:a.location||a.name||'',what:[a.name,a.description].filter(Boolean).join(' — ')})).filter(s=>s.place)}));
+ if(!days.length)throw new Error('AI returned no itinerary days');
+ planner.draft={tripId,name:d.tripName||ai.title||d.destination,country:ai.country||'',year:d.start.slice(0,4),sourceType:'ai',plannerProfile:d,changeCount:0,maxChanges:10,days,aiItinerary:ai,aiUsage:{build:payload.usage||null,buildCostUsd:payload.cost_usd||0,webSearchCalls:payload.web_search_calls||0},verification:null};
+ applyHardConstraintsToDays(planner.draft.days,parseHardConstraints(d.free,d.start?d.start.slice(0,4):''));
+ renderPlannerDraft();
+ await tcSaveCurrentTrip(false);
+ tcLogEvent('trip_built',{name:planner.draft.name,days:days.length,tripId,source:'openai',costUsd:payload.cost_usd||0});
+ // Verification is deliberately a second call: a failure here never destroys the built trip.
+ try{
+   const verify=await sb.functions.invoke(functionName,{body:{action:'verify_trip',trip_id:tripId,user_id:tcCustomer()?.id||null,trip:tripRequest,itinerary:ai}});
+   const v=verify?.data||{};
+   if(!verify?.error&&v.ok){planner.draft.verification=v.verification||null;planner.draft.aiUsage.verify=v.usage||null;planner.draft.aiUsage.verifyCostUsd=v.cost_usd||0;planner.draft.aiUsage.webSearchCalls=(planner.draft.aiUsage.webSearchCalls||0)+(v.web_search_calls||0);await tcSaveCurrentTrip(false);}
+   else console.warn('Trip web verification skipped/failed',verify?.error||v?.error||'unknown');
+ }catch(e){console.warn('Trip web verification failed; keeping built trip',e);}
+ renderPlannerDraft();
+ return true;
+}
 function plannerTravelMode(profile){if(profile.transport==='walking')return{mode:'walking',icon:'🚶',label:'הליכה'};if(profile.transport==='public')return{mode:'transit',icon:'🚆',label:'תחבורה ציבורית'};if(profile.transport==='mixed')return{mode:'driving',icon:'🚗',label:'נסיעה / משולב'};return{mode:'driving',icon:'🚗',label:'נסיעה'};}
 function plannerDayRoute(d,profile){const destName=profile.destination||'';const pts=(d.stops||[]).map(x=>({name:/airport|שדה|Prague|Budapest|Munich|Innsbruck|New York|Athens|Achensee|Seefeld|Sölden|Längenfeld|Central Park|Brooklyn/i.test(x.place||'')?x.place:((x.place||'')+', '+destName)})).filter(x=>x.name);if(pts.length<2)return'#';const m=plannerTravelMode(profile).mode,origin=encodeURIComponent(pts[0].name),destination=encodeURIComponent(pts[pts.length-1].name),mids=pts.slice(1,-1).map(x=>encodeURIComponent(x.name)).join('|');return`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=${m}${mids?'&waypoints='+mids:''}`;}
 function plannerDayDuration(d,profile){const gaps=Math.max(1,(d.stops||[]).length-1),t=profile.transport;if(t==='walking')return`כ־${Math.max(25,gaps*35)} דק׳ הליכה`;if(t==='public')return`כ־${Math.max(40,gaps*45)} דק׳ תחבורה`;if(t==='mixed')return`כ־${Math.max(45,gaps*40)} דק׳ תנועה`;return`כ־${Math.max(45,gaps*45)} דק׳ נהיגה`;}
@@ -1484,7 +1516,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 <script src="tripcraft-v109.js?v=109"></script>
 <script src="tripcraft-v109-final.js?v=109-final"></script>
 <script src="tripcraft-v109-mobile-fixes.js?v=110-mobile"></script>
-<script src="tripcraft-v125.js?v=125"></script>
+<script src="tripcraft-v126.js?v=126"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 </body></html>
