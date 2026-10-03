@@ -173,6 +173,17 @@
     editing = { id: '', source: '', original: null };
     activeDayIndex = -1;
     document.body.classList.remove('tc-v115-editing');
+    // V128: a new trip must be a truly blank trip, never the last opened/saved trip.
+    try {
+      window.planner = window.planner || {};
+      window.planner.draft = null;
+      window.planner.currentTripId = null;
+      window.planner.step = 1;
+      localStorage.removeItem('tripcraft_planner_draft_v57');
+      $('plannerResult')?.classList.remove('show');
+      const share = $('plannerShareBox'); if (share) share.style.display = 'none';
+      const days = $('plannerDraftDays'); if (days) days.innerHTML = '';
+    } catch (_) { }
     window.TripCraftV108State?.resetState?.();
     try { window.TripCraftV102?.resetNewTrip?.(); }
     finally { showPlanner(); }
