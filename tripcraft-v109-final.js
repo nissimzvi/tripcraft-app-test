@@ -14,7 +14,7 @@
 
   const EN=new Map(Object.entries({
     'V118 · נץ מערכות מידע':'V118 · Netz Information Systems','V117 · נץ מערכות מידע':'V117 · Netz Information Systems','V110 · נץ מערכות מידע':'V110 · Netz Information Systems','V109 · נץ מערכות מידע':'V109 · Netz Information Systems',
-    'דף הבית':'Home','איך זה עובד':'How It Works','מחירים':'Pricing','הצעות לטיולים':'Trip Ideas','בתי מלון':'Hotels','תכנון טיול':'Plan a Trip','סל':'Cart','החשבון שלי':'My Account','כניסה':'Sign In','כניסה / הרשמה':'Sign In / Register','התקן אפליקציה':'Install App','פרטיות, תקנון ונגישות':'Privacy, Terms & Accessibility',
+    'אוסטריה':'Austria','גרמניה':'Germany','איטליה':'Italy','צרפת':'France','שווייץ':'Switzerland','יוון':'Greece','הונגריה':'Hungary','סלובקיה':'Slovakia','ויאטנם':'Vietnam','וייטנאם':'Vietnam','תאילנד':'Thailand','ספרד':'Spain','פורטוגל':'Portugal','הולנד':'Netherlands','בלגיה':'Belgium','צ׳כיה':'Czechia','פולין':'Poland','קרואטיה':'Croatia','סלובניה':'Slovenia','רומניה':'Romania','בולגריה':'Bulgaria','קפריסין':'Cyprus','טורקיה':'Turkey','בריטניה':'United Kingdom','אירלנד':'Ireland','דנמרק':'Denmark','נורווגיה':'Norway','שוודיה':'Sweden','פינלנד':'Finland','איסלנד':'Iceland','ארה״ב':'USA','קנדה':'Canada','יפן':'Japan','דרום קוריאה':'South Korea','סינגפור':'Singapore','איחוד האמירויות':'United Arab Emirates','גאורגיה':'Georgia','מונטנגרו':'Montenegro','אלבניה':'Albania','מלטה':'Malta','טירול':'Tyrol','דף הבית':'Home','איך זה עובד':'How It Works','מחירים':'Pricing','הצעות לטיולים':'Trip Ideas','בתי מלון':'Hotels','תכנון טיול':'Plan a Trip','סל':'Cart','החשבון שלי':'My Account','כניסה':'Sign In','כניסה / הרשמה':'Sign In / Register','התקן אפליקציה':'Install App','פרטיות, תקנון ונגישות':'Privacy, Terms & Accessibility',
     'איך TripCraft עובד?':'How does TripCraft work?','לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.':'More than an itinerary document — a smart platform that stays with you from the first idea until you return home.',
     '1. מספרים לנו על הטיול':'1. Tell us about your trip','יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.':'Destination, dates, airports, travelers, ages, pace, interests and preferences.',
     '2. המנוע בונה חכם':'2. The engine plans intelligently','חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים.':'Daily structure, geographic order, travel times, points of interest and traveler matching.',
@@ -53,8 +53,9 @@
     const tag=node.parentElement?.tagName||'';
     if(tag==='OPTION')return 'Select an option';
     if(tag==='BUTTON')return 'Continue';
-    if(tag==='LABEL'||tag==='STRONG'||/^H[1-6]$/.test(tag))return 'Trip details';
-    if(text.length<24)return 'Trip information';
+    if(tag==='LABEL')return 'Option';
+    if(tag==='STRONG'||/^H[1-6]$/.test(tag))return 'Trip details';
+    if(text.length<24)return 'Option';
     return 'TripCraft information is available for this step.';
   }
 

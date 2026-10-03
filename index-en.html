@@ -404,7 +404,7 @@ input,select,textarea,button{font-family:inherit;max-width:100%;}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V124 · נץ מערכות מידע" data-en="V124 · Netz Information Systems">V124 · Netz Information Systems</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V125 · נץ מערכות מידע" data-en="V125 · Netz Information Systems">V125 · Netz Information Systems</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -940,14 +940,14 @@ function validatePlannerStep1Part(part){
  if(part===2){
    if(d.arrivalAirport||d.departureAirport){
      const chk=airportCompatibility(d.destination,d.arrivalAirport,d.departureAirport||d.arrivalAirport);
-     if(chk.warn&&!confirm(chk.message+'\n\nלהמשיך בכל זאת?'))return false;
+     if(chk.warn&&!confirm(chk.message+'\n\nContinue anyway?'))return false;
    }
  }
  if(part===3){
    if(!d.start||!d.end){alert('Please select departure and return dates.');return false;}
    const a=new Date(d.start+'T12:00:00'),b=new Date(d.end+'T12:00:00'),diff=Math.round((b-a)/86400000);
    if(!isFinite(diff)||diff<=0){alert('Return date must be later than departure date.');return false;}
-   if(diff<=2&&!confirm(`הטיול קצר מאוד (${diff+1} ימים קלנדריים). בטוחים שאתם רוצים לטוס לזמן כל כך קצר?`))return false;
+   if(diff<=2&&!confirm(`This is a very short trip (${diff+1} calendar days). Are you sure you want to continue?`))return false;
  }
  return true;
 }
@@ -1172,7 +1172,7 @@ function publicText(v){return String(v??'').replace(/עינת\s*[+ו]?\s*ניס�
 function esc(s){return publicText(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}loadImported();
 
 // V53 bilingual city + airport autocomplete. Local instant matches + Photon/OSM fallback.
-const TC_CITIES=[['פרובנס','Provence','צרפת / France','FR',43.9352,5.4520,['provence','פרובנס','provence-alpes-cote d azur','paca','avignon','aix en provence']],['הריביירה הצרפתית','French Riviera / Côte d’Azur','צרפת / France','FR',43.7102,7.2620,['cote d azur','côte d’azur','french riviera','ריביירה הצרפתית','ניס','nice']],
+const TC_CITIES=[['טירול','Tyrol','אוסטריה / Austria','AT',47.2692,11.4041,['tyrol','tirol','טירול','innsbruck','seefeld','solden','sölden']],['פרובנס','Provence','צרפת / France','FR',43.9352,5.4520,['provence','פרובנס','provence-alpes-cote d azur','paca','avignon','aix en provence']],['הריביירה הצרפתית','French Riviera / Côte d’Azur','צרפת / France','FR',43.7102,7.2620,['cote d azur','côte d’azur','french riviera','ריביירה הצרפתית','ניס','nice']],
  ['תל אביב','Tel Aviv','Israel','IL',32.0853,34.7818,['תל א','תא','tel aviv','telaviv']],['ירושלים','Jerusalem','Israel','IL',31.7683,35.2137,['ירוש','jerusalem']],['חיפה','Haifa','Israel','IL',32.7940,34.9896,['חיפ','haifa']],['אילת','Eilat','Israel','IL',29.5577,34.9519,['איל','eilat']],
  ['בודפשט','Budapest','Hungary','HU',47.4979,19.0402,['בוד','budapest']],['פראג','Prague','Czechia','CZ',50.0755,14.4378,['פרג','prague','praha']],['וינה','Vienna','Austria','AT',48.2082,16.3738,['וינ','vienna','wien']],['מינכן','Munich','Germany','DE',48.1351,11.5820,['מינ','munich','muenchen']],['ברלין','Berlin','Germany','DE',52.52,13.405,['ברל','berlin']],['פריז','Paris','France','FR',48.8566,2.3522,['פרי','paris']],['ניס','Nice','France','FR',43.7102,7.2620,['ניס','nice','cote dazur','côte d’azur']],['לונדון','London','United Kingdom','GB',51.5072,-0.1276,['לונד','london']],['רומא','Rome','Italy','IT',41.9028,12.4964,['רומ','rome','roma']],['מילאנו','Milan','Italy','IT',45.4642,9.19,['מיל','milan','milano']],['ונציה','Venice','Italy','IT',45.4408,12.3155,['ונצ','venice','venezia']],['אתונה','Athens','Greece','GR',37.9838,23.7275,['אתו','athens']],['סלוניקי','Thessaloniki','Greece','GR',40.6401,22.9444,['סלו','thessaloniki']],['אמסטרדם','Amsterdam','Netherlands','NL',52.3676,4.9041,['אמס','amsterdam']],['ברצלונה','Barcelona','Spain','ES',41.3874,2.1686,['ברצ','barcelona']],['מדריד','Madrid','Spain','ES',40.4168,-3.7038,['מדר','madrid']],['ליסבון','Lisbon','Portugal','PT',38.7223,-9.1393,['ליס','lisbon','lisboa']],['ציריך','Zurich','Switzerland','CH',47.3769,8.5417,['ציר','zurich']],['ז׳נבה','Geneva','Switzerland','CH',46.2044,6.1432,['זנבה','geneva']],['ניו יורק','New York','USA','US',40.7128,-74.006,['ניו','new york','nyc']],['לוס אנג׳לס','Los Angeles','USA','US',34.0522,-118.2437,['לוס','los angeles','la']],['מיאמי','Miami','USA','US',25.7617,-80.1918,['מיא','miami']],['בנגקוק','Bangkok','Thailand','TH',13.7563,100.5018,['בנג','bangkok']],['האנוי','Hanoi','Vietnam','VN',21.0278,105.8342,['האנ','hanoi']],['דה נאנג','Da Nang','Vietnam','VN',16.0544,108.2022,['דה נ','da nang','danang']],['טוקיו','Tokyo','Japan','JP',35.6762,139.6503,['טוק','tokyo']],['דובאי','Dubai','UAE','AE',25.2048,55.2708,['דוב','dubai']],['איסטנבול','Istanbul','Turkey','TR',41.0082,28.9784,['איס','istanbul']],['לרנקה','Larnaca','Cyprus','CY',34.9003,33.6232,['לרנ','larnaca']],['בוקרשט','Bucharest','Romania','RO',44.4268,26.1025,['בוק','bucharest']],['סופיה','Sofia','Bulgaria','BG',42.6977,23.3219,['סופ','sofia']],['קרקוב','Krakow','Poland','PL',50.0647,19.945,['קרק','krakow']],['ורשה','Warsaw','Poland','PL',52.2297,21.0122,['ורש','warsaw']],['קופנהגן','Copenhagen','Denmark','DK',55.6761,12.5683,['קופ','copenhagen']],['אוסלו','Oslo','Norway','NO',59.9139,10.7522,['אוס','oslo']],['סטוקהולם','Stockholm','Sweden','SE',59.3293,18.0686,['סטוק','stockholm']],['רייקיאוויק','Reykjavik','Iceland','IS',64.1466,-21.9426,['ריי','reykjavik']]
 ];
@@ -1290,7 +1290,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  document.getElementById('tcUnderline')?.addEventListener('click',()=>document.body.classList.toggle('tc-links-underlined'));
  document.getElementById('tcA11yReset')?.addEventListener('click',()=>{document.body.classList.remove('tc-large-text','tc-high-contrast','tc-links-underlined');});
 
- tcAdminMode();tcUpdateCart();tcRenderCart();tcRenderAccount();tcRenderPayments();tcRenderCustomers();tcRenderHeaderUser();tcSetLang(localStorage.getItem(K.lang)||'he');
+ tcAdminMode();tcUpdateCart();tcRenderCart();tcRenderAccount();tcRenderPayments();tcRenderCustomers();tcRenderHeaderUser();tcSetLang('en');
  if(!location.hash)location.hash='#home';applyPageFocus();
 })();
 </script>
@@ -1328,6 +1328,8 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 <script id="tc-v57-ux">
 (function(){
  const countries=['אוסטריה','גרמניה','איטליה','צרפת','שווייץ','יוון','הונגריה','סלובקיה','ויאטנם','תאילנד','ספרד','פורטוגל','הולנד','בלגיה','צ׳כיה','פולין','קרואטיה','סלובניה','רומניה','בולגריה','קפריסין','טורקיה','בריטניה','אירלנד','דנמרק','נורווגיה','שוודיה','פינלנד','איסלנד','ארה״ב','קנדה','יפן','דרום קוריאה','סינגפור','איחוד האמירויות','גאורגיה','מונטנגרו','אלבניה','מלטה'];
+ const TC_COUNTRY_EN={'אוסטריה':'Austria','גרמניה':'Germany','איטליה':'Italy','צרפת':'France','שווייץ':'Switzerland','יוון':'Greece','הונגריה':'Hungary','סלובקיה':'Slovakia','ויאטנם':'Vietnam','תאילנד':'Thailand','ספרד':'Spain','פורטוגל':'Portugal','הולנד':'Netherlands','בלגיה':'Belgium','צ׳כיה':'Czechia','פולין':'Poland','קרואטיה':'Croatia','סלובניה':'Slovenia','רומניה':'Romania','בולגריה':'Bulgaria','קפריסין':'Cyprus','טורקיה':'Turkey','בריטניה':'United Kingdom','אירלנד':'Ireland','דנמרק':'Denmark','נורווגיה':'Norway','שוודיה':'Sweden','פינלנד':'Finland','איסלנד':'Iceland','ארה״ב':'USA','קנדה':'Canada','יפן':'Japan','דרום קוריאה':'South Korea','סינגפור':'Singapore','איחוד האמירויות':'United Arab Emirates','גאורגיה':'Georgia','מונטנגרו':'Montenegro','אלבניה':'Albania','מלטה':'Malta'};
+ const tcCountryDisplay=v=>TC_COUNTRY_EN[String(v||'').trim()]||String(v||'').trim();
  const countryAliases={'שווייץ':['שווייץ','שויץ','שוויץ','שוויצריה','switzerland','swiss','ch'],'אוסטריה':['austria','osterreich','österreich'],'גרמניה':['germany','deutschland'],'איטליה':['italy','italia'],'צרפת':['france'],'יוון':['greece','hellas']};
  const nrm=v=>String(v||'').toLowerCase().normalize('NFKD').replace(/[׳’'״"]/g,'').trim();
  function canonicalCountry(v){const q=nrm(v);for(const c of countries){if(nrm(c)===q||(countryAliases[c]||[]).some(a=>nrm(a)===q))return c;}return String(v||'').trim();}
@@ -1335,9 +1337,9 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  function countryMatches(c,q){q=nrm(q);const vals=[c,...(countryAliases[c]||[])].map(nrm);return vals.some(v=>v.includes(q)||(q.length>=3&&tcOneEdit(v,q)));}
  const search=document.getElementById('plCountrySearch'), list=document.getElementById('plCountrySearchList'), chips=document.getElementById('countryChoices'), selected=document.getElementById('selectedCountries');
  function checked(){return [...chips.querySelectorAll('input:checked')].map(x=>x.value)}
- function ensureCountry(name){name=canonicalCountry(name);if(!name)return;let input=[...chips.querySelectorAll('input')].find(x=>x.value===name);if(!input){const lab=document.createElement('label');lab.innerHTML='<input type="checkbox"><span></span>';input=lab.querySelector('input');input.value=name;lab.querySelector('span').textContent='🌍 '+name;chips.appendChild(lab)}input.checked=true;sync();search.value='';list.classList.remove('show');setTimeout(()=>search?.blur(),0)}
- function sync(){const vals=checked();document.getElementById('plCountries').value=vals.join(', ');selected.innerHTML=vals.map(x=>'<button type="button" class="selected-country" data-c="'+x.replace(/"/g,'&quot;')+'">✓ '+x+' ×</button>').join('');selected.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=[...chips.querySelectorAll('input')].find(x=>x.value===b.dataset.c);if(i)i.checked=false;sync()})}
- function render(){const q=(search.value||'').trim().toLowerCase();if(!q){list.classList.remove('show');return}const a=countries.filter(x=>countryMatches(x,q)).slice(0,10);list.innerHTML=(a.length?a:[search.value.trim()]).map(x=>'<div class="ac-item" data-country="'+x.replace(/"/g,'&quot;')+'"><span class="ac-icon">🌍</span><span class="ac-main">'+x+'</span></div>').join('');list.classList.add('show');list.querySelectorAll('.ac-item').forEach(el=>el.onpointerdown=e=>{e.preventDefault();ensureCountry(el.dataset.country)})}
+ function ensureCountry(name){name=canonicalCountry(name);if(!name)return;let input=[...chips.querySelectorAll('input')].find(x=>x.value===name);if(!input){const lab=document.createElement('label');lab.innerHTML='<input type="checkbox"><span></span>';input=lab.querySelector('input');input.value=name;lab.querySelector('span').textContent='🌍 '+tcCountryDisplay(name);chips.appendChild(lab)}input.checked=true;sync();search.value='';list.classList.remove('show');setTimeout(()=>search?.blur(),0)}
+ function sync(){const vals=checked();document.getElementById('plCountries').value=vals.join(', ');selected.innerHTML=vals.map(x=>'<button type="button" class="selected-country" data-c="'+x.replace(/"/g,'&quot;')+'">✓ '+tcCountryDisplay(x)+' ×</button>').join('');selected.querySelectorAll('button').forEach(b=>b.onclick=()=>{const i=[...chips.querySelectorAll('input')].find(x=>x.value===b.dataset.c);if(i)i.checked=false;sync()})}
+ function render(){const q=(search.value||'').trim().toLowerCase();if(!q){list.classList.remove('show');return}const a=countries.filter(x=>countryMatches(x,q)).slice(0,10);list.innerHTML=(a.length?a:[search.value.trim()]).map(x=>'<div class="ac-item" data-country="'+x.replace(/"/g,'&quot;')+'"><span class="ac-icon">🌍</span><span class="ac-main">'+tcCountryDisplay(x)+'</span></div>').join('');list.classList.add('show');list.querySelectorAll('.ac-item').forEach(el=>el.onpointerdown=e=>{e.preventDefault();ensureCountry(el.dataset.country)})}
  search?.addEventListener('input',render);search?.addEventListener('focus',render);chips?.addEventListener('change',sync);document.getElementById('addCountryBtn')?.addEventListener('click',()=>ensureCountry(search.value));sync();
  // Helpful notes disappear as soon as the user starts answering, but free typing is always accepted.
  const step1=document.querySelector('.planner-step[data-step="1"]');
@@ -1461,7 +1463,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
 <script src="tripcraft-v109.js?v=109"></script>
 <script src="tripcraft-v109-final.js?v=109-final"></script>
 <script src="tripcraft-v109-mobile-fixes.js?v=110-mobile"></script>
-<script src="tripcraft-v124.js?v=124"></script>
+<script src="tripcraft-v125.js?v=125"></script>
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 </body></html>
