@@ -1,0 +1,63 @@
+# TripCraft V133 QA
+
+Passed: 59/59
+
+- PASS — index.html: visible V133
+- PASS — index.html: build progress start
+- PASS — index.html: progress capped waiting
+- PASS — index.html: build client timeout
+- PASS — index.html: verify background
+- PASS — index.html: build releases before verify
+- PASS — index.html: payload required_places
+- PASS — index.html: payload arrival_time
+- PASS — index.html: payload departure_time
+- PASS — index.html: payload include_hotels
+- PASS — index.html: payload lodging_style
+- PASS — index.html: payload lodging_budget
+- PASS — index.html: payload priorities
+- PASS — index.html: payload ages
+- PASS — index.html: day open handler
+- PASS — index.html: day maps
+- PASS — index.html: day waze
+- PASS — index.html: rain alternative
+- PASS — index.html: custom calendar
+- PASS — index.html: gray range css
+- PASS — index.html: RTL date format
+- PASS — index.html: no duplicate ids — []
+- PASS — index.html: JS syntax
+- PASS — index-en.html: visible V133
+- PASS — index-en.html: build progress start
+- PASS — index-en.html: progress capped waiting
+- PASS — index-en.html: build client timeout
+- PASS — index-en.html: verify background
+- PASS — index-en.html: build releases before verify
+- PASS — index-en.html: payload required_places
+- PASS — index-en.html: payload arrival_time
+- PASS — index-en.html: payload departure_time
+- PASS — index-en.html: payload include_hotels
+- PASS — index-en.html: payload lodging_style
+- PASS — index-en.html: payload lodging_budget
+- PASS — index-en.html: payload priorities
+- PASS — index-en.html: payload ages
+- PASS — index-en.html: day open handler
+- PASS — index-en.html: day maps
+- PASS — index-en.html: day waze
+- PASS — index-en.html: rain alternative
+- PASS — index-en.html: custom calendar
+- PASS — index-en.html: gray range css
+- PASS — index-en.html: RTL date format
+- PASS — index-en.html: no duplicate ids — []
+- PASS — index-en.html: JS syntax
+- PASS — AI hard must requirements
+- PASS — AI multi destination lodging
+- PASS — AI exact dates
+- PASS — AI flight constraints
+- PASS — AI lodging prefs
+- PASS — AI rich route schema
+- PASS — AI duration schema
+- PASS — AI drive schema
+- PASS — AI notes schema
+- PASS — AI cost schema
+- PASS — AI 120s timeout
+- PASS — AI 12k output
+- PASS — AI TypeScript parse/type sanity
