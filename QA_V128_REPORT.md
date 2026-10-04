@@ -1,32 +1,26 @@
 # TripCraft V128 QA Report
 
-Build basis: stable MOBILE V126 and clean ADMIN V126.
+## Baselines
+- MOBILE: rebuilt from stable MOBILE V126 planner, not from the broken V127/V128 attempt.
+- ADMIN: rebuilt from the original working ADMIN V126 package supplied by the user.
+- Backend: no new deployment required; the already deployed TripCraft AI V127 remains the backend.
 
-Automated/static QA completed successfully: 72 checks passed, 0 failed.
+## Automated static QA
+77/77 checks passed. Coverage includes HTML IDs, step/button wiring, flight field order, time validation, trip_id/user_id payloads, verify_trip payload, rich AI day mapping, Maps/Waze links, local file references, admin script references, AI settings function definitions, RPC names, user/trip joins and 7-decimal cost formatting.
 
-Mobile checks include:
-- 7 planner steps present.
-- Previous / Next / Build Trip handlers present.
-- Build Trip button is shown by the original stable V126 step-7 logic.
-- Save Trip / Exit without Save controls present.
-- New Trip clears previous draft/current trip state in both inline flow and account flow.
-- Flight time controls exist in Hebrew and English.
-- Flight times are required only when flight airports are entered.
-- build_trip and verify_trip calls include trip_id and authenticated user_id.
-- A tripcraft_trips cloud shell is created before AI usage logging.
-- AI day detail, Google Maps and Waze code present.
-- All local script references resolve.
-- All external/local JS and inline JS passed syntax checks.
-- No duplicate HTML IDs found.
+## Browser/runtime QA
+15/15 checks passed in headless Chromium with controlled mocks. Coverage includes:
+- Mobile JavaScript boot without application errors.
+- Same-airport checkbox auto-fill/read-only behavior.
+- Flight times are mandatory when a flight airport is entered.
+- Build Trip button becomes active/visible on final step.
+- Next flow reaches step 7 and Previous returns to step 6.
+- AI day detail renders actual AI text, time, notes, Google Maps and Waze links.
+- Admin JavaScript boot without application errors.
+- Admin login/dashboard flow with mocked RPC data.
+- AI rows display user name + email, trip name + destination.
+- AI costs display exactly 7 digits after the decimal.
 
-Admin checks include:
-- AI costs use exactly 7 decimal places.
-- Detailed AI activity table includes Trip / Destination.
-- trip_id is joined to saved trips.
-- user_id (or linked trip user_id) resolves to name + email.
-- Old NULL-id AI rows are explicitly shown as unassigned rather than falsely matched.
-- Admin JavaScript passed syntax validation.
+## Live-service boundary
+The QA did not create another paid OpenAI itinerary. The deployed AI V127 backend was already validated live earlier with successful build_trip and verify_trip calls. V128 preserves that backend contract and was statically checked against arrival_airport, departure_airport, arrival_time and departure_time fields.
 
-ZIP checks:
-- ZIP opens without corruption.
-- Every file is inside one clearly named internal V128 folder.

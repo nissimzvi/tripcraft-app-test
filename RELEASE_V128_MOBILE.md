@@ -1,14 +1,15 @@
 # TripCraft MOBILE V128
 
-QA rebuild from stable MOBILE V126 (not V127).
+Baseline: stable MOBILE V126.
 
-- Preserves the V126 7-step wizard and Build Trip button behavior.
-- New Trip clears the prior trip/draft/currentTripId before opening the wizard.
-- Flight arrival/departure times added; required only when flight airports are entered.
-- Creates a tripcraft_trips cloud shell before AI calls so trip_id/user_id are joinable in Admin.
-- Sends authenticated user_id + trip_id to build_trip and verify_trip.
-- Sends arrival/departure airports and times to AI.
-- Day details display AI summary/activity text and per-stop Google Maps + Waze links.
-- Israel/no-flight planning remains supported.
+Changes:
+- Restored and QA-protected Build Trip button on final planner step.
+- Arrival/return flight times are captured and sent to the AI backend as critical constraints.
+- 'Same airport for return' is directly under arrival airport, before return airport and times.
+- Airport values use LTR-safe display inside the RTL mobile UI.
+- New AI trips send trip_id + user_id to build_trip and verify_trip.
+- Day details render the actual AI activity description, times, route metadata and notes.
+- Each AI stop has working Google Maps and Waze search links built from the stop location + trip destination.
+- New trip flow retains V126 navigation and reset behavior.
 
-- Same-return-airport checkbox moved directly under the arrival airport field (before flight times), for a practical mobile flow.
+Backend dependency: deployed TripCraft AI V127.
