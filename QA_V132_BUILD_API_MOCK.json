@@ -1,0 +1,27 @@
+{
+  "result": {
+    "ok": true,
+    "calls": [
+      {
+        "action": "build_trip",
+        "trip_id": "TC-2026-BREHET",
+        "user_id": "51906eb3-265d-4840-b4b4-7a0000000000",
+        "arrival_time": "21:30",
+        "departure_time": "07:15"
+      },
+      {
+        "action": "verify_trip",
+        "trip_id": "TC-2026-BREHET",
+        "user_id": "51906eb3-265d-4840-b4b4-7a0000000000",
+        "arrival_time": "21:30",
+        "departure_time": "07:15"
+      }
+    ],
+    "days": 1,
+    "buildCost": 0.0123,
+    "verifyCost": 0.0045,
+    "web": 1,
+    "dayButtons": 1
+  },
+  "exceptions": []
+}

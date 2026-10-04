@@ -1,0 +1,19 @@
+{
+  "result": {
+    "calls": [
+      {
+        "action": "rain_alternative",
+        "trip_id": "TC-QA-RAIN",
+        "user_id": "51906eb3-265d-4840-b4b4-7a0000000000",
+        "day": 1
+      }
+    ],
+    "visible": true,
+    "maps": 1,
+    "waze": 1,
+    "useButton": 1,
+    "cost": 0.02,
+    "web": 2
+  },
+  "exceptions": []
+}

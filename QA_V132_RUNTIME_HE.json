@@ -1,0 +1,52 @@
+{
+  "ready": "complete",
+  "funcs": {
+    "render": "function",
+    "open": "function",
+    "edit": "function",
+    "planner": "object",
+    "calendar": "object",
+    "nav": "object",
+    "share": "function"
+  },
+  "version": "V132 · נץ מערכות מידע",
+  "calendarOpen": {
+    "show": true,
+    "prompt": "בחרו תאריך יציאה"
+  },
+  "calendarRange": {
+    "start": "16 ספט 2026",
+    "end": "24 ספט 2026",
+    "gray": 7,
+    "startMarks": 1,
+    "endMarks": 1
+  },
+  "nav": {
+    "a": 1,
+    "b": 7,
+    "buildDisplay": "flex",
+    "nextDisplay": "none"
+  },
+  "inject": {
+    "buttons": 1,
+    "rain": 1
+  },
+  "openClick": {
+    "show": true,
+    "aria": "false",
+    "title": "יום 1 · יום ב׳ · 16 ספט 2026",
+    "stops": 2,
+    "maps": 2,
+    "waze": 2,
+    "tripcheck": true,
+    "rainButton": true
+  },
+  "urls": [
+    "https://www.google.com/maps/search/?api=1&query=Acropolis%20Athens%2C%20%D7%99%D7%95%D7%95%D7%9F",
+    "https://www.waze.com/ul?q=Acropolis%20Athens%2C%20%D7%99%D7%95%D7%95%D7%9F&navigate=yes",
+    "https://www.google.com/maps/search/?api=1&query=Plaka%20Athens%2C%20%D7%99%D7%95%D7%95%D7%9F",
+    "https://www.waze.com/ul?q=Plaka%20Athens%2C%20%D7%99%D7%95%D7%95%D7%9F&navigate=yes"
+  ],
+  "exceptions": [],
+  "consoleErrors": []
+}

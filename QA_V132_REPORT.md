@@ -1,0 +1,206 @@
+# TripCraft MOBILE V132 — QA report
+
+Static/structural checks: **192/192 passed**.
+
+- PASS — index.html: visible V132
+- PASS — index.html: no legacy V101
+- PASS — index.html: no legacy V102
+- PASS — index.html: no legacy V109 override
+- PASS — index.html: custom calendar modal
+- PASS — index.html: date display start
+- PASS — index.html: date display end
+- PASS — index.html: gray range css
+- PASS — index.html: start/end marker css
+- PASS — index.html: planner next
+- PASS — index.html: planner prev
+- PASS — index.html: planner build
+- PASS — index.html: build API action
+- PASS — index.html: verify API action
+- PASS — index.html: rain API action
+- PASS — index.html: trip_id build
+- PASS — index.html: user_id build
+- PASS — index.html: arrival time payload
+- PASS — index.html: departure time payload
+- PASS — index.html: delegated day open
+- PASS — index.html: delegated rain
+- PASS — index.html: modal rain button bound
+- PASS — index.html: Google Maps stop
+- PASS — index.html: Waze stop
+- PASS — index.html: day route Maps
+- PASS — index.html: TripCheck day
+- PASS — index.html: save button
+- PASS — index.html: discard button
+- PASS — index.html: copy link button
+- PASS — index.html: globals exported
+- PASS — index.html: no duplicate IDs — []
+- PASS — index.html: button bound tcInstallApp
+- PASS — index.html: button bound tcInstallAppMobile
+- PASS — index.html: button bound addCountryBtn
+- PASS — index.html: button bound plStartDisplay
+- PASS — index.html: button bound plEndDisplay
+- PASS — index.html: button bound addExistingHotelBtn
+- PASS — index.html: button bound plannerPrev
+- PASS — index.html: button bound plannerNext
+- PASS — index.html: button bound plannerBuild
+- PASS — index.html: button bound plannerSaveTrip
+- PASS — index.html: button bound plannerDiscardTrip
+- PASS — index.html: button bound plannerCopyLink
+- PASS — index.html: button bound plannerGlobalPostReview
+- PASS — index.html: button bound plannerChatSend
+- PASS — index.html: button bound analyzeBtn
+- PASS — index.html: button bound createBtn
+- PASS — index.html: button bound tcCheckoutBtn
+- PASS — index.html: button bound tcPayBtn
+- PASS — index.html: button bound tcCheckEmail
+- PASS — index.html: button bound tcRegisterOtp
+- PASS — index.html: button bound tcOtpBack
+- PASS — index.html: button bound tcVerifyOtp
+- PASS — index.html: button bound tcResendOtp
+- PASS — index.html: button bound tcA11yBtn
+- PASS — index.html: button bound tcTextPlus
+- PASS — index.html: button bound tcContrast
+- PASS — index.html: button bound tcUnderline
+- PASS — index.html: button bound tcA11yReset
+- PASS — index.html: button bound tcCalendarClose
+- PASS — index.html: button bound tcCalendarPrev
+- PASS — index.html: button bound tcCalendarNext
+- PASS — index.html: button bound tcCalendarClear
+- PASS — index.html: button bound tcCalendarDone
+- PASS — index.html: button bound plannerDayModalClose
+- PASS — index.html: button bound plannerApplyDayTitle
+- PASS — index.html: button bound plannerRainBtn
+- PASS — index.html: button bound plannerDayChatSend
+- PASS — index-en.html: visible V132
+- PASS — index-en.html: no legacy V101
+- PASS — index-en.html: no legacy V102
+- PASS — index-en.html: no legacy V109 override
+- PASS — index-en.html: custom calendar modal
+- PASS — index-en.html: date display start
+- PASS — index-en.html: date display end
+- PASS — index-en.html: gray range css
+- PASS — index-en.html: start/end marker css
+- PASS — index-en.html: planner next
+- PASS — index-en.html: planner prev
+- PASS — index-en.html: planner build
+- PASS — index-en.html: build API action
+- PASS — index-en.html: verify API action
+- PASS — index-en.html: rain API action
+- PASS — index-en.html: trip_id build
+- PASS — index-en.html: user_id build
+- PASS — index-en.html: arrival time payload
+- PASS — index-en.html: departure time payload
+- PASS — index-en.html: delegated day open
+- PASS — index-en.html: delegated rain
+- PASS — index-en.html: modal rain button bound
+- PASS — index-en.html: Google Maps stop
+- PASS — index-en.html: Waze stop
+- PASS — index-en.html: day route Maps
+- PASS — index-en.html: TripCheck day
+- PASS — index-en.html: save button
+- PASS — index-en.html: discard button
+- PASS — index-en.html: copy link button
+- PASS — index-en.html: globals exported
+- PASS — index-en.html: no duplicate IDs — []
+- PASS — index-en.html: button bound tcInstallApp
+- PASS — index-en.html: button bound tcInstallAppMobile
+- PASS — index-en.html: button bound addCountryBtn
+- PASS — index-en.html: button bound plStartDisplay
+- PASS — index-en.html: button bound plEndDisplay
+- PASS — index-en.html: button bound addExistingHotelBtn
+- PASS — index-en.html: button bound plannerPrev
+- PASS — index-en.html: button bound plannerNext
+- PASS — index-en.html: button bound plannerBuild
+- PASS — index-en.html: button bound plannerSaveTrip
+- PASS — index-en.html: button bound plannerDiscardTrip
+- PASS — index-en.html: button bound plannerCopyLink
+- PASS — index-en.html: button bound plannerGlobalPostReview
+- PASS — index-en.html: button bound plannerChatSend
+- PASS — index-en.html: button bound analyzeBtn
+- PASS — index-en.html: button bound createBtn
+- PASS — index-en.html: button bound tcCheckoutBtn
+- PASS — index-en.html: button bound tcPayBtn
+- PASS — index-en.html: button bound tcCheckEmail
+- PASS — index-en.html: button bound tcRegisterOtp
+- PASS — index-en.html: button bound tcOtpBack
+- PASS — index-en.html: button bound tcVerifyOtp
+- PASS — index-en.html: button bound tcResendOtp
+- PASS — index-en.html: button bound tcA11yBtn
+- PASS — index-en.html: button bound tcTextPlus
+- PASS — index-en.html: button bound tcContrast
+- PASS — index-en.html: button bound tcUnderline
+- PASS — index-en.html: button bound tcA11yReset
+- PASS — index-en.html: button bound tcCalendarClose
+- PASS — index-en.html: button bound tcCalendarPrev
+- PASS — index-en.html: button bound tcCalendarNext
+- PASS — index-en.html: button bound tcCalendarClear
+- PASS — index-en.html: button bound tcCalendarDone
+- PASS — index-en.html: button bound plannerDayModalClose
+- PASS — index-en.html: button bound plannerApplyDayTitle
+- PASS — index-en.html: button bound plannerRainBtn
+- PASS — index-en.html: button bound plannerDayChatSend
+- PASS — config V132
+- PASS — AI function tripcraft-ai
+- PASS — SW V132 cache
+- PASS — SW network first HTML
+- PASS — index.html: exists tripcraft-config.js
+- PASS — index.html: exists tripcraft-logo-v109.png
+- PASS — index.html: exists assets/slovakia.jpg
+- PASS — index.html: exists assets/vietnam.jpg
+- PASS — index.html: exists assets/greece.jpg
+- PASS — index.html: exists assets/dolomites.jpg
+- PASS — index.html: exists assets/austria.jpg
+- PASS — index.html: exists assets/hero.jpg
+- PASS — index-en.html: exists tripcraft-config.js
+- PASS — index-en.html: exists tripcraft-logo-v109.png
+- PASS — index-en.html: exists assets/slovakia.jpg
+- PASS — index-en.html: exists assets/vietnam.jpg
+- PASS — index-en.html: exists assets/greece.jpg
+- PASS — index-en.html: exists assets/dolomites.jpg
+- PASS — index-en.html: exists assets/austria.jpg
+- PASS — index-en.html: exists assets/hero.jpg
+- PASS — index.html: inline script 1 syntax
+- PASS — index.html: inline script 2 syntax
+- PASS — index.html: inline script 3 syntax
+- PASS — index.html: inline script 4 syntax
+- PASS — index.html: inline script 5 syntax
+- PASS — index.html: inline script 6 syntax
+- PASS — index.html: inline script 7 syntax
+- PASS — index.html: inline script 8 syntax
+- PASS — index.html: inline script 9 syntax
+- PASS — index.html: inline script 10 syntax
+- PASS — index.html: inline script 11 syntax
+- PASS — index.html: inline script 12 syntax
+- PASS — index.html: inline script 13 syntax
+- PASS — index.html: inline script 14 syntax
+- PASS — index.html: inline script 15 syntax
+- PASS — index.html: inline script 16 syntax
+- PASS — index.html: inline script 17 syntax
+- PASS — index.html: inline script 18 syntax
+- PASS — index-en.html: inline script 1 syntax
+- PASS — index-en.html: inline script 2 syntax
+- PASS — index-en.html: inline script 3 syntax
+- PASS — index-en.html: inline script 4 syntax
+- PASS — index-en.html: inline script 5 syntax
+- PASS — index-en.html: inline script 6 syntax
+- PASS — index-en.html: inline script 7 syntax
+- PASS — index-en.html: inline script 8 syntax
+- PASS — index-en.html: inline script 9 syntax
+- PASS — index-en.html: inline script 10 syntax
+- PASS — index-en.html: inline script 11 syntax
+- PASS — index-en.html: inline script 12 syntax
+- PASS — index-en.html: inline script 13 syntax
+- PASS — index-en.html: inline script 14 syntax
+- PASS — index-en.html: inline script 15 syntax
+- PASS — index-en.html: inline script 16 syntax
+- PASS — index-en.html: inline script 17 syntax
+- PASS — index-en.html: inline script 18 syntax
+
+## Runtime browser tests
+- Hebrew calendar: 16 ספט 2026 / 24 ספט 2026; 7 intermediate gray days; start/end markers present.
+- Planner navigation: step 1 -> step 7; Build visible and Next hidden on final step.
+- Day detail: modal opens by actual click; 2/2 hourly stops rendered; 2 Google Maps + 2 Waze links; TripCheck rendered.
+- AI build mock: build_trip and verify_trip invoked with same trip_id and user_id; arrival/departure times preserved; costs stored in draft.
+- Rain mock: rain_alternative invoked with trip_id/user_id/day; result renders Maps/Waze; usage cost/web-search count stored.
+- English runtime: same calendar range and day-detail tests passed with English labels.
+
+Failures: 0- Runtime buttons: Previous moved step 7 -> 6; Build click invoked build flow; Save produced share-link state; Exit without save cleared draft and routed to account. No runtime exceptions.
