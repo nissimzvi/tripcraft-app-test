@@ -1,0 +1,136 @@
+# QA V129
+
+Total checks: 130
+Passed: 130
+Failed: 0
+
+- PASS — MOBILE HE V129 label
+- PASS — MOBILE HE no duplicate IDs — []
+- PASS — MOBILE HE inline 0 JavaScript syntax
+- PASS — MOBILE HE inline 1 JavaScript syntax
+- PASS — MOBILE HE inline 2 JavaScript syntax
+- PASS — MOBILE HE inline 3 JavaScript syntax
+- PASS — MOBILE HE inline 4 JavaScript syntax
+- PASS — MOBILE HE inline 5 JavaScript syntax
+- PASS — MOBILE HE inline 6 JavaScript syntax
+- PASS — MOBILE HE inline 7 JavaScript syntax
+- PASS — MOBILE HE inline 8 JavaScript syntax
+- PASS — MOBILE HE element plannerPrev
+- PASS — MOBILE HE element plannerNext
+- PASS — MOBILE HE element plannerBuild
+- PASS — MOBILE HE element tcCheckEmail
+- PASS — MOBILE HE element tcVerifyOtp
+- PASS — MOBILE HE element tcOtpBack
+- PASS — MOBILE HE element tcResendOtp
+- PASS — MOBILE HE element plSameAirport
+- PASS — MOBILE HE element plArrivalAirport
+- PASS — MOBILE HE element plDepartureAirport
+- PASS — MOBILE HE element plArrivalTime
+- PASS — MOBILE HE element plDepartureTime
+- PASS — MOBILE HE Build click bound
+- PASS — MOBILE HE Next click bound
+- PASS — MOBILE HE Prev click bound
+- PASS — MOBILE HE Build visible on step 7
+- PASS — MOBILE HE unified auth return key
+- PASS — MOBILE HE pending build action
+- PASS — MOBILE HE auto resume Build after OTP
+- PASS — MOBILE HE old mismatched auth key removed
+- PASS — MOBILE HE OTP cooldown logic
+- PASS — MOBILE HE OTP wait is Hebrew
+- PASS — MOBILE HE successful OTP recorded
+- PASS — MOBILE HE session persistence
+- PASS — MOBILE HE clean new trip function
+- PASS — MOBILE HE account new trip uses clean start
+- PASS — MOBILE HE same-airport between arrival and departure
+- PASS — MOBILE HE arrival time present
+- PASS — MOBILE HE departure time present
+- PASS — MOBILE HE build_trip integration
+- PASS — MOBILE HE verify_trip integration
+- PASS — MOBILE HE trip_id included
+- PASS — MOBILE HE user_id included
+- PASS — MOBILE HE Google Maps support
+- PASS — MOBILE HE Waze support
+- PASS — MOBILE HE service worker registration
+- PASS — MOBILE EN V129 label
+- PASS — MOBILE EN no duplicate IDs — []
+- PASS — MOBILE EN inline 0 JavaScript syntax
+- PASS — MOBILE EN inline 1 JavaScript syntax
+- PASS — MOBILE EN inline 2 JavaScript syntax
+- PASS — MOBILE EN inline 3 JavaScript syntax
+- PASS — MOBILE EN inline 4 JavaScript syntax
+- PASS — MOBILE EN inline 5 JavaScript syntax
+- PASS — MOBILE EN inline 6 JavaScript syntax
+- PASS — MOBILE EN inline 7 JavaScript syntax
+- PASS — MOBILE EN inline 8 JavaScript syntax
+- PASS — MOBILE EN element plannerPrev
+- PASS — MOBILE EN element plannerNext
+- PASS — MOBILE EN element plannerBuild
+- PASS — MOBILE EN element tcCheckEmail
+- PASS — MOBILE EN element tcVerifyOtp
+- PASS — MOBILE EN element tcOtpBack
+- PASS — MOBILE EN element tcResendOtp
+- PASS — MOBILE EN element plSameAirport
+- PASS — MOBILE EN element plArrivalAirport
+- PASS — MOBILE EN element plDepartureAirport
+- PASS — MOBILE EN element plArrivalTime
+- PASS — MOBILE EN element plDepartureTime
+- PASS — MOBILE EN Build click bound
+- PASS — MOBILE EN Next click bound
+- PASS — MOBILE EN Prev click bound
+- PASS — MOBILE EN Build visible on step 7
+- PASS — MOBILE EN unified auth return key
+- PASS — MOBILE EN pending build action
+- PASS — MOBILE EN auto resume Build after OTP
+- PASS — MOBILE EN old mismatched auth key removed
+- PASS — MOBILE EN OTP cooldown logic
+- PASS — MOBILE EN OTP wait is Hebrew
+- PASS — MOBILE EN successful OTP recorded
+- PASS — MOBILE EN session persistence
+- PASS — MOBILE EN clean new trip function
+- PASS — MOBILE EN account new trip uses clean start
+- PASS — MOBILE EN same-airport between arrival and departure
+- PASS — MOBILE EN arrival time present
+- PASS — MOBILE EN departure time present
+- PASS — MOBILE EN build_trip integration
+- PASS — MOBILE EN verify_trip integration
+- PASS — MOBILE EN trip_id included
+- PASS — MOBILE EN user_id included
+- PASS — MOBILE EN Google Maps support
+- PASS — MOBILE EN Waze support
+- PASS — MOBILE EN service worker registration
+- PASS — MOBILE sw.js exists
+- PASS — MOBILE sw JavaScript syntax
+- PASS — MOBILE SW cache V129
+- PASS — MOBILE manifest exists
+- PASS — ADMIN V129 label
+- PASS — ADMIN no duplicate IDs
+- PASS — ADMIN config file exists
+- PASS — ADMIN JS file exists
+- PASS — ADMIN index references config
+- PASS — ADMIN index references admin V129 JS
+- PASS — ADMIN no V128 JS reference
+- PASS — ADMIN config JavaScript syntax
+- PASS — ADMIN main JavaScript syntax
+- PASS — ADMIN loadAiSettings defined
+- PASS — ADMIN saveAiSettings defined
+- PASS — ADMIN testAiConnection defined
+- PASS — ADMIN seven decimal costs
+- PASS — ADMIN trip linkage label
+- PASS — ADMIN user linkage label
+- PASS — ADMIN load dashboard RPC
+- PASS — ADMIN session V129
+- PASS — ADMIN old undefined loadAISettings spelling absent
+- PASS — ADMIN element usersBody
+- PASS — ADMIN element tripsBody
+- PASS — ADMIN element aiBody
+- PASS — ADMIN element aiSummaryBody
+- PASS — ADMIN element saveAiSettings
+- PASS — ADMIN element testAiConnection
+- PASS — ADMIN element refresh
+- PASS — ADMIN element logout
+- PASS — ADMIN referenced script exists tripcraft-config.js?v=129
+- PASS — ADMIN referenced script exists admin-v129.js?v=129
+- PASS — TripCraft_MOBILE_V129 ZIP integrity — None
+- PASS — TripCraft_MOBILE_V129 ZIP inner folder
+- PASS — TripCraft_ADMIN_V129 ZIP integrity — None
+- PASS — TripCraft_ADMIN_V129 ZIP inner folder
