@@ -1,0 +1,24 @@
+PASS — index.html runtime date format
+PASS — index.html runtime date direction — rtl
+PASS — index.html runtime day button rendered — 1
+PASS — index.html runtime day modal opens
+PASS — index.html runtime hourly stop rendered
+PASS — index.html runtime Google Maps rendered
+PASS — index.html runtime Waze rendered
+PASS — index.html runtime TripCheck rendered
+PASS — index.html runtime lodging rendered
+PASS — index.html runtime legacy fallback opens
+PASS — index-en.html runtime date format
+PASS — index-en.html runtime date direction — ltr
+PASS — index-en.html runtime day button rendered — 1
+PASS — index-en.html runtime day modal opens
+PASS — index-en.html runtime hourly stop rendered
+PASS — index-en.html runtime Google Maps rendered
+PASS — index-en.html runtime Waze rendered
+PASS — index-en.html runtime TripCheck rendered
+PASS — index-en.html runtime lodging rendered
+PASS — index-en.html runtime legacy fallback opens
+PASS — runtime rain alternative returns
+PASS — runtime rain Maps/Waze
+PASS — runtime use-rain button rendered
+PASS — runtime rain applied to day
