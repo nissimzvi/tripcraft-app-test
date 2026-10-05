@@ -1,0 +1,155 @@
+# TripCraft MOBILE V136 - QA Report
+
+**Result: 142/142 checks passed.**
+
+## Root causes fixed
+- V135 ZIP referenced `tripcraft-config.js` but did not contain it, so Supabase Auth could not initialize.
+- V135 treated `#planner` as a protected page, preventing the intended public questionnaire -> login/OTP-before-build flow.
+- V136 restores the public Supabase browser config from the last known-good V132 configuration and restores `sw.js`.
+- V136 adds explicit mobile click routing for Build Trip, Sign in and My Account.
+
+## QA scope
+Static/structural QA and Node syntax validation for all inline JavaScript in Hebrew and English pages. Chromium runtime navigation could not be executed in this environment because local/file navigation is blocked by the container browser policy; production OTP delivery still requires smoke testing after deployment.
+
+- PASS - index.html: exists
+- PASS - index.html: V136 visible
+- PASS - index.html: no duplicate ids — []
+- PASS - index.html: planner is not protected
+- PASS - index.html: planner protected old rule removed
+- PASS - index.html: hard start trip routing
+- PASS - index.html: hard login/account routing
+- PASS - index.html: logged-out planner visible
+- PASS - index.html: logged-out login visible
+- PASS - index.html: logged-out account hidden
+- PASS - index.html: logged-in account visible
+- PASS - index.html: logged-in login hidden
+- PASS - index.html: login section
+- PASS - index.html: email input
+- PASS - index.html: email check button
+- PASS - index.html: register button
+- PASS - index.html: OTP input
+- PASS - index.html: verify OTP button
+- PASS - index.html: check-email function
+- PASS - index.html: register function
+- PASS - index.html: verify function
+- PASS - index.html: email click bound
+- PASS - index.html: register click bound
+- PASS - index.html: verify click bound
+- PASS - index.html: existing-user OTP no signup
+- PASS - index.html: new-user OTP signup
+- PASS - index.html: 6 digit OTP validation
+- PASS - index.html: build requires real auth session
+- PASS - index.html: build routes login if unauthenticated
+- PASS - index.html: resume build after login
+- PASS - index.html: account button present
+- PASS - index.html: login button present
+- PASS - index.html: planner button present
+- PASS - index.html: build CTA present
+- PASS - index.html: config script reference
+- PASS - index.html: sw V136 registration
+- PASS - index.html: preserve AI build
+- PASS - index.html: preserve AI verify
+- PASS - index.html: preserve rain alternative
+- PASS - index.html: preserve Google Maps
+- PASS - index.html: preserve Waze
+- PASS - index.html: preserve day modal
+- PASS - index.html: preserve calendar
+- PASS - index.html: preserve save trip
+- PASS - index.html: preserve discard trip
+- PASS - index.html: local tripcraft-config.js exists — tripcraft-config.js
+- PASS - index.html: local tripcraft-logo-v109.png exists — tripcraft-logo-v109.png
+- PASS - index.html: local assets/slovakia.jpg exists — assets/slovakia.jpg
+- PASS - index.html: local assets/vietnam.jpg exists — assets/vietnam.jpg
+- PASS - index.html: local assets/greece.jpg exists — assets/greece.jpg
+- PASS - index.html: local assets/dolomites.jpg exists — assets/dolomites.jpg
+- PASS - index.html: local assets/austria.jpg exists — assets/austria.jpg
+- PASS - index.html: local assets/hero.jpg exists — assets/hero.jpg
+- PASS - index.html: inline script 0 syntax
+- PASS - index.html: inline script 6 syntax
+- PASS - index.html: inline script 7 syntax
+- PASS - index.html: inline script 8 syntax
+- PASS - index.html: inline script 9 syntax
+- PASS - index.html: inline script 10 syntax
+- PASS - index.html: inline script 11 syntax
+- PASS - index.html: inline script 12 syntax
+- PASS - index.html: inline script 13 syntax
+- PASS - index.html: inline script 15 syntax
+- PASS - index.html: inline script 16 syntax
+- PASS - index.html: inline script 17 syntax
+- PASS - index.html: inline script 18 syntax
+- PASS - index.html: inline script 19 syntax
+- PASS - index-en.html: exists
+- PASS - index-en.html: V136 visible
+- PASS - index-en.html: no duplicate ids — []
+- PASS - index-en.html: planner is not protected
+- PASS - index-en.html: planner protected old rule removed
+- PASS - index-en.html: hard start trip routing
+- PASS - index-en.html: hard login/account routing
+- PASS - index-en.html: logged-out planner visible
+- PASS - index-en.html: logged-out login visible
+- PASS - index-en.html: logged-out account hidden
+- PASS - index-en.html: logged-in account visible
+- PASS - index-en.html: logged-in login hidden
+- PASS - index-en.html: login section
+- PASS - index-en.html: email input
+- PASS - index-en.html: email check button
+- PASS - index-en.html: register button
+- PASS - index-en.html: OTP input
+- PASS - index-en.html: verify OTP button
+- PASS - index-en.html: check-email function
+- PASS - index-en.html: register function
+- PASS - index-en.html: verify function
+- PASS - index-en.html: email click bound
+- PASS - index-en.html: register click bound
+- PASS - index-en.html: verify click bound
+- PASS - index-en.html: existing-user OTP no signup
+- PASS - index-en.html: new-user OTP signup
+- PASS - index-en.html: 6 digit OTP validation
+- PASS - index-en.html: build requires real auth session
+- PASS - index-en.html: build routes login if unauthenticated
+- PASS - index-en.html: resume build after login
+- PASS - index-en.html: account button present
+- PASS - index-en.html: login button present
+- PASS - index-en.html: planner button present
+- PASS - index-en.html: build CTA present
+- PASS - index-en.html: config script reference
+- PASS - index-en.html: sw V136 registration
+- PASS - index-en.html: preserve AI build
+- PASS - index-en.html: preserve AI verify
+- PASS - index-en.html: preserve rain alternative
+- PASS - index-en.html: preserve Google Maps
+- PASS - index-en.html: preserve Waze
+- PASS - index-en.html: preserve day modal
+- PASS - index-en.html: preserve calendar
+- PASS - index-en.html: preserve save trip
+- PASS - index-en.html: preserve discard trip
+- PASS - index-en.html: local tripcraft-config.js exists — tripcraft-config.js
+- PASS - index-en.html: local tripcraft-logo-v109.png exists — tripcraft-logo-v109.png
+- PASS - index-en.html: local assets/slovakia.jpg exists — assets/slovakia.jpg
+- PASS - index-en.html: local assets/vietnam.jpg exists — assets/vietnam.jpg
+- PASS - index-en.html: local assets/greece.jpg exists — assets/greece.jpg
+- PASS - index-en.html: local assets/dolomites.jpg exists — assets/dolomites.jpg
+- PASS - index-en.html: local assets/austria.jpg exists — assets/austria.jpg
+- PASS - index-en.html: local assets/hero.jpg exists — assets/hero.jpg
+- PASS - index-en.html: inline script 0 syntax
+- PASS - index-en.html: inline script 6 syntax
+- PASS - index-en.html: inline script 7 syntax
+- PASS - index-en.html: inline script 8 syntax
+- PASS - index-en.html: inline script 9 syntax
+- PASS - index-en.html: inline script 10 syntax
+- PASS - index-en.html: inline script 11 syntax
+- PASS - index-en.html: inline script 12 syntax
+- PASS - index-en.html: inline script 13 syntax
+- PASS - index-en.html: inline script 15 syntax
+- PASS - index-en.html: inline script 16 syntax
+- PASS - index-en.html: inline script 17 syntax
+- PASS - index-en.html: inline script 18 syntax
+- PASS - index-en.html: inline script 19 syntax
+- PASS - config exists
+- PASS - config V136
+- PASS - config Supabase URL
+- PASS - config anon publishable key
+- PASS - config contains no service-role key value (comment warning only)
+- PASS - config AI function
+- PASS - sw exists
+- PASS - sw V136
