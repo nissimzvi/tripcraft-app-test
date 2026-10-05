@@ -482,7 +482,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V136 · נץ מערכות מידע" data-en="V136 · Netz Information Systems">V136 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V137 · נץ מערכות מידע" data-en="V137 · Netz Information Systems">V137 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -1750,6 +1750,74 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
       setTimeout(()=>{try{window.dispatchEvent(new HashChangeEvent('hashchange'));}catch(_){ }},0);
     },{capture:true});
   });
+})();
+</script>
+<script id="tc-v137-auth-first-routing">
+(function(){
+  const isEnglish=()=>String(document.documentElement.lang||'he').toLowerCase().startsWith('en');
+  const msg=(he,en)=>isEnglish()?en:he;
+  function plannerLinkTarget(el){
+    const a=el?.closest?.('a[href="#planner"]');
+    if(!a)return null;
+    const t=(a.textContent||'').trim();
+    return /בנה|בנו|תכנון טיול|Build|Plan a Trip/i.test(t)?a:null;
+  }
+  async function realSession(){
+    try{
+      const sb=(typeof tcSupabase==='function')?tcSupabase():null;
+      if(!sb?.auth?.getSession)return null;
+      const result=await Promise.race([
+        sb.auth.getSession(),
+        new Promise(resolve=>setTimeout(()=>resolve({data:{session:null}}),2500))
+      ]);
+      return result?.data?.session||null;
+    }catch(e){console.warn('V137 session check failed',e);return null;}
+  }
+  function clearForFreshPlanner(){
+    try{localStorage.removeItem('tripcraft_planner_draft_v57');}catch(e){}
+    try{
+      if(window.planner){window.planner.draft=null;window.planner.currentTripId=null;window.planner.step=1;}
+      if(typeof plannerStep1Part!=='undefined')plannerStep1Part=1;
+    }catch(e){}
+  }
+  function goLoginThenPlanner(){
+    clearForFreshPlanner();
+    try{
+      sessionStorage.setItem('tc_return_after_login','#planner');
+      sessionStorage.removeItem('tc_after_login_action');
+      sessionStorage.setItem('tc_v137_start_after_login','1');
+    }catch(e){}
+    location.hash='#login';
+    try{window.tcMenu?.(false);}catch(e){}
+    setTimeout(()=>document.getElementById('tcAuthEmail')?.focus({preventScroll:true}),120);
+  }
+  async function routePlannerClick(e,a){
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    const session=await realSession();
+    if(!session){goLoginThenPlanner();return;}
+    try{sessionStorage.removeItem('tc_v137_start_after_login');}catch(e){}
+    if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
+    else location.hash='#planner';
+    try{window.tcMenu?.(false);}catch(e){}
+  }
+  document.addEventListener('click',function(e){
+    const a=plannerLinkTarget(e.target);if(!a)return;
+    routePlannerClick(e,a);
+  },true);
+  function resumeCleanPlanner(){
+    let pending=false;try{pending=sessionStorage.getItem('tc_v137_start_after_login')==='1';}catch(e){}
+    if(!pending||location.hash!=='#planner')return;
+    try{sessionStorage.removeItem('tc_v137_start_after_login');}catch(e){}
+    setTimeout(()=>{
+      try{
+        if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
+        else location.hash='#planner';
+      }catch(err){console.error('V137 post-login planner start failed',err);}
+    },80);
+  }
+  window.addEventListener('hashchange',resumeCleanPlanner);
+  setTimeout(resumeCleanPlanner,0);
+  window.TripCraftV137QA={realSession,goLoginThenPlanner,resumeCleanPlanner,version:'V137'};
 })();
 </script>
 </body></html>
