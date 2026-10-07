@@ -1,4 +1,4 @@
-// TripCraft MOBILE V139 - public browser configuration only.
+// TripCraft MOBILE V140 - public browser configuration only.
 // NEVER place service_role or private API keys in this file.
 window.TRIPCRAFT_CONFIG = {
   supabaseUrl: 'https://zhxmmpctqqoxjconovyv.supabase.co',
