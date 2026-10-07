@@ -157,7 +157,7 @@ html[dir="rtl"] input[type="date"]{direction:rtl!important;text-align:right!impo
 }
 
 
-/* MOBILE V133 flight/layout + navigation QA fixes */
+/* MOBILE V139 flight/layout + navigation QA fixes */
 .flight-fields-v129{display:grid;gap:12px}.flight-times-row{margin-top:2px}.airport-ltr-value{direction:ltr;text-align:left;unicode-bidi:plaintext}.planner-actions #plannerBuild{min-width:150px;font-weight:900}.planner-detail-nav{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.planner-detail-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;color:#547083;font-size:13px}.planner-detail-stop .stop-time{font-weight:900;color:#0d5d97;margin-inline-end:6px}
 @media(max-width:700px){.flight-fields-v129{gap:10px}.flight-times-row{grid-template-columns:1fr!important}.airport-ltr-value{font-size:16px!important;white-space:nowrap;overflow-x:auto;text-overflow:clip}.planner-actions{display:flex!important}.planner-actions #plannerBuild{display:none;flex:1}.planner-step[data-step="7"].active~.planner-actions #plannerBuild{display:inline-flex}}
 </style>
@@ -405,15 +405,15 @@ html[dir="rtl"] .calendar-input{direction:rtl!important;unicode-bidi:plaintext!i
 @media(max-width:560px){.tc-guide-grid{grid-template-columns:1fr}.tc-guide-card{display:grid;grid-template-columns:118px 1fr}.tc-guide-card img{height:100%;min-height:165px}.tc-guide-card h3{font-size:19px}.tc-guide-card p{font-size:14px}.hero{min-height:430px}.hero h2{font-size:43px}.hero p{font-size:18px}}
 </style>
 
-<style id="tc-v133-date-css">
+<style id="tc-v139-date-css">
 .tc-date-shell{position:relative;min-height:56px;border:1px solid #cfdde6;border-radius:12px;background:#fff;overflow:hidden}.tc-date-shell:focus-within{border-color:#2f80d9;box-shadow:0 0 0 3px rgba(47,128,217,.12)}.tc-date-shell .calendar-input{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:56px!important;opacity:0!important;z-index:2!important;cursor:pointer!important;padding:0!important;margin:0!important}.tc-date-shell .date-preview{position:relative;z-index:1;display:flex!important;align-items:center;min-height:56px;margin:0!important;padding:0 16px;font-size:20px!important;font-weight:700!important;color:#173047!important;direction:inherit;text-align:start!important;pointer-events:none}.tc-date-shell .date-preview:empty::before{content:"בחר תאריך";color:#718391;font-weight:600}html[lang="en"] .tc-date-shell .date-preview:empty::before{content:"Select date"}
 </style>
-<style id="tc-v133-day-css">
-.tc-v133-day-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}.tc-v133-rain-status{font-weight:800;color:#48606f}.tc-v133-rain-result{border:2px solid #b9dbe8;background:#f5fbfd;border-radius:16px;padding:14px;margin:12px 0}.tc-v133-rain-result h3{margin:0 0 8px;color:#0d4968}.tc-v133-rain-stop{background:#fff;border:1px solid #d9e7ed;border-radius:13px;padding:11px;margin-top:10px}.tc-v133-rain-stop h4{margin:0 0 6px}.tc-v133-source-list{font-size:12px;overflow-wrap:anywhere;margin-top:10px}.tc-v133-day-checks{margin-top:10px;padding:10px;border-radius:12px;background:#f7fafc;border:1px solid #dce7ed}.tc-v133-day-check{margin:6px 0}.tc-v133-day-route-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.planner-detail-nav a{min-width:120px;text-align:center}@media(max-width:700px){.tc-v133-day-actions .btn{width:100%}.planner-detail-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}.planner-detail-nav a{min-width:0}}
+<style id="tc-v139-day-css">
+.tc-v139-day-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0}.tc-v139-rain-status{font-weight:800;color:#48606f}.tc-v139-rain-result{border:2px solid #b9dbe8;background:#f5fbfd;border-radius:16px;padding:14px;margin:12px 0}.tc-v139-rain-result h3{margin:0 0 8px;color:#0d4968}.tc-v139-rain-stop{background:#fff;border:1px solid #d9e7ed;border-radius:13px;padding:11px;margin-top:10px}.tc-v139-rain-stop h4{margin:0 0 6px}.tc-v139-source-list{font-size:12px;overflow-wrap:anywhere;margin-top:10px}.tc-v139-day-checks{margin-top:10px;padding:10px;border-radius:12px;background:#f7fafc;border:1px solid #dce7ed}.tc-v139-day-check{margin:6px 0}.tc-v139-day-route-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.planner-detail-nav a{min-width:120px;text-align:center}@media(max-width:700px){.tc-v139-day-actions .btn{width:100%}.planner-detail-nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}.planner-detail-nav a{min-width:0}}
 </style>
 
-<style id="tc-v133-calendar-css">
-/* MOBILE V133 custom date-range calendar: avoids the iOS native picker and keeps the selected range visible. */
+<style id="tc-v139-calendar-css">
+/* MOBILE V139 custom date-range calendar: avoids the iOS native picker and keeps the selected range visible. */
 .tc-date-shell{position:relative}.tc-date-shell .calendar-input{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important;inset-inline-start:0;bottom:0;padding:0!important;min-height:0!important}
 .tc-date-display{width:100%;min-height:58px;border:1px solid #cfdde6;border-radius:14px;background:#fff;color:#173047;font:inherit;font-size:18px;font-weight:850;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;touch-action:manipulation;text-align:start}
 .tc-date-display .tc-date-value{direction:rtl;unicode-bidi:isolate;text-align:right;flex:1}.tc-date-display .tc-date-icon{font-size:20px;flex:0 0 auto}.tc-date-display.empty .tc-date-value{color:#7b8b97;font-weight:650}.date-preview{display:none!important}
@@ -428,68 +428,18 @@ html[dir="rtl"] .calendar-input{direction:rtl!important;unicode-bidi:plaintext!i
 html[dir="ltr"] .tc-calendar-card{direction:ltr}html[dir="ltr"] .tc-date-display .tc-date-value,html[dir="ltr"] .tc-calendar-summary b{direction:ltr;text-align:left}
 @media(max-width:700px){.tc-date-display{min-height:58px;font-size:17px}.tc-calendar-card{padding:14px;border-radius:22px}.tc-cal-day{min-height:40px}.tc-calendar-modal{align-items:flex-end;padding:8px}.tc-calendar-card{width:100%;max-height:88dvh;border-radius:24px 24px 14px 14px}}
 </style>
-
-<style id="tc-v135-ux-fixes">
-/* MOBILE V135 - targeted UX/auth/date/result navigation fixes. Home design intentionally unchanged. */
-/* Only the TripCraft custom calendar is visible. Prevent iOS native date control + duplicate preview. */
-.v59-dates .tc-date-shell .calendar-input{position:absolute!important;width:1px!important;height:1px!important;min-height:1px!important;opacity:0!important;pointer-events:none!important;z-index:-1!important;padding:0!important;margin:0!important;border:0!important}
-.v59-dates .tc-date-shell .date-preview{display:none!important}
-.v59-dates .tc-date-display{display:flex!important;width:100%!important;position:relative!important;z-index:3!important}
-/* Modern, thinner planner controls in one row. */
-#planner .planner-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:8px!important}
-#planner .planner-actions .btn{min-height:42px!important;height:42px!important;padding:7px 12px!important;border-radius:14px!important;font-size:16px!important;line-height:1.1!important}
-#planner .planner-actions #plannerBuild{grid-column:1/-1;max-width:360px;width:100%;justify-self:center}
-#planner.tc-v135-built .planner-actions{display:none!important}
-/* After the trip exists, show only Save + Exit as a slim floating row. */
-#planner .tc-v108-result-actions{display:none}
-#planner.tc-v135-built .tc-v108-result-actions{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;position:fixed!important;left:14px!important;right:14px!important;bottom:calc(env(safe-area-inset-bottom,0px) + 10px)!important;z-index:350!important;background:rgba(255,255,255,.97)!important;border:1px solid #d8e4eb!important;border-radius:18px!important;padding:8px!important;box-shadow:0 10px 30px rgba(13,53,87,.18)!important}
-#planner.tc-v135-built .tc-v108-result-actions .btn{min-height:44px!important;height:44px!important;padding:8px 10px!important;border-radius:14px!important;font-size:16px!important;white-space:nowrap!important}
-#planner.tc-v135-built{padding-bottom:86px!important}
-/* Universal way back/close for every internal page. */
-.tc-v135-page-nav{display:none;position:fixed;top:calc(env(safe-area-inset-top,0px) + 78px);left:12px;z-index:340;gap:6px;background:rgba(255,255,255,.96);border:1px solid #d8e4eb;border-radius:14px;padding:5px;box-shadow:0 7px 20px rgba(13,53,87,.14)}
-.page-focus:not([data-page="home"]) .tc-v135-page-nav{display:flex}
-.tc-v135-page-nav button{border:0;background:#eef4f8;color:#173047;border-radius:10px;min-height:36px;padding:6px 10px;font:inherit;font-size:14px;font-weight:800}
-.tc-v135-page-nav .close{background:#fff0f0;color:#9b2424}
-@media(max-width:700px){.tc-v135-page-nav{top:calc(env(safe-area-inset-top,0px) + 72px)}#planner .planner-actions #plannerBuild{max-width:none}}
-
-/* MOBILE V135 - auth visibility + trip-only navigation. */
-<style id="tc-v135-targeted-fixes">
-.tc-v135-page-nav{display:none!important}
-#tcMobileMenu a[href="#login"],#tcMobileMenu a[href="#account"]{display:block!important}
-@media(max-width:980px){
-  #tcMobileMenu a[href="#login"],#tcMobileMenu a[href="#account"]{display:block!important}
-}
-.tc-v135-trip-nav{display:none;gap:8px;align-items:center;justify-content:flex-start;margin:0 0 12px}
-#planner.tc-v135-opened .tc-v135-trip-nav{display:flex}
-.tc-v135-trip-nav .btn{min-height:38px!important;height:38px!important;padding:6px 12px!important;border-radius:12px!important;font-size:14px!important;width:auto!important}
-</style>
-</style>
-
-<style id="tc-v136-auth-nav-fix">
-/* V136: planner is public; authentication is required only when Build Trip is pressed. */
-body:not(.tc-logged-in) .tc-desktop-nav a[href="#planner"],
-body:not(.tc-logged-in) #tcMobileMenu a[href="#planner"]{display:inline-flex!important}
-body:not(.tc-logged-in) .tc-desktop-nav a[href="#login"],
-body:not(.tc-logged-in) #tcMobileMenu a[href="#login"]{display:inline-flex!important}
-body:not(.tc-logged-in) .tc-desktop-nav a[href="#account"],
-body:not(.tc-logged-in) #tcMobileMenu a[href="#account"]{display:none!important}
-body.tc-logged-in .tc-desktop-nav a[href="#account"],
-body.tc-logged-in #tcMobileMenu a[href="#account"]{display:inline-flex!important}
-body.tc-logged-in .tc-desktop-nav a[href="#login"],
-body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
-</style>
 </head><body>
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V138 · נץ מערכות מידע" data-en="V138 · Netz Information Systems">V138 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V139 · נץ מערכות מידע" data-en="V139 · Netz Information Systems">V139 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
     <a href="#pricing" data-he="מחירים" data-en="Pricing">מחירים</a>
     <a href="#trips" data-he="הצעות לטיולים" data-en="Trip Ideas">הצעות לטיולים</a>
     <a href="#hotels" data-he="בתי מלון" data-en="Hotels">בתי מלון</a>
-    <a href="#login" data-tc-new-trip-entry="1" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
+    <a href="#planner" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
     <a href="#cart" data-he="סל" data-en="Cart">סל <span id="tcCartBadge" class="cart-badge">0</span></a>
     <a href="#account" data-he="החשבון שלי" data-en="My Account">החשבון שלי</a>
     <a href="#login" data-he="כניסה" data-en="Sign in">כניסה</a><button id="tcInstallApp" class="tc-install" type="button">התקן אפליקציה</button>
@@ -505,7 +455,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
     <a href="#pricing" data-he="מחירים" data-en="Pricing">מחירים</a>
   <a href="#trips" data-he="הצעות לטיולים" data-en="Trip Ideas">הצעות לטיולים</a>
   <a href="#hotels" data-he="בתי מלון" data-en="Hotels">בתי מלון</a>
-  <a href="#login" data-tc-new-trip-entry="1" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
+  <a href="#planner" data-he="תכנון טיול" data-en="Plan a Trip">תכנון טיול</a>
   <a href="#cart"><span data-he="סל" data-en="Cart">סל</span> <span id="tcCartBadgeMobile" class="cart-badge">0</span></a>
   <a href="#account" data-he="החשבון שלי" data-en="My Account">החשבון שלי</a>
   <a href="#login" data-he="כניסה / הרשמה" data-en="Sign in / Register">כניסה / הרשמה</a>
@@ -519,7 +469,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
   <div class="home-kicker" data-he="TripCraft · תכנון חכם לטיול עצמאי" data-en="TripCraft · Smart planning for independent travel">TripCraft · תכנון חכם לטיול עצמאי</div>
   <h2><span data-he="מתכננים טיול." data-en="Plan your trip.">מתכננים טיול.</span><br><span data-he="בדרך שלכם." data-en="Your way.">בדרך שלכם.</span></h2>
   <p data-he="בונים מסלול אישי לפי היעד, התאריכים, מי שנוסע והקצב שלכם — ומרכזים במקום אחד את הימים, המפות, הלינות והעדכונים." data-en="Build a personal itinerary around your destination, dates, travelers and pace — with your days, maps, stays and updates organized in one place.">בונים מסלול אישי לפי היעד, התאריכים, מי שנוסע והקצב שלכם — ומרכזים במקום אחד את הימים, המפות, הלינות והעדכונים.</p>
-  <div class="cta tc-home-actions"><a class="btn planner-color" href="#login" data-tc-new-trip-entry="1" data-he="בנה טיול חדש" data-en="Build a Trip">בנה טיול חדש</a><a class="btn tc-home-account" href="trip-slovakia.html" data-he="גלו מסלולים ומדריכים" data-en="Explore Trips & Guides">גלו מסלולים ומדריכים</a></div>
+  <div class="cta tc-home-actions"><a class="btn planner-color" href="#planner" data-he="בנה טיול חדש" data-en="Build a Trip">בנה טיול חדש</a><a class="btn tc-home-account" href="trip-slovakia.html" data-he="גלו מסלולים ומדריכים" data-en="Explore Trips & Guides">גלו מסלולים ומדריכים</a></div>
   <div class="home-trust"><span data-he="✓ מסלול יום־יום" data-en="✓ Day-by-day itinerary">✓ מסלול יום־יום</span><span>✓ Google Maps / Waze</span><span data-he="✓ לינות ותקציב" data-en="✓ Stays & budget">✓ לינות ותקציב</span><span>✓ TripCheck</span></div>
 </div></section>
 <section class="tc-home-content" aria-label="תוכן תיירותי" data-he-aria="תוכן תיירותי" data-en-aria="Travel content">
@@ -535,7 +485,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
  <div class="tc-home-section tc-why"><div class="tc-home-section-head"><span data-he="למה TripCraft" data-en="Why TripCraft">למה TripCraft</span><h2 data-he="פחות קבצים. יותר טיול." data-en="Fewer files. More travel.">פחות קבצים. יותר טיול.</h2></div><div class="tc-why-grid"><article><h3 data-he="הכול לפי ימים" data-en="Everything organized by day">הכול לפי ימים</h3><p data-he="מסלול ברור לכל יום במקום רשימות מפוזרות וקישורים שאבדו בדרך." data-en="A clear plan for every day instead of scattered lists and lost links.">מסלול ברור לכל יום במקום רשימות מפוזרות וקישורים שאבדו בדרך.</p></article><article><h3 data-he="ניווט כחלק מהמסלול" data-en="Navigation built into the itinerary">ניווט כחלק מהמסלול</h3><p data-he="Google Maps ו־Waze זמינים מתוך הטיול כדי לעבור מהתכנון לביצוע." data-en="Google Maps and Waze are available from the itinerary, so planning turns into action quickly.">Google Maps ו־Waze זמינים מתוך הטיול כדי לעבור מהתכנון לביצוע.</p></article><article><h3 data-he="אפשר לחזור ולשנות" data-en="Come back and edit anytime">אפשר לחזור ולשנות</h3><p data-he="הטיול נשמר בחשבון וניתן לעריכה גם אחרי שבניתם את הגרסה הראשונה." data-en="Your trip is saved to your account and remains editable after the first version is built.">הטיול נשמר בחשבון וניתן לעריכה גם אחרי שבניתם את הגרסה הראשונה.</p></article></div></div>
 </section>
 <div class="focus-title planner wrap" style="padding-bottom:0"><div class="headrow"><div><h2>תכנון טיול</h2><p>אשף תכנון, עריכת ימים ושיחה עם עוזר התכנון.</p></div></div></div><div class="focus-title trips wrap" style="padding-bottom:0"><div class="headrow"><div><h2 data-he="מסלולים ומדריכי יעדים" data-en="Trips & Destination Guides">מסלולים ומדריכי יעדים</h2><p data-he="מסלולים אמיתיים להשראה, פתיחה והתאמה אישית." data-en="Real itineraries to explore, use for inspiration and tailor to your trip.">מסלולים אמיתיים להשראה, פתיחה והתאמה אישית.</p></div></div></div><div class="focus-title import wrap" style="padding-bottom:0"><div class="headrow"><div><h2>יבוא טיול</h2><p>Excel / Word / PDF לתבנית TripCraft.</p></div></div></div><div class="focus-title admin wrap" style="padding-bottom:0"><div class="headrow"><div><h2>ניהול</h2><p>בדיקות, טיולים מיובאים והכנה להרשאות Admin.</p></div></div></div><main class="wrap">
-<section id="how" class="panel tc-commerce-page"><div class="page-visual pricing-visual"><div><h2 data-he="איך TripCraft עובד?" data-en="How does TripCraft work?">איך TripCraft עובד?</h2><p data-he="לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה." data-en="More than an itinerary document — a smart platform that stays with your trip from the first idea until you return home.">לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.</p></div></div><p class="how-lead" data-he="TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות." data-en="TripCraft keeps planning, routing and updates in one place. Start from a ready trip, tailor one to you, import our standard format, or build a new trip with AI around your dates, travelers, ages, pace and interests.">TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות.</p><div class="how-grid"><div class="how-card"><div class="how-icon">🧭</div><b data-he="1. מספרים לנו על הטיול" data-en="1. Tell us about your trip">1. מספרים לנו על הטיול</b><span data-he="יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות." data-en="Destination, dates, airports, travelers, ages, pace, interests and preferences.">יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.</span></div><div class="how-card"><div class="how-icon">🤖</div><b data-he="2. המנוע בונה חכם" data-en="2. The planner builds intelligently">2. המנוע בונה חכם</b><span data-he="חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים." data-en="Day allocation, geographic flow, driving, points of interest and adaptation to your travel group.">חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים.</span></div><div class="how-card"><div class="how-icon">🗺️</div><b data-he="3. הכול הופך למסלול חי" data-en="3. Everything becomes a live itinerary">3. הכול הופך למסלול חי</b><span data-he="ימים, Google Maps, Waze, נקודות עצירה, זמני נסיעה ועלויות אטרקציות משוערות." data-en="Days, Google Maps, Waze, stops, driving times and estimated attraction costs.">ימים, Google Maps, Waze, נקודות עצירה, זמני נסיעה ועלויות אטרקציות משוערות.</span></div><div class="how-card"><div class="how-icon">🏨</div><b data-he="4. גם לינה — לבחירתכם" data-en="4. Stays are part of the plan">4. גם לינה — לבחירתכם</b><span data-he="ניתן להחליט על אזורי לינה ומלונות בהתאם למסלול. יכולות המלונות המלאות יתווספו בהמשך." data-en="Choose stay areas and hotels that fit the route. Full hotel capabilities will be added later.">ניתן להחליט על אזורי לינה ומלונות בהתאם למסלול. יכולות המלונות המלאות יתווספו בהמשך.</span></div><div class="how-card"><div class="how-icon">🔒</div><b data-he="5. מקבלים מסלול מלא" data-en="5. Keep the complete itinerary">5. מקבלים מסלול מלא</b><span data-he="הטיול המלא נשמר בחשבון וניתן לפתוח, לערוך ולשתף באמצעות קישור אישי." data-en="The full trip is saved to your account and can be opened, edited and shared through a personal link.">הטיול המלא נשמר בחשבון וניתן לפתוח, לערוך ולשתף באמצעות קישור אישי.</span></div><div class="how-card"><div class="how-icon">✅</div><b>6. TripCheck</b><span data-he="המערכת מיועדת לבדוק את היגיון המסלול, מרחקים, לינות ושינויים חשובים לקראת הנסיעה." data-en="TripCheck is designed to review route logic, distances, stays and important changes before departure.">המערכת מיועדת לבדוק את היגיון המסלול, מרחקים, לינות ושינויים חשובים לקראת הנסיעה.</span></div></div><div class="how-highlight"><h3 data-he="הטיול נשאר שלכם — גם אחרי התכנון" data-en="Your trip stays with you — after planning too">הטיול נשאר שלכם — גם אחרי התכנון</h3><p data-he="בחשבון האישי נשמרת היסטוריית הטיולים שלכם: שם הטיול, היעד, התאריכים והקישור האישי. אפשר לחזור לטיול בכל זמן — גם לאחר שהסתיים. במהלך התכנון והנסיעה תוכלו להמשיך לשפר את המסלול דרך AI שמחובר לטיול שלכם: לקצר יום, להחליף נקודה, להתאים למזג האוויר או לשנות את התוכנית בלי להתחיל מחדש." data-en="Your account keeps your trip history: trip name, destination, dates and personal link. Return to a trip at any time, even after it ends. During planning and travel, continue refining the itinerary with trip-aware AI: shorten a day, replace a stop, adapt to weather or change the plan without starting over.">בחשבון האישי נשמרת היסטוריית הטיולים שלכם: שם הטיול, היעד, התאריכים והקישור האישי. אפשר לחזור לטיול בכל זמן — גם לאחר שהסתיים. במהלך התכנון והנסיעה תוכלו להמשיך לשפר את המסלול דרך AI שמחובר לטיול שלכם: לקצר יום, להחליף נקודה, להתאים למזג האוויר או לשנות את התוכנית בלי להתחיל מחדש.</p><strong data-he="מתכננים פעם אחת. ממשיכים לשפר עד שחוזרים הביתה." data-en="Plan once. Keep improving until you are back home.">מתכננים פעם אחת. ממשיכים לשפר עד שחוזרים הביתה.</strong></div><div class="trust-grid"><div>🔐 פרטיות ואבטחה בתכנון</div><div>♿ ממשק נגיש ורספונסיבי</div><div>💳 תשלום דרך ספק סליקה</div><div>🧠 AI כחלק מהטיול</div><div>📚 היסטוריית טיולים אישית</div><div>📱 הטיול זמין גם מהנייד</div></div><div class="cta"><a class="btn planner-color" href="#login" data-tc-new-trip-entry="1">בנו טיול חדש</a><a class="btn import-color" href="#trips">ראו הצעות לטיולים</a></div></section>
+<section id="how" class="panel tc-commerce-page"><div class="page-visual pricing-visual"><div><h2 data-he="איך TripCraft עובד?" data-en="How does TripCraft work?">איך TripCraft עובד?</h2><p data-he="לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה." data-en="More than an itinerary document — a smart platform that stays with your trip from the first idea until you return home.">לא עוד מסמך טיול — פלטפורמה חכמה שמלווה את הטיול שלכם מהרעיון ועד החזרה הביתה.</p></div></div><p class="how-lead" data-he="TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות." data-en="TripCraft keeps planning, routing and updates in one place. Start from a ready trip, tailor one to you, import our standard format, or build a new trip with AI around your dates, travelers, ages, pace and interests.">TripCraft מרכזת את תכנון הטיול, המסלול והעדכונים במקום אחד. אפשר לבחור הצעה קיימת, להתאים מסלול אליכם, לייבא מסלול בפורמט האחיד שלנו או לבנות טיול חדש בעזרת AI — לפי התאריכים, הנוסעים, הגילאים, הקצב והדברים שאתם באמת אוהבים לעשות.</p><div class="how-grid"><div class="how-card"><div class="how-icon">🧭</div><b data-he="1. מספרים לנו על הטיול" data-en="1. Tell us about your trip">1. מספרים לנו על הטיול</b><span data-he="יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות." data-en="Destination, dates, airports, travelers, ages, pace, interests and preferences.">יעד, תאריכים, שדות תעופה, מי נוסע, גילאים, קצב, תחומי עניין והעדפות.</span></div><div class="how-card"><div class="how-icon">🤖</div><b data-he="2. המנוע בונה חכם" data-en="2. The planner builds intelligently">2. המנוע בונה חכם</b><span data-he="חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים." data-en="Day allocation, geographic flow, driving, points of interest and adaptation to your travel group.">חלוקת ימים, סדר גאוגרפי, נסיעות, נקודות עניין והתאמה להרכב הנוסעים.</span></div><div class="how-card"><div class="how-icon">🗺️</div><b data-he="3. הכול הופך למסלול חי" data-en="3. Everything becomes a live itinerary">3. הכול הופך למסלול חי</b><span data-he="ימים, Google Maps, Waze, נקודות עצירה, זמני נסיעה ועלויות אטרקציות משוערות." data-en="Days, Google Maps, Waze, stops, driving times and estimated attraction costs.">ימים, Google Maps, Waze, נקודות עצירה, זמני נסיעה ועלויות אטרקציות משוערות.</span></div><div class="how-card"><div class="how-icon">🏨</div><b data-he="4. גם לינה — לבחירתכם" data-en="4. Stays are part of the plan">4. גם לינה — לבחירתכם</b><span data-he="ניתן להחליט על אזורי לינה ומלונות בהתאם למסלול. יכולות המלונות המלאות יתווספו בהמשך." data-en="Choose stay areas and hotels that fit the route. Full hotel capabilities will be added later.">ניתן להחליט על אזורי לינה ומלונות בהתאם למסלול. יכולות המלונות המלאות יתווספו בהמשך.</span></div><div class="how-card"><div class="how-icon">🔒</div><b data-he="5. מקבלים מסלול מלא" data-en="5. Keep the complete itinerary">5. מקבלים מסלול מלא</b><span data-he="הטיול המלא נשמר בחשבון וניתן לפתוח, לערוך ולשתף באמצעות קישור אישי." data-en="The full trip is saved to your account and can be opened, edited and shared through a personal link.">הטיול המלא נשמר בחשבון וניתן לפתוח, לערוך ולשתף באמצעות קישור אישי.</span></div><div class="how-card"><div class="how-icon">✅</div><b>6. TripCheck</b><span data-he="המערכת מיועדת לבדוק את היגיון המסלול, מרחקים, לינות ושינויים חשובים לקראת הנסיעה." data-en="TripCheck is designed to review route logic, distances, stays and important changes before departure.">המערכת מיועדת לבדוק את היגיון המסלול, מרחקים, לינות ושינויים חשובים לקראת הנסיעה.</span></div></div><div class="how-highlight"><h3 data-he="הטיול נשאר שלכם — גם אחרי התכנון" data-en="Your trip stays with you — after planning too">הטיול נשאר שלכם — גם אחרי התכנון</h3><p data-he="בחשבון האישי נשמרת היסטוריית הטיולים שלכם: שם הטיול, היעד, התאריכים והקישור האישי. אפשר לחזור לטיול בכל זמן — גם לאחר שהסתיים. במהלך התכנון והנסיעה תוכלו להמשיך לשפר את המסלול דרך AI שמחובר לטיול שלכם: לקצר יום, להחליף נקודה, להתאים למזג האוויר או לשנות את התוכנית בלי להתחיל מחדש." data-en="Your account keeps your trip history: trip name, destination, dates and personal link. Return to a trip at any time, even after it ends. During planning and travel, continue refining the itinerary with trip-aware AI: shorten a day, replace a stop, adapt to weather or change the plan without starting over.">בחשבון האישי נשמרת היסטוריית הטיולים שלכם: שם הטיול, היעד, התאריכים והקישור האישי. אפשר לחזור לטיול בכל זמן — גם לאחר שהסתיים. במהלך התכנון והנסיעה תוכלו להמשיך לשפר את המסלול דרך AI שמחובר לטיול שלכם: לקצר יום, להחליף נקודה, להתאים למזג האוויר או לשנות את התוכנית בלי להתחיל מחדש.</p><strong data-he="מתכננים פעם אחת. ממשיכים לשפר עד שחוזרים הביתה." data-en="Plan once. Keep improving until you are back home.">מתכננים פעם אחת. ממשיכים לשפר עד שחוזרים הביתה.</strong></div><div class="trust-grid"><div>🔐 פרטיות ואבטחה בתכנון</div><div>♿ ממשק נגיש ורספונסיבי</div><div>💳 תשלום דרך ספק סליקה</div><div>🧠 AI כחלק מהטיול</div><div>📚 היסטוריית טיולים אישית</div><div>📱 הטיול זמין גם מהנייד</div></div><div class="cta"><a class="btn planner-color" href="#planner">בנו טיול חדש</a><a class="btn import-color" href="#trips">ראו הצעות לטיולים</a></div></section>
 <section id="trips"><div class="headrow"><div><h2 data-he="מסלולים ומדריכי יעדים" data-en="Trips & Destination Guides">מסלולים ומדריכי יעדים</h2><p data-he="גלו מסלולים אמיתיים, רעיונות לימים, אזורי לינה, נקודות עניין וטיפים שימושיים ליעדים שונים." data-en="Explore real itineraries, day-by-day ideas, stay areas, highlights and practical tips for different destinations.">גלו מסלולים אמיתיים, רעיונות לימים, אזורי לינה, נקודות עניין וטיפים שימושיים ליעדים שונים.</p></div></div><div class="cards" id="tripCards">
 <article class="trip" data-trip-sku="ready-slovakia"><div class="cover" style="background-image:var(--img-budapest)"></div><div class="tripbody"><div class="tags"><span class="tag">HTML מלא</span><span class="tag">8 ימים</span></div><h3>סלובקיה + בודפשט</h3><div class="trip-price">מסלול מוכן · <b>99 ₪</b></div><p>מסלול קיים עם הימים, המפות והניווט.</p><div class="trip-actions"><a class="open" href="trip-slovakia.html">פתח טיול</a><button type="button" class="btn cart-add" onclick="tcAddTripToCart('ready-slovakia','סלובקיה + בודפשט',99)">הוסף לסל</button></div></div></article>
 <article class="trip" data-trip-sku="ready-vietnam"><div class="cover" style="background-image:var(--img-vietnam)"></div><div class="tripbody"><div class="tags"><span class="tag">HTML מלא</span><span class="tag">25 ימים</span></div><h3>ויאטנם + תאילנד</h3><div class="trip-price">מסלול מוכן · <b>99 ₪</b></div><p>מסלול קיים עם כל דפי הימים.</p><div class="trip-actions"><a class="open" href="trip-vietnam.html">פתח טיול</a><button type="button" class="btn cart-add" onclick="tcAddTripToCart('ready-vietnam','ויאטנם + תאילנד',99)">הוסף לסל</button></div></div></article>
@@ -669,7 +619,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
     <div class="planner-step" data-step="7"><h3>7. סקירה ואישור לפני בניית הטיול</h3><div id="plannerSummary" class="planner-summary"></div><div class="ai-box"><div><strong>💬 עוזר התכנון</strong><p>אחרי יצירת הטיול תוכלו לשנות ימים, יעדים, לינות ואילוצים. שינוי שמשפיע על המסלול יחושב מחדש ויוצג לאישור.</p></div><span>הטיול נשאר ניתן לעריכה</span></div></div>
   </div>
   <div class="planner-actions"><button class="btn soft" id="plannerPrev" type="button" disabled>הקודם</button><button class="btn secondary" id="plannerNext" type="button">הבא</button><button class="btn green" id="plannerBuild" type="button" style="display:none">בנה טיול</button></div><div id="tripBuildOverlay" class="trip-build-overlay" aria-hidden="true"><div class="trip-build-card"><div class="trip-build-icon">🧭</div><h3>בונים לכם את הטיול...</h3><p id="tripBuildStatus">מנתחים את ההעדפות שלכם</p><div class="trip-build-track"><div id="tripBuildBar"></div></div><strong id="tripBuildPct">0%</strong><small>TripCraft מתאים קצב, גילאים, מרחקים, לינות ואטרקציות ומכין את הטיול המלא.</small></div></div>
-  <div id="plannerResult" class="planner-result"><div class="tc-v135-trip-nav" aria-label="Trip navigation"><button class="btn soft" id="tcV135TripBack" type="button" data-he="חזרה לחשבון" data-en="Back to account">חזרה לחשבון</button><button class="btn soft" id="tcV135TripClose" type="button" data-he="סגור" data-en="Close">סגור</button></div><div class="planner-result-head"><div><h3 id="plannerResultTitle">טיול חדש</h3><p id="plannerResultMeta"></p><span id="plannerChangeQuota" class="change-quota">פיילוט: עד 10 שינויים</span></div><div class="tc-v108-result-actions"><button class="btn green" id="plannerSaveTrip">שמור טיול</button><button class="btn tc-v108-discard" id="plannerDiscardTrip" type="button">יציאה ללא שמירה</button></div></div><div id="tcV108SaveNotice" class="warn tc-v108-save-notice"><strong>הטיול עדיין לא נשמר.</strong> שמרו כדי לקבל קישור קבוע ולהמשיך אליו מהחשבון, או בחרו יציאה ללא שמירה.</div><div id="plannerShareBox" class="safe" style="display:none;margin:14px 0"><strong>הקישור האישי לטיול:</strong><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><input id="plannerShareLink" readonly dir="ltr" style="flex:1;min-width:230px"><button id="plannerCopyLink" class="btn soft" type="button">העתק קישור</button></div></div><div id="plannerBudgetSummary" class="budget-summary"></div>
+  <div id="plannerResult" class="planner-result"><div class="planner-result-head"><div><h3 id="plannerResultTitle">טיול חדש</h3><p id="plannerResultMeta"></p><span id="plannerChangeQuota" class="change-quota">פיילוט: עד 10 שינויים</span></div><div class="tc-v108-result-actions"><button class="btn green" id="plannerSaveTrip">שמור טיול</button><button class="btn tc-v108-discard" id="plannerDiscardTrip" type="button">יציאה ללא שמירה</button></div></div><div id="tcV108SaveNotice" class="warn tc-v108-save-notice"><strong>הטיול עדיין לא נשמר.</strong> שמרו כדי לקבל קישור קבוע ולהמשיך אליו מהחשבון, או בחרו יציאה ללא שמירה.</div><div id="plannerShareBox" class="safe" style="display:none;margin:14px 0"><strong>הקישור האישי לטיול:</strong><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px"><input id="plannerShareLink" readonly dir="ltr" style="flex:1;min-width:230px"><button id="plannerCopyLink" class="btn soft" type="button">העתק קישור</button></div></div><div id="plannerBudgetSummary" class="budget-summary"></div>
   <div class="panel" style="margin-top:18px;background:#fbfdff"><h3 style="margin-top:0">פוסטים והמלצות לכל הטיול</h3><p style="color:#607887;margin-top:-4px">הדביקו פוסט, לינק או המלצה. TripCraft יציע לאיזה יום לשבץ אותו, ויתריע אם הוא נראה רחוק או לא הגיוני למסלול.</p><div class="field"><textarea id="plannerGlobalPostInput" rows="5" placeholder="הדבק כאן פוסט / לינק / המלצה לכל הטיול"></textarea></div><div class="cta"><button class="btn secondary" id="plannerGlobalPostReview" type="button">בדוק והצע שיבוץ</button></div><div id="plannerGlobalPostResult"></div></div>
   <div id="plannerDraftDays" class="day-list"></div><div class="chatbox"><div class="chatlog" id="plannerChatLog"><div class="chatmsg bot">הטיול הראשוני מוכן. כתבו לי מה תרצו לשנות.</div></div><div class="chatinput"><input id="plannerChatInput" placeholder="למשל: יום 2 עמוס מדי, תוריד תחנה אחת"><button class="btn secondary" id="plannerChatSend">שלח</button></div></div></div>
 </section>
@@ -748,7 +698,7 @@ body.tc-logged-in #tcMobileMenu a[href="#login"]{display:none!important}
     <div class="tc-calendar-actions"><button id="tcCalendarClear" class="tc-calendar-clear" type="button">איפוס</button><button id="tcCalendarDone" class="tc-calendar-done" type="button">אישור</button></div>
   </div>
 </div>
-<div id="plannerDayModal" class="planner-modal" aria-hidden="true"><div class="planner-modal-card"><div class="planner-modal-head"><div><strong id="plannerDayModalTitle">עריכת יום</strong><div style="color:#6c7c89;font-size:13px;margin-top:4px">Drill Down של היום: מפה, נקודות, עדכון/מחיקה ושיחה חופשית על היום הספציפי.</div></div><button class="btn soft" id="plannerDayModalClose" type="button">סגור</button></div><div class="field"><label>כותרת היום</label><input id="plannerDayTitleInput"></div><div class="cta"><button class="btn green" id="plannerApplyDayTitle" type="button">שמור כותרת</button></div><div id="plannerDayRouteBox" class="safe" style="margin-top:12px"></div><div id="plannerDayDistanceWarning"></div><div class="tc-v133-day-actions"><button class="btn secondary" id="plannerRainBtn" type="button">☔ בנה חלופת גשם ליום הזה</button><span id="plannerRainStatus" class="tc-v133-rain-status"></span></div><div id="plannerRainResult" class="tc-v133-rain-result" hidden></div><div id="plannerDayStopsEditor" class="planner-detail-list"></div><div class="day-chat"><div class="chatlog" id="plannerDayChatLog"><div class="chatmsg bot">אפשר לכתוב חופשי על היום הזה: להוריד תחנה, להוסיף מקום, לרווח את היום או לבנות אותו מחדש.</div></div><div class="chatinput"><input id="plannerDayChatInput" placeholder="כתוב חופשי על היום הזה"><button class="btn secondary" id="plannerDayChatSend" type="button">שלח</button></div></div></div></div>
+<div id="plannerDayModal" class="planner-modal" aria-hidden="true"><div class="planner-modal-card"><div class="planner-modal-head"><div><strong id="plannerDayModalTitle">עריכת יום</strong><div style="color:#6c7c89;font-size:13px;margin-top:4px">Drill Down של היום: מפה, נקודות, עדכון/מחיקה ושיחה חופשית על היום הספציפי.</div></div><button class="btn soft" id="plannerDayModalClose" type="button">סגור</button></div><div class="field"><label>כותרת היום</label><input id="plannerDayTitleInput"></div><div class="cta"><button class="btn green" id="plannerApplyDayTitle" type="button">שמור כותרת</button></div><div id="plannerDayRouteBox" class="safe" style="margin-top:12px"></div><div id="plannerDayDistanceWarning"></div><div class="tc-v139-day-actions"><button class="btn secondary" id="plannerRainBtn" type="button">☔ בנה חלופת גשם ליום הזה</button><span id="plannerRainStatus" class="tc-v139-rain-status"></span></div><div id="plannerRainResult" class="tc-v139-rain-result" hidden></div><div id="plannerDayStopsEditor" class="planner-detail-list"></div><div class="day-chat"><div class="chatlog" id="plannerDayChatLog"><div class="chatmsg bot">אפשר לכתוב חופשי על היום הזה: להוריד תחנה, להוסיף מקום, לרווח את היום או לבנות אותו מחדש.</div></div><div class="chatinput"><input id="plannerDayChatInput" placeholder="כתוב חופשי על היום הזה"><button class="btn secondary" id="plannerDayChatSend" type="button">שלח</button></div></div></div></div>
 <div id="generatedTrip" class="generated"><div class="backbar"><strong id="generatedTitle">טיול</strong><button onclick="closeGenerated()">סגור וחזור</button></div><section class="generated-hero"><div class="generated-hero-in"><h1 id="gName"></h1><p id="gMeta"></p></div></section><main class="generated-body"><div id="tripDaysView"><div class="headrow"><div><h2>תכנית לפי ימים</h2><p>לחץ על יום כדי לפתוח פירוט מלא.</p></div></div><section class="overview-box"><h3>🗺️ כל המסלול במפה</h3><div id="tripOverviewMap" class="overview-map"></div><div class="overview-note" id="overviewNote"></div></section><div id="generatedDays" class="days-grid"></div></div><div id="dayDetailView" class="day-detail"></div></main></div>
 <script>
 if(window.pdfjsLib){pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';}
@@ -1161,13 +1111,7 @@ function renderHotelRecommendations(){const box=document.getElementById('hotelRe
 function openHotelsForDay(i){if(planner.draft&&planner.draft.days[i])sessionStorage.setItem('tc_hotel_focus',planner.draft.days[i].lodging||'');location.hash='#hotels';setTimeout(()=>renderHotelRecommendations(),50);}
 
 function tcSleep(ms){return new Promise(r=>setTimeout(r,ms));}
-let tcBuildProgressTimer=null,tcBuildProgressValue=0;
-function tcBuildProgressEls(){return{overlay:document.getElementById('tripBuildOverlay'),bar:document.getElementById('tripBuildBar'),pct:document.getElementById('tripBuildPct'),status:document.getElementById('tripBuildStatus')}}
-function tcBuildProgressSet(v,msg){const e=tcBuildProgressEls();tcBuildProgressValue=Math.max(tcBuildProgressValue,Math.min(100,Number(v)||0));if(e.bar)e.bar.style.width=tcBuildProgressValue+'%';if(e.pct)e.pct.textContent=tcBuildProgressValue+'%';if(e.status&&msg)e.status.textContent=msg;}
-function tcBuildProgressStart(){const e=tcBuildProgressEls();if(!e.overlay)return;e.overlay.classList.add('show');e.overlay.setAttribute('aria-hidden','false');tcBuildProgressValue=4;tcBuildProgressSet(4,plannerMessage('מתחילים לבנות את הטיול','Starting your trip plan'));clearInterval(tcBuildProgressTimer);const messages=[[18,'מנתחים את ההעדפות שלכם','Analyzing your preferences'],[32,'מתאימים את הקצב והגילאים','Matching pace and traveler ages'],[46,'מחלקים את הטיול לימים ואזורים','Dividing the trip into days and regions'],[60,'מתכננים לינות ומעברים','Planning overnight stops and transfers'],[72,'בונים פירוט לפי שעות','Building the hourly day plans'],[82,'בודקים מרחקים והיגיון גאוגרפי','Checking distances and geographic logic'],[88,'ה-AI עדיין עובד — ממשיכים לעבד את המסלול','AI is still working — continuing to process the itinerary']];let i=0,slowTick=0;tcBuildProgressTimer=setInterval(()=>{if(tcBuildProgressValue<88){const target=messages[Math.min(i,messages.length-1)];tcBuildProgressSet(Math.min(target[0],tcBuildProgressValue+4),plannerMessage(target[1],target[2]));if(tcBuildProgressValue>=target[0]&&i<messages.length-1)i++;return;}if(tcBuildProgressValue<97){slowTick++;if(slowTick%2===0)tcBuildProgressSet(tcBuildProgressValue+1,plannerMessage('עדיין עובדים על הפרטים האחרונים...','Still working on the final details...'));}},1400);}
-async function tcBuildProgressFinish(msg){clearInterval(tcBuildProgressTimer);tcBuildProgressTimer=null;tcBuildProgressSet(100,msg||plannerMessage('הטיול נבנה ומוכן לשמירה','Trip built and ready to save'));await tcSleep(450);const e=tcBuildProgressEls();e.overlay?.classList.remove('show');e.overlay?.setAttribute('aria-hidden','true');}
-async function tcBuildProgressFail(msg){clearInterval(tcBuildProgressTimer);tcBuildProgressTimer=null;const e=tcBuildProgressEls();if(e.status)e.status.textContent=msg||plannerMessage('בניית הטיול נעצרה','Trip build stopped');await tcSleep(500);e.overlay?.classList.remove('show');e.overlay?.setAttribute('aria-hidden','true');}
-function tcWithTimeout(promise,ms,label){let timer;return Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(new Error(label||'TIMEOUT')),ms)})]).finally(()=>clearTimeout(timer));}
+async function runTripBuildProgress(){const overlay=document.getElementById('tripBuildOverlay'),bar=document.getElementById('tripBuildBar'),pct=document.getElementById('tripBuildPct'),status=document.getElementById('tripBuildStatus');if(!overlay||!bar||!pct||!status)return;const steps=[[8,'מנתחים את ההעדפות שלכם'],[22,'מתאימים את הקצב לגילאי הנוסעים'],[38,'בונים חלוקת ימים ומסלול'],[54,'בודקים מרחקים וזמני נסיעה'],[68,'מתאימים אזורי לינה'],[82,'מחשבים עלויות אטרקציות'],[93,'מבצעים TripCheck ראשוני'],[100,'הטיול המלא שלכם מוכן']];overlay.classList.add('show');overlay.setAttribute('aria-hidden','false');for(const [v,msg] of steps){bar.style.width=v+'%';pct.textContent=v+'%';status.textContent=msg;await tcSleep(v===100?250:320);}overlay.classList.remove('show');overlay.setAttribute('aria-hidden','true');}
 function parseHardConstraints(text,startYear){
  const src=String(text||'').trim();if(!src)return[];const out=[];
  const lines=src.split(/\n|;/).map(x=>x.trim()).filter(Boolean);
@@ -1183,14 +1127,6 @@ function parseHardConstraints(text,startYear){
 function applyHardConstraintsToDays(days,constraints){
  for(const c of constraints){const idx=days.findIndex(d=>String(d.date).replace(/\./g,'-')===c.date||displayPlannerDate(c.date)===displayPlannerDate(d.date));if(idx<0)continue;const d=days[idx];const place=c.from&&c.to?`${c.from} → ${c.to}`:'אירוע קבוע';d.stops.unshift({time:c.time,place,what:`אילוץ קשיח: ${c.text}`});d.title=`${d.title} · אילוץ קבוע`;d.hardConstraints=d.hardConstraints||[];d.hardConstraints.push(c);}
 }
-async function tcVerifyPlannerDraftInBackground(sb,functionName,tripId,userId,tripRequest,ai){
- try{
-   const verify=await tcWithTimeout(sb.functions.invoke(functionName,{body:{action:'verify_trip',trip_id:tripId,user_id:userId,trip:tripRequest,itinerary:ai}}),95000,plannerMessage('TripCheck ארך יותר מדי זמן; הטיול נשמר וניתן להמשיך.','TripCheck timed out; the trip is saved and usable.'));
-   const v=verify?.data||{};
-   if(!verify?.error&&v.ok&&planner.draft?.tripId===tripId){planner.draft.verification=v.verification||null;planner.draft.aiUsage=planner.draft.aiUsage||{};planner.draft.aiUsage.verify=v.usage||null;planner.draft.aiUsage.verifyCostUsd=v.cost_usd||0;planner.draft.aiUsage.webSearchCalls=(planner.draft.aiUsage.webSearchCalls||0)+(v.web_search_calls||0);planner.draft.verificationStatus='complete';renderPlannerDraft();}
-   else console.warn('Trip web verification skipped/failed',verify?.error||v?.error||'unknown');
- }catch(e){console.warn('Trip web verification failed; keeping built trip',e);if(planner.draft?.tripId===tripId){planner.draft.verificationStatus='pending';}}
-}
 async function buildPlannerDraft(){
  const d=plannerData();
  const lang=(document.documentElement.lang||'he').startsWith('en')?'en':'he';
@@ -1199,34 +1135,30 @@ async function buildPlannerDraft(){
  if(!sb?.functions?.invoke)throw new Error(plannerMessage('שירות ה-AI אינו זמין.','AI service is unavailable.'));
  const tripId=planner.currentTripId||planner.draft?.tripId||tcNewTripId();
  planner.currentTripId=tripId;
- const userId=tcCustomer()?.id||null;
  const functionName=window.TRIPCRAFT_CONFIG?.aiFunctionName||'tripcraft-ai';
- const requiredPlaces=String(d.must||'').split(/[\n;,\.]+/).map(x=>x.trim()).filter(x=>x.length>1);
- const tripRequest={destination:d.destination,countries:d.countries||[],start_date:d.start,end_date:d.end,travelers:d.people,children:d.children,ages:d.ages||[],age_bands:d.ageBands||{},language:lang,intensity:d.pace,trip_name:d.tripName,group:d.group,transport:d.transport,transports:d.transports||[],day_length:d.dayLength,walking_preference:d.walk,daily_drive_preference:d.drive,interests:d.interests||[],priorities:d.priorities||[],must:d.must||'',required_places:requiredPlaces,avoid:d.avoid||'',notes:d.free||'',arrival_airport:d.arrivalAirport||'',departure_airport:d.departureAirport||d.arrivalAirport||'',arrival_time:d.arrivalTime||'',departure_time:d.departureTime||'',include_hotels:!!d.includeHotels,lodging_style:d.lodgingStyle||'smart',hotel_stars:d.hotelStars||'any',lodging_mode:d.lodgingMode||'recommend',lodging_types:d.lodgingTypes||[],lodging_budget:d.lodgingBudget||'mid',lodging_filters:d.lodgingFilters||[],lodging_priority:d.lodgingPriority||'balanced',lodging_detour:d.lodgingDetour||'10',existing_lodging:d.existingLodging||''};
- tcBuildProgressStart();
+ const tripRequest={destination:d.destination,start_date:d.start,end_date:d.end,travelers:d.people,language:lang,intensity:d.pace,trip_name:d.tripName,group:d.group,children:d.children,transport:d.transport,interests:d.interests,must:d.must,avoid:d.avoid,notes:d.free,arrival_airport:d.arrivalAirport||'',departure_airport:d.departureAirport||d.arrivalAirport||'',arrival_time:d.arrivalTime||'',departure_time:d.departureTime||''};
+ await runTripBuildProgress();
+ const build=await sb.functions.invoke(functionName,{body:{action:'build_trip',trip_id:tripId,user_id:tcCustomer()?.id||null,trip:tripRequest}});
+ if(build?.error)throw build.error;
+ const payload=build?.data||{};
+ if(!payload.ok||!payload.itinerary)throw new Error(payload.error||'INVALID_BUILD_RESPONSE');
+ const ai=payload.itinerary;
+ const days=(ai.days||[]).map(day=>({date:day.date||'',title:day.title||'',lodging:day.overnight_location||'',summary:day.day_summary||'',routeSummary:day.route_summary||'',stops:(day.activities||[]).map(a=>({time:a.time||'',name:a.name||'',place:a.location||a.name||'',what:a.description||a.name||'',durationMinutes:Number(a.duration_minutes||0),driveMinutes:Number(a.drive_minutes||0),notes:a.notes||'',estimatedCost:Number(a.estimated_cost||0)})).filter(s=>s.place)}));
+ if(!days.length)throw new Error('AI returned no itinerary days');
+ planner.draft={tripId,name:d.tripName||ai.title||d.destination,country:ai.country||'',year:d.start.slice(0,4),sourceType:'ai',plannerProfile:d,changeCount:0,maxChanges:10,days,aiItinerary:ai,aiUsage:{build:payload.usage||null,buildCostUsd:payload.cost_usd||0,webSearchCalls:payload.web_search_calls||0},verification:null};
+ applyHardConstraintsToDays(planner.draft.days,parseHardConstraints(d.free,d.start?d.start.slice(0,4):''));
+ renderPlannerDraft();
+ await tcSaveCurrentTrip(false);
+ tcLogEvent('trip_built',{name:planner.draft.name,days:days.length,tripId,source:'openai',costUsd:payload.cost_usd||0});
+ // Verification is deliberately a second call: a failure here never destroys the built trip.
  try{
-   tcBuildProgressSet(10,plannerMessage('שולחים את כל פרטי הטיול ל-AI','Sending the full trip profile to AI'));
-   const build=await tcWithTimeout(sb.functions.invoke(functionName,{body:{action:'build_trip',trip_id:tripId,user_id:userId,trip:tripRequest}}),135000,plannerMessage('בניית הטיול נמשכה יותר משתי דקות. נסו שוב; הנתונים שהזנתם נשמרו במסך.','Trip building took more than two minutes. Please retry; your entered data remains on screen.'));
-   tcBuildProgressSet(90,plannerMessage('המסלול התקבל — מכינים את הימים','Itinerary received — preparing the days'));
-   if(build?.error)throw build.error;
-   const payload=build?.data||{};
-   if(!payload.ok||!payload.itinerary)throw new Error(payload.error||'INVALID_BUILD_RESPONSE');
-   const ai=payload.itinerary;
-   const days=(ai.days||[]).map(day=>({date:day.date||'',title:day.title||'',lodging:day.overnight_location||'',summary:day.day_summary||'',routeSummary:day.route_summary||'',stops:(day.activities||[]).map(a=>({time:a.time||'',name:a.name||'',place:a.location||a.name||'',what:a.description||a.name||'',durationMinutes:Number(a.duration_minutes||0),driveMinutes:Number(a.drive_minutes||0),notes:a.notes||'',estimatedCost:Number(a.estimated_cost||0)})).filter(s=>s.place)}));
-   if(!days.length)throw new Error('AI returned no itinerary days');
-   tcBuildProgressSet(94,plannerMessage('מכינים את התצוגה והסיכום','Preparing the itinerary view and summary'));
-   planner.draft={tripId,name:d.tripName||ai.title||d.destination,country:ai.country||'',year:d.start.slice(0,4),sourceType:'ai',plannerProfile:d,changeCount:0,maxChanges:10,days,aiItinerary:ai,aiUsage:{build:payload.usage||null,buildCostUsd:payload.cost_usd||0,webSearchCalls:payload.web_search_calls||0},verification:null,verificationStatus:'checking'};
-   applyHardConstraintsToDays(planner.draft.days,parseHardConstraints(d.free,d.start?d.start.slice(0,4):''));
-   renderPlannerDraft();
-   tcLogEvent('trip_built',{name:planner.draft.name,days:days.length,tripId,source:'openai',costUsd:payload.cost_usd||0});
-   await tcBuildProgressFinish(plannerMessage('הטיול נבנה ומוכן ✓','Trip built and ready ✓'));
-   // TripCheck runs after the trip is already usable. It must never keep the Build button stuck.
-   void tcVerifyPlannerDraftInBackground(sb,functionName,tripId,userId,tripRequest,ai);
-   return true;
- }catch(e){
-   await tcBuildProgressFail(plannerMessage('בניית הטיול לא הושלמה','Trip build did not complete'));
-   throw e;
- }
+   const verify=await sb.functions.invoke(functionName,{body:{action:'verify_trip',trip_id:tripId,user_id:tcCustomer()?.id||null,trip:tripRequest,itinerary:ai}});
+   const v=verify?.data||{};
+   if(!verify?.error&&v.ok){planner.draft.verification=v.verification||null;planner.draft.aiUsage.verify=v.usage||null;planner.draft.aiUsage.verifyCostUsd=v.cost_usd||0;planner.draft.aiUsage.webSearchCalls=(planner.draft.aiUsage.webSearchCalls||0)+(v.web_search_calls||0);await tcSaveCurrentTrip(false);}
+   else console.warn('Trip web verification skipped/failed',verify?.error||v?.error||'unknown');
+ }catch(e){console.warn('Trip web verification failed; keeping built trip',e);}
+ renderPlannerDraft();
+ return true;
 }
 function plannerTravelMode(profile){if(profile.transport==='walking')return{mode:'walking',icon:'🚶',label:'הליכה'};if(profile.transport==='public')return{mode:'transit',icon:'🚆',label:'תחבורה ציבורית'};if(profile.transport==='mixed')return{mode:'driving',icon:'🚗',label:'נסיעה / משולב'};return{mode:'driving',icon:'🚗',label:'נסיעה'};}
 function plannerDayRoute(d,profile){const destName=profile.destination||'';const pts=(d.stops||[]).map(x=>({name:/airport|שדה|Prague|Budapest|Munich|Innsbruck|New York|Athens|Achensee|Seefeld|Sölden|Längenfeld|Central Park|Brooklyn/i.test(x.place||'')?x.place:((x.place||'')+', '+destName)})).filter(x=>x.name);if(pts.length<2)return'#';const m=plannerTravelMode(profile).mode,origin=encodeURIComponent(pts[0].name),destination=encodeURIComponent(pts[pts.length-1].name),mids=pts.slice(1,-1).map(x=>encodeURIComponent(x.name)).join('|');return`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}&travelmode=${m}${mids?'&waypoints='+mids:''}`;}
@@ -1250,7 +1182,7 @@ function globalPostSuggestedDay(txt,t){
  }
  return Math.min(best,Math.max(0,t.days.length-2));
 }
-function renderPlannerDraft(){const t=planner.draft;if(!t)return;document.getElementById('planner')?.classList.toggle('tc-v135-built',!t.saved);document.getElementById('planner')?.classList.toggle('tc-v135-opened',!!t.saved);document.getElementById('plannerResult').classList.add('show');document.getElementById('plannerResultTitle').textContent=t.name;document.getElementById('plannerResultMeta').textContent=`${t.days.length} ימים · ${t.plannerProfile.people} נוסעים · ${t.plannerProfile.group}`;const q=document.getElementById('plannerChangeQuota');if(q)q.textContent=`פיילוט: ${t.changeCount||0}/${t.maxChanges||10} שינויים`;const mode=plannerTravelMode(t.plannerProfile),html=[];t.days.forEach((d,i)=>{const route=plannerDayRoute(d,t.plannerProfile),duration=plannerDayDuration(d,t.plannerProfile),routeLine=(d.stops||[]).map(x=>x.place).filter(Boolean).join(' ← '),theme=plannerThemeShort(d),wd=weekdayForDate(d.date),dc=dayAttractionCost(d,t.plannerProfile);html.push(`<article class="day-row" style="--day:${dayColors[i%dayColors.length]}"><div class="day-no"><span>יום</span><b>${i+1}</b><span class="day-weekday">${esc(wd)}</span><span class="day-date">${esc(displayPlannerDate(d.date))}</span></div><div class="day-photo" style="background-image:url('${dayPhoto(i)}')"></div><div class="day-main day-summary-card"><h3>${esc(d.title)}</h3><div class="day-route-line">${esc(routeLine||'מסלול היום ייבנה כאן')}</div><div class="day-mini-meta"><span>${esc(theme)}</span><span>${mode.icon} ${esc(duration)}</span>${route!=='#'?`<a href="${route}" target="_blank" rel="noopener">🗺 Google Maps</a>`:''}</div>${d.lodging?`<span class="lodging-chip">🏨 לינה: ${esc(d.lodging)}</span>`:''}<span class="cost-chip">💰 אטרקציות לכולם ≈ ${dc.toLocaleString()} ₪</span></div><div class="day-action"><button class="btn ai-color" type="button" data-tc-open-day="${i}">פתח פירוט יום</button><button class="btn soft" type="button" data-tc-rain-day="${i}">☔ חלופת גשם</button>${d.lodging?`<button class="btn soft" type="button" data-tc-hotels-day="${i}">איפה ישנים?</button>`:''}</div></article>`)});document.getElementById('plannerDraftDays').innerHTML=html.join('');renderPlannerBudget();if(t.tripId)tcShowPlannerShareLink(tcPersonalTripUrl(t.tripId));document.getElementById('plannerResult').scrollIntoView({behavior:'smooth',block:'start'});}
+function renderPlannerDraft(){const t=planner.draft;if(!t)return;document.getElementById('plannerResult').classList.add('show');document.getElementById('plannerResultTitle').textContent=t.name;document.getElementById('plannerResultMeta').textContent=`${t.days.length} ימים · ${t.plannerProfile.people} נוסעים · ${t.plannerProfile.group}`;const q=document.getElementById('plannerChangeQuota');if(q)q.textContent=`פיילוט: ${t.changeCount||0}/${t.maxChanges||10} שינויים`;const mode=plannerTravelMode(t.plannerProfile),html=[];t.days.forEach((d,i)=>{const route=plannerDayRoute(d,t.plannerProfile),duration=plannerDayDuration(d,t.plannerProfile),routeLine=(d.stops||[]).map(x=>x.place).filter(Boolean).join(' ← '),theme=plannerThemeShort(d),wd=weekdayForDate(d.date),dc=dayAttractionCost(d,t.plannerProfile);html.push(`<article class="day-row" style="--day:${dayColors[i%dayColors.length]}"><div class="day-no"><span>יום</span><b>${i+1}</b><span class="day-weekday">${esc(wd)}</span><span class="day-date">${esc(displayPlannerDate(d.date))}</span></div><div class="day-photo" style="background-image:url('${dayPhoto(i)}')"></div><div class="day-main day-summary-card"><h3>${esc(d.title)}</h3><div class="day-route-line">${esc(routeLine||'מסלול היום ייבנה כאן')}</div><div class="day-mini-meta"><span>${esc(theme)}</span><span>${mode.icon} ${esc(duration)}</span>${route!=='#'?`<a href="${route}" target="_blank" rel="noopener">🗺 Google Maps</a>`:''}</div>${d.lodging?`<span class="lodging-chip">🏨 לינה: ${esc(d.lodging)}</span>`:''}<span class="cost-chip">💰 אטרקציות לכולם ≈ ${dc.toLocaleString()} ₪</span></div><div class="day-action"><button class="btn ai-color" type="button" data-tc-open-day="${i}">פתח פירוט יום</button><button class="btn soft" type="button" data-tc-rain-day="${i}">☔ חלופת גשם</button>${d.lodging?`<button class="btn soft" type="button" data-tc-hotels-day="${i}">איפה ישנים?</button>`:''}</div></article>`)});document.getElementById('plannerDraftDays').innerHTML=html.join('');renderPlannerBudget();if(t.tripId)tcShowPlannerShareLink(tcPersonalTripUrl(t.tripId));document.getElementById('plannerResult').scrollIntoView({behavior:'smooth',block:'start'});}
 
 function plannerStopNav(stop,profile){const q=[stop?.place,profile?.destination].filter(Boolean).join(', ');const e=encodeURIComponent(q);return{maps:'https://www.google.com/maps/search/?api=1&query='+e,waze:'https://www.waze.com/ul?q='+e+'&navigate=yes'};}
 let plannerEditingDay=-1;
@@ -1276,7 +1208,7 @@ document.getElementById('plannerDayChatSend').addEventListener('click',()=>{cons
 document.getElementById('plannerChatSend')?.addEventListener('click',()=>{const inp=document.getElementById('plannerChatInput'),log=document.getElementById('plannerChatLog'),v=(inp?.value||'').trim();if(!v||!planner.draft)return;const max=planner.draft.maxChanges||10,count=planner.draft.changeCount||0;if(count>=max){alert('בפיילוט ניתן לבצע עד 10 שינויים בטיול.');return;}planner.draft.changeCount=count+1;if(log){log.insertAdjacentHTML('beforeend',`<div class="chatmsg user">${esc(v)}</div><div class="chatmsg bot">קיבלתי את בקשת השינוי. בגרסת הפיילוט היא נרשמה למעקב; בחיבור AI השינוי יחושב מול כל המסלול והלינות.</div>`);log.scrollTop=log.scrollHeight;}inp.value='';renderPlannerDraft();tcLogEvent('trip_change',{n:planner.draft.changeCount,text:v.slice(0,160)});});
 function tcIsAdmin(){const u=tcCustomer();return !!u?.isAdmin;}
 function applyPageFocus(){
- let rawHash=(location.hash||'#home').replace('#','');const protectedPages=new Set(['trips','hotels','import','cart','account']);
+ let rawHash=(location.hash||'#home').replace('#','');const protectedPages=new Set(['trips','hotels','planner','import','cart','account']);
  if(rawHash.startsWith('trip/')){const tid=decodeURIComponent(rawHash.slice(5));if(!tcCustomer()){sessionStorage.setItem('tc_pending_trip_id',tid);sessionStorage.setItem('tc_return_after_login','#account');rawHash='login';if(location.hash!=='#login')history.replaceState(null,'','#login');}else{setTimeout(()=>tcOpenPurchasedTrip(tid),0);rawHash='account';}}
  let page=rawHash.split('?')[0]||'home';const pages=['home','how','trips','hotels','planner','import','pricing','cart','login','account','legal'];if(!pages.includes(page))page='home';
  if(protectedPages.has(page)&&!tcCustomer()){sessionStorage.setItem('tc_return_after_login','#'+page);page='login';if(location.hash!=='#login')history.replaceState(null,'','#login');}
@@ -1321,7 +1253,7 @@ window.tcCheckLateLodgingChange=function(hotelName,detourMinutes){const d=planne
 function plannerGoNext(){if(planner.step===1&&plannerStep1Part<3){if(!validatePlannerStep1Part(plannerStep1Part))return false;showPlannerStep1Part(plannerStep1Part+1);return true;}if(!validatePlannerStep())return false;plannerShowStep(planner.step+1);return true;}
 plannerNext.addEventListener('click',plannerGoNext);
 window.TripCraftPlannerNavigation={next:plannerGoNext,previous:plannerGoPrevious,getStep:()=>planner.step,getStep1Part:()=>plannerStep1Part};
-plannerBuild.addEventListener('click',async()=>{const sbAuth=tcSupabase();let activeUser=null;try{activeUser=(await sbAuth?.auth?.getSession?.())?.data?.session?.user||null;}catch(e){console.warn('Auth session check failed',e);}if(!activeUser){localStorage.removeItem(K.customer);try{sessionStorage.setItem('tc_return_after_login','#planner');sessionStorage.setItem('tc_after_login_action','build_trip');}catch(e){}location.hash='#login';return;}if(plannerBuild.dataset.busy==='1')return;plannerBuild.dataset.busy='1';plannerBuild.disabled=true;const label=plannerBuild.textContent;plannerBuild.textContent='בונה טיול...';try{const built=await buildPlannerDraft();if(built===false||!planner.draft)throw new Error('לא נוצר טיול. בדקו שהיעד והתאריכים הוזנו.');}catch(err){console.error(err);alert('בניית הטיול נכשלה: '+(err?.message||'שגיאה לא ידועה'));}finally{plannerBuild.dataset.busy='0';plannerBuild.disabled=false;plannerBuild.textContent=label;}});
+plannerBuild.addEventListener('click',async()=>{if(!tcCustomer()){try{sessionStorage.setItem('tc_return_after_login','#planner');sessionStorage.setItem('tc_after_login_action','build_trip');}catch(e){}location.hash='#login';return;}if(plannerBuild.dataset.busy==='1')return;plannerBuild.dataset.busy='1';plannerBuild.disabled=true;const label=plannerBuild.textContent;plannerBuild.textContent='בונה טיול...';try{const built=await buildPlannerDraft();if(built===false||!planner.draft)throw new Error('לא נוצר טיול. בדקו שהיעד והתאריכים הוזנו.');}catch(err){console.error(err);alert('בניית הטיול נכשלה: '+(err?.message||'שגיאה לא ידועה'));}finally{plannerBuild.dataset.busy='0';plannerBuild.disabled=false;plannerBuild.textContent=label;}});
 plannerShowStep(1);
 
 
@@ -1425,13 +1357,13 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
    if(!otpContext)return;const entered=(document.getElementById('tcOtpCode')?.value||'').trim();if(!/^\d{6}$/.test(entered)){alert('יש להזין קוד אימות בן 6 ספרות.');return;}
    const sb=tcSupabase();if(!sb){alert('שירות האימות אינו זמין כרגע.');return;}
    const email=otpContext.data.email;const {data,error}=await sb.auth.verifyOtp({email,token:entered,type:'email'});if(error){alert('קוד OTP שגוי או שפג תוקפו.');return;}
-   const user=data?.user,meta=user?.user_metadata||{};let firstName=meta.first_name||otpContext.data.firstName||'',lastName=meta.last_name||otpContext.data.lastName||'',phone=meta.phone||otpContext.data.phone||'';if(!firstName||!lastName){firstName=(prompt('כדי להמשיך, הזינו שם פרטי:')||'').trim();lastName=(prompt('הזינו שם משפחה:')||'').trim();if(!firstName||!lastName){alert('שם פרטי ושם משפחה הם שדות חובה.');try{await sb.auth.signOut();}catch(_){}return;}try{await sb.auth.updateUser({data:{first_name:firstName,last_name:lastName,phone}});}catch(e){console.warn('Profile metadata update failed',e);}}const u={id:user?.id||('CUS-'+Date.now()),firstName,lastName,phone,email:user?.email||email,verifiedEmail:true,createdAt:user?.created_at||new Date().toISOString()};
+   const user=data?.user,meta=user?.user_metadata||{};const u={id:user?.id||('CUS-'+Date.now()),firstName:meta.first_name||otpContext.data.firstName||'',lastName:meta.last_name||otpContext.data.lastName||'',phone:meta.phone||otpContext.data.phone||'',email:user?.email||email,verifiedEmail:true,createdAt:user?.created_at||new Date().toISOString()};
    jset(K.customer,u);otpContext=null;clearInterval(tcOtpTimer);document.getElementById('tcOtpStep').hidden=true;document.getElementById('tcAuthEntry').hidden=false;await tcFetchCloudTrips();tcRenderAccount();tcRenderHeaderUser();tcRenderCustomers();const ret=sessionStorage.getItem('tc_return_after_login')||'#account';sessionStorage.removeItem('tc_return_after_login');const after=sessionStorage.getItem('tc_after_login_action')||'';sessionStorage.removeItem('tc_after_login_action');const tripId=sessionStorage.getItem('tc_pending_trip_id');sessionStorage.removeItem('tc_pending_trip_id');location.hash=ret;if(tripId)setTimeout(()=>tcOpenPurchasedTrip(tripId),150);if(after==='build_trip'){setTimeout(()=>{try{plannerShowStep(7);document.getElementById('plannerBuild')?.click();}catch(e){console.error('Resume build failed',e);}},350);}tcLogEvent('login_verified',{method:'email_otp'});
  }
- async function tcSyncAuthSession(){const sb=tcSupabase();if(!sb)return;try{const {data}=await sb.auth.getSession();const user=data?.session?.user;if(!user){localStorage.removeItem(K.customer);tcCloudTripsCache=[];tcRenderHeaderUser();tcRenderAccount();return;}const meta=user.user_metadata||{},u={id:user.id,firstName:meta.first_name||'',lastName:meta.last_name||'',phone:meta.phone||'',email:user.email||'',verifiedEmail:true,createdAt:user.created_at||''};jset(K.customer,u);await tcFetchCloudTrips();tcRenderHeaderUser();tcRenderAccount();const ret=sessionStorage.getItem('tc_return_after_login');if(location.hash==='#login'&&ret){sessionStorage.removeItem('tc_return_after_login');const after=sessionStorage.getItem('tc_after_login_action')||'';sessionStorage.removeItem('tc_after_login_action');location.hash=ret;if(after==='build_trip'){setTimeout(()=>{try{plannerShowStep(7);document.getElementById('plannerBuild')?.click();}catch(e){console.error('Resume build failed',e);}},350);}}}catch(e){console.warn('Session sync failed',e);}}
+ async function tcSyncAuthSession(){const sb=tcSupabase();if(!sb)return;try{const {data}=await sb.auth.getSession();const user=data?.session?.user;if(!user)return;const meta=user.user_metadata||{},u={id:user.id,firstName:meta.first_name||'',lastName:meta.last_name||'',phone:meta.phone||'',email:user.email||'',verifiedEmail:true,createdAt:user.created_at||''};jset(K.customer,u);await tcFetchCloudTrips();tcRenderHeaderUser();tcRenderAccount();const ret=sessionStorage.getItem('tc_return_after_login');if(location.hash==='#login'&&ret){sessionStorage.removeItem('tc_return_after_login');const after=sessionStorage.getItem('tc_after_login_action')||'';sessionStorage.removeItem('tc_after_login_action');location.hash=ret;if(after==='build_trip'){setTimeout(()=>{try{plannerShowStep(7);document.getElementById('plannerBuild')?.click();}catch(e){console.error('Resume build failed',e);}},350);}}}catch(e){console.warn('Session sync failed',e);}}
  async function tcFetchCloudTrips(){const sb=tcSupabase(),u=tcCustomer();if(!sb||!u?.id){tcCloudTripsCache=[];return [];}try{const {data,error}=await sb.from('trips').select('id,name,destination,start_date,end_date,draft,updated_at').eq('user_id',u.id).order('updated_at',{ascending:false});if(error)throw error;tcCloudTripsCache=(data||[]).map(r=>({tripId:r.id,tripName:r.name,destination:r.destination,start:r.start_date,end:r.end_date,tripDraft:r.draft,personalUrl:tcPersonalTripUrl(r.id),cloud:true}));return tcCloudTripsCache;}catch(e){console.warn('Cloud trips unavailable; using local fallback.',e);tcCloudTripsCache=[];return [];}}
  function tcNewTripId(){return 'TC-'+new Date().getFullYear()+'-'+Math.random().toString(36).slice(2,8).toUpperCase();}
- async function tcSaveCurrentTrip(showMessage=true){const u=tcCustomer(),t=planner.draft;if(!u||!t)return false;if(!t.tripId)t.tripId=tcNewTripId();t.saved=true;t.savedAt=new Date().toISOString();const meta=tcTripDatesFromDraft(t),rec={tripId:t.tripId,customer:u,tripName:t.name||t.tripId,destination:meta.destination||t.plannerProfile?.destination||'',start:meta.start||'',end:meta.end||'',personalUrl:tcPersonalTripUrl(t.tripId),tripDraft:t,date:new Date().toISOString()};let local=jget(K.purchases,[]);const ix=local.findIndex(x=>x.tripId===rec.tripId);if(ix>=0)local[ix]={...local[ix],...rec};else local.unshift(rec);jset(K.purchases,local);const sb=tcSupabase();let cloudOk=false;if(sb){try{const {error}=await sb.from('trips').upsert({id:rec.tripId,user_id:u.id,name:rec.tripName,destination:rec.destination,start_date:rec.start||null,end_date:rec.end||null,draft:t,updated_at:new Date().toISOString()},{onConflict:'id'});if(error)throw error;cloudOk=true;await tcFetchCloudTrips();}catch(e){console.warn('Trip cloud save failed',e);}}
+ async function tcSaveCurrentTrip(showMessage=true){const u=tcCustomer(),t=planner.draft;if(!u||!t)return false;if(!t.tripId)t.tripId=tcNewTripId();const meta=tcTripDatesFromDraft(t),rec={tripId:t.tripId,customer:u,tripName:t.name||t.tripId,destination:meta.destination||t.plannerProfile?.destination||'',start:meta.start||'',end:meta.end||'',personalUrl:tcPersonalTripUrl(t.tripId),tripDraft:t,date:new Date().toISOString()};let local=jget(K.purchases,[]);const ix=local.findIndex(x=>x.tripId===rec.tripId);if(ix>=0)local[ix]={...local[ix],...rec};else local.unshift(rec);jset(K.purchases,local);const sb=tcSupabase();let cloudOk=false;if(sb){try{const {error}=await sb.from('trips').upsert({id:rec.tripId,user_id:u.id,name:rec.tripName,destination:rec.destination,start_date:rec.start||null,end_date:rec.end||null,draft:t,updated_at:new Date().toISOString()},{onConflict:'id'});if(error)throw error;cloudOk=true;await tcFetchCloudTrips();}catch(e){console.warn('Trip cloud save failed',e);}}
    tcShowPlannerShareLink(rec.personalUrl);tcRenderAccount();if(showMessage)alert(cloudOk?'הטיול נשמר בחשבון שלכם.':'הטיול נשמר בדפדפן. כדי לראות אותו מכל מכשיר יש להשלים פעם אחת את טבלת trips ב-Supabase.');return true;}
  function tcShowPlannerShareLink(url){const box=document.getElementById('plannerShareBox'),inp=document.getElementById('plannerShareLink');if(!box||!inp)return;inp.value=url||'';box.style.display=url?'block':'none';}
  async function tcCopyPlannerLink(){const v=document.getElementById('plannerShareLink')?.value||'';if(!v)return;try{await navigator.clipboard.writeText(v);alert('הקישור הועתק.');}catch(e){const i=document.getElementById('plannerShareLink');i?.select();document.execCommand('copy');alert('הקישור הועתק.');}}
@@ -1451,8 +1383,8 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  window.tcMenu=function(open){const nav=document.getElementById('tcNavToggle');if(nav)nav.checked=!!open;document.getElementById('tcMobileMenu')?.classList.toggle('open',open);document.getElementById('tcMenuBackdrop')?.classList.toggle('show',open);document.getElementById('tcMobileMenu')?.setAttribute('aria-hidden',open?'false':'true');document.getElementById('tcHamburger')?.setAttribute('aria-expanded',open?'true':'false');};
  window.tcRouteRefresh=function(page){window.tcMenu(false);if(page==='cart')tcRenderCart();if(page==='account')tcRenderAccount();if(page==='hotels')renderHotelRecommendations();if(page==='admin'){tcRenderPayments();tcRenderCustomers();}};
  document.getElementById('tcHamburger')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(true)});document.getElementById('tcMobileClose')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(false)});document.getElementById('tcMenuBackdrop')?.addEventListener('click',e=>{e.preventDefault();window.tcMenu(false)});document.getElementById('tcMobileMenu')?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>window.tcMenu(false)));document.getElementById('tcNavToggle')?.addEventListener('change',e=>{document.getElementById('tcMobileMenu')?.setAttribute('aria-hidden',e.target.checked?'false':'true');});
- window.tcStartCleanTrip=function(){try{localStorage.removeItem('tripcraft_planner_draft_v57');sessionStorage.removeItem('tc_after_login_action');planner.draft=null;planner.step=1;plannerStep1Part=1;document.getElementById('planner')?.classList.remove('tc-v135-built','tc-v135-opened');['plTripName','plCountries','plCountryOther','plCountrySearch','plDestination','plArrivalAirport','plDepartureAirport','plArrivalTime','plDepartureTime','plStart','plEnd','plMust','plFree'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const same=document.getElementById('plSameAirport');if(same){same.checked=false;}document.querySelectorAll('#countryChoices input,#groupChoices input').forEach(x=>x.checked=false);const couple=document.querySelector('#groupChoices input[value="זוג"]');if(couple)couple.checked=true;plannerShowStep(1);showPlannerStep1Part(1);}catch(e){console.error('New trip reset failed',e);}location.hash='#planner';};
- document.getElementById('tcCheckoutBtn')?.addEventListener('click',tcOpenCheckout);document.getElementById('tcPayBtn')?.addEventListener('click',tcPay);document.getElementById('tcCheckEmail')?.addEventListener('click',tcCheckEmail);document.getElementById('tcRegisterOtp')?.addEventListener('click',()=>tcRegisterAndSendOtp(false));document.getElementById('tcVerifyOtp')?.addEventListener('click',tcVerifyOtp);document.getElementById('tcOtpBack')?.addEventListener('click',tcBackFromOtp);document.getElementById('tcResendOtp')?.addEventListener('click',tcResendCurrentOtp);document.getElementById('tcAdminSearch')?.addEventListener('input',tcRenderPayments);document.getElementById('plannerSaveTrip')?.addEventListener('click',async()=>{const ok=await tcSaveCurrentTrip(true);if(ok){document.getElementById('planner')?.classList.remove('tc-v135-built','tc-v135-opened');location.hash='#account';}});document.getElementById('plannerCopyLink')?.addEventListener('click',tcCopyPlannerLink);
+ window.tcStartCleanTrip=function(){try{localStorage.removeItem('tripcraft_planner_draft_v57');sessionStorage.removeItem('tc_after_login_action');planner.draft=null;planner.step=1;plannerStep1Part=1;['plTripName','plCountries','plCountryOther','plCountrySearch','plDestination','plArrivalAirport','plDepartureAirport','plArrivalTime','plDepartureTime','plStart','plEnd','plMust','plFree'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});const same=document.getElementById('plSameAirport');if(same){same.checked=false;}document.querySelectorAll('#countryChoices input,#groupChoices input').forEach(x=>x.checked=false);const couple=document.querySelector('#groupChoices input[value="זוג"]');if(couple)couple.checked=true;plannerShowStep(1);showPlannerStep1Part(1);}catch(e){console.error('New trip reset failed',e);}location.hash='#planner';};
+ document.getElementById('tcCheckoutBtn')?.addEventListener('click',tcOpenCheckout);document.getElementById('tcPayBtn')?.addEventListener('click',tcPay);document.getElementById('tcCheckEmail')?.addEventListener('click',tcCheckEmail);document.getElementById('tcRegisterOtp')?.addEventListener('click',()=>tcRegisterAndSendOtp(false));document.getElementById('tcVerifyOtp')?.addEventListener('click',tcVerifyOtp);document.getElementById('tcOtpBack')?.addEventListener('click',tcBackFromOtp);document.getElementById('tcResendOtp')?.addEventListener('click',tcResendCurrentOtp);document.getElementById('tcAdminSearch')?.addEventListener('input',tcRenderPayments);document.getElementById('plannerSaveTrip')?.addEventListener('click',()=>tcSaveCurrentTrip(true));document.getElementById('plannerCopyLink')?.addEventListener('click',tcCopyPlannerLink);
  tcSyncAuthSession().then(()=>applyPageFocus());
  document.querySelectorAll('[data-lang]').forEach(btn=>btn.addEventListener('click',()=>tcSetLang(btn.dataset.lang)));
 
@@ -1546,7 +1478,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;showInstall();});
  if(isIOS&&!standalone())showInstall();
  buttons.forEach(b=>b.addEventListener('click',async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;buttons.forEach(x=>x.classList.remove('show'));}else if(isIOS){alert('באייפון: פתחו ב-Safari, לחצו על שיתוף ואז “הוסף למסך הבית”.');}else{alert('אם אפשרות ההתקנה לא מופיעה עדיין, פתחו את האתר ב-Chrome או Edge דרך HTTPS ורעננו פעם אחת.');}}));
- if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=138',{updateViaCache:'none'}).catch(e=>tcLogEvent('sw_error',{message:String(e)})));}
+ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=132',{updateViaCache:'none'}).catch(e=>tcLogEvent('sw_error',{message:String(e)})));}
  const off=document.createElement('div');off.className='tc-offline';off.textContent='מצב לא מקוון — חלק מהמידע נשמר במכשיר';document.body.appendChild(off);const net=()=>off.classList.toggle('show',!navigator.onLine);window.addEventListener('online',net);window.addEventListener('offline',net);net();
 })();
 </script>
@@ -1632,13 +1564,13 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
   if(log){log.addEventListener('click',function(e){const email=(document.getElementById('tcLoginIdentity')?.value||'').trim();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){e.stopImmediatePropagation();alert('נא להזין את כתובת האימייל שאיתה נרשמתם.');}},true);}
 })();
 </script>
-<!-- MOBILE V133: legacy remote planner override scripts removed; current planner is self-contained. -->
-<!-- MOBILE V133 intentionally uses the stable inline planner; no V126/V127 override script. -->
+<!-- MOBILE V139: legacy remote planner override scripts removed; current planner is self-contained. -->
+<!-- MOBILE V139 intentionally uses the stable inline planner; no V126/V127 override script. -->
 <!-- CJ/Booking Publisher Tag: PID 101885723, SID tripcraft_booking. -->
 <script src="https://www.anrdoezrs.net/am/101885723/include/allCj/sid/tripcraft_booking/impressions/page/am.js"></script>
 
 
-<script id="tc-v133-calendar-js">
+<script id="tc-v139-calendar-js">
 (function(){
  const start=document.getElementById('plStart'),end=document.getElementById('plEnd');if(!start||!end)return;
  const isEn=()=>String(document.documentElement.lang||'he').toLowerCase().startsWith('en');
@@ -1659,222 +1591,99 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  ['plStart','plEnd'].forEach(id=>{$(id+'Display')?.addEventListener('click',()=>open(id==='plStart'?'start':'end'))});
  $('tcCalendarPrev')?.addEventListener('click',()=>{view.setMonth(view.getMonth()-1);render()});$('tcCalendarNext')?.addEventListener('click',()=>{view.setMonth(view.getMonth()+1);render()});$('tcCalendarClose')?.addEventListener('click',close);$('tcCalendarDone')?.addEventListener('click',close);$('tcCalendarClear')?.addEventListener('click',()=>{start.value='';end.value='';fire(start);fire(end);mode='start';updateDisplays();render()});modal?.addEventListener('click',e=>{if(e.target===modal)close()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('show'))close()});
  updateDisplays();
- window.TripCraftV133Calendar={open,close,render,updateDisplays};
+ window.TripCraftV139Calendar={open,close,render,updateDisplays};
 })();
 </script>
-<script id="tc-v133-day-runtime">
+<script id="tc-v139-day-runtime">
 (function(){
   const $=id=>document.getElementById(id);
   function esc131(v){return String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));}
-  function nav133(stop,profile){const q=[stop?.place||stop?.location||stop?.name,profile?.destination].filter(Boolean).join(', '),e=encodeURIComponent(q);return{maps:'https://www.google.com/maps/search/?api=1&query='+e,waze:'https://www.waze.com/ul?q='+e+'&navigate=yes'};}
+  function nav139(stop,profile){const q=[stop?.place||stop?.location||stop?.name,profile?.destination].filter(Boolean).join(', '),e=encodeURIComponent(q);return{maps:'https://www.google.com/maps/search/?api=1&query='+e,waze:'https://www.waze.com/ul?q='+e+'&navigate=yes'};}
   function route131(stops,profile){const pts=(stops||[]).map(x=>[x.place||x.location||x.name,profile?.destination].filter(Boolean).join(', ')).filter(Boolean);if(pts.length<2)return'';const mode=typeof plannerTravelMode==='function'?plannerTravelMode(profile).mode:'driving';const origin=encodeURIComponent(pts[0]),destination=encodeURIComponent(pts[pts.length-1]),mid=pts.slice(1,-1).map(encodeURIComponent).join('|');return'https://www.google.com/maps/dir/?api=1&origin='+origin+'&destination='+destination+'&travelmode='+mode+(mid?'&waypoints='+mid:'');}
-  function dayChecks131(index){const v=planner?.draft?.verification,checks=Array.isArray(v?.checks)?v.checks.filter(c=>Number(c.day_number)===index+1):[];if(!checks.length)return'';return'<div class="tc-v133-day-checks"><strong>✓ TripCheck ליום הזה</strong>'+checks.map(c=>'<div class="tc-v133-day-check"><b>'+esc131(c.item||'בדיקה')+':</b> '+esc131(c.finding||'')+(c.recommended_change?'<div><b>המלצה:</b> '+esc131(c.recommended_change)+'</div>':'')+'</div>').join('')+'</div>';}
+  function dayChecks131(index){const v=planner?.draft?.verification,checks=Array.isArray(v?.checks)?v.checks.filter(c=>Number(c.day_number)===index+1):[];if(!checks.length)return'';return'<div class="tc-v139-day-checks"><strong>✓ TripCheck ליום הזה</strong>'+checks.map(c=>'<div class="tc-v139-day-check"><b>'+esc131(c.item||'בדיקה')+':</b> '+esc131(c.finding||'')+(c.recommended_change?'<div><b>המלצה:</b> '+esc131(c.recommended_change)+'</div>':'')+'</div>').join('')+'</div>';}
   function renderStops131(day,index){
     const profile=planner.draft.plannerProfile||{},route=route131(day.stops,profile),routeBox=$('plannerDayRouteBox');
-    if(routeBox)routeBox.innerHTML='<strong>'+esc131(typeof weekdayForDate==='function'?weekdayForDate(day.date):'')+' · '+esc131(typeof displayPlannerDate==='function'?displayPlannerDate(day.date):day.date)+'</strong>'+(day.summary?'<div style="margin-top:8px">'+esc131(day.summary)+'</div>':'')+(day.routeSummary?'<div style="margin-top:6px;color:#607887">'+esc131(day.routeSummary)+'</div>':'')+(day.lodging?'<div style="margin-top:10px"><strong>🏨 לינה:</strong> '+esc131(day.lodging)+'</div>':'')+(route?'<div class="tc-v133-day-route-actions"><a class="btn soft" target="_blank" rel="noopener" href="'+route+'">🗺 Google Maps למסלול היום</a></div>':'')+dayChecks131(index);
+    if(routeBox)routeBox.innerHTML='<strong>'+esc131(typeof weekdayForDate==='function'?weekdayForDate(day.date):'')+' · '+esc131(typeof displayPlannerDate==='function'?displayPlannerDate(day.date):day.date)+'</strong>'+(day.summary?'<div style="margin-top:8px">'+esc131(day.summary)+'</div>':'')+(day.routeSummary?'<div style="margin-top:6px;color:#607887">'+esc131(day.routeSummary)+'</div>':'')+(day.lodging?'<div style="margin-top:10px"><strong>🏨 לינה:</strong> '+esc131(day.lodging)+'</div>':'')+(route?'<div class="tc-v139-day-route-actions"><a class="btn soft" target="_blank" rel="noopener" href="'+route+'">🗺 Google Maps למסלול היום</a></div>':'')+dayChecks131(index);
     const box=$('plannerDayStopsEditor');
-    if(box)box.innerHTML=(day.stops||[]).map((st,j)=>{const nav=nav133(st,profile),meta=[];if(st.durationMinutes)meta.push('⏱ משך '+st.durationMinutes+' דק׳');if(st.driveMinutes)meta.push('🚗 מעבר '+st.driveMinutes+' דק׳');if(st.estimatedCost)meta.push('💰 עלות משוערת '+st.estimatedCost);return'<article class="planner-detail-stop"><h4>'+(j+1)+'. '+(st.time?'<span class="stop-time">'+esc131(st.time)+'</span> ':'')+esc131(st.name||st.place)+'</h4>'+(st.place?'<div><strong>📍 '+esc131(st.place)+'</strong></div>':'')+(st.what?'<div class="what">'+esc131(st.what)+'</div>':'')+(meta.length?'<div class="planner-detail-meta">'+meta.map(x=>'<span>'+esc131(x)+'</span>').join('')+'</div>':'')+(st.notes?'<div class="planner-detail-meta">🛈 '+esc131(st.notes)+'</div>':'')+'<div class="planner-detail-nav"><a class="btn soft" target="_blank" rel="noopener" href="'+nav.maps+'">Google Maps</a><a class="btn soft" target="_blank" rel="noopener" href="'+nav.waze+'">Waze</a></div><div class="stop-edit-row"><button class="edit" type="button" data-tc-edit-stop="'+j+'">עדכן נקודה</button><button class="remove" type="button" data-tc-remove-stop="'+j+'">הסר נקודה</button></div></article>';}).join('')||'<div class="warn">אין נקודות מפורטות ביום הזה.</div>';
+    if(box)box.innerHTML=(day.stops||[]).map((st,j)=>{const nav=nav139(st,profile),meta=[];if(st.durationMinutes)meta.push('⏱ משך '+st.durationMinutes+' דק׳');if(st.driveMinutes)meta.push('🚗 מעבר '+st.driveMinutes+' דק׳');if(st.estimatedCost)meta.push('💰 עלות משוערת '+st.estimatedCost);return'<article class="planner-detail-stop"><h4>'+(j+1)+'. '+(st.time?'<span class="stop-time">'+esc131(st.time)+'</span> ':'')+esc131(st.name||st.place)+'</h4>'+(st.place?'<div><strong>📍 '+esc131(st.place)+'</strong></div>':'')+(st.what?'<div class="what">'+esc131(st.what)+'</div>':'')+(meta.length?'<div class="planner-detail-meta">'+meta.map(x=>'<span>'+esc131(x)+'</span>').join('')+'</div>':'')+(st.notes?'<div class="planner-detail-meta">🛈 '+esc131(st.notes)+'</div>':'')+'<div class="planner-detail-nav"><a class="btn soft" target="_blank" rel="noopener" href="'+nav.maps+'">Google Maps</a><a class="btn soft" target="_blank" rel="noopener" href="'+nav.waze+'">Waze</a></div><div class="stop-edit-row"><button class="edit" type="button" data-tc-edit-stop="'+j+'">עדכן נקודה</button><button class="remove" type="button" data-tc-remove-stop="'+j+'">הסר נקודה</button></div></article>';}).join('')||'<div class="warn">אין נקודות מפורטות ביום הזה.</div>';
   }
   function renderRain131(alt,index){
-    const box=$('plannerRainResult');if(!box)return;const profile=planner.draft.plannerProfile||{},stops=(alt.activities||[]).map(a=>({time:a.time||'',name:a.name||'',place:a.location||a.name||'',what:a.description||'',durationMinutes:Number(a.duration_minutes||0),driveMinutes:Number(a.drive_minutes||0),notes:a.notes||'',estimatedCost:Number(a.estimated_cost||0)})),route=route131(stops,profile);box.hidden=false;box.innerHTML='<h3>☔ '+esc131(alt.title||'חלופת גשם')+'</h3><div>'+esc131(alt.day_summary||'')+'</div>'+(alt.route_summary?'<div style="margin-top:6px;color:#607887">'+esc131(alt.route_summary)+'</div>':'')+(route?'<div class="tc-v133-day-route-actions"><a class="btn soft" target="_blank" rel="noopener" href="'+route+'">Google Maps לחלופת הגשם</a></div>':'')+stops.map((st,j)=>{const n=nav133(st,profile);return'<div class="tc-v133-rain-stop"><h4>'+(j+1)+'. '+(st.time?esc131(st.time)+' · ':'')+esc131(st.name||st.place)+'</h4><div><b>📍 '+esc131(st.place)+'</b></div><div>'+esc131(st.what)+'</div>'+(st.notes?'<div>🛈 '+esc131(st.notes)+'</div>':'')+'<div class="planner-detail-nav"><a class="btn soft" target="_blank" rel="noopener" href="'+n.maps+'">Google Maps</a><a class="btn soft" target="_blank" rel="noopener" href="'+n.waze+'">Waze</a></div></div>';}).join('')+(Array.isArray(alt.important_notes)&&alt.important_notes.length?'<div class="warn" style="margin-top:10px"><strong>הערות חשובות:</strong><br>'+alt.important_notes.map(esc131).join('<br>')+'</div>':'')+(Array.isArray(alt.source_urls)&&alt.source_urls.length?'<div class="tc-v133-source-list"><strong>מקורות שנבדקו:</strong><br>'+alt.source_urls.map(u=>'<a target="_blank" rel="noopener" href="'+esc131(u)+'">'+esc131(u)+'</a>').join('<br>')+'</div>':'')+'<div class="cta"><button class="btn green" type="button" data-tc-use-rain="'+index+'">השתמש בחלופת הגשם ביום הזה</button></div>';
+    const box=$('plannerRainResult');if(!box)return;const profile=planner.draft.plannerProfile||{},stops=(alt.activities||[]).map(a=>({time:a.time||'',name:a.name||'',place:a.location||a.name||'',what:a.description||'',durationMinutes:Number(a.duration_minutes||0),driveMinutes:Number(a.drive_minutes||0),notes:a.notes||'',estimatedCost:Number(a.estimated_cost||0)})),route=route131(stops,profile);box.hidden=false;box.innerHTML='<h3>☔ '+esc131(alt.title||'חלופת גשם')+'</h3><div>'+esc131(alt.day_summary||'')+'</div>'+(alt.route_summary?'<div style="margin-top:6px;color:#607887">'+esc131(alt.route_summary)+'</div>':'')+(route?'<div class="tc-v139-day-route-actions"><a class="btn soft" target="_blank" rel="noopener" href="'+route+'">Google Maps לחלופת הגשם</a></div>':'')+stops.map((st,j)=>{const n=nav139(st,profile);return'<div class="tc-v139-rain-stop"><h4>'+(j+1)+'. '+(st.time?esc131(st.time)+' · ':'')+esc131(st.name||st.place)+'</h4><div><b>📍 '+esc131(st.place)+'</b></div><div>'+esc131(st.what)+'</div>'+(st.notes?'<div>🛈 '+esc131(st.notes)+'</div>':'')+'<div class="planner-detail-nav"><a class="btn soft" target="_blank" rel="noopener" href="'+n.maps+'">Google Maps</a><a class="btn soft" target="_blank" rel="noopener" href="'+n.waze+'">Waze</a></div></div>';}).join('')+(Array.isArray(alt.important_notes)&&alt.important_notes.length?'<div class="warn" style="margin-top:10px"><strong>הערות חשובות:</strong><br>'+alt.important_notes.map(esc131).join('<br>')+'</div>':'')+(Array.isArray(alt.source_urls)&&alt.source_urls.length?'<div class="tc-v139-source-list"><strong>מקורות שנבדקו:</strong><br>'+alt.source_urls.map(u=>'<a target="_blank" rel="noopener" href="'+esc131(u)+'">'+esc131(u)+'</a>').join('<br>')+'</div>':'')+'<div class="cta"><button class="btn green" type="button" data-tc-use-rain="'+index+'">השתמש בחלופת הגשם ביום הזה</button></div>';
     const d=planner.draft.days[index];d.rainAlternative={...alt,_mappedStops:stops};
   }
-  window.tcV133OpenDay=function(index){
-    try{index=Number(index);const day=planner?.draft?.days?.[index],m=$('plannerDayModal');if(!day||!m){if(typeof plannerEditDay==='function')plannerEditDay(index);return;}plannerEditingDay=index;if($('plannerDayModalTitle'))$('plannerDayModalTitle').textContent='יום '+(index+1)+' · '+(typeof weekdayForDate==='function'?weekdayForDate(day.date):'')+' · '+(typeof displayPlannerDate==='function'?displayPlannerDate(day.date):day.date);if($('plannerDayTitleInput'))$('plannerDayTitleInput').value=day.title||'';if($('plannerDayChatLog'))$('plannerDayChatLog').innerHTML='<div class="chatmsg bot">אני מתמקד ביום הזה בלבד. כאן מופיע הפירוט לפי שעות, הניווט והבדיקות של היום.</div>';renderStops131(day,index);const rain=$('plannerRainResult');if(day.rainAlternative){renderRain131(day.rainAlternative,index);}else if(rain){rain.hidden=true;rain.innerHTML='';}if($('plannerRainStatus'))$('plannerRainStatus').textContent='';m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';m.querySelector('.planner-modal-card')?.scrollTo({top:0,behavior:'auto'});}catch(e){console.error('V133 open day failed',e);if(typeof plannerEditDay==='function')plannerEditDay(index);}
+  window.tcV139OpenDay=function(index){
+    try{index=Number(index);const day=planner?.draft?.days?.[index],m=$('plannerDayModal');if(!day||!m){if(typeof plannerEditDay==='function')plannerEditDay(index);return;}plannerEditingDay=index;if($('plannerDayModalTitle'))$('plannerDayModalTitle').textContent='יום '+(index+1)+' · '+(typeof weekdayForDate==='function'?weekdayForDate(day.date):'')+' · '+(typeof displayPlannerDate==='function'?displayPlannerDate(day.date):day.date);if($('plannerDayTitleInput'))$('plannerDayTitleInput').value=day.title||'';if($('plannerDayChatLog'))$('plannerDayChatLog').innerHTML='<div class="chatmsg bot">אני מתמקד ביום הזה בלבד. כאן מופיע הפירוט לפי שעות, הניווט והבדיקות של היום.</div>';renderStops131(day,index);const rain=$('plannerRainResult');if(day.rainAlternative){renderRain131(day.rainAlternative,index);}else if(rain){rain.hidden=true;rain.innerHTML='';}if($('plannerRainStatus'))$('plannerRainStatus').textContent='';m.classList.add('show');m.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';m.querySelector('.planner-modal-card')?.scrollTo({top:0,behavior:'auto'});}catch(e){console.error('V139 open day failed',e);if(typeof plannerEditDay==='function')plannerEditDay(index);}
   };
-  window.tcV133RainAlternative=async function(){
-    const index=plannerEditingDay,day=planner?.draft?.days?.[index];if(index<0||!day)return;const btn=$('plannerRainBtn'),status=$('plannerRainStatus');if(btn?.dataset.busy==='1')return;if(day.rainAlternative){renderRain131(day.rainAlternative,index);return;}try{if(btn){btn.dataset.busy='1';btn.disabled=true;btn.textContent='מחפש חלופת גשם...';}if(status)status.textContent='בודק מקומות מתאימים ומידע עדכני...';const sb=typeof tcSupabase==='function'?tcSupabase():null;if(!sb?.functions?.invoke)throw new Error('שירות AI אינו זמין');const p=planner.draft.plannerProfile||{},dayPayload={day_number:index+1,date:day.date,title:day.title,overnight_location:day.lodging||'',day_summary:day.summary||'',activities:(day.stops||[]).map(st=>({time:st.time||'',name:st.name||st.place||'',location:st.place||'',description:st.what||'',duration_minutes:Number(st.durationMinutes||0),drive_minutes:Number(st.driveMinutes||0),notes:st.notes||'',estimated_cost:Number(st.estimatedCost||0)}))},tripPayload={destination:p.destination||'',start_date:p.start||'',end_date:p.end||'',travelers:p.people||2,language:(document.documentElement.lang||'he').startsWith('en')?'en':'he',intensity:p.pace||'medium',transport:p.transport||'',arrival_airport:p.arrivalAirport||'',departure_airport:p.departureAirport||'',arrival_time:p.arrivalTime||'',departure_time:p.departureTime||'',interests:p.interests||[],notes:p.free||''};const fn=window.TRIPCRAFT_CONFIG?.aiFunctionName||'tripcraft-ai';const res=await sb.functions.invoke(fn,{body:{action:'rain_alternative',trip_id:planner.draft.tripId||planner.currentTripId||null,user_id:typeof tcCustomer==='function'?tcCustomer()?.id||null:null,trip:tripPayload,day:dayPayload}});if(res?.error)throw res.error;const data=res?.data||{};if(!data.ok||!data.alternative)throw new Error(data.error||'לא התקבלה חלופת גשם');renderRain131(data.alternative,index);planner.draft.aiUsage=planner.draft.aiUsage||{};planner.draft.aiUsage.rainAlternatives=planner.draft.aiUsage.rainAlternatives||[];planner.draft.aiUsage.rainAlternatives.push({day:index+1,costUsd:data.cost_usd||0,webSearchCalls:data.web_search_calls||0});if(planner.draft?.saved&&typeof tcSaveCurrentTrip==='function')await tcSaveCurrentTrip(false);if(status)status.textContent='חלופת הגשם נבנתה ונבדקה.';}catch(e){console.error('V133 rain alternative failed',e);if(status)status.textContent='לא הצלחנו לבנות חלופת גשם: '+(e?.message||'שגיאה');}finally{if(btn){btn.dataset.busy='0';btn.disabled=false;btn.textContent='☔ בנה חלופת גשם ליום הזה';}}
+  window.tcV139RainAlternative=async function(){
+    const index=plannerEditingDay,day=planner?.draft?.days?.[index];if(index<0||!day)return;const btn=$('plannerRainBtn'),status=$('plannerRainStatus');if(btn?.dataset.busy==='1')return;if(day.rainAlternative){renderRain131(day.rainAlternative,index);return;}try{if(btn){btn.dataset.busy='1';btn.disabled=true;btn.textContent='מחפש חלופת גשם...';}if(status)status.textContent='בודק מקומות מתאימים ומידע עדכני...';const sb=typeof tcSupabase==='function'?tcSupabase():null;if(!sb?.functions?.invoke)throw new Error('שירות AI אינו זמין');const p=planner.draft.plannerProfile||{},dayPayload={day_number:index+1,date:day.date,title:day.title,overnight_location:day.lodging||'',day_summary:day.summary||'',activities:(day.stops||[]).map(st=>({time:st.time||'',name:st.name||st.place||'',location:st.place||'',description:st.what||'',duration_minutes:Number(st.durationMinutes||0),drive_minutes:Number(st.driveMinutes||0),notes:st.notes||'',estimated_cost:Number(st.estimatedCost||0)}))},tripPayload={destination:p.destination||'',start_date:p.start||'',end_date:p.end||'',travelers:p.people||2,language:(document.documentElement.lang||'he').startsWith('en')?'en':'he',intensity:p.pace||'medium',transport:p.transport||'',arrival_airport:p.arrivalAirport||'',departure_airport:p.departureAirport||'',arrival_time:p.arrivalTime||'',departure_time:p.departureTime||'',interests:p.interests||[],notes:p.free||''};const fn=window.TRIPCRAFT_CONFIG?.aiFunctionName||'tripcraft-ai';const res=await sb.functions.invoke(fn,{body:{action:'rain_alternative',trip_id:planner.draft.tripId||planner.currentTripId||null,user_id:typeof tcCustomer==='function'?tcCustomer()?.id||null:null,trip:tripPayload,day:dayPayload}});if(res?.error)throw res.error;const data=res?.data||{};if(!data.ok||!data.alternative)throw new Error(data.error||'לא התקבלה חלופת גשם');renderRain131(data.alternative,index);planner.draft.aiUsage=planner.draft.aiUsage||{};planner.draft.aiUsage.rainAlternatives=planner.draft.aiUsage.rainAlternatives||[];planner.draft.aiUsage.rainAlternatives.push({day:index+1,costUsd:data.cost_usd||0,webSearchCalls:data.web_search_calls||0});if(typeof tcSaveCurrentTrip==='function')await tcSaveCurrentTrip(false);if(status)status.textContent='חלופת הגשם נבנתה ונבדקה.';}catch(e){console.error('V139 rain alternative failed',e);if(status)status.textContent='לא הצלחנו לבנות חלופת גשם: '+(e?.message||'שגיאה');}finally{if(btn){btn.dataset.busy='0';btn.disabled=false;btn.textContent='☔ בנה חלופת גשם ליום הזה';}}
   };
-  window.tcV133UseRain=function(i){const d=planner?.draft?.days?.[Number(i)],alt=d?.rainAlternative;if(!d||!alt)return;if(!d.rainOriginal)d.rainOriginal={title:d.title,lodging:d.lodging,summary:d.summary,routeSummary:d.routeSummary,stops:(d.stops||[]).map(x=>({...x}))};d.title=alt.title||d.title;d.lodging=alt.overnight_location||d.lodging;d.summary=alt.day_summary||d.summary;d.routeSummary=alt.route_summary||d.routeSummary;d.stops=(alt._mappedStops||[]).map(x=>({...x}));if(typeof renderPlannerDraft==='function')renderPlannerDraft();if(planner.draft?.saved&&typeof tcSaveCurrentTrip==='function')tcSaveCurrentTrip(false);window.tcV133OpenDay(Number(i));};
-  const close=$('plannerDayModalClose');if(close&&!close.dataset.v133Body){close.dataset.v133Body='1';close.addEventListener('click',()=>{document.body.style.overflow='';});}
+  window.tcV139UseRain=function(i){const d=planner?.draft?.days?.[Number(i)],alt=d?.rainAlternative;if(!d||!alt)return;if(!d.rainOriginal)d.rainOriginal={title:d.title,lodging:d.lodging,summary:d.summary,routeSummary:d.routeSummary,stops:(d.stops||[]).map(x=>({...x}))};d.title=alt.title||d.title;d.lodging=alt.overnight_location||d.lodging;d.summary=alt.day_summary||d.summary;d.routeSummary=alt.route_summary||d.routeSummary;d.stops=(alt._mappedStops||[]).map(x=>({...x}));if(typeof renderPlannerDraft==='function')renderPlannerDraft();if(typeof tcSaveCurrentTrip==='function')tcSaveCurrentTrip(false);window.tcV139OpenDay(Number(i));};
+  const close=$('plannerDayModalClose');if(close&&!close.dataset.v139Body){close.dataset.v139Body='1';close.addEventListener('click',()=>{document.body.style.overflow='';});}
 })();
 </script>
 
-<script id="tc-v133-action-runtime">
+<script id="tc-v139-action-runtime">
 (function(){
- function openDay(i){if(typeof window.tcV133OpenDay==='function')return window.tcV133OpenDay(Number(i));if(typeof plannerEditDay==='function')return plannerEditDay(Number(i));}
+ function openDay(i){if(typeof window.tcV139OpenDay==='function')return window.tcV139OpenDay(Number(i));if(typeof plannerEditDay==='function')return plannerEditDay(Number(i));}
  document.addEventListener('click',async function(e){
    const open=e.target.closest('[data-tc-open-day]');if(open){e.preventDefault();e.stopPropagation();openDay(open.dataset.tcOpenDay);return;}
-   const rain=e.target.closest('[data-tc-rain-day]');if(rain){e.preventDefault();e.stopPropagation();openDay(rain.dataset.tcRainDay);await new Promise(r=>setTimeout(r,0));if(typeof window.tcV133RainAlternative==='function')window.tcV133RainAlternative();return;}
+   const rain=e.target.closest('[data-tc-rain-day]');if(rain){e.preventDefault();e.stopPropagation();openDay(rain.dataset.tcRainDay);await new Promise(r=>setTimeout(r,0));if(typeof window.tcV139RainAlternative==='function')window.tcV139RainAlternative();return;}
    const hotel=e.target.closest('[data-tc-hotels-day]');if(hotel){e.preventDefault();e.stopPropagation();if(typeof openHotelsForDay==='function')openHotelsForDay(Number(hotel.dataset.tcHotelsDay));return;}
-   const useRain=e.target.closest('[data-tc-use-rain]');if(useRain){e.preventDefault();e.stopPropagation();if(typeof window.tcV133UseRain==='function')window.tcV133UseRain(Number(useRain.dataset.tcUseRain));return;}
+   const useRain=e.target.closest('[data-tc-use-rain]');if(useRain){e.preventDefault();e.stopPropagation();if(typeof window.tcV139UseRain==='function')window.tcV139UseRain(Number(useRain.dataset.tcUseRain));return;}
    const edit=e.target.closest('[data-tc-edit-stop]');if(edit){e.preventDefault();e.stopPropagation();if(typeof plannerEditStop==='function')plannerEditStop(Number(edit.dataset.tcEditStop));return;}
    const remove=e.target.closest('[data-tc-remove-stop]');if(remove){e.preventDefault();e.stopPropagation();if(typeof plannerRemoveStop==='function')plannerRemoveStop(Number(remove.dataset.tcRemoveStop));return;}
  });
  const modal=document.getElementById('plannerDayModal');modal?.addEventListener('click',e=>{if(e.target===modal){modal.classList.remove('show');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal?.classList.contains('show'))document.getElementById('plannerDayModalClose')?.click()});
- const rainBtn=document.getElementById('plannerRainBtn');if(rainBtn&&!rainBtn.dataset.v133Bound){rainBtn.dataset.v133Bound='1';rainBtn.addEventListener('click',()=>window.tcV133RainAlternative?.());}
- const discard=document.getElementById('plannerDiscardTrip');if(discard&&!discard.dataset.v133Bound){discard.dataset.v133Bound='1';discard.addEventListener('click',()=>{planner.draft=null;planner.currentTripId=null;document.getElementById('planner')?.classList.remove('tc-v135-built','tc-v135-opened');const result=document.getElementById('plannerResult');result?.classList.remove('show');if(result)result.style.display='';const target=window.tcCustomer?.()?'#account':'#home';location.hash=target;});}
- window.TripCraftV133QA={openDay,version:'V133'};
+ const rainBtn=document.getElementById('plannerRainBtn');if(rainBtn&&!rainBtn.dataset.v139Bound){rainBtn.dataset.v139Bound='1';rainBtn.addEventListener('click',()=>window.tcV139RainAlternative?.());}
+ const discard=document.getElementById('plannerDiscardTrip');if(discard&&!discard.dataset.v139Bound){discard.dataset.v139Bound='1';discard.addEventListener('click',()=>{planner.draft=null;planner.currentTripId=null;const result=document.getElementById('plannerResult');result?.classList.remove('show');if(result)result.style.display='';const target=window.tcCustomer?.()?'#account':'#home';location.hash=target;});}
+ window.TripCraftV139QA={openDay,version:'V139'};
 })();
 </script>
 
-<script id="tc-v135-runtime">
+<script id="tc-v139-auth-routing">
 (function(){
-  const tripBack=document.getElementById('tcV135TripBack'),tripClose=document.getElementById('tcV135TripClose');
-  if(tripBack)tripBack.addEventListener('click',()=>{document.getElementById('plannerDayModalClose')?.click();location.hash='#account';});
-  if(tripClose)tripClose.addEventListener('click',()=>{document.getElementById('plannerDayModalClose')?.click();location.hash=window.tcCustomer?.()?'#account':'#home';});
-  // Custom calendar owns the tap. Native iOS input stays as hidden value storage only.
-  ['plStart','plEnd'].forEach(id=>{const input=document.getElementById(id),btn=document.getElementById(id+'Display');if(input){input.tabIndex=-1;input.setAttribute('aria-hidden','true');}if(btn&&!btn.dataset.v135Bound){btn.dataset.v135Bound='1';btn.addEventListener('click',e=>{e.preventDefault();window.TripCraftV133Calendar?.open(id==='plEnd'?'end':'start');});}});
-  // Freshly built unsaved trip: only Save + Exit. Saved/opened trip: trip-only Back/Close.
-  if(window.planner?.draft && document.getElementById('plannerResult')?.classList.contains('show')){
-    document.getElementById('planner')?.classList.toggle('tc-v135-built',!window.planner.draft.saved);
-    document.getElementById('planner')?.classList.toggle('tc-v135-opened',!!window.planner.draft.saved);
+  const NEW_TRIP_FLAG='tc_v139_new_trip_after_login';
+  function user(){try{return (typeof window.tcCustomer==='function')?window.tcCustomer():null;}catch(e){return null;}}
+  function isNewTripLink(a){
+    if(!a||a.getAttribute('href')!=='#planner')return false;
+    if(a.closest('#planner'))return false;
+    return true;
   }
-})();
-</script>
-
-<script id="tc-v136-start-trip-routing" type="application/x-tripcraft-disabled">
-(function(){
-  function startPlanner(e){
-    if(e){e.preventDefault();e.stopPropagation();}
+  function markFreshTrip(){
+    try{sessionStorage.setItem(NEW_TRIP_FLAG,'1');sessionStorage.setItem('tc_return_after_login','#planner');sessionStorage.removeItem('tc_after_login_action');}catch(e){}
+  }
+  function clearFreshFlag(){try{sessionStorage.removeItem(NEW_TRIP_FLAG);}catch(e){}}
+  function startFreshPlanner(){
+    if(!user())return false;
+    clearFreshFlag();
     try{
-      if(typeof window.tcStartCleanTrip==='function'){window.tcStartCleanTrip();}
-      else{location.hash='#planner';}
-    }catch(err){console.error('V136 start planner failed',err);location.hash='#planner';}
-    setTimeout(()=>{try{window.tcMenu?.(false);}catch(_){ }},0);
+      if(typeof window.tcStartCleanTrip==='function'){window.tcStartCleanTrip();return true;}
+      location.hash='#planner';
+      return true;
+    }catch(e){console.error('V139 fresh planner start failed',e);return false;}
   }
-  document.querySelectorAll('a[href="#planner"]').forEach(a=>{
-    const t=(a.textContent||'').trim();
-    if(/בנה|בנו|תכנון טיול|Build|Plan a Trip/i.test(t)){
-      a.dataset.tcV136Start='1';
-      a.addEventListener('click',startPlanner,{capture:true});
-    }
-  });
-  // Hard guard: login/account links must always route even if another handler fails.
-  document.querySelectorAll('a[href="#login"],a[href="#account"]').forEach(a=>{
-    a.addEventListener('click',function(e){
+  document.addEventListener('click',function(e){
+    const a=e.target && e.target.closest ? e.target.closest('a[href="#planner"]') : null;
+    if(!isNewTripLink(a))return;
+    markFreshTrip();
+    if(user()){
       e.preventDefault();
-      const target=this.getAttribute('href');
-      location.hash=target;
-      try{window.tcMenu?.(false);}catch(_){ }
-      setTimeout(()=>{try{window.dispatchEvent(new HashChangeEvent('hashchange'));}catch(_){ }},0);
-    },{capture:true});
-  });
-})();
-</script>
-<script id="tc-v137-auth-first-routing" type="application/x-tripcraft-disabled">
-(function(){
-  const isEnglish=()=>String(document.documentElement.lang||'he').toLowerCase().startsWith('en');
-  const msg=(he,en)=>isEnglish()?en:he;
-  function plannerLinkTarget(el){
-    const a=el?.closest?.('a[href="#planner"]');
-    if(!a)return null;
-    const t=(a.textContent||'').trim();
-    return /בנה|בנו|תכנון טיול|Build|Plan a Trip/i.test(t)?a:null;
-  }
-  async function realSession(){
-    try{
-      const sb=(typeof tcSupabase==='function')?tcSupabase():null;
-      if(!sb?.auth?.getSession)return null;
-      const result=await Promise.race([
-        sb.auth.getSession(),
-        new Promise(resolve=>setTimeout(()=>resolve({data:{session:null}}),2500))
-      ]);
-      return result?.data?.session||null;
-    }catch(e){console.warn('V137 session check failed',e);return null;}
-  }
-  function clearForFreshPlanner(){
-    try{localStorage.removeItem('tripcraft_planner_draft_v57');}catch(e){}
-    try{
-      if(window.planner){window.planner.draft=null;window.planner.currentTripId=null;window.planner.step=1;}
-      if(typeof plannerStep1Part!=='undefined')plannerStep1Part=1;
-    }catch(e){}
-  }
-  function goLoginThenPlanner(){
-    clearForFreshPlanner();
-    try{
-      sessionStorage.setItem('tc_return_after_login','#planner');
-      sessionStorage.removeItem('tc_after_login_action');
-      sessionStorage.setItem('tc_v137_start_after_login','1');
-    }catch(e){}
-    location.hash='#login';
-    try{window.tcMenu?.(false);}catch(e){}
-    setTimeout(()=>document.getElementById('tcAuthEmail')?.focus({preventScroll:true}),120);
-  }
-  async function routePlannerClick(e,a){
-    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
-    const session=await realSession();
-    if(!session){goLoginThenPlanner();return;}
-    try{sessionStorage.removeItem('tc_v137_start_after_login');}catch(e){}
-    if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
-    else location.hash='#planner';
-    try{window.tcMenu?.(false);}catch(e){}
-  }
-  document.addEventListener('click',function(e){
-    const a=plannerLinkTarget(e.target);if(!a)return;
-    routePlannerClick(e,a);
-  },true);
-  function resumeCleanPlanner(){
-    let pending=false;try{pending=sessionStorage.getItem('tc_v137_start_after_login')==='1';}catch(e){}
-    if(!pending||location.hash!=='#planner')return;
-    try{sessionStorage.removeItem('tc_v137_start_after_login');}catch(e){}
-    setTimeout(()=>{
-      try{
-        if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
-        else location.hash='#planner';
-      }catch(err){console.error('V137 post-login planner start failed',err);}
-    },80);
-  }
-  window.addEventListener('hashchange',resumeCleanPlanner);
-  setTimeout(resumeCleanPlanner,0);
-  window.TripCraftV137QA={realSession,goLoginThenPlanner,resumeCleanPlanner,version:'V137'};
-})();
-</script>
-<script id="tc-v138-auth-first-routing">
-(function(){
-  function isLoggedIn(){
-    try{
-      const u=(typeof window.tcCustomer==='function')?window.tcCustomer():null;
-      return !!(u&&u.id&&u.email);
-    }catch(e){return false;}
-  }
-  function prepareLogin(){
-    try{
-      sessionStorage.setItem('tc_return_after_login','#planner');
-      sessionStorage.setItem('tc_v138_start_after_login','1');
-      sessionStorage.removeItem('tc_after_login_action');
-    }catch(e){}
-  }
-  function clearPlanner(){
-    try{localStorage.removeItem('tripcraft_planner_draft_v57');}catch(e){}
-    try{
-      if(window.planner){window.planner.draft=null;window.planner.currentTripId=null;window.planner.step=1;}
-      if(typeof plannerStep1Part!=='undefined')plannerStep1Part=1;
-    }catch(e){}
-  }
-  window.tcV138StartTrip=function(e){
-    if(e){e.preventDefault();e.stopPropagation();}
-    clearPlanner();
-    if(isLoggedIn()){
-      try{sessionStorage.removeItem('tc_v138_start_after_login');}catch(_){}
-      if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
-      else location.hash='#planner';
-    }else{
-      prepareLogin();
-      location.hash='#login';
-      setTimeout(function(){document.getElementById('tcAuthEmail')?.focus({preventScroll:true});},120);
+      e.stopPropagation();
+      startFreshPlanner();
+      try{window.tcMenu?.(false);}catch(_){}
     }
-    try{window.tcMenu?.(false);}catch(_){}
-    return false;
-  };
-  document.addEventListener('click',function(e){
-    const a=e.target?.closest?.('[data-tc-new-trip-entry="1"]');
-    if(!a)return;
-    window.tcV138StartTrip(e);
   },true);
-  function resumeAfterOtp(){
+  function resumeAfterLogin(){
     let pending=false;
-    try{pending=sessionStorage.getItem('tc_v138_start_after_login')==='1';}catch(e){}
-    if(!pending||location.hash!=='#planner')return;
-    try{sessionStorage.removeItem('tc_v138_start_after_login');}catch(e){}
-    setTimeout(function(){
-      clearPlanner();
-      if(typeof window.tcStartCleanTrip==='function')window.tcStartCleanTrip();
-    },80);
+    try{pending=sessionStorage.getItem(NEW_TRIP_FLAG)==='1';}catch(e){}
+    if(!pending||!user()||location.hash!=='#planner')return;
+    setTimeout(startFreshPlanner,40);
   }
-  window.addEventListener('hashchange',resumeAfterOtp);
-  setTimeout(resumeAfterOtp,0);
-  window.TripCraftV138QA={version:'V138',isLoggedIn,prepareLogin,resumeAfterOtp};
+  window.addEventListener('hashchange',resumeAfterLogin);
+  window.addEventListener('pageshow',resumeAfterLogin);
+  setTimeout(resumeAfterLogin,0);
+  window.TripCraftV139Auth={version:'V139',startFreshPlanner,resumeAfterLogin};
 })();
 </script>
+
 </body></html>
