@@ -385,6 +385,9 @@ html[dir="rtl"] .calendar-input{direction:rtl!important;unicode-bidi:plaintext!i
   #planner>.planner-progress{margin:4px 0 12px!important;height:6px!important}
 }
 
+/* V143: OTP field must visibly fit all 6 digits on mobile */
+#tcOtpCode.tc-otp-six{width:100%!important;max-width:100%!important;min-width:0!important;box-sizing:border-box!important;font-size:34px!important;font-weight:800!important;line-height:1.2!important;letter-spacing:.42em!important;text-indent:.42em!important;text-align:center!important;font-variant-numeric:tabular-nums!important;padding:16px 12px!important;direction:ltr!important;overflow:visible!important}
+@media(max-width:700px){#tcOtpCode.tc-otp-six{font-size:32px!important;letter-spacing:.34em!important;text-indent:.34em!important;padding:16px 8px!important}}
 /* V83 OTP flow: separate verification screen */
 #tcAuthEntry[hidden],#tcOtpStep[hidden]{display:none!important}#tcOtpStep{max-width:760px;margin:0 auto;padding:8px 0 24px}
 #tcOtpStep .otp-box{margin:0;padding:24px;border-radius:28px;background:#eefaf4;border:1px solid #b8e4cf}
@@ -436,7 +439,7 @@ html[dir="ltr"] .tc-calendar-card{direction:ltr}html[dir="ltr"] .tc-date-display
 <input id="tcNavToggle" class="tc-nav-toggle" type="checkbox" aria-hidden="true">
 <header class="top tc-header" id="tcHeader">
   <label class="hamburger" id="tcHamburger" for="tcNavToggle" role="button" tabindex="0" aria-label="פתח תפריט" data-he-aria="פתח תפריט" data-en-aria="Open menu">☰</label>
-  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V142 · נץ מערכות מידע" data-en="V142 · Netz Information Systems">V142 · נץ מערכות מידע</small></div></div>
+  <div class="brand"><a class="tc-logo-link" href="#home" data-tc-home-logo="1" aria-label="חזרה לחשבון או לדף הבית" data-he-aria="חזרה לחשבון או לדף הבית" data-en-aria="Return to account or home"><img class="logo tc-brand-logo" src="tripcraft-logo-v109.png?v=109-final" alt="TripCraft" fetchpriority="high" decoding="sync"></a><div><h1>TripCraft</h1><small data-he="V143 · נץ מערכות מידע" data-en="V143 · Netz Information Systems">V143 · נץ מערכות מידע</small></div></div>
   <nav id="tcDesktopNav" class="tc-desktop-nav">
     <a href="#home" data-he="דף הבית" data-en="Home">דף הבית</a>
     <a href="#how" data-he="איך זה עובד" data-en="How It Works">איך זה עובד</a>
@@ -672,7 +675,7 @@ html[dir="ltr"] .tc-calendar-card{direction:ltr}html[dir="ltr"] .tc-date-display
    <p class="otp-subtitle">שלחנו קוד האימות אל:</p>
    <div id="tcOtpEmailDisplay" class="otp-email-display" dir="ltr"></div>
    <p id="tcOtpHint" class="otp-hint">הזינו את הקוד שקיבלתם במייל.</p>
-   <div class="otp-row"><input id="tcOtpCode" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" placeholder="000000" aria-label="קוד אימות בן 6 ספרות"><button id="tcVerifyOtp" class="btn green" type="button">אמת והמשך</button></div>
+   <div class="otp-row"><input id="tcOtpCode" class="tc-otp-six" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" size="6" autocomplete="one-time-code" placeholder="000000" aria-label="קוד אימות בן 6 ספרות"><button id="tcVerifyOtp" class="btn green" type="button">אמת והמשך</button></div>
    <div class="otp-resend-row"><button id="tcResendOtp" class="btn soft" type="button" disabled>שלח קוד חדש בעוד 60 שנ׳</button><span id="tcOtpStatus" aria-live="polite"></span></div>
    <div id="tcOtpDemo" class="safe">לא קיבלתם? בדקו גם בספאם. לאחר 60 שניות ניתן לשלוח קוד חדש.</div>
   </div>
@@ -1379,7 +1382,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
      const {data}=await sb.auth.getSession();
      const user=data?.session?.user;
      if(!user){tcClearAuthenticated();tcCloudTripsCache=[];tcRenderHeaderUser();tcRenderAccount();return;}
-     // V142: a persisted Supabase token is NOT enough. The user must also have
+     // V143: a persisted Supabase token is NOT enough. The user must also have
      // activity within the last 30 minutes. This check runs before restoring UI state.
      if(!tcPersistentSessionFresh()){
        try{await sb.auth.signOut();}catch(_e){}
@@ -1512,7 +1515,7 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;showInstall();});
  if(isIOS&&!standalone())showInstall();
  buttons.forEach(b=>b.addEventListener('click',async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null;buttons.forEach(x=>x.classList.remove('show'));}else if(isIOS){alert('באייפון: פתחו ב-Safari, לחצו על שיתוף ואז “הוסף למסך הבית”.');}else{alert('אם אפשרות ההתקנה לא מופיעה עדיין, פתחו את האתר ב-Chrome או Edge דרך HTTPS ורעננו פעם אחת.');}}));
- if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=142',{updateViaCache:'none'}).catch(e=>tcLogEvent('sw_error',{message:String(e)})));}
+ if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=143',{updateViaCache:'none'}).catch(e=>tcLogEvent('sw_error',{message:String(e)})));}
  const off=document.createElement('div');off.className='tc-offline';off.textContent='מצב לא מקוון — חלק מהמידע נשמר במכשיר';document.body.appendChild(off);const net=()=>off.classList.toggle('show',!navigator.onLine);window.addEventListener('online',net);window.addEventListener('offline',net);net();
 })();
 </script>
@@ -1682,13 +1685,13 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
     if(!a||a.closest('#planner'))return;
     if(!user()){e.preventDefault();e.stopPropagation();try{sessionStorage.setItem('tc_return_after_login','#account');}catch(_e){}location.hash='#login';try{window.tcMenu?.(false);}catch(_e){} }
   },true);
-  window.TripCraftV142Auth={version:'V142',destinationAfterOtp:'#account'};
+  window.TripCraftV143Auth={version:'V143',destinationAfterOtp:'#account'};
 })();
 </script>
 
 <script id="tc-v142-final-guard">
 (function(){
- const VERSION='V142';
+ const VERSION='V143';
  // Any account-required navigation must pass through real authenticated state.
  function currentUser(){try{return typeof window.tcCustomer==='function'?window.tcCustomer():null;}catch(e){return null;}}
  document.addEventListener('click',function(e){
@@ -1704,11 +1707,11 @@ document.querySelectorAll('.ac-picked-note').forEach(x=>x.remove());document.que
  const sb=window.tcSupabase?.();
  if(sb?.auth?.getSession){sb.auth.getSession().then(async({data})=>{const hasUser=!!data?.session?.user;let last=0;try{last=Number(localStorage.getItem('tc_v142_last_activity')||0)||0;}catch(e){}const expired=!last||Date.now()-last>30*60*1000;if(!hasUser||expired){if(hasUser&&expired){try{await sb.auth.signOut();}catch(_e){}}try{sessionStorage.removeItem('tc_v142_auth_ok');sessionStorage.removeItem('tc_v141_auth_ok');sessionStorage.removeItem('tc_v141_auth_touch');localStorage.removeItem('tc_v142_last_activity');localStorage.removeItem('tc_v433_customer');}catch(e){}if(['#planner','#account','#trips','#hotels','#import','#cart'].includes(location.hash)){location.hash='#login';}}}).catch(()=>{});}
  // Keep the visible version trustworthy.
- document.querySelectorAll('.brand small').forEach(el=>{if(/V\d+/.test(el.textContent))el.textContent=el.textContent.replace(/V\d+/,'V142');});
- async function tcV142CheckIdleOnResume(){let last=0;try{last=Number(localStorage.getItem('tc_v142_last_activity')||0)||0;}catch(e){}if(!last||Date.now()-last<=30*60*1000)return;const s=window.tcSupabase?.();try{await s?.auth?.signOut();}catch(_e){}try{sessionStorage.removeItem('tc_v142_auth_ok');localStorage.removeItem('tc_v142_last_activity');localStorage.removeItem('tc_v433_customer');}catch(_e){}if(['#planner','#account','#trips','#hotels','#import','#cart'].includes(location.hash))location.hash='#login';try{window.tcRouteRefresh?.('account');}catch(_e){}}
- document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')tcV142CheckIdleOnResume();});
- window.addEventListener('focus',tcV142CheckIdleOnResume);
- window.TripCraftV142QA={version:VERSION,requiresEmail:true,accountAfterOtp:true,autoSave:true,accountEditDelete:true};
+ document.querySelectorAll('.brand small').forEach(el=>{if(/V\d+/.test(el.textContent))el.textContent=el.textContent.replace(/V\d+/,'V143');});
+ async function tcV143CheckIdleOnResume(){let last=0;try{last=Number(localStorage.getItem('tc_v142_last_activity')||0)||0;}catch(e){}if(!last||Date.now()-last<=30*60*1000)return;const s=window.tcSupabase?.();try{await s?.auth?.signOut();}catch(_e){}try{sessionStorage.removeItem('tc_v142_auth_ok');localStorage.removeItem('tc_v142_last_activity');localStorage.removeItem('tc_v433_customer');}catch(_e){}if(['#planner','#account','#trips','#hotels','#import','#cart'].includes(location.hash))location.hash='#login';try{window.tcRouteRefresh?.('account');}catch(_e){}}
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')tcV143CheckIdleOnResume();});
+ window.addEventListener('focus',tcV143CheckIdleOnResume);
+ window.TripCraftV143QA={version:VERSION,requiresEmail:true,accountAfterOtp:true,autoSave:true,accountEditDelete:true};
 })();
 </script>
 </body></html>
